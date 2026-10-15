@@ -1,0 +1,22 @@
+[
+ {
+  "kennung": "F-Brief",
+  "seite": "anleitung",
+  "adresse": "/brief-verstehen"
+ },
+ {
+  "kennung": "R30",
+  "seite": "abo",
+  "adresse": "/kontoauszug-abos"
+ },
+ {
+  "kennung": "F-Wohnzimmer",
+  "seite": "wohnzimmer",
+  "adresse": "/wohnzimmer-neu-denken"
+ },
+ {
+  "kennung": "F-Keller",
+  "seite": "keller",
+  "adresse": "/keller-ausmisten"
+ }
+]
