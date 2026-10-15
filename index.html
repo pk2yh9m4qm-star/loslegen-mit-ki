@@ -2571,6 +2571,8 @@
       .v22z-schluss--kurz .v22z-gross { font-size: min(40px, var(--v25-h1)); }
       .v22z-moeglich .v22z-titel { font-size: min(34px, var(--v25-h1)); }
     }
+    /* 15.10.2026: Vertrauenszeile unter der Unterzeile, vor den Knöpfen */
+    .v25-vertrauen[data-lage="oben"] { margin: 14px auto 0; }
     /* Plan B (nur vorbereitet, KOPF = "B"): Überschrift wie bisher, darunter „… und wofür nicht.“ in der Art der früheren Fragezeile */
     .hero.v22g h1.v25-kopf--b { max-width: 13em; margin-bottom: clamp(12px, 1.8vh, 18px); }
     /* Prüfung Runde 1 (14.10.2026 nachts): Fußzeile der Bühne am Halt im Bild (Lage aus fussSetzen; ohne Skript wie bisher) */
@@ -2626,6 +2628,17 @@
       .v22z-so.v25-so .v22z-nicht { max-width: 330px; gap: 8px; }
       .v22z-so.v25-so .v22z-nicht li { padding: 7px 12px; font-size: 15px; }
     }
+    /* 15.10.2026 (Yannis, Bildschirmfoto bei schmalem Fenster): Zwischen 861 und 1239 px quetschte die ruhige Ideenwand sieben
+       Karten neben das Schild, die Titel brachen nach zwei Wörtern ab („Welche F…“). Dort jetzt wie am Handy: Schild über der Reihe,
+       Karten seitlich wischbar und groß genug für den ganzen Titel. */
+    @media (min-width: 861px) and (max-width: 1239px) {
+      .v22z-v-reihe { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+      .v22z-v-karten { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: calc(-1 * var(--gutter)); padding: 4px var(--gutter) 10px; scroll-padding-inline: var(--gutter); }
+      .v22z-v-karten::-webkit-scrollbar { display: none; }
+      .v22z-v-karten .v22z-wk { flex: 0 0 196px; scroll-snap-align: start; }
+      .v22z-v-karten .v22z-wk:nth-child(n+8) { display: flex; }
+      .v22z-v-karten .v22z-wk b { font-size: 15px; line-height: 1.22; }
+    }
   </style>
 </head>
 <body><div class="live-aufbau" role="note"><b>Diese Seite ist im Aufbau.</b> Du siehst eine Testfassung, noch nicht alles funktioniert.</div>
@@ -2647,13 +2660,13 @@
       </header>
       <div class="hero-grid wrap" id="top">
         <div>
-          <h1 class="display v25-kopf v25-kopf--f" id="hero-title">Finde heraus, was KI <em>wirklich</em> für dich tun kann.</h1>
+          <h1 class="display v25-kopf v25-kopf--f" id="hero-title">Finde heraus, was KI <em>Sinnvolles</em> für dich tun kann.</h1>
           <p class="hero-intro v25-intro"><span class="zeile">Dir fehlen Ideen, wie du KI im Alltag sinnvoll für dich einsetzen kannst?</span> Entdecke unsere Ideenkarten, Nutzergeschichten &amp; Hilfestellungen.</p>
+          <p class="v25-vertrauen" data-lage="oben"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Alle Ideen sind von Menschen zusammengestellt und getestet.</p>
           <div class="hero-actions">
             <a class="button-primary" href="#moeglich"><span>Beispiel ansehen</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-down"/></svg></a>
             <a class="v22g-link" href="#wissen">Ich fange bei null an</a>
           </div>
-          <p class="v25-vertrauen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Alle Ideen sind von Menschen zusammengestellt und getestet.</p>
         </div>
 
         <div class="moment" id="beispiel" hidden aria-roledescription="Beispiele" aria-label="Fünf Beispiele, zum Antippen, Wischen oder über Pfeile und Punkte">
