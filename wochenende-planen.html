@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Was mach ich am Wochenende? Vorschläge, die zu dir passen · KIosk</title>
+  <meta name="description" content="Sag, wie sich dein Wochenende anfühlen soll. Die KI sucht in deiner Stadt, was genau zu dir passt, auch das, was du allein nie gefunden hättest.">
+  <meta property="og:site_name" content="KIosk">
+  <meta property="og:title" content="Was mach ich am Wochenende? Vorschläge, die zu dir passen · KIosk">
+  <meta property="og:description" content="Sag, wie sich dein Wochenende anfühlen soll. Die KI sucht in deiner Stadt, was genau zu dir passt, auch das, was du allein nie gefunden hättest.">
+  <meta property="og:url" content="https://loslegen-mit-ki.de/wochenende-planen">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://loslegen-mit-ki.de/wochenende-standbild.jpg">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="a-eddba2ef40ac.woff2" as="font" type="font/woff2" crossorigin>
+  <style>
+    /* Detailseite nach „Anleitungsseite kompakt“ (entschieden 15.10.2026), im Material der Live-Seiten (Version 25).
+       Schrift und Favicon liegen beim Hochladen neben der Seite. */
+    @font-face { font-family: "Figtree"; font-style: normal; font-weight: 300 900; font-display: swap; src: url(a-eddba2ef40ac.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    :root {
+      color-scheme: light;
+      --ink: #23201c; --ink-soft: #4a443c; --muted: #675f56;
+      --paper: #f6f1e8; --line: rgba(60, 45, 30, .13); --line-strong: rgba(60, 45, 30, .26); --focus: #3b5a9a;
+      --content: 1220px; --gutter: clamp(16px, 4vw, 40px);
+      --font-ui: "Figtree", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+      --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.78' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.52'/%3E%3C/svg%3E");
+      --noise-coarse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280' viewBox='0 0 280 280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.29' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.30'/%3E%3C/svg%3E");
+      /* Kategorie „Urlaub & Freizeit planen“: Koralle */
+      --fa: #f2ad8e; --fb: #d47a63; --fc: #78343f;
+      --ki-hell: #fbe6db; --ki-tief: #f7ddd0;
+      --frei-bg: #e3ecd9; --green-b: #5f8a77; --green-c: #23473d;
+      --k-blue: #2f5871;
+      --board: #f1ebe1; --clay-hi: #fcfaf6; --clay: #f5f0e8; --clay-lo: #ebe4d8; --clay-in: #e9e2d7;
+      --zettel: #fffefb; --zettel-lo: #faf6ee; --klebeband: rgba(232, 214, 178, .82);
+      --sh: 96 72 46; --lamp: 244 172 140; --light-blue: 118 166 197;
+      --ease: cubic-bezier(.22, 1, .36, 1); --spring: cubic-bezier(.34, 1.4, .52, 1); --feder: cubic-bezier(.34, 1.56, .64, 1);
+      --platte: inset 0 2px 0 #ffffff, inset 0 -2px 0 rgba(96,72,46,.08), 0 2px 4px rgba(96,72,46,.14), 0 14px 26px -10px rgba(40,26,14,.24), 0 36px 66px -26px rgba(40,26,14,.3);
+      --zettel-liegt: 0 1px 1px rgba(96,72,46,.16), 0 14px 24px -14px rgba(96,72,46,.4);
+      --mulde: inset 0 1px 2px rgba(96,72,46,.22), 0 1px 0 #ffffff;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; background: var(--board); scroll-padding-bottom: 110px; }
+    body { position: relative; margin: 0; background: var(--board); color: var(--ink); font-family: var(--font-ui); font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; overflow-x: hidden; overflow-x: clip; }
+    body::before { content: ""; position: fixed; inset: 0; z-index: -1; background-image: var(--noise-coarse), var(--noise); background-size: 280px 280px, 210px 210px; opacity: .24; mix-blend-mode: multiply; pointer-events: none; }
+    ::selection { background: rgb(var(--lamp) / .45); color: var(--ink); }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; color: inherit; cursor: pointer; }
+    a { color: inherit; text-underline-offset: .24em; text-decoration-thickness: 1px; }
+    :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+    h1, h2, h3 { margin: 0; text-wrap: balance; overflow-wrap: break-word; }
+    p { margin: 0; }
+    img, video { max-width: 100%; }
+    [hidden] { display: none !important; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+    .skip { position: absolute; left: 12px; top: -60px; z-index: 50; padding: 10px 16px; border-radius: 999px; background: var(--ink); color: #fbf7f0; font-weight: 650; text-decoration: none; }
+    .skip:focus { top: 12px; }
+    .wrap { width: min(calc(100% - 2 * var(--gutter)), var(--content)); margin: 0 auto; }
+    .icon { width: 1em; height: 1em; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
+    .logo { width: 20px; height: 20px; flex: none; }
+
+    /* Leiste „im Aufbau“ und Fuß wie auf den Live-Seiten */
+    .live-aufbau { position: relative; z-index: 1; background: #2b2420; color: #f7f1e8; font: 500 14px/1.4 var(--font-ui); text-align: center; padding: 8px 16px; }
+    .live-aufbau b { font-weight: 700; }
+    .live-fuss { font: 500 14px/1.5 var(--font-ui); color: #675f56; text-align: center; padding: 18px 16px 28px; }
+    .live-fuss a { color: inherit; display: inline-block; padding: 12px 4px; }
+    .footer { position: relative; padding: 28px var(--gutter) 32px; color: var(--muted); font-size: 13px; }
+    .footer::before { content: ""; position: absolute; left: var(--gutter); right: var(--gutter); top: 0; height: 2px; background: linear-gradient(rgb(var(--sh) / .18) 0 1px, rgb(255 255 255 / .9) 1px 2px); }
+    .footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; }
+
+    /* Knöpfe aus Knete (Live-Seiten) */
+    .nav-kompass, .nav-mein, .button-primary, .clay-btn, .mini {
+      --hi: 255 255 255; --lo: var(--sh); --lip: 255 255 255; --lip-a: .6; --lip-a2: .3; --lift: 0px;
+      --o1: 0 1px 1px rgb(var(--sh) / .14); --o2: 0 2px 5px -1px rgb(var(--sh) / .1); --o3: 0 8px 14px -8px rgb(var(--sh) / .22);
+      --hl: -1px -2px 5px -1px rgb(255 255 255 / .6);
+      --i1: inset 0 1.5px 0 rgb(var(--hi) / .95); --i2: inset 0 -1.5px 0 rgb(var(--lo) / .12);
+      --i3: inset 0 10px 14px -10px rgb(var(--hi) / .85); --i4: inset 0 -12px 16px -12px rgb(var(--lo) / .2);
+      --p1: inset 0 0 0 0 rgb(var(--lo) / 0); --p2: inset 0 0 0 0 rgb(var(--lo) / 0);
+      border: 0; color: var(--ink);
+      background: linear-gradient(175deg, var(--clay-hi) 0%, var(--clay) 55%, var(--clay-lo) 100%);
+      box-shadow: var(--o1), var(--o2), var(--o3), var(--hl), var(--i1), var(--i2), var(--i3), var(--i4), var(--p1), var(--p2);
+      transform: translateY(var(--lift));
+      transition: transform .45s var(--feder), box-shadow .26s var(--ease), color .2s ease;
+    }
+    @media (hover: hover) {
+      :where(.nav-kompass, .nav-mein, .button-primary, .clay-btn, .mini):hover { --lift: -2px; --o2: 0 4px 7px -2px rgb(var(--sh) / .13); --o3: 0 11px 16px -8px rgb(var(--sh) / .24); }
+    }
+    :where(.nav-kompass, .nav-mein, .button-primary, .clay-btn, .mini):active, .clay-btn.is-copied {
+      --lift: 1px; --o1: 0 1px 0 rgb(255 255 255 / .9); --o2: 0 0 0 0 rgb(var(--sh) / 0); --o3: 0 0 0 -12px rgb(var(--sh) / 0);
+      --hl: 0 -1px 0 0 rgb(var(--sh) / .16);
+      --i1: inset 0 1.5px 0 rgb(var(--hi) / 0); --i2: inset 0 -1.5px 0 rgb(var(--lip) / var(--lip-a));
+      --i3: inset 0 10px 14px -10px rgb(var(--hi) / 0); --i4: inset 0 -10px 14px -10px rgb(var(--lip) / var(--lip-a2));
+      --p1: inset 0 2px 4px 0 rgb(var(--lo) / .26); --p2: inset 0 8px 14px -6px rgb(var(--lo) / .2);
+      background: linear-gradient(175deg, var(--clay-in) 0%, #efe9df 100%);
+    }
+    /* Der dunkle Hauptknopf: weiches, dunkles Gummi */
+    .button-primary { --lo: 0 0 0; --lip-a: .14; --lip-a2: .06; --i1: inset 0 1.5px 0 rgb(255 255 255 / .2); --i2: inset 0 -1.5px 0 rgb(0 0 0 / .35); --i3: inset 0 10px 14px -10px rgb(255 255 255 / .16); --i4: inset 0 -12px 16px -12px rgb(0 0 0 / .5);
+      display: inline-flex; align-items: center; justify-content: space-between; gap: 16px; min-width: 190px; min-height: 56px; padding: 0 20px 0 22px; border-radius: 999px; color: #fbf7f0; background: linear-gradient(175deg, #4a433b 0%, #2b2722 45%, #1d1a16 100%); text-decoration: none; font-size: 16px; font-weight: 650; letter-spacing: -.005em; white-space: nowrap; }
+    .button-primary:active { background: linear-gradient(175deg, #151310 0%, #25211c 100%); }
+    .button-primary .icon { font-size: 19px; }
+    .clay-btn { display: inline-flex; align-items: center; gap: 9px; min-height: 44px; padding: 0 18px; border-radius: 999px; text-decoration: none; font-size: 14.5px; font-weight: 640; }
+    .clay-btn .icon { font-size: 17px; }
+    .clay-btn.is-copied .icon { color: #3c7f37; }
+
+    /* Kopf */
+    .site-nav { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 80px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; min-height: 44px; color: inherit; text-decoration: none; font-size: 17px; font-weight: 700; letter-spacing: -.02em; white-space: nowrap; }
+    .brand-mark { position: relative; width: 26px; height: 26px; flex: none; border-radius: 50%; background: linear-gradient(170deg, var(--clay-hi), var(--clay-lo)); box-shadow: 0 1px 1px rgb(var(--sh) / .2), 0 4px 8px -3px rgb(var(--sh) / .3), -1px -2px 4px rgb(255 255 255 / .8), inset 0 1px 0 #fff, inset 0 -3px 5px -2px rgb(var(--sh) / .2); }
+    .brand-mark::after { content: ""; position: absolute; inset: 8px 7px 6px 7px; border-radius: 50%; background: radial-gradient(circle at 40% 30%, #4a433b, var(--ink) 70%); box-shadow: inset 0 1px 1px rgb(0 0 0 / .5), 0 1px 0 rgb(255 255 255 / .7); }
+    .kiosk { white-space: nowrap; }
+    .kiosk-ki { font-family: Georgia, "Iowan Old Style", "Noto Serif", "Times New Roman", serif; font-weight: 700; letter-spacing: .01em; }
+    .nav-end { display: flex; align-items: center; gap: clamp(18px, 2.6vw, 36px); }
+    .nav-links { display: flex; align-items: center; gap: clamp(18px, 2.6vw, 36px); }
+    .nav-links a { position: relative; display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; font-size: 15px; font-weight: 600; }
+    .nav-links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 8px; height: 1.5px; border-radius: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform .35s var(--ease); }
+    .nav-links a:hover::after { transform: none; }
+    .nav-kompass { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px 0 14px; border-radius: 999px; color: var(--k-blue); text-decoration: none; font-size: 14.5px; font-weight: 680; white-space: nowrap; }
+    .nav-kompass .icon { font-size: 18px; }
+    .nav-mein { display: inline-flex; align-items: center; gap: 9px; min-height: 44px; padding: 0 16px 0 5px; border-radius: 999px; text-decoration: none; font-size: 14.5px; font-weight: 680; white-space: nowrap; }
+    .nav-mein__ich { display: grid; place-items: center; width: 34px; height: 34px; flex: none; border-radius: 50%; color: var(--ink-soft); background: var(--clay-in); box-shadow: inset 0 1.5px 3px rgb(var(--sh) / .26), 0 1px 0 rgb(255 255 255 / .9); font-size: 17px; }
+    .crumbs { display: flex; margin: 2px 0 20px; }
+    .crumb { padding: 0 16px 0 12px; font-size: 14px; }
+
+    /* ——— Die Anleitungskarte: links du, rechts die KI, unten die Reiter ——— */
+    .anl { position: relative; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); grid-template-areas: "du ki" "reiter reiter"; max-width: 1120px; margin: 0 auto;
+      border-radius: 28px; background: linear-gradient(175deg, var(--clay-hi), var(--clay) 42%, #eee7dc); box-shadow: var(--platte); overflow: hidden; }
+    .anl:focus { outline: none; }
+    .du { grid-area: du; display: grid; align-content: start; gap: 20px; padding: 36px 38px 30px; min-width: 0; }
+    .ki { grid-area: ki; position: relative; padding: 30px 30px 26px; min-width: 0;
+      background-color: var(--ki-hell); background-image: var(--noise), linear-gradient(172deg, var(--ki-hell) 0%, var(--ki-tief) 100%); background-size: 210px, auto; background-blend-mode: soft-light, normal; }
+    .reiter { grid-area: reiter; display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 16px; border-top: 1px solid var(--line); background: rgba(255,255,255,.4); }
+    .reiter button { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border: 0; border-radius: 999px; background: transparent; font-weight: 600; font-size: 15px; color: var(--ink-soft); }
+    .reiter button:hover { color: var(--ink); background: rgba(255,255,255,.55); }
+    .reiter button[aria-selected="true"] { background: linear-gradient(175deg, var(--clay-in), #efe9df); box-shadow: 0 1px 0 rgba(255,255,255,.9), inset 0 2px 4px 0 rgba(96,72,46,.26), inset 0 8px 14px -6px rgba(96,72,46,.2); color: var(--ink); }
+    .kopfzeile { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .tag-kat { display: inline-flex; align-items: center; gap: 8px; min-height: 28px; padding: 3px 12px 3px 8px; border-radius: 999px; font-size: 13px; font-weight: 700; color: var(--fc);
+      background: linear-gradient(180deg, #fff, #f5f1eb); box-shadow: inset 0 1px 0 #fff, 0 1px 1px color-mix(in oklab, var(--fc) 34%, transparent), 0 4px 8px -3px color-mix(in oklab, var(--fc) 44%, transparent); }
+    .tag-kat i { width: 10px; height: 10px; border-radius: 50%; background: var(--fb); }
+    .anl-titel { font-size: clamp(26px, 2.8vw, 34px); font-weight: 600; letter-spacing: -.03em; line-height: 1.12; text-shadow: 0 1px 0 rgba(255,255,255,.8); }
+    .versal { margin: 0 0 10px; font-size: 12.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+    .chips li { display: inline-flex; align-items: center; gap: 7px; min-height: 34px; padding: 4px 13px 4px 11px; border-radius: 999px; font-size: 14.5px; font-weight: 600;
+      background: linear-gradient(175deg, var(--clay-hi), var(--clay)); box-shadow: 0 1px 1px rgba(96,72,46,.16), 0 3px 6px -2px rgba(96,72,46,.2), inset 0 1.5px 0 #fff; }
+    .chips li .icon { font-size: 16px; color: var(--fc); }
+    .einleitung p { font-size: 17px; line-height: 1.55; color: var(--ink-soft); font-weight: 500; max-width: 60ch; }
+    .schritte-du, .kette { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+    .schritte-du { counter-reset: s; } .kette { counter-reset: k; }
+    .schritte-du li, .kette li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 10px; align-items: baseline; font-size: 16px; }
+    .kette li { font-weight: 500; }
+    .schritte-du li::before, .kette li::before { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; font-weight: 700; font-size: 14px; }
+    .schritte-du li::before { counter-increment: s; content: counter(s); background: #2b2722; color: #fbf7f0; }
+    .kette li::before { counter-increment: k; content: counter(k); background: #fff; color: var(--fc); box-shadow: 0 1px 2px rgba(96,72,46,.25); }
+    .kette li.hoch::before { background: var(--fc); color: #fff; }
+    .start { display: grid; gap: 10px; justify-items: start; padding-top: 4px; }
+    .start-hinweis { font-size: 14.5px; color: var(--ink-soft); max-width: 52ch; }
+    .ks-rueckfall { padding: 10px 14px; border-radius: 14px; background: #fff; font-size: 15px; font-weight: 600; }
+    .ks-rueckfall a { display: inline-block; padding: 6px 0; }
+    .datenschutz { display: flex; gap: 8px; align-items: baseline; font-size: 14.5px; color: var(--muted); max-width: 52ch; }
+    .datenschutz .icon { position: relative; top: 2px; }
+    .klein { min-height: 44px; padding: 0 16px; font-size: 14px; }
+
+    .panel { display: grid; gap: 18px; align-content: start; min-width: 0; }
+    .panel:focus { outline: none; }
+    .panel:focus-visible { outline: 3px solid var(--focus); outline-offset: 6px; border-radius: 12px; }
+    .ki-kopf, .panel-kopf { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    .ki-kopf h2, .panel-kopf h2 { font-size: 19px; font-weight: 650; letter-spacing: -.01em; }
+    .geprueft { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px 0 8px; border: 0; border-radius: 999px; background: var(--frei-bg); color: var(--green-c); font-size: 14px; font-weight: 800; box-shadow: 0 1px 2px rgba(96,72,46,.2); }
+    .geprueft i { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--green-c); color: #fff; font-size: 15px; font-style: normal; }
+    .geprueft i .icon { stroke-width: 2.6; }
+    .siegel-text { padding: 10px 14px; border-radius: 14px; background: #fff; font-size: 14.5px; color: var(--ink-soft); box-shadow: 0 1px 2px rgba(96,72,46,.18); }
+    .film { margin: 0; display: grid; gap: 6px; }
+    .film video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: 16px; background: #1d1a16; box-shadow: var(--zettel-liegt); }
+    .film figcaption { font-size: 13.5px; color: var(--ink-soft); }
+    .zettel { position: relative; margin-top: 8px; padding: 18px 18px 10px; border-radius: 6px; background: linear-gradient(180deg, var(--zettel), var(--zettel-lo)); box-shadow: var(--zettel-liegt); transform: rotate(-.6deg); }
+    .zettel::before { content: ""; position: absolute; left: 50%; top: -9px; width: 86px; height: 18px; margin-left: -43px; border-radius: 2px; background: var(--klebeband); transform: rotate(-2deg); box-shadow: 0 1px 1px rgba(96,72,46,.12); }
+    .zettel .ergebnis-satz { font-size: 16px; font-weight: 650; margin-bottom: 6px; }
+    .zettel ul { margin: 0; padding: 0; list-style: none; }
+    .zettel li { padding: 7px 0; border-top: 1px solid var(--line); font-size: 15px; }
+    .zettel-kopf { font-size: 14.5px; color: var(--ink-soft); }
+    .prompt { margin: 0; max-height: 440px; overflow: auto; padding: 16px 18px; border-radius: 12px; background: var(--zettel); box-shadow: var(--mulde); font: 14px/1.6 var(--font-ui); white-space: pre-wrap; overflow-wrap: anywhere; color: var(--ink); }
+    .prompt:focus-visible { outline: 3px solid var(--focus); }
+    .md { margin: 0; display: grid; gap: 10px; font-size: 16px; color: var(--ink); }
+    ul.md { padding-left: 20px; }
+    .md p { max-width: 62ch; }
+
+    /* Weitere Ideen */
+    .weitere { max-width: 1120px; margin: 34px auto 40px; }
+    .weitere ul { display: flex; flex-wrap: wrap; gap: 12px; margin: 0; padding: 0; list-style: none; }
+    .weitere li { flex: 1 1 220px; min-width: 0; display: flex; }
+    .mini { display: grid; align-content: start; gap: 4px; width: 100%; min-height: 64px; padding: 14px 18px; border-radius: 20px; text-decoration: none; font-weight: 650; font-size: 15px; line-height: 1.3; }
+    .mini small { font-size: 12.5px; font-weight: 700; color: var(--muted); }
+    .mini.alle { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+
+    .mobile-cta { display: none; }
+
+    @media (max-width: 1023px) {
+      .anl { grid-template-columns: minmax(0, 1fr); grid-template-areas: "du" "reiter" "ki"; }
+      .du { padding: 28px 22px 22px; } .ki { padding: 26px 22px; }
+      .reiter { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    }
+    @media (max-width: 700px) {
+      html { scroll-padding-bottom: 100px; }
+      .site-nav { height: 68px; }
+      .nav-links { display: none; }
+      .nav-kompass { min-height: 44px; padding: 0 15px 0 12px; font-size: 14px; }
+      .nav-mein { width: 44px; padding: 0; justify-content: center; }
+      .nav-mein__text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+      .anl { border-radius: 22px; }
+      .du { padding: 22px 18px 20px; gap: 18px; } .ki { padding: 22px 18px; }
+      .reiter { padding: 8px 10px; gap: 4px; }
+      .reiter button { padding: 0 12px; font-size: 14.5px; }
+      .start-knopf { display: none; }
+      .einleitung p { font-size: 16.5px; }
+      body { padding-bottom: 92px; }
+      .mobile-cta { position: fixed; z-index: 30; left: 10px; right: 10px; bottom: calc(10px + env(safe-area-inset-bottom, 0px)); display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 8px 8px 16px; border-radius: 26px; background: linear-gradient(175deg, var(--clay-hi), var(--clay) 60%, #efe9df);
+        box-shadow: inset 0 1.5px 0 #fff, 0 1px 2px rgb(var(--sh) / .14), 0 -1px 12px -4px rgb(var(--sh) / .12), 0 10px 20px -8px rgb(var(--sh) / .24); }
+      .mobile-cta small { flex: 1; min-width: 0; color: var(--ink-soft); font-size: 13px; line-height: 1.35; }
+      .mobile-cta .button-primary { flex: none; min-width: 0; min-height: 52px; gap: 8px; padding: 0 16px 0 14px; font-size: 15px; }
+    }
+    @media (max-width: 400px) {
+      .brand { font-size: 16px; }
+      .mobile-cta small { font-size: 12.5px; }
+    }
+    @media (max-width: 380px) {
+      .nav-kompass span { display: none; }
+      .nav-kompass { width: 44px; padding: 0; justify-content: center; }
+    }
+    @media (max-width: 359px) {
+      .mobile-cta small { display: none; }
+      .mobile-cta .button-primary { flex: 1; justify-content: center; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; }
+      .nav-kompass, .nav-mein, .button-primary, .clay-btn, .mini { transform: none !important; }
+    }
+
+  </style>
+</head>
+<body>
+<a class="skip" href="#karte">Zum Inhalt springen</a>
+<div class="live-aufbau" role="note"><b>Diese Seite ist im Aufbau.</b> Du siehst eine Testfassung, noch nicht alles funktioniert.</div>
+<!-- Symbole: Lucide (ISC-Lizenz); Logo des KI-Anbieters aus Simple Icons, wie auf den Live-Seiten. -->
+<svg class="sb-sprite" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="l-openai" viewBox="0 0 24 24"><path fill="currentColor" d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></symbol><symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /> <path d="M12 6v6l4 2" /></symbol><symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34" /> <circle cx="11" cy="11" r="8" /></symbol><symbol id="i-euro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12" /> <path d="M4 14h9" /> <path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2" /></symbol><symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol><symbol id="i-arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></symbol><symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol><symbol id="i-compass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"/></symbol><symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol><symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol><symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol><symbol id="i-user-round" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5" /> <path d="M20 21a8 8 0 0 0-16 0" /></symbol><symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol></defs></svg>
+
+<div class="board">
+  <header class="site-nav wrap">
+    <a class="brand" href="/" aria-label="KIosk, zur Startseite"><span class="brand-mark" aria-hidden="true"></span><span class="kiosk"><span class="kiosk-ki">KI</span>osk</span></a>
+    <div class="nav-end">
+      <nav class="nav-links" aria-label="Hauptnavigation"><a href="/#moeglich">Entdecken</a><a href="/#so-gehts">Machen</a><a href="/#wissen">Verstehen</a></nav>
+      <a class="nav-kompass" href="/#kompass"><svg class="icon" aria-hidden="true"><use href="#i-compass"/></svg><span>KI-Kompass</span></a>
+      <a class="nav-mein" href="/mein-bereich" aria-label="Mein Bereich"><span class="nav-mein__ich" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-user-round"/></svg></span><span class="nav-mein__text">Mein Bereich</span></a>
+    </div>
+  </header>
+
+  <main class="wrap" id="inhalt">
+    <div class="crumbs"><a class="clay-btn crumb" href="/ideen"><svg class="icon" aria-hidden="true"><use href="#i-arrow-left"/></svg><span>Zurück zu den Ideen</span></a></div>
+
+    <article class="anl" id="karte" aria-labelledby="titel" tabindex="-1">
+      <div class="du">
+        <div class="kopfzeile"><span class="tag-kat"><i aria-hidden="true"></i>Urlaub &amp; Freizeit planen</span></div>
+        <h1 class="anl-titel" id="titel">Was mach ich am Wochenende? Vorschläge, die zu dir passen</h1>
+
+        <section aria-labelledby="h-brauchst">
+          <h2 class="versal" id="h-brauchst">Das brauchst du</h2>
+          <ul class="chips"><li><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg><span>Einen KI-Chat mit Websuche</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-map-pin"/></svg><span>Deine Stadt und dein Budget</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><span>Etwa 10 Minuten</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-euro"/></svg><span>Kostenlos (vorläufig, der Test entscheidet)</span></li></ul>
+        </section>
+
+        <div class="einleitung"><p>Noch keinen Plan fürs Wochenende? Die KI fragt dich, worauf du Lust hast und an welchen schönen Tag du gern zurückdenkst. Dann sucht sie in deiner Stadt: die passenden großen Sachen und das, was du allein nie gefunden hättest, vom Hoffest bis zum Workshop im Kulturzentrum.</p></div>
+
+        <section aria-labelledby="h-machst">
+          <h2 class="versal" id="h-machst">Das machst du</h2>
+          <ol class="schritte-du"><li>Beantworte die Multiple-Choice Fragen</li></ol>
+        </section>
+
+        <div class="start">
+          <a class="button-primary start-knopf" href="https://chatgpt.com/?q=Plan%20mir%20ein%20Wochenende%2C%20das%20mir%20guttut%3A%20Sachen%2C%20die%20genau%20zu%20mir%20passen%2C%20gern%20auch%20Entdeckungen%2C%20die%20ich%20allein%20nie%20gefunden%20h%C3%A4tte.%20Ich%20will%20nur%20ausw%C3%A4hlen.%0A%0A1.%20Frag%20mich%20zuerst%2C%20einzeln%20und%20zum%20Antippen%20mit%20Emojis%2C%20h%C3%B6chstens%20sechs%20Fragen%3A%20Stadt%2C%20wie%20weit%2C%20Auto%20oder%20Bahn%3F%20Mit%20wem%3F%20Wie%20soll%20sich%20das%20Wochenende%20anf%C3%BChlen%3F%20Was%20mache%20ich%20gern%2C%20was%20gar%20nicht%3F%20Budget%20pro%20Person%3F%20Zuletzt%20offen%20zum%20Selberschreiben%2C%20genau%20so%3A%20%E2%80%9EAn%20welchen%20Tag%20denkst%20du%20gern%20zur%C3%BCck%3F%20Was%20davon%20h%C3%A4ttest%20du%20gern%20wieder%3F%E2%80%9C%0A2.%20Such%20dann%20im%20Netz%2C%20was%20an%20diesem%20Wochenende%20(Freitagabend%20bis%20Sonntag)%20wirklich%20stattfindet%2C%20auf%20gro%C3%9Fen%20Eventseiten%20und%20abseits%20davon%3A%20Vereine%2C%20Kulturzentren%2C%20Stadtteilseiten%2C%20Kurse%20zum%20Mitmachen.%20Nimm%20nur%2C%20was%20du%20beim%20Veranstalter%20oder%20der%20Stadt%20mit%20Datum%20gefunden%20hast.%20Lieber%20drei%20echte%20Vorschl%C3%A4ge%20als%20sechs%20unsichere.%0A3.%20Gib%20mir%20vier%20bis%20sechs%20Vorschl%C3%A4ge%20und%20einen%20Top-Tipp.%20Gro%C3%9Fes%20ist%20willkommen%2C%20wenn%20es%20passt%3B%20mindestens%20die%20H%C3%A4lfte%20Entdeckungen.%20Je%20Vorschlag%3A%20was%2C%20wann%2C%20wo%2C%20Preis%2C%20Tickets%2C%20Link%2C%20warum%20es%20zu%20mir%20und%20meiner%20Erinnerung%20passt%2C%20Plan%20B%20bei%20Regen.%0A4.%20Fass%20zum%20Schluss%20meine%20Antworten%20als%20%E2%80%9EMein%20Wochenend-Profil%E2%80%9C%20in%20f%C3%BCnf%20Zeilen%20zusammen%2C%20zum%20Wiedereinf%C3%BCgen.%20Biete%20eine%20Einladung%20als%20Text%20an.%0A%0AErfinde%20keine%20Termine%2C%20Preise%20oder%20Orte%3B%20bist%20du%20unsicher%2C%20sag%20es.%20Arbeite%20jeden%20Schritt%20ganz%20durch%20und%20h%C3%B6r%20nie%20nach%20einer%20Ank%C3%BCndigung%20auf." data-start target="_blank" rel="noopener"><svg class="logo" aria-hidden="true"><use href="#l-openai"/></svg><span>Mit ChatGPT starten</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+          <p class="start-hinweis">Öffnet ChatGPT mit dem fertigen Auftrag. Steht er nur im Eingabefeld? Dann tippe auf Senden.</p>
+          <p class="ks-rueckfall" hidden>Hat sich nichts geöffnet? <a href="https://chatgpt.com/auth/login?next=%2F%3Fq%3DPlan%2520mir%2520ein%2520Wochenende%252C%2520das%2520mir%2520guttut%253A%2520Sachen%252C%2520die%2520genau%2520zu%2520mir%2520passen%252C%2520gern%2520auch%2520Entdeckungen%252C%2520die%2520ich%2520allein%2520nie%2520gefunden%2520h%25C3%25A4tte.%2520Ich%2520will%2520nur%2520ausw%25C3%25A4hlen.%250A%250A1.%2520Frag%2520mich%2520zuerst%252C%2520einzeln%2520und%2520zum%2520Antippen%2520mit%2520Emojis%252C%2520h%25C3%25B6chstens%2520sechs%2520Fragen%253A%2520Stadt%252C%2520wie%2520weit%252C%2520Auto%2520oder%2520Bahn%253F%2520Mit%2520wem%253F%2520Wie%2520soll%2520sich%2520das%2520Wochenende%2520anf%25C3%25BChlen%253F%2520Was%2520mache%2520ich%2520gern%252C%2520was%2520gar%2520nicht%253F%2520Budget%2520pro%2520Person%253F%2520Zuletzt%2520offen%2520zum%2520Selberschreiben%252C%2520genau%2520so%253A%2520%25E2%2580%259EAn%2520welchen%2520Tag%2520denkst%2520du%2520gern%2520zur%25C3%25BCck%253F%2520Was%2520davon%2520h%25C3%25A4ttest%2520du%2520gern%2520wieder%253F%25E2%2580%259C%250A2.%2520Such%2520dann%2520im%2520Netz%252C%2520was%2520an%2520diesem%2520Wochenende%2520(Freitagabend%2520bis%2520Sonntag)%2520wirklich%2520stattfindet%252C%2520auf%2520gro%25C3%259Fen%2520Eventseiten%2520und%2520abseits%2520davon%253A%2520Vereine%252C%2520Kulturzentren%252C%2520Stadtteilseiten%252C%2520Kurse%2520zum%2520Mitmachen.%2520Nimm%2520nur%252C%2520was%2520du%2520beim%2520Veranstalter%2520oder%2520der%2520Stadt%2520mit%2520Datum%2520gefunden%2520hast.%2520Lieber%2520drei%2520echte%2520Vorschl%25C3%25A4ge%2520als%2520sechs%2520unsichere.%250A3.%2520Gib%2520mir%2520vier%2520bis%2520sechs%2520Vorschl%25C3%25A4ge%2520und%2520einen%2520Top-Tipp.%2520Gro%25C3%259Fes%2520ist%2520willkommen%252C%2520wenn%2520es%2520passt%253B%2520mindestens%2520die%2520H%25C3%25A4lfte%2520Entdeckungen.%2520Je%2520Vorschlag%253A%2520was%252C%2520wann%252C%2520wo%252C%2520Preis%252C%2520Tickets%252C%2520Link%252C%2520warum%2520es%2520zu%2520mir%2520und%2520meiner%2520Erinnerung%2520passt%252C%2520Plan%2520B%2520bei%2520Regen.%250A4.%2520Fass%2520zum%2520Schluss%2520meine%2520Antworten%2520als%2520%25E2%2580%259EMein%2520Wochenend-Profil%25E2%2580%259C%2520in%2520f%25C3%25BCnf%2520Zeilen%2520zusammen%252C%2520zum%2520Wiedereinf%25C3%25BCgen.%2520Biete%2520eine%2520Einladung%2520als%2520Text%2520an.%250A%250AErfinde%2520keine%2520Termine%252C%2520Preise%2520oder%2520Orte%253B%2520bist%2520du%2520unsicher%252C%2520sag%2520es.%2520Arbeite%2520jeden%2520Schritt%2520ganz%2520durch%2520und%2520h%25C3%25B6r%2520nie%2520nach%2520einer%2520Ank%25C3%25BCndigung%2520auf." data-start-web target="_blank" rel="noopener">Im Browser öffnen</a></p>
+          <p class="datenschutz"><svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg><span>Deine Antworten gibst du im KI-Chat, wir sehen sie nicht.</span></p>
+          <button class="clay-btn klein kopieren" type="button" data-kopieren><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span>Auftrag als Text kopieren</span></button>
+          <p class="sr-only" role="status" aria-live="polite" id="kopier-meldung"></p>
+        </div>
+      </div>
+
+      <div class="reiter" role="tablist" aria-label="Mehr zu dieser Anleitung">
+        <button type="button" role="tab" id="tab-uebersicht" aria-controls="p-uebersicht" aria-selected="true">Übersicht</button>
+        <button type="button" role="tab" id="tab-auftrag" aria-controls="p-auftrag" aria-selected="false" tabindex="-1">Der Auftrag</button>
+        <button type="button" role="tab" id="tab-gut" aria-controls="p-gut" aria-selected="false" tabindex="-1">Gut zu wissen</button>
+        <button type="button" role="tab" id="tab-weiter" aria-controls="p-weiter" aria-selected="false" tabindex="-1">Weitergedacht</button>
+        <button type="button" role="tab" id="tab-hakt" aria-controls="p-hakt" aria-selected="false" tabindex="-1">Falls etwas hakt</button>
+      </div>
+
+      <div class="ki">
+        <section class="panel" role="tabpanel" id="p-uebersicht" aria-labelledby="h-ki" tabindex="-1">
+          <div class="ki-kopf">
+            <h2 id="h-ki">Das übernimmt die KI</h2>
+            <button class="geprueft" type="button" aria-expanded="false" aria-controls="siegel-text"><i aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></i>Geprüft</button>
+          </div>
+          <p class="siegel-text" id="siegel-text" hidden>Wir haben diesen Ablauf am 15.10.2026 selbst durchgespielt, mit ChatGPT kostenlos am Handy. Kein amtliches Prüfzeichen.</p>
+          <ol class="kette"><li class="hoch"><b>Sucht auch abseits der großen Eventseiten</b></li><li>Prüft Datum und Ort beim Veranstalter</li><li>Denkt an Wetter, Budget und Anreise</li><li>Schreibt dein Wochenend-Profil für nächste Woche</li></ol>
+          <figure class="film">
+            <video controls muted playsinline preload="none" poster="wochenende-standbild.jpg" data-poster-ersatz="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD//gAPTGF2YzYzLjEuMTAyAP/bAEMACA4OEA4QExMTExMTFhUWFxcXFhYWFhcXFxkZGR0dHRkZGRcXGRkcHB0dICEgHh4dHiEhIyMjKiooKDExMjw8SP/EAKgAAAEFAQEAAAAAAAAAAAAAAAIAAwQBBQYHAQEAAwEBAQAAAAAAAAAAAAAAAQIDBAUGEAACAQIEAgUKAwUHBAIDAQEBAAIRAxIhMQRRQRORcWGxBaEigdFSMhRCwXKSUyOCotIzFeFiwvBDk+KyNCRU8WOjRAaDEQACAgECBAQFBAIDAQEAAAAAAQIRAxIhMVFBYQQTcaFSFIEykSKxwTMjYnLh8ELR/8AAEQgBaAKAAwEiAAIRAAMRAP/aAAwDAQACEQMRAD8A0aKomp7DUCiqJqQAoqi40gA1RcUgBRqi4pACiqJqQAoqiakAKKTUgBRVE1IAUVRNSAFGqLjaA3RVFxpACiqJqZAFFUTUwAKKTbQGqN0TUgBRVFxpACjVFxSA3RuiakAKKompACiqJqQAoqiakAKNUXFMgCiqJtsAboqiakAKKompACiqLjSAFFUXGkAFUTbQG6Kom2gN0VRNtAboqi41RACiqLjSAFFUTUgN0bom2gN0VRNSAFGqLrSAFFUTUgBRVE1IAUVRNSA5RVFxTBIFFUTUgBRVE1IDdFUXFIDdG6JqQAo1RcUgBRVE1IAUVRNSA3RVFxSA3RuiakAFUTUgBRVE1IAUUmpACiqJqQG6KouKQAoqiakAKKompACiqJqQAUmpACiqJtIA0VRQIOhCaA3RuiakBujdE1IAKompAbo3RNSA3RuiakAKKompAbo3RNSAFFUTUgBRVE1IAUUmpAbo3RNSAFFUTUgBRqi4pAbbompACjVFxSAFFUTUgN0bTUgAqiakAKKompAk4ECHp4bePRCucqVrp5nmpmcf9uv4ZD70fOx5lNtcjZoao3RY6aI+KNyPbA+MahsX7R/3I+s08XuszHqKouxpLTPsX8DRySJoh0VRkGNFujdOyKG6KomqjIAo1RdoqjFgboqiamQBRVE1IAUVRNtAboqialYAoqiakAKKom2gN0VRNSAFFUTUgBRVE1IAUVRNSAFGqLikAKKonRSAFFqUhAZshwb8v2hHBEMndNXkWNcrPs4MXFLCcABlyBNAT2sTcT3O3vdDfsmMxHGYwIu+h7x6ORNO0NbKD5FO5kfNSiB6IJ41ce5eMZARhIiUowBIwwMzpHHMxjX1rt63uLEzbv2xanlkJCWRFc6ZIG5Z3UbhwkYT5i6dHhBI1B0NR4veDRsWRVFUTUiwFFUTUgBRVE1IAUVRNSAFFUXGkAKKompACiqJqQAoqiakAKKompACiqJqQAoqiakAKKompACiqJqQAoqi5RVFYG6KouUaQAoqiaVOLDYoaoqiZnbH1Drr4Mc3Ryjcl2QI88qBqpJk0O0VRYx3Tpap+KYH/biVS+eduPYJS8SPBtZB0fTyw4a5MCRRaeSOOMW2lxNLBRMRLUA9uaanoIGo2LVfgiOwU8KPWWYQhZAGlM+fi84GRjNHzs2Nz4bF0Q7kJ54bnXEHwow6Xx+lL80f5nSJWnsgqRVkHHdGtqv4Zg+IimLvG3cH7tf+0llrgbtkBQj0kaivrBHjRjYocpR6w9BbuREB3OPchCesYntALxQyScmn0LUR1UY521n3AOysfCjXy8eUrkey5L7kvfZQlUTwseNmQ0uz9Ygf8ru2LFY1lLFXTKngXmnl0FqMiiK7cF2JNBbOfGQ+xYWK8P8AaB7Lg+4DpGepWQSFUY3Sz52bnqwH/MkLw5wujtty+1XSyCRRqi9bIufDXLiCPEBZNy0NZxHaQHPzFdE0JSInA6Tif3h7Vx1sgFS5RPCw5USMKXjFBXYAUk2yAFLlFUYsDak2mbIKaTborJIl2WCEpcAT1PFdKZGpNSXu5xqCHjLmxuRkcFCO/IhmyjRHx8z/AK73T3HlG3OXTTtWo7iVvopXxixyhSh9GuEZZGVNHM+Vv8B1onaXvdHWEZ0x63u7MgIXLVvcwjMXBCRkMMxliiYkVHKQzBW91u7m7vSuzpilyGg5AdgC18nf9wdYQO03HuecLYUyGZPa+TrhuWBXkSPUHlY7DcTNCBEca18HudtZFm3GA5f6qi6RMUm3Riy42pco0rJAUmpWQApco3RiyRpSambIAUmmIsWSNUaXiKMczhHWcR2yHtSkmAlMf5iz+pD8wa+YtcpV7IyPgGbIJNG6IRuA6QuH9yQ8aL8hcj/tT9eEf5nJ5EnRNDSlkyvcrQHbcH2iUP8A2DytD1zl9g6WQSaJUYuC+dbkB2W/bIs61YlKQBuzzPIRHhFzlPSrJorCtkUdu/tLcYVrP1zln53AltrPuA9ufjVxx5vMJoA3bcdZwH7w9q18xa5SxfhjKXgGSLcI6QiOwALz1FSNG5XS3cP7tP8AuIZMoXgK9FTtmPtVfhkQ6dy5ExoHinOSkki6RzJF/wD/ABR/NL+VDo7h1un92MR44nSK29aZUhdBHnK5LtmfCNAyYWLQPwR9Yr41XEwWJK0DanGMYUAAHKjiSX8RWC82KLjdlmNqSae0oGpcWpThEgSlGJOgJA8XGy5dG6L0QJaUPYuGBDTWiaIja5RFvYAUuKorIG0glRTFkl1aKlMAbUnRVG1kCDPjdMRRgJOM4qXEsHI1WE1Oi2IG1wKbZbBq2pAR15sC5SROQQqiXlUKlZJElatnWED+6PYs/LWP04eoU8Gep6rKkOO2tcgR2SmPu7+1sQAJ9I8s5SPiXNDKjMx0Ly5U2tiyGL9kYpUncGfI+0FzTZnyvXOqB/yurI1WHTHaSsMgdHd/WPrhD7USEL36kf8Aj/62YmHZsrQ7Zs3J/FOFBwgf5li7bvQkQDbPaJD7uhbuYPWtTliNXhTnr7F6MY/McLR9cx9ijXce5a/PL+R0WnusoQQb/wCnb/5D/Iz7ULszTBEcTjr/AJVB0LUxCtebhkk0tiUjNuxuwNOjB/f9oc8m7+j/APsj7HeuSxGrDWNtrcloy/2n6P8AHH2N/tP0f44uk29FlaI0LdyZp0X8cfY3O3cgadF/HH2OvakI1q1dliLxa5a66FqOe/a/o/8A7I+xLFe/SH/IP5XRLT2WVIIlf/Sh/wAn/Qz7UL1w0wQH75/kU6Fm5gLz5G1HYskQ71q9bNKWz34pfyuafmOFrrmfs9BeuYy5xa4ZSa3DRm03HG11TP3CQjf9+3+SX87OU9dlRWrN2Zp0kfyf9S/e284UpdOf+CP967bngNV25cxvntz1quBejCNmf61z1CA/yLfQf/lvfmA8AHSKL3IpRB+Xj710/wD/AEn7Wda21oyAIJ7ZSPiVLsTRznutiUP3ttZy/Zw6g5nRWxpCA/dHsdCUidWO5400tyWM0A5AJhtt6rKkq0QJCrMvSBFHMDdXjlC5Jlhsra609aZADIhLCa8FptrLdAnzvGYzc8pIucIKHAniNqTbd7KlBKrSmpIJRXG6M2QNNp0UzZIDS5RokDUgdqsgGjVFyBjPKMhLsIPguGNGmsmgWsIOoB7XO+a/w+f+5l270Z5aHgWpmskJOkzU21q0LgOCII0NAM2VugJ09IgjnE0YILZL58oNzTs6TNlaucr0v3oxl9gVqm4HO1LtEo+Bk6SNHuRSiBjvjW0D+G4P80Ysq3KUiAbdwV/CR5pFeoyYHCatJt1sTQzdw2hWRy7D7GD01o6XIfmDszniYEoRlrEHtALnjk63FDYz0zboxztbB/24eoU8KNfLWxp0key5P+Z6LIomAJYVWbHpR/aXKV0JB8Y1dLcQOEYSAfw1+4eWWWpJEmTRpakNwNOiPqnH7yWsW4H+1A9lz2welOyCU3Ri9Jc52J+qVs/5gyYTMjTo7orxj7CWHKgFRGjo3bfRRxSOXYXKN+z+pAdpp4tI5FIkcUti7aOlyB/ej7V4UPMF1sA0VRfEVzAeDRzSFERtcIRo3uwC0nRKisDSl7CjRixQKm6KoyAFLlEqKwMp1bo1RgCQTo3RkDal2jVFYKBVVVFUYAClyjdGbFDSYLdGqLiBVQTo3RAbUu0aoxYoFTdFUQAUuUSwrUBltcojRmwC0nRKisDSmRhY8p246zgO2Q9rXUgJTGO5sD/dh6jXwa+Ztcscuy3cP+VvZBKboxxerpbvH9yn/cQ6lm3K7X0TAD3qZ9RLlKaiSQ6NJTF4EgQhlxmftFiU3J52Y+qcvvFspWQSW6MTo751vAfhtj/MZLgsHneun1xH/bENrBKwokU1ydHbWICp9KR09KRl4mjEu7eziP7OHVXxeVZf1USZ0r9mOtyA/eC38zaOhlL8MJnwizhCMdIgdgATeqyKIAuk6Wbp7RGP/dIM+3G7cPwCI4mQPmAPi2GbbnhcMjdbEmbct3waYrcf3ZS+4YfRXDrel+7GEftIu1OWIsVmDdbijO+Wifilcl23JeAIC5Hb2Qf6cPWK+NWZRt2FE/biMa5AI3qGTGrRDHE/UOsPHpeuxscopSnuPmwvSpXEestel7x6y0pycT2IeKSSUk+7F0suJX4ylIVxMXAWRGsRo5HqWmrQZEj9R/162vSA+I9ZaM6clo3KjREjmKXvHrK30suJQxNYSc2CSRGU5c12kj9RWIAxXDOnLzskEmNY54jl3ldnfnMZyLndL3LWNzcU2B2VyQ5lUZzkdSs4TLNciDEtySR6XvFn2CYSjKpNDVzjIjk0L3cxJWQdTuN1GcKRq8tcmRzqh0q0fTcoQ0igcpmhjHqC50EPdh+UNRiQasjEeHndwSrFmAlHWlRXM+163dGJtSFeyheKjeA5Lhv14vLOLbW5WiLcBGly4P3vaxAblf6tz+E/ZkyONAQL0ItSHMF79Y/lH9zIhbuk/wBWv7p/mRxHh50o3gOSZWjortgRtGhzA1z9rykzejmDHrk7PzJuERJoDlVkGxAgnCSBqanJ4vM8t72xXM5Xpr/+H80vYv4txwj+c/yqlbIJ7W7hlgIAze69rDGunkNdfxGn2Z1rcW5jCcUZ/T6Xonu7nBwXPd8GLLFHUEOL3M7Z0M5XI/TL849rG6e77svzD2sgTxQjXUxHgt4C6o1CF26R8E+uP8y8DM6xudcf524kgUp514XKcmWRRpfLS6PFWVaVp/ouFOUx9NzrH8z0PzgMKUzpRw5zDzxbvcUyF8xc92fWP5l2N24fpufw/wA7WArVy/HbRrLOugBzL0kv1J8Tcl9Nz+H+d2OigLeKd4QJFRGU4j/M+Y3d9eu/UYj3Y5dZ1Lm4mrg31oxcjv5Xq/Ca9lyP8y1010fTL8w9rweMrsdxch8MiO7l1FulQ1HdRu3pfSfzhlR6aXL+P+5wdnvRcOCQAkdOB7O/uekE6cmrNeJt2tqZW6ykQTpSWXg89cF4HWP5pex3Ib2kMNHGuXKvNHVbFMzsd+OVY/xFcjK/I/HEeqX8zdDLNciDEvUTQ9GN463eqP8A1PSbfbg26ykZE+qjzwnTkz4bsxjTk8876EUQLtuQkR0tzXiPY5pEh/uXfzexnzuVYtMWjpG6JpDYjiNDK5+eftZkbMe3tMj4lZjEg1ZWIjl527FLkdFtYW4W8qDPNw78I45UAGfBEX6MaVypedKndloxtjeKUdCWRIyH158KsXG5l2Up3QRrADzyz8zut3yN3DSuZ0cTL3no9tfFuBjLPOtXjBdoyhfcpLWZSg0aO5uY5k1LjmUhnU9ZSldqs1xZN4xpFQulnxLMiZe8wcBZQJ4OhBowuThpIsa7OVfiObF6WnJalcxOelXYESfel1lrpZcT1oVq3gLcklxMiK4k/S94rIJApRo3KcmSApYh9R6ys+l7x6yqU6oYmCQullxPWvCUiK4ixsBXMwKNluzHJLRBy5BGROpKClPSfMtuTtuxMoQHNiswSBQap1d90NTjTMLDInIaMdFQgQFyoYhzZVs5PO+J9Lhi444p8RudToCsYTwdKo4hbkRRqdBBoWSJABFYOrBJLxBCWY5t2ubJqGSDOwng1QugSKHNiokuJAGa5iDFOq7b1YA4cxz6mNhPAujUcVVHFkgzaFdiaarkQZEACpJyD01nydAUld9I+6NB2nmylZWUlHic3iDZ7D1F9AjG3bFIwjHsAbJB1APaHTSc3ndjzTCeCNC91c21qegwHiPY8retStTIlz0PIubVG8cikQ45HNfxBjyQGrU1Jte3qYtDwLPqGqhkgkbaxG4PS1l8OdKd6/IyFYgk8j308XKlOQyByZu2MgTM5jR8nLCe7fC+YBhZuXJHSPGuvU6kdlaAqSZHhWngw7ZuX7xFvIDKU9RHuHEvVwgICgz7zqXSKySSt6VRm2YHRbSJpMAfvUPnKwdtt56eaVfa9NKEZagHtFXMntLB/wBuIPGPonzUbeVLpNlTnbuznaNYnFzodaeDFxh3p2p284kzHA/EOw8+wuRuIxNJRINQK08D3htGcoy0y4PgzVDVe1alUnIFfgRhC5UPcSQvSQzZUzp2rTBIWOIGr5/uL5vXJSOmg7hyer3Bw2bh/wAJdDyP5Mtxtxv3YiU5ZwidIjkacT5mboxnyOGt7Xc3s7dm7IcRA066UZn9l78//wA9zze19bvb/abU4bt+3A+7WsvyipX9vvdru6izehcIFSAfSA40NDRjU+RlR5EPI+/l/s0/FKA+7d3yPvbUcWCM+IhKpHqyr6n2C9dt2Y4rk42xxkREedzobvbXzS3etTPCMwT1VqxqZakeFkmJ5xIPYQQ+hba+dxYjLnpLtHt1dHyp5Oju4GcABeiMj79PpP2LzfkaX7K6DlSfPsb2pImNxkb3pcEM2cSKFitaOguJAGa5iDFOq5byLIHjpoWPSXAs6o4t1Cogzs1yBpqktSYJJOINk9vUxofEGfUcWSDMlWIJoxMbO3UZzt0hU55gZmjzpt3RrCY/dl7GjOvG9h+7dlGmHrW7UySZHU0DHOIa187WI8W9rTVb8ydL16tTrkafSL1qeKVHFqzdtKl6PV1uZeXBm1QpRyNWRLVZlo3OEexh5vceV7VmZhGBuUyJBoK8BrVwr3la5jPRRjhB1kKk9+uTy5NTXi7KPM5J5PhOq3PlaUyOhGDiZAE14Dklt/KxAIvDEeRiNe48vW4tvY7i7b6SNskVoORPeAeSzd216wAbkDES/wBZ00bVHgZap8d/4O72u/tbmWEVjLkJUz7CHosQfG7Vw2rkZjPCQe17/ab6O6JjhwTArStQR3NJRrgdEJ6tnxOnr2rEgSdCyYEYQuVHFzNzNoVULNmdFlEN0m+SLqipT01R8vKcpu27EpIBRFOCtExxzkrUWwVKUyZCRCSeE8GDValFvo3QCcUFyIqWHwNcDayRrq9xuawz8AKEoAB5z6QhsyIyDdqz0sxEes8A9J+w2kKyIgOJ1P36niy51jaVOUn0QOcw05eZano9Jb3u23BwRmCTykCK9lRmxdxtogYo6cxw7GkPEXJRnFwb4WQc4pmmEaLFA95IcNF2gYhJGi5D0jmyByQFGI6GAd/WlCzGUojiQERdG1sbItw6Q/FLTuj/AHunO/GHxGjmbu+bNBEajLgAHmZTuyNRQk6ykfsG7lp2RxKLn+p8Dp5b33Yk9pox/nyNYdR/ucSJu19LAR3VBW7hl9NPXX7OOuXM28uPJnTw3du5oaHgVXcN2JjL1HgeLxB6Qa4T2VDo2dxIyEJZ1yBdVO9mZPHW8b2LETGRidQvUDG8oC8LolbxESiK4RXMZcHElPcxzljHaKfZjgbqdqzpKBhHVyq7rhc/KfYj/wCz7tz8p9jBbUarrWsUrQhD4pGleGeZ9QeV/wDZ925+U+x7zaWehpUkypme86vNkjq0+tk3Zo0O1sUs2jdIpSIIiSTrIk9ZWBLyoc8OzH+Am6T+YZeZ0sQiCSaACpJ5AORb8qWZyj6F+MLhEbd6Vsi1MnSh1FeRIALqjFnQ50GKlaZ00rzo85K35QkSem28OERalIU7yZAu8ZaV56POXfKBEp4Ntfu27ZMZ3IgChGuGJIlOnPCOxAmWunwnphbxA5G3WhHGh07HD3n7M1HMV9b0WISiCNCARlTXuObCnGM8pAHtcJLV+UbIw6BjT1Z0oASNK68VvBF6yxAUy5QAWqBgkkiyL0TEjIiheqtjDGI4APMWLwiCJZcC9FCYlEEaObKtEiFmzGcpi3ATkaykIjET3mlV/DASxCMRKlMVBWnCurh39pDdTrcuXTARoLcZmEQfeJgRInhU0DLsxlt7WGV2d3DUiU/iw8ok86cTmV9TIlXbdu6AJwjMA1GKIlQ8RVyr2x2l747NvLQxGGQ7JRoVy7G7uLUQLhsVoZmA9LD7sSfhPfQsezYnt5SHTTuWyBhjcOKcZc6T1MTwLH1J+hKk8r8uLBuECnSTx9YH/wBvSzLHu4TGhYianPqZphGixQOxIcNF2gYhNNFyFZFkDkhkxHQwDv60ejiiCCvwaoEDlowSS6BogUY8SSQKsvCO/rZIHNrchCokaGtavVGUsJw0xUOHFXDXlWmdOx4/o4u5YuCcac45f3ubXUh7kyyNzGRF65auxIqCIYJCXMUrIGPA1qt3cVyMTZt2TUmsroyAHOgFZV5CoXpXYwFZSERkKk0zPasxnbFYRkCY5kVrQHw7mtmdEaNqMoftbFmM8wRERlHLmDStDrnmGJPb2BGREIxyOYFGfOXNxp+mSTXsrklua8OplMe/eht7cpzzAFKcSeTomIBcff7c37BjH4gRId9OTt1IfB0eYPonkrai3ZNy5h/aUIrQgAaa8y8PHbX5ywi3KvYQB69H0W1tLEIQFwCZjER9M1jX/CDkHTI9qs48ad3X5NwgUcm5OyThMrZ/wkx8GdGMLccMIiI1oMg5srVg1jgt8SMI58cubyHb+Dgt/Z6K+aACMs408F3yZKMN3AyNK1A7SKAFn+UrEjgnAVEY4SByHL1OVs9tcvXoUBAjIGUqZCh8XtTuJwNNT2XU9YoGNPVkxFRXNswi4neQFMqUAFugYJDouQFSxMR4su3pV1UjysnhVu4v6EpzpRoSyzOjG1dKTPMjOeNtJ1zKRJokrCZaMPZbG+JqeRKa1X162VGWY7XRcwwIXKzGVXNSriehm8Pr06aVbV0HpCpaFRzWukXASdAw3Z0Y8Uca2W/VlSlKKybhK9KMpLJgQ1Ok3vJ+eM9geV8qXJT3UonSAAiO0VJ9bvbO50UyDpLL18l/f+T/AJo44ERnShrpIfYvkOSxeJcp8JLZ8ikjzt9WsTN7awlLWVvPq1eTs+R7xkOlMYx50NSex62/IWrOCOWWGI4DTzMeInHLKEYfqd8V0KxRynSFDEl0ZCOF9c1DEcWa4I4dCtiWHJcEq6BkBkyARhenE4gKkAkdRSIJGjdmJjcie9FXwZl9LO4azkZHvKzcuSGUYyloKRNMz70uUQ9FubFsQMoRESDU04c3GlHmDQ09R7XNqnuVi1NbbEe3dmDSUJx5YScY0qDCXMceDV29LQQmdPRGRJPE8o5ZlMVrUmvDgEZZmoNC1LURI3JVpKEodxOIZ84y8QnUiQIyK/EVzlnTQcmRYsidwkisQPOWeLDelWzZ2d2dyMsRrQ6sfyn/AEB+MeBdS1ERFAKBy/Kf9AfjHgWP/syTtXwNq38EfwjwXFq38EfwjwXXIuJKVyFv0tAOaLBvwj0Vw0zwS8OGjAN7EvA5PHeTt30kein8URkeI4doemrlk7cBs0Xcr0kJUxAVGXKtM14l4G75V3tqcoSsQBHdMjtGejv7W9fu28d6MYEn0YgEHD31J1TRNGnKTnXLxgKRIBrmaA5evzt3bogO9xukSVliQZE5ig9SzKchwTFTy863KEpOq2A2Zko4mzAhrCiRzA623nhGA+pysa4CToE1YOmBXK1DhwuyGRQunpKETuW5R0MTx4xOR9bjRU2QBCNBWnKpr6lqUnGt+hIylOdyRFKmgAHARGQ8VTv8tGKJJNyfIasCUjENRJkqUSRo7JUBrpChiS6Mo4WSQxHFmuCOHQrYlhyXRLFoGQETIBY6SXcvkSPJY6OSIAxJgYlvChG7GOWdTyIIYJJQhQ6rtZd3UtCdeS9hmRlFWkQR+lKVqZ6WPeQzLexu3MyRAd+vUyZ7I2sM4EzoakaH1OTyRXUWicfSFCAQdQcwwcVuz6MYCPOkQAPMudPD/EDwoaoxsSvSM5VhHlXU+rg4648/wCFKcpc2H0h7nVubacM40kOoucLFyXIDtd9cK4oDBmS1XFk6MdqPqkT2ZL4jCJpECrg88elskwTalbz1DHv2DdjH05QMZCQlHXh4F6cgEEHR525ij+HkfaxjnqvaqDp7McxOd0MTe6SsqkAEV9HLnTjRGVyVcgCO2hQEpHt7ncbEswrIDiXSFoR5sa3Axzlr4MzpO5ukB0VHNCU5DgmKnOnnW5QlItyBszJRxJGBCOFgkcwd66ARzW8a4CTyZAB1RXDGRRMSHZM8LNglqbirT326ArkSI6pZMeerVys68Ph9D1SdvpQ9KQK1ULKnI9IuhZUDQZ1SBybqyQFjC3KcSFqbHQH6hnW93et5fEOVfa5bLicnOUIzVSSZJpx38pA+gB1lhyu4jWRJLCtaHtXJ6KOKGNvTFI58TcoRb3bHTOLHqFhTc6Bwiq5D0TmlDRdqyAsQaxx4rcjkw0QS+ll7xc24JDSpj4L69E0qxxGyMC7jkPQlQjzsaIvCXpTqO46+Z1LoGI/ZZEQ58Cw9Zt3L8qQyHOXIPY27MLcREdZ1J4lVsxpSNMuQpl1MhzbfoZPcWjheU/6A/GPAu84PlP8AoD8Y8CwuKI6Gzb+CP4R4Lq1b+CP4R4LrUkTFv/0bn4JeDIJAY9z9pbnGOZMSB6w3Sb6Mq2lxaOJ2vxHsevtXiSInOrB22wNqpnLMjSPL1lfuW5WZicRjiOXMPoeTN9Dm+Yxrbd+hsnNh35mEKjjRAbuyRmSO4g/ZhXbnzNI24k0NcRyAcI4Zt1pa9eBq82NK9SfpxIhlXnUoYTwdP5WNB6Rrz4IyhKPeHZ4pR6fgmOfHLrXZ7DMSABqlji0xp6uXA3VPgx6UgVqoWF+EMWfJjiRKSgreyGqFkwNBRlxhGoqTR24xhDQD7t9LOJ+KhWyb9jnJSpTXPTI5u1QEaLt23G9GkvUeYcvDubWQpcHfqxKF8DKPilf6lS7bk2QAicuReZoXYw7i7kSLY501Z9u3C3HCBXjXmxGD6kvxSvaLa77GFb9GtV7GHSnagdPRcyVsnKobUzoXiMb4vT6lGcaLFQtEGJoUWh1qmrQ4RVch6JzThouVRIWMf6DWOPFbkcmGiB+oROei2vwYJN21d6SGfxDX2pMOzH6uOjMfKzSuVLgibsn2j6K9iYoNGsTjZlRIqhiY+JbMlZND8jkxgCdHOub21DIVuS4Rz8+jM2dy5MyNyIhphHd3ukcbk99kTwJnRkfEKOVdHR5k4aeuoeolITFA8zvLoM+jj9PxHieHYPF6lhUmor8mcsmiLk+isxZ7kXDQVA7Dn5nWhanOIyoP8WXmYkJGMgRxd7G+vHBGKo8d+NlJbRS9zh71BMgwwEajj3rIIiR4B7S5GFzKcRLtY8LVq2axgAePPzs+TG739Ci8ZkUaqLfxf9EDorxgDg1GhkAQv7eyLlRcrCQ5VGnUzsTAuSJLp5cb/gr83kqn+VszYG2gBSsusexyL8YCVBOYprQ8+pO1eNsEcdO4sGernk0rZI7/AAzlk/VJuuFdysNsUIqTxJJ8SlULKnkPULwllQNBmkC3VkgvGEJTBC1cWEST4AYQnQcFqnb1rMiQdSiB6YFB2rSziJ5tVLBILNtgURwBOgHFkDtBwCEgKaLEyRoSs4jxRA8sFVSyBEEMEgWRqzKDgwbQyPavSqBqW74nJg/rj6fyPkChyYq1iPFqpanWWdVy3mUogEZrmEBAeoODeEMeWQ1PWzntwwU7vejmyScaofsbe2RWXpHhoHVMIGJjhjQihFHNsmhLNxPaoRjwRyOTfFnO3fJ5rW2ajgciPWx4bC6T6WGI7a+D0+JHEzoi3bir50TqlVWwLVqFiOGPrJ1KxftRuA0lO2eMZEdY0X8SxM5MuKlxSZW6MP5e9T/yLlfXTxYG6s3oWxKd0zGICmeufF6Ny9//AEB+MeBeLNjjCKaVb0bRk29y47TcmII3BFQOckvlN1/8k9cneh8EfwjwRuGgfJVt0urrgdDpJt9DJhGUY0lIzPEk/dkQNJBbXIav0qWlVyPm29Tb5mlVGq1VGrALMYHWMT6glkNFuqNWSB2qxOSqrJObIBRAHBJhTJEtXk8R9q9T0PCfe12JEwKLlv4XOMjxdG38EXz48Tq8X9i/5DzqA5OWzAXY8VEiqNVmqNUSP1RqsVRqgHI5MZIlFFWMz9rFWt5fG3jEmJlUkZGnJxv7Sh+nLrDhJO+B7WDJGONJvmbJ1XbeZcH+0bf6R6wr+0rY/wBqX5g0qXJ+x1+dDmdTQcFUHB5j+04fpy/Mr+04fpy/MzUvhfsR5sOZuNYcUgOvsWIXOktxmARi5Mq1Kkqlxk3pdcToTvc2gQMtG8QFTwWAQVuAxE8JHrD43UsPVnLMyMe4Uy7SQc2POeAVlcI9YHmo6x2/SAiMjHv1p1uJd8nCBx3Lly6ANJUHniBk+goIrZD+dnL0bcDcl72g9Y/+m+gu3c792g9yH3XDLAPQAiByGVRwLJxOMmofal6ii4Qt2vgiB38+tdxFjYkMTzNt8WSSYbmdsz51GVfpPEOdzKySalcjo/QYUrvseZ4x6cX/ACaX8j0dQ6GJzK0TxvpHzZMxLZkxMS3iYIsmGSwTUscyRjKsmQSmVQcGIiSRzLx5eKZ73gXalHk7/JImBQdqytYjxaqXlPaBZtsVCOAJ0pxZA7QcAhICixMkaErOI8UQSwCRWvmaNuvNKJIFKMsZI58mVYlzb4IzTCnNDC6UxiHex7YEsywUjni4OXCuhGxlfjWQqzThpQ0YwGE0GiIhnjPpp6/QAwrzWjboNXTqAx7nwlFY+JjKVVV8GQcKsRGTNtgUqV2QjIZoS8TGMqq1wbM2zU1ZJgTz8yzYGrp1bS4nPDOseOCq3X8mabfetYWbcOHlqwsTB6cJKcU0LEY5LsSZFawmWa7EGJRoGYnLPmzWFU1GXMM19Pw/CXqcWXih6Bov4mFioW8T2nMSao4mNiQxMgk4lolZxLRkgS3J3/8ARH4x4F1nH3/9EfiHgXmz/Z9UaQ4nSw+CP4R4MS6c2THK3H8I8HOJqXzPDRubfw/uR4mVQr4v2KXYrBIVU9r7R4o/KYjqVjpocWAfTMq1r9IpWprp3Mr5O7hrh9Vc3x34mbk1BRpfF1PXXhoKKc3K38PQkCYOhbq5eUJCmIGnpA8efqZeJ7cGbzU9qa48jjz4fKkt7T4D9Ua5rGJuJ9J7DkJDGlDFLVksaU8MvU8mf7Pqju8L/Z9GNThQOhDKI7A5051Do1oHzodTp8Xwj6sNcqsHRGpdjyCRVGqxUo4kB+rVVjF2o1RA9XRdYVTUdrNQOb8q/wBK3+L7PL9BcoDTW2buoygDSp4V5ccnqvKn9KH4/sWMN9YxXBOIlDFGMBG3CvRW4nDiORl6QgTGR5MnVD7TAt7a9eiZQjUA01AqeABNTTnTQasN6wb+xGcT0UcOC4QIxj6Fy8TiOdKiMKDDlEsYbvZgRB2wnSFCcokykY4iTHOmUsOh9KmQDJoc4uQhK5IRiMUjoA9Jb3eytAAWTPDCVDct2zLGeJEwCAMhUZasaO9EIz6MdFIWo24GMQJSJwi5KUhzIBpwqgbG1z21rsPiWZXCw9qabe12HxLMpieHn6s9yH2x9EUDUjkzMc4GoJp1076MGoifij+YJG6OMfzB58kZNppcC+xu2N+LZ9Mih5jl2hrc723OJESDXny87yN/dm3TCIyr3+xz/wC0J+5HrLdY8zX2+6Od5IRe73Ogri7OZX8TnQvSnbx0FaEuH/aU/wBOPWXn8nLPotu6NJZYqr6nV1Rq4213UtxIjABQVyLq4u5zeCadNe6LxkpK0XRpuqxKdC+xg22fGjy/Gxbgn0i9/qOmS2Stj0zU0oNPaUZdz2uSjVvieFHHOabiroOqFWOTRAEk0Gbcw3uqd8upIquQzI6wt9HIfEuypQGoiRpXwclOLdJnS8GSEVJxpe/15EhkiGIauVG9imIgDN1hPDlRyyvgj0/Axdyl04fUowohhTlOvJDE8h7wsZX41kK1Y+AsiNYilECzCvNaNugrVdM6cls3KjREDoK4ZUWgfQWTmCOLY8bxP9kb4Uv33LjuITNBX2skGjiws4ZAk1ppT7uliVGXiPJjOsMnKNK75+xm7mMzOtCRypm6tvEIRxa0zW8SqqicniZZMePHpitHVcX/AO6kgzERUmgRExMZGoYF4GccuRWrEZQrXnyVErHi8jzPM/yaq0dv37mxVxbu4uRmaGgHJ0arRESakAnjRUR4fNjxSk54/MuLSvo+e4dg5HtZdXPtmgLE3E5AjMgfdlmfh8Xn5FDUo3e77GvPOJYVC1ZlIwGLv14L7Rnq+Hi4a42npm1a4MuJAGa5iDFOq5b1R2jlfSHaysRY8imDXN9Tw/2v1OHLxXoETmhkhIioHM/6qsGT3HOP17yjXvLHxIYkCQgSx8S9DKkjoTQIGnicrfGtoDni+xdFyb4F8iINBE5l5839cv8A3UvHibHzNqUIxjOJlQCnqW3H+SAzFzzf3s/0wPiie+n97wYZxxpp9XZTPinNproh6XwnsXtuTWHHJhGRIoaJC5OJqDT/AF3vpS3i1zR5cdpJ8mdDa29N1j1BBI7pO9OAAeE+ZvjPGeoexnnyjMjOArxqadX974/y048mex8zCT6oj7yIF0dmfWwqoSnKcjKWZK3V9LDiWOPd7s8zNleWXZbIeqlD4mNWpoy4nCcPV3vSc4+xbgJkOxkEiIqVi3PESTk8uf7H6o7fDf2r0YwQQ6K1Pl2oRlQ0fOib+Le8fRkhCq2Z1yjmfBsxIjXWmpdTygqo1Wao1QHqo1WatVrkiCQMyyVj4COH3Xaila5IkxPKf9GP4/sXnYbfFASMxEyBNuFCZToaZU0qchzJHB19/MzhHgJZdTm295OzCIhGFY4qSIMj6QINBIkDXkNWTqhwM2hFcjlr3drP+TvejURjihK4BKQHox1rw00LEnclclKUjnM4pUyBPGmi98xcwmINAYRtmmXog1przOcuLJcdtbWd4QoRWeOgNdIUzPcZHCO9hytyGLIkRNMQBw9dOfJnQ3l21GAhhiYZYqVJFTIA1qKAmumZpXRYu7m9eFJyJFanvOERrLiaRGZRJ1O2/wDGtdh8SuXpGFi6QaHBKnU1tf8AxrXYfEobv+hd/AXiXH6v9z2o/Yv+P8Hm3nJbIkPpUNZU1w5JDD6OHXn96vYeaXA+kKOm5cPj/edR6cfAwmdfYysD8B8Hhnurf9CH4fs8M4Y+MvU6s3CHodJ5LHpXD3R+70eE8C4nkrKNw98fAvV1HF58n3M7MP2IzqFz75MImR0DtS1cvdQM7M4xzJDSLpotlgskHF+3Y575uA0xf69bv7S9bvRkeYyeCIMTQ1B4FOFyds1iSC9c4a13PNw/4eF11VnZ7qUYRqWJtb8JSPHveZndnd+KRKyKjuarG9DjfEvJxeVZK3Wx6Hf3EYWyT6u95g7qMjU4nGlOUtST2rbOPHo7srmay7O0uVnXbWXSyrGvokVq9DIE8i4nku3KEJmQpiIpXueoqOLhkdy9Dr8Pjjihte++5nYTwVQsyZ0WXE7RzEEqsJmWzkyBudTyKxhPB0qjityIoiBi7ctWY1n5nPjfhMVEh68iu3rQvxAJIpmC5vyEffPUPa1U0uJw5cXm10rqTJX7cNZdWZa+asSNIkj8XtYfyEf1D1D2q+Qj+oeoe1trVmK8OlFrn1NHpI8R1hZ+csAEEyrxpkxPkI++eoK+Qj+oeoe1OaYh4dRu99qNAXYSFRIda2dxagfSP5c2J8hH3z1BXyEffPUE8iKx8MlK7uuhMjuLUz6J68kpXYRFTIdbB+Qj756gr5CPvnqC8xB+GTd3XYejurIyqa14GjK6SPEdYc/5CPvnqCvkI++eoLzEH4ZOqdGpblC7iAkCQpZsbeNitCSSzKBreps9DFBY40hyGjJFsy0DAJIdCF4YQK6MN0bMj3IGIqRTqYWPDzyP+qulOYkKF4i7euC5MCWQkaacX0PD5FTVO7s4cvGzromEc8Ve/mwZSzJeft7iUZekajn7XrBbGFZM04zXL9/UtCMZRfP9iBiQqw9zihnE07mBZuXLkwDLLnpoHrjni46tzBpqWk2tXShKJjhPnTjGOHk4G6u9H6MdTz4B4vmJSyLStuT/AHOlwjGO5qTnhBjGRNfN2FvbxMiaCryfTXPe8HsdrOIhE1GIxFXfNlWhqnbMMe8tuho9FL3fBhSs3B9OXqdLpRxW5XAQ+PqfI7m3RlVRq5W7uSjcpA0GEaetzOmue+X6CORSSdPc+ceNxbVrY6aqNXm+mue8VdLc94t9XYro7nRVaq870tz3i+ieSduDaF2fpSlmMWeEVpkOJcp5VBXRpDE5urQO123o456keiOA4rV20YAmYyHN7O4I0fJ99vpX7lIEiEdO8+8fs8OPJOU3yfHt6Hdkx41BcbXDv6kuUsWQrQaVXrcJTrhFXlulue8XtrUoxA0zAq7Z8lQqnbMcEHrvbb+SLOE7YxSFANTULBu2z9Uetk7ydbMhXh4h494IPY6s2PzJJt1SOzsXYTkIGYFdDlmeD0sbUQDHWuve+Tvqnku909gSn8QJiTxpzYnb9CcUIw6W+ZhX7E7RORw8fa59X0C6AavkN+At3rkY6CZAbxnZzz8MuKddjfAMjQAk8Bm9FttsbYxTHpHQHkPah5JtRhZjP6p5k89aAPT3CCGkpXsbYsCg7e/I5e7awAyqMPf4ODKWLQUHiwd9u5X7hArGECQBxPErG0kelzNRQ6t1JpbmM8Ccv07D9+zcvQEbccRrWmWnrb/s2QtQHR4pnO4akGPPDE1wVpQfDLMu8Llq3qYR9YC783a/Uh+YOfmvojWGBRVORyA8nESlGVyFQYRiY+lGspyiTOWWERwmvqat7KE4isycU4wjKAxR9KRGKVaEDI041DB3l2N7cTnHQ09dBSrnPYt0czpM3dvtrU5XayFIywQ6TFDXEcUsOmGMSaV1Wbmz6K0LpuRmJRqMNRqaD4o51zyyIo5VTSlTStacq8UWSp2u3/8AGtevxKd//wAa9+CXgv7ARNi3iFcj4l2MNogjAKHIvn6km/Vnsx+xLseKd+hbrLuHYH1A+S9iT8EvVOVGv7L2PuS/PJ382Pc5PLl2PM4fEO1030/Y+S/J2ORlbxUGQlKRHbq9J/Z/k3/49vqPtenHkVHPODs4Hb/04/hHg8E+4mzso3oxAiI4TUVNK8hqyP7O8mf/AB7XUfa5wkk5eptl/Uo10R5r5MH7KR4z+wdUvVX9ts9vAdFbjCstBWh79XNpa90PNOX6mdmN1BLkY6Ucy69LXuBVLXujzuetG1mNdsW7o9KIPqz63gdxaFm7KArQaV7H1g9H7o875v5TAG6lTIGMfB6sMrlXY5MqVWR9jCNzcQEhUZmnYHV8rwjHo5gZmoJ7gwPJoruY/hl4Or5ZH7O1+I+DeT/zR9DFL/GzjMT6Ht9natRBw1lrU5n+586iKyiOJHi+0RFsfSPOs0qruWwpbkIRCzPIut+z90edGlr3Q8WtHfZituzS17oc4gVNGydk2OgN0DDxFkwFRnVuBubHdDAChKEQESR9GqoEtVeYyHKqqt1VVggcqqq3VVUSOVVVbqqqA5VVVuqqoDlVVW6tVQHaoiSNV6FqU/hFXWCJTS4liOLNIQpzZAs3Y/QesLnR3Pc84ejTLk/wRrh8UfyiFIUH9zyF+zITlLUEk5cnrpxukmNMKwbRiKuv9SbfGuH/AOnLL/LwVJf/AE+vojiXoLe9GECVQfFK/ZjKJNMwCavOt1pzR5UY/qxP1NC/e6UgDSvWxY47MgSCCORZmziJXdK5Gnaz/KEcNuMqCuKle0FnaLUK2JpyTne6/gobyNOfY4ty4bkjIsPH3O1s7QugyI0NAlGOO2NUstR2IduzO6aRHr5PW27GGMRXQJRGBkCfc88puR2QxqHcLCe7qY5PYzM+HnWDbkXM3Od3VuUpYgK5Uych7IwLEnYjIZj1jV6oZdKpo4cmDU20+PQ5hS7cjgkY60Wnv4nlPZ0Kj2Xk3yjCzbFq4cNPhlyoeRYNiz+zBH1CpcC+BbuyjTT2PK2stxfTqdml4kp3d8UehbryrahbItyxzIoKaDvJfOFvEHd29mBiJyGKo0OgZSjhXV2V/Vnl0VGbbtTumkR6+Qes+AAZaL0Y5ZBswkXlnNzPQx41j7tmfeBuQIyedlExNCKPWm2QsG3XXNyujWUbOWdfZ72W0JFMUJajmDxC1ftRiMUcu7k5rficruLOyveWImP7OEsXGVKDqJq8cakkyrUknPmy9vDpLlO6rP3VoxtmR5U8Wq2L05Kx/Y+UPl44JgmPIjUd3Y6e48rQwEWqmR5kUA73hcYXrdLkxHinFcSFJ8CnU29uUTiOWTpQtRjHIac+a5GNTRzlPei6jT3MTyiP6R4iX2effQ6TiORWcU+EepupOKqvcznh1Sbv2OBU97jkNQOpMTkdAG/mPl7/APRn8v39jgFPoX7ThFX7ThHqXmP4ff8A6I8j/b2G9gImxbxDkfEuxgte75z7WDbAkfT5DIDJnCFocj+Y+143xO1KklyFhtD6fOfanS37vijhtcPOVYbXDzn2tfqSCY2/d8UOjte75yngtcD+aXtV0drgfzS9q+oA6Oz7vnPtR6Kz7vnPtXsFocj+Y+1LDa4ecr6kACNofT4p0t+75y1htcPOUcFrgfzS9qvuSFhte75z7WsNr3fOfa10drgfzS9reC1wP5j7V9QCYWfd859rIueQtruTG5O7OJMRlExp5wSs4bXDzleFyURQTmANBiLrCel2ZSWpBWfIG1sTxxuzkaEUkY0z7AC1PyRt99aibk5QpIkYCOzPFVCU5SFJTmR+IoQ/Z/BKceyR9ro8i1XuU0Oqsbj/AP5jZRIPT3ciDrDl6l2dm1bnKNK0NK1PtXOln+pP8xWsNs5mpPGp9rSc9VcS0I6S6Wh9PnLdLXujzo4bXDzlrBaPI/mPtcfqbBUtH6fOXKkaEgaVdLBa4H80va5pjQmmlXSJZB4FwAx0K3jXASdA7FipSlFZNwlelGUlk2yESRC1VlX7cozJoaE1FGHQ8D1POc6knuFVVUKHgepuh4HqRNhVVVGh4HqVQ8D1IWFVVUKHgepVDwPUhYdVVQoeB6lUPA9SFoOqqo0PA9SqHgepCwqu7t50ie1xoW5TkBQ9rtXjgpQUevB95xZ5rTp5kvpEekcrpEOkfYPHsnXJirDnOJjk6O39KJJHNvcAC2chqHxsz/VI9fFl/TGNdrOcn8MvwnwePfQdvA3LhiBUmJycX+w/KH6Q/PD2t/DvZ+pOXdpcjP2P9X937h0PKRBsD8Q+7r7HyXu9tOU7lsAYaZSjLmOQLL3uyv7yxhswxHEDqIjLvNG8n/kX0KqdR01xPKXrfJ+Vo/iP2R/sHyj+lH/kh7XrNns7u0sRhehhlWR5HnxFQ3yv9JWEtDujPOeigDV6Wg4DqVQcA8NnR8yvh9zIxD/QQ6SPF26DgOpWD/D5mbHzC+F/k56UgStHN6jo/wDB5lG0fc8zFk/Mf6s8v3IpdPYGE7/lSOC+KilYDxLz9X2YfbH0PMm7k3zZ2diURZh+EPK73O/P1eD6NtbRNi16I+CPDg8F5Ujg3cwcso+Dx4v7H9f3Oqc9UEqqqMR7KzE9HD8I8HjKvsdmxLo4eiPhHDg3z8EVxT0NurMaJAASxxeg6GXu+DXQy9zweC+x1+f/AKs5uUwVqoeoNkj6PMGuiPueZX2HzH+rOE3ET0Z9Xi4L6Fvof+vc9HQV073z10jwK69e9UaezIF3P3T9nT3komxP1eIY3k0A3pfg+4d7fgfLXch8PDvDDe48xR/TR5u6G0Fbw7C570XkkVvy7oHxDo+BF6d+RtjKJVAgSdq8B0UsuHi5u3zuDsLxP7kbLJqTlXAszjTVYqHo8MeA6grDHgOoOtmfzC+F/k5kiq5AUOb0VBwHU3QcArHzK+H3MTEGsceLt0HAdSsMeA6grI+YXwv8nOVHFE1OhPW9LhjwHUqg4DqYsn5hfD7nNxBBzr52TWPf53coOA6lUHAdTN9iPmF8PuYOKHFaJFdT1vRYY8B1Kwx4DqDF9h8wvh9zmznoT1tAS7/O9LQcB1KoOAVrkT8wvh9zErHv87WKHF3aDgGsI4DqDN9iPmF8Puc8SK6nrQOehPW9JhjwHUFYRwHUGL7D5hfD7nM0lxl1llCnf53doOAaoOA6lfYfML4fcw6x4+K3IjkT1vQUHAdSsMeA6mb7D5hfD7nN+s9aFJf4usvT0HAdSqDgGLXIn5hfD7mEKUzr526x4l3KDgFUHAdSvsR8wvh9zAkY8ihUPRYY8B1BWGPAdSsn5hfD7nMULKgaB3qDgGqDgOpmx8yvh9zGxxW5TiRq7uEcB1Kwx4DqZ1D5hfC/yNkVWejZCmh5xG6MNdGylyEJXJCMRUnQIEHo1dGHt7Xk62B+0JkeANB7SzPktt7n8Uva7aJdi9M886MN9GH0H5Lbe5/FL2q+S23ufxS9rPlvsKZ570aujfQvktt7n8Uvar5Lbfp/xS9q8t9hTPPejDfRh9B+S23ufxS9rXyW29z+KXtXlvsKZwgjRcIEhQir3HyW29z+KXta+S23ufxS9q8uXNEaWcF0Nv3ArobXuRe9+T23ufxS9qvk9t7n8Uva20z+L3ZGj0OJyGmTF3AJtmnc+gfJ7b3P4pe1MbXbx0tjz+1p5bfUuk00+R5rsDK3exYTTCRpXXqeu+Z7fyf9Tv8AQWfd859qPy1n3fOfa2jBxVWdDlbsxDfIGWf7tPus2pm3ARPLu4+t0722oKwzA5c/72DT0fUnaICG4rz/AIf+pbnMXaA5gGulPuqMVRHpMWADCA+kLxiANB1NS1Tlo1FCjohFOOiEWSS/qRuN/UqaBPEdsQK24yy1NvEesxbwbX9K3/xD+VyiJUyJHrKMRL3pdZdNRFE650IlCgw55gCmXZRlGO2lmbcD3m1XzmLjCPpKkJDSRHrLGoUa/R7X9G3/AMI/lY88Al6IoKaUp5mERKnxS6yuwGTDdii4Nn4moq+poSFJs/D6mpN/T6mSAbcbUxIXMJBypLQ+pL5bYfo7f8kfYsRqNDRDFdr8cutsnRJMFnZx+GFqJ0rGIifMEI29vOJFwQlXKkgKU7GLIzORketIiUdCR2KwSfltj+jt/wDjj7FfL7MA4bduJprGIiesBjg3KfHLraiZnWUj61ZBm7iz+ynhqTTRxNpanK7oQADmQXsfqXJuLjbssnSariZhsSpyK10c/ddn6fU1HRtRjoRgmo1ad0fEtTtxJ0Hqa0V0dzHU6U9uORPrYhtTGdK9jWjNxaGFIqYKhKRUgEpFSASkVIBKRUgEpFSASkVIBKRUgEpFSASkVIBKRUgEpFSASkVIFKRUiAnpvJsAIyucycI7Bq8s9R5OuDo5R5iVet1h9xePE2r9+G3tXL1w0hbiZyPcA8/t/KG+vStSl5PnCzdIwzF2ErkARUSuW6CgI4EkOpvNvHeba9t5EgXYSgSNRXn6jm8Zc8n+UN4dtb3EdvEWJQrubd25jnCJBpG1QAGdBUyJpyew3O0HlDaSvSsDcWjdjXFASGIYcz1cxqFq15T2N+Rja3NmchHGQJjKGuLsHPhzeD2/kTc2rsYywyt27t27C78xczM8VKWcNBLOkiZEEMkeSN1CxsI2ughd2+33FucsiMdyFI/T6Yxa1QOyt+U9jdhKcNzZlGEoxlISFAZGkQfxHIcXRjetyuTtxmDO3hxxGscXw1HfyfKR5E8oTF6UsAlKzYjATvdJWdm7GdCRbgIxIBoAPRex8n2N3Hdbvc7mNqB3AsYY25meHo4yBBJA4oGvDyjsrkrkI7myZWgTcGMegBqT3DmeS5tt7tt4Cdvet3hE0lglWnbzfOT5E3sxubQNmxZuRlhgLkrsDPpRcGESgJ24GlJxxGtXptjtdyN5c3d+3YsGVmFkWrMsQOGWLHI4YjuiKZBgG8N9tDf+XF+1036eIYuNKce7VzbflfaxsQnub+2tSmDKkbuKNBMxrGVATmM8si8pZ8i7i3uRipO0N1LcC58xcBzJkP2IjTGDlixUIZWx8kXrMrRvRtSENnfsHPF6dy9KYpUaYTmUDvult9H0uIGGHHiBqMNK4q8KPI7by4Nzst1uehMJbeJn0UpZygYY4SrhyEx3FaPk/dHyPZ2IMIzMLdq9LFlG3X08OWZw5Ad7n3vIu5tm70N83xf2lzbz6YwgY0H7HDggAQMweYBQOw23lLabqJwXrRlGAnciJg9GCKmumQ0JVDynsbluVyO5smECIyliFImRoK8K8joXhZ+Rt5u4iF0bfbi1s5baErRJ6UnDnMYRSPo5jM5lb/sXdXLdzHCEZn5eHpbmd7FC3dEpVxRERGg9CNK8kDv4+U9jKzO+NzZNqBwyniGGJ4HvPLis7Lyjb31zcxt4TCzKEY3IyxC4JwxVGWVNObzG88k7i5ub9+zGyR0+1v27cjSFzooSjKM6Ckdcjmzdjtt9tr24uytbcfM7i3OcYXDS3bwUkR6IxTBpwrmUDt6uLdGGRA01dWrk3ZYpS6nOXAsMx0RHxJR0RHxOJYUtU5aIS1TloyBR0QinHRCOqAvqbk19TckAvp9SMUvpaiiAR8TUtWx8SpasEhS0VHRuWio6MkAR1UfiVFX1MElyS+n1IyS+lkgGKIHpJxRHxIkqWqctEZapy0QKjohBcjohHVAX1Nya+puTAC+lqLf0+pqLJAI+JUtVD4lS1YJDloqOipaKjoyQRTbjPXXi5U4mEqF24uRemJzy0GTmzKaRHUipoc4SkVIBKRUgEpFSASkVIBKRUgEpFSASkVIBKRUgEpFSASkVIBKRUgAppSBa7buyszEo+scQstMknZWt5aujKQB4HIs3pBxHW+dmK1gdvM7Guo9J6QcR1q6SPEdb5rgVgXmdidR6V0g4jra6QcR1vm2BvAvM7DUekdIOI61dIOI63zbAFYF5nYaj0npBxHWrpI8R1vm2BWALzOw1HpHSR4jrV0g4jrfN8CsAXmdhqPSOkHEdaukHEPnGBdEpDn15rX2GpHoXSDiOtHpI8R1vDRuU1iCyBdhXOJHnbay+qPM6O5uOUczx5BYHwsHpbZ507QzBOBGUh1tbstaHIND4m4ND4kSKWqUtEZapS0QFHRGKUdEY6oC+puTX1NyRIX0+pqLfL1NRRAI+JUtVD4mpasEhy0VHRUtFR0ZIBjqr6mot/UwSXJL6UZN/T6mSBRRHxNx0aHxIClqlLRCWqctEBR0RjqkNEYoC+puSJIEkJ3ID6h1sAf8ApaixDuLYGtfUsfNAaRJ8ytFdS5mgPiVLVxzuZ1yAHnWJXZy1kfBrZTWjenKMRmQGGdzGIoAT5g4ymLKa2SJXJT1PqWUVNDMtTSkQWppSBamlIBNNKQLU0pAtTSkC1NKQLU0pAtTSkC1NKQLU0pAtTSkAVIqRUJSKkAmmlIktTSkC1NKQLU0pAtTSkC1NKQLU0pAtTSkAlItogKqYnMaSPWsqRJK6a57xXPmLnEdQYKmSbfM0Rupj3epsbqQ+kedzVK2TqfM1fmjWuEdaR3Vfp8/9zkKZtk65czZ+bFKYT1tjdRH0nzOKpWxrZsjdRrpLzKO6geUvM4ylbGuRuHdQPKXmaG6gBpLzOK0rZOuRsjdRH0y8yvmo1rhPmcZStka5Gwd0D9J62vm8qYfP/c5ClbGuRqjdEfSOtD5qVa0Hnc1TFsapczQO5meHUgdxcPPzBhKVldT5krprnvFbxy4nrWVMEWw2kVIgJSKkAlIqQCUipAJSKkAlIqQCUipAJSLaBakVIBKRUgEpFSASkVIBKRUgEpFtAtSKkAlIqQCUipApSKkAlItIBqRaQDUipAJSKkAlINoBKQbQCUipAJSDaASkVIBKQbQCUipAJSLSAakVIBKQbQCUg2gEpBtAJSKkAlItIBqRUgEpBSAakVIBKRaQDUipAJSLSAakVIBKRaQDUi0gGpFSASkWkA1IqQCUg2gEpFSASkG0AlINoBKQbQCUg2gEpBtAJSKkAlINoAqaUiS1NKQLU0pEFqaUiS1NKQLU0pAtTSkC1NKRBamlIktTSkC1NKRBamlIFqaUiS1NKQLU0pAtTSkQWppSJLU0pAtTSkC1NKRBamlIktTSkC1NKQLU0pAtTSkC1NKQLU0pAtTSkC1NKRBamlIFqaUiS1NKRBamlIktTSkC1NKQLU0pAtTSkC1NKQLU0pAtTSkD/9k=" aria-describedby="film-text" width="1920" height="1080">
+              <source src="wochenende-video.mp4" type="video/mp4">
+            </video>
+            <figcaption><span>Der Film zur Anleitung · ohne Ton · 29 Sekunden</span></figcaption>
+            <p class="sr-only" id="film-text">Film ohne Ton, rund 29 Sekunden, mit kurzen Texten im Bild. Freitagabend: Nina und Tom sitzen müde auf dem Sofa, draußen regnet es. Nina denkt an einen Sommertag am See. Am Handy beantwortet sie ein paar Fragen, die KI schlägt ein Hofkonzert im Gemeinschaftsgarten vor. Am Samstag sitzen die beiden dort auf der Bierbank, eine kleine Band spielt, die Nachbarin reicht eine Brezel. Am Sonntag schaut Nina lächelnd das Foto vom Abend an.</p>
+          </figure>
+          <div class="zettel">
+            <p class="ergebnis-satz">Ergebnis: vier bis sechs Vorschläge für dein Wochenende, die zu dir passen.</p>
+            <ul><li>Was, wann, wo, Preis, Link</li><li>Warum es zu dir und deinem Lieblingstag passt</li><li>Plan B bei Regen</li><li>Ein Top-Tipp, klar markiert</li><li>Mein Wochenend-Profil in fünf Zeilen</li></ul>
+          </div>
+        </section>
+
+        <section class="panel" role="tabpanel" id="p-auftrag" aria-labelledby="tab-auftrag" tabindex="-1">
+          <div class="panel-kopf"><h2>Der Auftrag</h2><button class="clay-btn klein zurueck" type="button" data-zurueck><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg><span>Zurück zur Übersicht</span></button></div>
+          <p class="zettel-kopf">Das bekommt ChatGPT von dir, wenn du auf „Mit ChatGPT starten“ tippst:</p>
+          <pre class="prompt" id="prompt-text">Plan mir ein Wochenende, das mir guttut: Sachen, die genau zu mir passen, gern auch Entdeckungen, die ich allein nie gefunden hätte. Ich will nur auswählen.
+
+1. Frag mich zuerst, einzeln und zum Antippen mit Emojis, höchstens sechs Fragen: Stadt, wie weit, Auto oder Bahn? Mit wem? Wie soll sich das Wochenende anfühlen? Was mache ich gern, was gar nicht? Budget pro Person? Zuletzt offen zum Selberschreiben, genau so: „An welchen Tag denkst du gern zurück? Was davon hättest du gern wieder?“
+2. Such dann im Netz, was an diesem Wochenende (Freitagabend bis Sonntag) wirklich stattfindet, auf großen Eventseiten und abseits davon: Vereine, Kulturzentren, Stadtteilseiten, Kurse zum Mitmachen. Nimm nur, was du beim Veranstalter oder der Stadt mit Datum gefunden hast. Lieber drei echte Vorschläge als sechs unsichere.
+3. Gib mir vier bis sechs Vorschläge und einen Top-Tipp. Großes ist willkommen, wenn es passt; mindestens die Hälfte Entdeckungen. Je Vorschlag: was, wann, wo, Preis, Tickets, Link, warum es zu mir und meiner Erinnerung passt, Plan B bei Regen.
+4. Fass zum Schluss meine Antworten als „Mein Wochenend-Profil“ in fünf Zeilen zusammen, zum Wiedereinfügen. Biete eine Einladung als Text an.
+
+Erfinde keine Termine, Preise oder Orte; bist du unsicher, sag es. Arbeite jeden Schritt ganz durch und hör nie nach einer Ankündigung auf.</pre>
+          <button class="clay-btn klein kopieren" type="button" data-kopieren><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span>Auftrag als Text kopieren</span></button>
+        </section>
+
+        <section class="panel" role="tabpanel" id="p-gut" aria-labelledby="tab-gut" tabindex="-1">
+          <div class="panel-kopf"><h2>Gut zu wissen</h2><button class="clay-btn klein zurueck" type="button" data-zurueck><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg><span>Zurück zur Übersicht</span></button></div>
+          <ul class="md"><li><b>Termine prüfen:</b> Die KI kann sich irren. Öffne vor dem Losgehen kurz den Link.</li><li><b>Großes und Kleines:</b> Bekannte Events kommen vor, wenn sie passen; mindestens die Hälfte sind Entdeckungen.</li><li><b>Kleine Orte:</b> Wo wenig online steht, weicht die KI in die nächste größere Stadt aus.</li><li><b>Kosten:</b> Mit Websuche im kostenlosen Tarif machbar (wird im Test bestätigt).</li></ul>
+        </section>
+
+        <section class="panel" role="tabpanel" id="p-weiter" aria-labelledby="tab-weiter" tabindex="-1">
+          <div class="panel-kopf"><h2>Weitergedacht</h2><button class="clay-btn klein zurueck" type="button" data-zurueck><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg><span>Zurück zur Übersicht</span></button></div>
+          <div class="md"><p>Was einmal klappt, kann jede Woche laufen. Hast du ein bezahltes KI-Abo, kannst du den Suchlauf automatisch z.B. jeden Donnerstag Abend laufen lassen, ohne die Fragen erneut beantworten zu müssen.</p></div>
+        </section>
+
+        <section class="panel" role="tabpanel" id="p-hakt" aria-labelledby="tab-hakt" tabindex="-1">
+          <div class="panel-kopf"><h2>Falls etwas hakt</h2><button class="clay-btn klein zurueck" type="button" data-zurueck><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg><span>Zurück zur Übersicht</span></button></div>
+          <ul class="md"><li><b>Die KI sucht nicht im Netz:</b> Schreib „Such bitte im Netz“ dazu.</li><li><b>Nur Bekanntes dabei:</b> Schreib „Zeig mir mehr Entdeckungen aus Vereinen und Stadtteilen“.</li><li><b>Ein Termin stimmt nicht:</b> Sag es der KI, sie sucht Ersatz.</li></ul>
+        </section>
+      </div>
+    </article>
+
+    <section class="weitere" aria-labelledby="h-weitere">
+      <h2 class="versal" id="h-weitere">Weitere Ideen</h2>
+      <ul><li><a class="mini pal-blue" href="/brief-verstehen"><small>Papierkram erledigen</small><span>Hilfe! Was bedeutet dieser Brief für mich?</span></a></li><li><a class="mini pal-sand" href="/keller-ausmisten"><small>Geld und Einkauf</small><span>Den Keller ausmisten: Was verkaufen, spenden, verschenken, entsorgen?</span></a></li><li><a class="mini pal-sand" href="/kontoauszug-abos"><small>Geld sparen</small><span>Kontoauszug rein: Abo-Liste, Haushaltsbuch und Kündigungen raus</span></a></li><li><a class="mini alle" href="/ideen"><span>Alle Ideen</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li></ul>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="wrap"><span>KIosk</span><span>Von Menschen für Menschen</span></div></footer>
+</div>
+
+<div class="mobile-cta">
+  <small>Fertig vorbereitet<br>Öffnet ChatGPT mit dem Auftrag</small>
+  <a class="button-primary" href="https://chatgpt.com/?q=Plan%20mir%20ein%20Wochenende%2C%20das%20mir%20guttut%3A%20Sachen%2C%20die%20genau%20zu%20mir%20passen%2C%20gern%20auch%20Entdeckungen%2C%20die%20ich%20allein%20nie%20gefunden%20h%C3%A4tte.%20Ich%20will%20nur%20ausw%C3%A4hlen.%0A%0A1.%20Frag%20mich%20zuerst%2C%20einzeln%20und%20zum%20Antippen%20mit%20Emojis%2C%20h%C3%B6chstens%20sechs%20Fragen%3A%20Stadt%2C%20wie%20weit%2C%20Auto%20oder%20Bahn%3F%20Mit%20wem%3F%20Wie%20soll%20sich%20das%20Wochenende%20anf%C3%BChlen%3F%20Was%20mache%20ich%20gern%2C%20was%20gar%20nicht%3F%20Budget%20pro%20Person%3F%20Zuletzt%20offen%20zum%20Selberschreiben%2C%20genau%20so%3A%20%E2%80%9EAn%20welchen%20Tag%20denkst%20du%20gern%20zur%C3%BCck%3F%20Was%20davon%20h%C3%A4ttest%20du%20gern%20wieder%3F%E2%80%9C%0A2.%20Such%20dann%20im%20Netz%2C%20was%20an%20diesem%20Wochenende%20(Freitagabend%20bis%20Sonntag)%20wirklich%20stattfindet%2C%20auf%20gro%C3%9Fen%20Eventseiten%20und%20abseits%20davon%3A%20Vereine%2C%20Kulturzentren%2C%20Stadtteilseiten%2C%20Kurse%20zum%20Mitmachen.%20Nimm%20nur%2C%20was%20du%20beim%20Veranstalter%20oder%20der%20Stadt%20mit%20Datum%20gefunden%20hast.%20Lieber%20drei%20echte%20Vorschl%C3%A4ge%20als%20sechs%20unsichere.%0A3.%20Gib%20mir%20vier%20bis%20sechs%20Vorschl%C3%A4ge%20und%20einen%20Top-Tipp.%20Gro%C3%9Fes%20ist%20willkommen%2C%20wenn%20es%20passt%3B%20mindestens%20die%20H%C3%A4lfte%20Entdeckungen.%20Je%20Vorschlag%3A%20was%2C%20wann%2C%20wo%2C%20Preis%2C%20Tickets%2C%20Link%2C%20warum%20es%20zu%20mir%20und%20meiner%20Erinnerung%20passt%2C%20Plan%20B%20bei%20Regen.%0A4.%20Fass%20zum%20Schluss%20meine%20Antworten%20als%20%E2%80%9EMein%20Wochenend-Profil%E2%80%9C%20in%20f%C3%BCnf%20Zeilen%20zusammen%2C%20zum%20Wiedereinf%C3%BCgen.%20Biete%20eine%20Einladung%20als%20Text%20an.%0A%0AErfinde%20keine%20Termine%2C%20Preise%20oder%20Orte%3B%20bist%20du%20unsicher%2C%20sag%20es.%20Arbeite%20jeden%20Schritt%20ganz%20durch%20und%20h%C3%B6r%20nie%20nach%20einer%20Ank%C3%BCndigung%20auf." data-start target="_blank" rel="noopener"><svg class="logo" aria-hidden="true"><use href="#l-openai"/></svg><span>Mit ChatGPT starten</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+</div>
+
+<div class="live-fuss"><a href="/impressum">Impressum</a> · <a href="/datenschutz">Datenschutz</a> · Testfassung im Aufbau</div>
+<script>
+  (function () {
+    // Start-Knopf wie auf den Live-Seiten (Version 22, getestete Wege: Notiz „Installations-Knopf“).
+    // Handy: chatgpt.com/?q= (öffnet die App). Computer: Anmeldeweg mit next=/?q=, damit der Auftrag nach dem Anmelden ankommt.
+    var enc = encodeURIComponent, ua = navigator.userAgent;
+    var handy = /iPhone|iPod|Android/i.test(ua) || /iPad/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+    var prompt = document.getElementById('prompt-text');
+    function auftrag() { return prompt ? prompt.textContent.trim() : ''; }
+    function links() {
+      var q = enc(auftrag());
+      return { app: 'https://chatgpt.com/?q=' + q, web: 'https://chatgpt.com/auth/login?next=' + enc('/?q=' + q) };
+    }
+    function setzen() {
+      var L = links();
+      document.querySelectorAll('[data-start]').forEach(function (a) { a.href = handy ? L.app : L.web; a.setAttribute('data-web', L.web); });
+      document.querySelectorAll('[data-start-web]').forEach(function (a) { a.href = L.web; });
+    }
+    setzen();
+
+    function kopieren(knopf) {
+      var t = auftrag(), meldung = document.getElementById('kopier-meldung');
+      function fertig() {
+        if (meldung) meldung.textContent = 'Auftrag kopiert.';
+        if (!knopf) return;
+        var s = knopf.querySelector('span'), alt = s.textContent;
+        knopf.classList.add('is-copied'); knopf.querySelector('use').setAttribute('href', '#i-check'); s.textContent = 'Kopiert';
+        setTimeout(function () { knopf.classList.remove('is-copied'); knopf.querySelector('use').setAttribute('href', '#i-copy'); s.textContent = alt; }, 2200);
+      }
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(t).then(fertig, function () {}); return; }
+      } catch (x) {}
+      var ta = document.createElement('textarea'); ta.value = t; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); fertig(); } catch (x) {} document.body.removeChild(ta);
+    }
+    document.querySelectorAll('[data-kopieren]').forEach(function (b) { b.addEventListener('click', function () { kopieren(b); }); });
+
+    // Klick auf Start: Auftrag zusätzlich in die Zwischenablage; öffnet sich nach 2,5 s nichts, den Browser-Weg anbieten
+    var rueck = document.querySelector('.ks-rueckfall');
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('[data-start]');
+      if (!a) return;
+      setzen();
+      try { if (navigator.clipboard) navigator.clipboard.writeText(auftrag()).catch(function () {}); } catch (x) {}
+      if (!rueck) return;
+      var weg = false, merken = function () { weg = true; };
+      window.addEventListener('blur', merken, { once: true });
+      document.addEventListener('visibilitychange', merken, { once: true });
+      rueck.hidden = true;
+      setTimeout(function () { if (!weg && document.visibilityState === 'visible' && document.hasFocus()) rueck.hidden = false; }, 2500);
+    }, true);
+
+    // Siegel: beim Antippen steht, wann und womit getestet wurde
+    var siegel = document.querySelector('.geprueft'), siegelText = document.getElementById('siegel-text');
+    if (siegel && siegelText) siegel.addEventListener('click', function () {
+      var auf = siegel.getAttribute('aria-expanded') !== 'true';
+      siegel.setAttribute('aria-expanded', String(auf)); siegelText.hidden = !auf;
+    });
+
+    // Reiter: tauschen nur die KI-Hälfte, der Start-Knopf bleibt stehen. Ohne Skript sind alle Teile untereinander sichtbar.
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+    function zeige(tab, fokus) {
+      tabs.forEach(function (t) {
+        var an = t === tab, p = document.getElementById(t.getAttribute('aria-controls'));
+        t.setAttribute('aria-selected', String(an)); t.tabIndex = an ? 0 : -1; if (p) p.hidden = !an;
+      });
+      if (fokus) tab.focus();
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () {
+        zeige(t);
+        var p = document.getElementById(t.getAttribute('aria-controls'));
+        if (p && window.matchMedia('(max-width: 1023px)').matches) {
+          var r = p.getBoundingClientRect(); if (r.top > window.innerHeight * .6 || r.top < 0) p.scrollIntoView({ block: 'start', behavior: 'smooth' });
+        }
+      });
+      t.addEventListener('keydown', function (e) {
+        var n = null;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') n = tabs[(i + 1) % tabs.length];
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') n = tabs[(i - 1 + tabs.length) % tabs.length];
+        else if (e.key === 'Home') n = tabs[0];
+        else if (e.key === 'End') n = tabs[tabs.length - 1];
+        if (n) { e.preventDefault(); zeige(n, true); }
+      });
+    });
+    if (tabs.length) zeige(tabs[0]);
+    document.querySelectorAll('[data-zurueck]').forEach(function (b) { b.addEventListener('click', function () { zeige(tabs[0], true); }); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && tabs[0] && tabs[0].getAttribute('aria-selected') !== 'true' && e.target.closest && e.target.closest('.ki')) zeige(tabs[0], true);
+    });
+
+    // Standbild: liegt beim Hochladen neben der Seite. Fehlt es (Entwurfsvorschau), springt eine kleine eingebettete Fassung ein.
+    var v = document.querySelector('.film video');
+    if (v && v.getAttribute('data-poster-ersatz')) {
+      var probe = new Image();
+      probe.onerror = function () { v.poster = v.getAttribute('data-poster-ersatz'); };
+      probe.src = v.getAttribute('poster');
+    }
+  })();
+
+</script>
+</body>
+</html>

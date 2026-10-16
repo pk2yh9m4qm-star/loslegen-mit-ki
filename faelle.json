@@ -18,5 +18,10 @@
   "kennung": "F-Keller",
   "seite": "keller",
   "adresse": "/keller-ausmisten"
+ },
+ {
+  "kennung": "Y4",
+  "seite": "wochenende-planen",
+  "adresse": "/wochenende-planen"
  }
 ]
