@@ -16,6 +16,13 @@
   .kiosk-ki { font-family: Georgia, "Iowan Old Style", "Noto Serif", "Times New Roman", serif; font-weight: 700; letter-spacing: .01em; }
   .live-fuss { font: 500 14px/1.5 Figtree, system-ui, sans-serif; color: #6f655c; text-align: center; padding: 18px 16px 28px; }
   .live-fuss a { color: inherit; }
+  /* Fuß am Handy (Runde 11, 19.10.2026, live seit Yannis' „stell live“): Links 44 px hoch, „Testfassung im Aufbau“ in eigener Zeile */
+  @media (max-width: 767.98px) {
+    .live-fuss { padding: 12px 16px 28px; }
+    .live-fuss a { display: inline-flex; align-items: center; min-height: 44px; font-size: 1rem; margin-inline: 8px; text-underline-offset: 3px; }
+    .live-fuss-sep { display: none; }
+    .live-fuss-t { display: block; margin-top: 4px; }
+  }
 </style>
   <style>
     body { margin: 0; background: #f2ece3; color: #2b2420; font: 400 17px/1.6 Figtree, system-ui, sans-serif; }
@@ -47,6 +54,6 @@
   <p>Diese Seite verlinkt auf ChatGPT (OpenAI), Claude (Anthropic) und Gemini (Google). Die Start-Knöpfe öffnen den jeweiligen Dienst mit einem vorbereiteten Auftrag. Für diese Dienste und alle anderen verlinkten Seiten sind allein deren Betreiber verantwortlich. Dort gelten ihre Nutzungsbedingungen und Datenschutzhinweise. Was eine KI antwortet, liegt nicht in meiner Hand; Antworten können falsch oder unvollständig sein. Von den verlinkten Anbietern bekomme ich kein Geld und keine Provision. Als ich die Links gesetzt habe, war auf den verlinkten Seiten kein Rechtsverstoß erkennbar. Erfahre ich von einem, entferne ich den Link.</p>
 
 </main>
-<div class="live-fuss"><a href="/impressum">Impressum</a> · <a href="/datenschutz">Datenschutz</a> · Testfassung im Aufbau</div>
+<div class="live-fuss"><a href="/impressum">Impressum</a><span class="live-fuss-sep" aria-hidden="true"> · </span><a href="/datenschutz">Datenschutz</a><span class="live-fuss-sep" aria-hidden="true"> · </span><span class="live-fuss-t">Testfassung im Aufbau</span></div>
 </body>
 </html>
