@@ -21,7 +21,12 @@
  },
  {
   "kennung": "Y4",
-  "seite": "wochenende-planen",
+  "seite": "wochenende",
   "adresse": "/wochenende-planen"
+ },
+ {
+  "kennung": "I10",
+  "seite": "vorsorge",
+  "adresse": "/vorsorgemappe-anlegen"
  }
 ]

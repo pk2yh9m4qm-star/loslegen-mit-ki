@@ -12,7 +12,7 @@
 <script>
   // Live-Fassung (15.10.2026): übernimmt, was bisher die Hülle von Version 25 getan hat (Seitenwechsel, Anker, Nachrichten).
   (function () {
-    var ADR = {"start": "/", "ideen": "/ideen", "anleitung": "/brief-verstehen", "abo": "/kontoauszug-abos", "wohnzimmer": "/wohnzimmer-neu-denken", "keller": "/keller-ausmisten", "bereich": "/mein-bereich"}, SEITE = 'keller';
+    var ADR = {"start": "/", "ideen": "/ideen", "anleitung": "/brief-verstehen", "abo": "/kontoauszug-abos", "wohnzimmer": "/wohnzimmer-neu-denken", "keller": "/keller-ausmisten", "bereich": "/mein-bereich", "wochenende": "/wochenende-planen", "vorsorge": "/vorsorgemappe-anlegen"}, SEITE = 'keller';
     function ziel(v, a) { if (v === 'start' && a === 'ideen') { v = 'ideen'; a = ''; } return { v: ADR[v] ? v : 'start', a: a || '' }; }
     function liefern(a, von) {
       if (SEITE === 'bereich') { window.postMessage({ mb: a, von: von || '' }, '*'); return; }
@@ -1521,8 +1521,540 @@
     filter: none; }
   .mcard .field > :not(.mcard-symbol):not(.glow) { position: relative; z-index: 1; }
 </style>
+<style>
+  /* Runde 22 (21.10.2026, Jim): Free-Zusage und „Anleitung →“ (Pam, Yannis „mit Free nutzbar“, „Einfach nur "Anleitung" ->“) */
+  .tag--frei { --frei-bg: #e3ecd9; --frei-ink: #2f4a26; color: var(--frei-ink); background: var(--frei-bg); white-space: normal; line-height: 1.2;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / .6), 0 1px 1px rgb(47 74 38 / .22); }
+  .mcard .mcard-los::after { content: ""; display: inline-block; width: .82em; height: .82em; margin-left: .32em; vertical-align: -.06em;
+    background: color-mix(in oklab, var(--fc) 70%, var(--ink)); -webkit-mask: var(--arrow-mask) center / contain no-repeat; mask: var(--arrow-mask) center / contain no-repeat;
+    transition: transform .35s var(--ease); }
+  .mcard:hover .mcard-los::after, .mcard:focus-within .mcard-los::after { transform: translateX(3px); }
+</style>
+<style>/* Runde 24: Anleitungsseite nach Pams Entwurf 3 */
+
+/* ===== Entwurf „Anleitungsseite ruhig“ (Pam, 21.10.2026) ===== */
+body { padding-bottom: 0; }
+.ra { --rand: 16px; }
+.ra[hidden] { display: none; }
+.ra-wrap { width: min(calc(100% - 2 * var(--gutter)), 1080px); margin: 0 auto; }
+.ra-zurueck { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin: 4px 0 8px -2px; color: var(--ink-soft); font-weight: 600; font-size: 16px; text-decoration: none; }
+.ra-zurueck .icon { font-size: 18px; }
+
+/* Seite: ein Raster, am Handy eine Spalte */
+.ra-seite { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; }
+.ra-kopf { display: grid; gap: 14px; }
+.ra-meta { display: flex; align-items: center; gap: 10px; min-height: 44px; }
+.ra-kat { display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 700; color: var(--kc); }
+.ra-kat::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--kb); }
+.ra-siegel { display: inline-flex; align-items: center; gap: 5px; padding: 4px 11px 4px 9px; border-radius: 999px; font-size: 13px; font-weight: 800; text-decoration: none; }
+.ra-siegel.ok { background: var(--frei-bg); color: #2f4a26; }
+.ra-siegel.offen { background: var(--clay-in); color: var(--muted); padding-left: 11px; }
+.ra-siegel .icon { font-size: 14px; stroke-width: 2.6; }
+.ra-siegel { position: relative; }
+.ra-siegel::after { content: ""; position: absolute; inset: -8px -2px; }
+.ra-herz { margin-left: auto; display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 50%; color: var(--ink-soft); cursor: pointer;
+  background: linear-gradient(175deg, var(--clay-hi), var(--clay)); box-shadow: 0 1px 1px rgba(96,72,46,.14), 0 6px 12px -8px rgba(96,72,46,.3), inset 0 1.5px 0 #fff; }
+.ra-herz svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linejoin: round; }
+.ra-herz[aria-pressed="true"] { color: #d24b3a; background: var(--clay-in); box-shadow: inset 0 2px 4px rgba(96,72,46,.26); }
+.ra-herz[aria-pressed="true"] svg { fill: currentColor; }
+.ra-kopf h1 { font-size: clamp(32px, 8.6vw, 44px); line-height: 1.04; font-weight: 650; letter-spacing: -.032em; text-shadow: 0 1px 0 rgb(255 255 255 / .8); }
+.ra-einleitung { margin: 0; font-size: 17px; line-height: 1.55; color: var(--ink-soft); max-width: 36em; }
+.ra-einleitung b { font-weight: 600; color: var(--ink); }
+
+.ra-versal { margin: 0 0 14px; font-size: 12.5px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); }
+
+/* Ergebnis-Zettel: die eine farbige Fläche */
+.ra-ergebnis { position: relative; padding: 26px 18px 20px; border-radius: 28px;
+  background: radial-gradient(120% 90% at 10% 0%, color-mix(in srgb, var(--ka) 55%, #fff) 0%, color-mix(in srgb, var(--ka) 70%, var(--board)) 100%); }
+.ra-zettel { position: relative; padding: 22px 20px 18px; border-radius: 6px; background: linear-gradient(180deg, var(--zettel), var(--zettel-lo)); box-shadow: var(--zettel-liegt); transform: rotate(-.6deg); }
+.ra-band { position: absolute; top: -11px; left: 50%; width: 92px; height: 22px; margin-left: -46px; border-radius: 2px; background: var(--klebeband); transform: rotate(-2deg); box-shadow: 0 1px 1px rgba(96,72,46,.08); }
+.ra-ergebnis-satz { margin: 0 0 12px; font-size: 18px; line-height: 1.4; font-weight: 600; color: var(--ink); text-wrap: pretty; }
+.ra-ergebnis-satz b { font-weight: 800; }
+.ra-haken { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.ra-haken li { display: grid; grid-template-columns: 20px 1fr; gap: 8px; font-size: 16px; line-height: 1.4; color: var(--ink-soft); }
+.ra-haken .icon { font-size: 17px; margin-top: 2px; color: var(--kc); stroke-width: 2.4; }
+.ra-beispiel-knopf { margin-top: 14px; min-height: 44px; padding: 0 2px; border: 0; background: none; color: var(--ink); font: 700 16px/1 var(--font-ui); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1.5px; cursor: pointer; }
+
+/* Das brauchst du: Text statt Symbole */
+.ra-brauchst ul { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.ra-brauchst li { position: relative; padding-left: 20px; font-size: 17px; line-height: 1.45; }
+.ra-brauchst li::before { content: ""; position: absolute; left: 3px; top: .62em; width: 7px; height: 7px; border-radius: 50%; background: var(--kb); }
+.ra-brauchst li.ra-kosten { padding-left: 0; }
+.ra-brauchst li.ra-kosten::before { display: none; }
+.ra-marke { display: inline-block; margin-right: 4px; padding: 3px 10px; border-radius: 999px; font-size: 14px; font-weight: 800; vertical-align: 1px; }
+.ra-marke.frei { background: var(--frei-bg); color: #2f4a26; }
+.ra-marke.abo { background: #f3e1d6; color: #7a3b25; }
+
+/* So geht's: nummerierte Schritte, der Knopf ist ein Schritt */
+.ra-schritte ol { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+.ra-schritte li { position: relative; display: grid; grid-template-columns: 34px 1fr; gap: 14px; padding: 0 0 22px; }
+.ra-schritte li:not(:last-child)::after { content: ""; position: absolute; left: 16px; top: 36px; bottom: 4px; width: 2px; border-radius: 2px; background: var(--line); }
+.ra-schritte li p { margin: 5px 0 0; font-size: 17px; line-height: 1.45; }
+.ra-nr { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; font-size: 15px; font-weight: 800; color: var(--ink);
+  background: linear-gradient(175deg, var(--clay-hi), var(--clay)); box-shadow: 0 1px 1px rgba(96,72,46,.14), 0 4px 8px -5px rgba(96,72,46,.3), inset 0 1.5px 0 #fff; }
+.ra-start-schritt .ra-nr { color: #fbf7f0; background: linear-gradient(175deg, #4a433b, #2b2722 45%, #1d1a16); box-shadow: 0 2px 6px -2px rgba(29,26,22,.5); }
+.ra-start { display: grid; gap: 10px; }
+.ra-knopf { width: 100%; min-height: 56px; font-size: 17px; }
+.ra-hinweis { margin: 2px 0 0 !important; font-size: 15px !important; color: var(--muted); line-height: 1.45 !important; }
+.ra-links { display: grid; justify-items: start; margin: -6px 0 0 !important; font-size: 15px !important; color: var(--muted); }
+.ra-links .ra-leise { padding: 10px 0; min-height: 44px; box-sizing: border-box; }
+.ra-leise { color: var(--ink-soft); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; text-decoration-color: var(--line-strong);
+  display: inline-block; padding: 11px 0; }
+
+/* Film: optional, ruht, bis man tippt */
+.ra-film { margin: 0; }
+.ra-film-knopf { position: relative; display: block; width: 100%; padding: 0; border: 0; border-radius: 22px; overflow: hidden; cursor: pointer; background: var(--clay-lo); box-shadow: 0 1px 2px rgba(96,72,46,.16), 0 14px 26px -16px rgba(40,26,14,.35); }
+.ra-film-knopf img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+.ra-play { position: absolute; left: 50%; top: 50%; width: 62px; height: 62px; margin: -31px 0 0 -31px; border-radius: 50%; background: rgb(251 247 240 / .92); box-shadow: 0 6px 18px -6px rgba(29,26,22,.45); }
+.ra-play::after { content: ""; position: absolute; left: 25px; top: 19px; border-style: solid; border-width: 12px 0 12px 19px; border-color: transparent transparent transparent var(--ink); }
+.ra-film figcaption { margin-top: 10px; font-size: 14px; color: var(--muted); }
+
+/* Mehr dazu: Aufklapper untereinander */
+.ra-mehr { border-top: 1px solid var(--line); padding-top: 26px; }
+.ra-auf { border-bottom: 1px solid var(--line); }
+.ra-auf:first-of-type { border-top: 1px solid var(--line); }
+.ra-auf summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 56px; cursor: pointer; list-style: none; font-size: 17px; font-weight: 600; }
+.ra-auf summary::-webkit-details-marker { display: none; }
+.ra-auf summary .icon { font-size: 18px; color: var(--muted); transition: transform .25s var(--ease); }
+.ra-auf[open] summary .icon { transform: rotate(90deg); }
+.ra-auf-innen { padding: 0 0 20px; font-size: 16px; line-height: 1.55; color: var(--ink-soft); }
+.ra-auf-innen p { margin: 0 0 10px; }
+.ra-auf-innen b { color: var(--ink); font-weight: 700; }
+.ra-punkte, .ra-ki { display: grid; gap: 10px; margin: 0; padding-left: 20px; }
+.ra-ki li::marker { font-weight: 800; color: var(--kc); }
+.ra-auftrag { margin: 4px 0 12px; padding: 16px; border-radius: 6px; background: var(--zettel); box-shadow: var(--mulde); white-space: pre-wrap; font: 14.5px/1.55 ui-monospace, "SF Mono", Menlo, monospace; color: var(--ink); max-height: 320px; overflow: auto; }
+.ra-klein { font-size: 15px; color: var(--muted); }
+.ra-zweit { display: inline-flex; align-items: center; min-height: 48px; padding: 0 20px; border: 0; border-radius: 999px; font: 600 16px/1 var(--font-ui); color: var(--ink); text-decoration: none; cursor: pointer;
+  background: linear-gradient(175deg, var(--clay-hi), var(--clay)); box-shadow: 0 1px 1px rgba(96,72,46,.14), 0 8px 14px -8px rgba(96,72,46,.22), inset 0 1.5px 0 #fff; }
+
+/* Weitere Ideen: nur Kategorie und Titel */
+.ra-weitere { margin: 44px 0 8px; }
+.ra-ideen { display: grid; gap: 10px; }
+.ra-idee { display: grid; gap: 3px; padding: 14px 16px 15px 20px; border-radius: 18px; text-decoration: none; color: var(--ink); position: relative; overflow: hidden;
+  background: linear-gradient(175deg, var(--clay-hi), var(--clay)); box-shadow: 0 1px 1px rgba(96,72,46,.14), 0 8px 14px -9px rgba(96,72,46,.24), inset 0 1.5px 0 #fff; }
+.ra-idee::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--kb); }
+.ra-idee-kat { font-size: 13px; font-weight: 700; color: var(--kc); }
+.ra-idee-titel { font-size: 17px; font-weight: 700; letter-spacing: -.01em; }
+.ra-alle { margin-top: 6px; }
+
+/* Leiste unten: nur, solange der Knopf im Text nicht im Bild ist */
+.ra-leiste { position: fixed; z-index: 30; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); transform: translateY(140%); transition: transform .35s var(--ease); }
+.ra-leiste.zeigen { transform: none; }
+.ra-leiste .button-primary { width: 100%; min-height: 56px; font-size: 17px; box-shadow: 0 14px 30px -12px rgba(29,26,22,.55); }
+
+/* Blatt für das Beispiel */
+.ra-blatt { width: min(560px, calc(100% - 24px)); max-height: 86vh; padding: 20px 18px 22px; border: 0; border-radius: 26px; background: var(--board); color: var(--ink); box-shadow: var(--platte); }
+.ra-blatt::backdrop { background: rgb(29 26 22 / .45); }
+.ra-blatt-kopf { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.ra-blatt h2 { font-size: 21px; font-weight: 700; }
+.ra-zu { display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 50%; background: var(--clay-in); color: var(--ink); cursor: pointer; font-size: 20px; }
+.ra-zettel-flach { transform: none; margin-top: 10px; }
+.ra-zettel-flach table { width: 100%; border-collapse: collapse; font-size: 15px; margin-bottom: 18px; }
+.ra-zettel-flach th { text-align: left; font-size: 12.5px; color: var(--muted); font-weight: 700; padding: 0 6px 6px 0; }
+.ra-zettel-flach td { padding: 7px 6px 7px 0; border-top: 1px solid var(--line); vertical-align: top; }
+.ra-zettel-flach td:last-child, .ra-zettel-flach th:last-child { text-align: right; white-space: nowrap; padding-right: 0; }
+.ra-zettel-flach tfoot td { font-weight: 800; border-top: 1.5px solid var(--line-strong); }
+.ra-plan { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; font-size: 15px; line-height: 1.45; }
+.ra-plan b { display: block; font-size: 13px; color: var(--muted); }
+
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 8px; }
+
+/* Computer: zwei Spalten, links du, rechts was herauskommt */
+@media (min-width: 1024px) {
+  .ra-wrap { width: min(calc(100% - 2 * var(--gutter)), 1080px); }
+  .ra-seite { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); column-gap: 64px; row-gap: 28px;
+    grid-template-areas: "kopf erg" "brauch erg" "schritt film" "mehr mehr"; align-items: start; }
+  .ra-kopf { grid-area: kopf; }
+  .ra-ergebnis { grid-area: erg; margin-top: 52px; }
+  .ra-brauchst { grid-area: brauch; }
+  .ra-schritte { grid-area: schritt; }
+  .ra-film-platz { grid-area: film; }
+  .ra-mehr { grid-area: mehr; max-width: 760px; }
+  .ra-ideen { grid-template-columns: repeat(3, 1fr); }
+  .ra-knopf { width: auto; min-width: 300px; justify-self: start; }
+  .ra-leiste { display: none; }
+}
+@media (max-width: 1023px) { .board { padding-bottom: 88px; } }
+@media (prefers-reduced-motion: reduce) { .ra-leiste, .ra-auf summary .icon { transition: none; } }
+
+/* ===== Entwurf 3 „Anleitungsseite mit Bild und Karte“ (Pam, 21.10.2026) ===== */
+
+/* Szene: frei, ohne Text */
+.ra3 .ra-szene { margin: 0; }
+.ra3 .ra-szene img { display: block; width: 100%; max-width: none; height: auto; aspect-ratio: 1 / 1.02; object-fit: cover; object-position: var(--pos-hoch); }
+.ohne-bild .ra-szene { display: none; }
+
+/* Karte: Rezept der Live-Karte (.title-plate.field auf /brief-verstehen, gemessen 21.10.): Körnung weich eingemischt
+   (soft-light), Glanz oben links, Verlauf über die ganze Karte, Kante mit Licht oben und links, Schatten rechts und unten.
+   Zwei Abweichungen (22.10., nach Jims Messung, 90. Perzentil des Grunds unter dem Text): Der Glanz hat eine feste Höhe
+   (240 px statt 60 % der Kartenhöhe, die bei langen Karten den ganzen oberen Teil aufhellte), und der Lesetext sitzt ab
+   130 px auf dem tieferen Ton. So hält weißer Kurztext in allen neun Kategorien mindestens 4,6:1. */
+.ra3 .ra-karte { --lite: color-mix(in oklab, var(--fb), var(--fc) var(--ml)); --bot: color-mix(in oklab, var(--fb), var(--fc) var(--mb));
+  --tief: color-mix(in oklab, var(--bot), var(--fc) 14%); --tief2: color-mix(in oklab, var(--bot), var(--fc) 26%); --sheen: color-mix(in oklab, var(--fa) 70%, #fff);
+  position: relative; z-index: 1; margin: -28px 0 6px; border-radius: 28px; overflow: hidden; color: #fff; isolation: isolate;
+  background-color: var(--bot);
+  background-image: var(--noise), radial-gradient(90% 240px at 18% -40px, color-mix(in oklab, var(--sheen) 34%, transparent) 0%, transparent 62%),
+    linear-gradient(172deg, var(--lite) 0px, var(--bot) 70px, var(--tief) 130px, var(--tief2) 100%);
+  background-blend-mode: soft-light, normal, normal;
+  box-shadow: inset 0 1.5px 0 color-mix(in oklab, var(--sheen) 85%, transparent), inset 1.5px 0 0 color-mix(in oklab, var(--sheen) 35%, transparent),
+    inset 0 26px 30px -22px color-mix(in oklab, var(--sheen) 70%, transparent), inset 16px 0 26px -20px color-mix(in oklab, var(--sheen) 34%, transparent),
+    inset -18px 0 28px -20px color-mix(in oklab, var(--fc) 42%, transparent), inset 0 -30px 36px -24px color-mix(in oklab, var(--fc) 72%, transparent),
+    inset 0 -2px 0 color-mix(in oklab, var(--fc) 50%, transparent), 0 1px 2px color-mix(in oklab, var(--fc) 30%, transparent),
+    0 9px 16px -8px rgb(96 72 46 / .2), 0 26px 40px -22px rgb(96 72 46 / .3), 0 -8px 18px -12px rgb(40 26 14 / .28); }
+.ohne-bild .ra3 .ra-karte, .ohne-bild.ra3 .ra-karte { margin-top: 4px; }
+.ra3 .ra-karte-symbol { position: absolute; z-index: -1; right: -40px; top: -10px; width: 230px; height: 230px; fill: none; stroke: #000; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; opacity: .1; pointer-events: none; }
+.ra3 .ra-karte-innen { display: grid; }
+.ra3 .ra-lesen { display: grid; gap: 14px; padding: 20px var(--gutter) 0; }
+.ra3 .ra-handeln { display: grid; gap: 30px; padding: 30px var(--gutter) 34px; }
+.ra3 .ra-lesen > *, .ra3 .ra-handeln > * { grid-area: auto; margin-top: 0; }
+.ra3 .ra-meta { display: flex; align-items: center; gap: 8px; min-height: 44px; }
+.ra3 .ra-chip { display: inline-flex; align-items: center; min-height: 30px; padding: 4px 12px; border-radius: 999px; font-size: 13.5px; font-weight: 700; color: var(--fc);
+  background: linear-gradient(180deg, #fff 0%, #f5f1eb 100%); box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 color-mix(in oklab, var(--fc) 16%, transparent), 0 1px 1px color-mix(in oklab, var(--fc) 34%, transparent), 0 4px 8px -3px color-mix(in oklab, var(--fc) 44%, transparent); }
+.ra3 .ra-siegel { box-shadow: 0 1px 1px rgb(40 26 14 / .2); }
+.ra3 .ra-siegel.offen { background: #f5f0e8; color: var(--ink-soft); }
+.ra3 h1 { margin: 2px 0 0; font-size: clamp(32px, 8.6vw, 48px); line-height: 1.04; font-weight: 650; letter-spacing: -.03em; color: #fff;
+  text-shadow: 0 1px 1px color-mix(in oklab, var(--fc) 50%, transparent); text-wrap: balance; }
+.ra3 .ra-kurztext { margin: 0; font-size: 17px; line-height: 1.55; color: #fff; max-width: 36em; text-wrap: pretty; }
+.ra3 .ra-ergebnis { padding: 8px 0 0; background: none; border-radius: 0; }
+.ra3 .ra-zettel { transform: rotate(-.5deg); color: var(--ink); }
+.ra3 .ra-brauchst { padding-top: 16px; }
+
+/* Lesetext auf der Karte: weiß (auf dem tiefen Ton mindestens 5:1) */
+.ra3 .ra-versal, .ra3 .ra-hinweis, .ra3 .ra-links, .ra3 .ra-klein, .ra3 .ra-auf-innen { color: #fff !important; }
+.ra3 .ra-versal { opacity: 1; letter-spacing: .1em; }
+.ra3 .ra-blatt .ra-versal, .ra3 .ra-blatt .ra-klein { color: var(--muted) !important; }   /* Beispiel-Blatt liegt hell über der Seite */
+.ra3 .ra-brauchst li, .ra3 .ra-schritte li p, .ra3 .ra-auf summary, .ra3 .ra-auf-innen b { color: #fff; }
+.ra3 .ra-brauchst li::before { background: #fff; }
+.ra3 .ra-leise { color: #fff; text-decoration-color: rgb(255 255 255 / .6); }
+.ra3 .ra-claude { display: inline-flex !important; align-items: center; gap: 8px; }
+.ra3 .ra-claude .logo { width: 17px; height: 17px; color: #fff; }
+.ra3 .ra-mehr { border-top: 0; padding-top: 0; }
+.ra3 .ra-auf, .ra3 .ra-auf:first-of-type { border-color: rgb(255 255 255 / .28); }
+.ra3 .ra-auf summary .icon { color: #fff; }
+.ra3 .ra-schritte li:not(:last-child)::after { background: rgb(255 255 255 / .32); }
+.ra3 .ra-knopf { color: var(--ink); background: linear-gradient(175deg, #fcfaf6 0%, #f5f0e8 60%, #ebe4d8 100%);
+  box-shadow: inset 0 1.5px 0 #fff, 0 2px 4px rgb(40 26 14 / .25), 0 12px 22px -12px rgb(40 26 14 / .5); }
+.ra3 .ra-start-schritt .ra-nr { color: var(--ink); background: linear-gradient(175deg, #fcfaf6, #f5f0e8); }
+.ra3 .ra-auftrag { color: var(--ink); }
+.ra3 .ra-herz { position: static; margin-left: auto; }
+
+/* Weitere Ideen wie in Entwurf 2 */
+.ra3 .ra-weitere { margin: 30px 0 8px; zoom: 1; }
+.ra3 .ra-weitere .ra-versal { margin-bottom: 6px; color: var(--muted) !important; }
+.ra3 .ra-weitere .ra-leise { color: var(--ink); text-decoration-color: rgb(35 32 28 / .4); }
+.ra3 .ra-reihe { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); padding: 14px var(--gutter) 26px; scrollbar-width: none; }
+.ra3 .ra-reihe::-webkit-scrollbar { display: none; }
+.ra3 .ra-reihe .mcard { scroll-snap-align: start; }
+
+/* Rechner: breites Bild, Karte mit allen Kanten, links lesen, rechts handeln (Mulde wie im Screenshot) */
+@media (min-width: 1024px) {
+  .ra3 .ra-wrap { width: min(calc(100% - 2 * var(--gutter)), 1160px); }
+  .ra3 .ra-szene img { aspect-ratio: auto; height: clamp(360px, 34vw, 480px); object-position: var(--pos-quer); }
+  .ra3 .ra-karte { width: min(calc(100% - 2 * var(--gutter)), 1160px); margin: -56px auto 6px; }
+  .ra3 .ra-karte-symbol { right: auto; left: 30%; top: -40px; width: 300px; height: 300px; }
+  .ra3 .ra-karte-innen { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 40px; padding: 34px 40px 40px; align-items: start; }
+  .ra3 .ra-lesen { padding: 0; }
+  .ra3 .ra-handeln { padding: 28px 28px 22px; border-radius: 22px; gap: 26px;
+    background-color: color-mix(in oklab, var(--bot) 80%, var(--fc)); background-image: var(--noise); background-blend-mode: soft-light;
+    box-shadow: inset 0 2px 6px rgb(0 0 0 / .2), inset 0 -1px 0 color-mix(in oklab, var(--sheen) 30%, transparent); }
+  .ra3 .ra-knopf { width: 100%; max-width: 380px; }
+  .ra3 .ra-reihe { padding-inline: max(var(--gutter), calc((100% - 1160px) / 2)); scroll-padding-inline: max(var(--gutter), calc((100% - 1160px) / 2)); }
+  .ohne-bild .ra3 .ra-karte, .ohne-bild.ra3 .ra-karte { margin-top: 4px; }
+}
+.ra-weitere{
+      color-scheme: light;
+      --ink: #23201c;
+      --ink-soft: #4a443c;
+      --muted: #675f56;
+      --paper: #f6f1e8;
+      --paper-2: #efe9de;
+      --card: #fbf8f2;
+      --line: rgba(60, 45, 30, .13);
+      --line-strong: rgba(60, 45, 30, .26);
+      --focus: #3b5a9a;
+      --content: 1220px;
+      --gutter: clamp(16px, 4vw, 40px);
+      --font-ui: "Figtree", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+      --font-display: "Figtree", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+      --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.78' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.52'/%3E%3C/svg%3E");
+      --noise-coarse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280' viewBox='0 0 280 280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.29' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.30'/%3E%3C/svg%3E");
+      
+      --coral-a: #f2ad8e; --coral-b: #d47a63; --coral-c: #78343f;
+      --sand-a: #e8cba3; --sand-b: #c0956a; --sand-c: #6b4a3a;
+      --green-a: #b0c8a8; --green-b: #5f8a77; --green-c: #23473d;
+      --blue-a: #a8c2d1; --blue-b: #5f8398; --blue-c: #274357;
+      --plum-a: #d6aab6; --plum-b: #96677d; --plum-c: #47304d;
+      --moss-a: #d6d6a8; --moss-b: #8a9160; --moss-c: #3f4a2b;
+      
+      --k-deep: #1f3a4f; --k-blue: #2f5871; --k-mid: #5f8398; --k-soft: #a8c2d1; --k-tint: #eaf1f5; --k-coral: #e2735a; --k-peach: #f4b49a;
+      --frei-bg: #e3ecd9; --frei-ink: #2f4a26; --abo-bg: #f3e1d6; --abo-ink: #7a3b25;
+
+      
+      --backdrop: #f1ebe1;
+      --board: #f1ebe1;
+      --clay-hi: #fcfaf6;
+      --clay: #f5f0e8;
+      --clay-lo: #ebe4d8;
+      --clay-in: #e9e2d7;
+      --sh: 96 72 46;
+      --lamp: 244 172 140;
+      --light-blue: 118 166 197;
+      
+      --ease: cubic-bezier(.22, 1, .36, 1);
+      --spring: cubic-bezier(.34, 1.4, .52, 1);
+    }
+.ra-weitere .shelf-nav button{
+      --hi: 255 255 255;
+      --lo: var(--sh);
+      --glow: var(--lamp);
+      --lip: 255 255 255;
+      --lip-a: .6;
+      --lip-a2: .3;
+      --lift: 0px;
+      --o1: 0 1px 1px rgb(var(--sh) / .14);
+      --o2: 0 2px 5px -1px rgb(var(--sh) / .1);
+      --o3: 0 8px 14px -8px rgb(var(--sh) / .22);
+      --hl: -1px -2px 5px -1px rgb(255 255 255 / .6);
+      --gl: 0 12px 24px -12px rgb(var(--glow) / 0);
+      --i1: inset 0 1.5px 0 rgb(var(--hi) / .95);
+      --i2: inset 0 -1.5px 0 rgb(var(--lo) / .12);
+      --i3: inset 0 10px 14px -10px rgb(var(--hi) / .85);
+      --i4: inset 0 -12px 16px -12px rgb(var(--lo) / .2);
+      --p1: inset 0 0 0 0 rgb(var(--lo) / 0);
+      --p2: inset 0 0 0 0 rgb(var(--lo) / 0);
+      border: 0;
+      background: linear-gradient(175deg, var(--clay-hi) 0%, var(--clay) 55%, var(--clay-lo) 100%);
+      box-shadow: var(--o1), var(--o2), var(--o3), var(--hl), var(--gl), var(--i1), var(--i2), var(--i3), var(--i4), var(--p1), var(--p2);
+      transform: translateY(var(--lift));
+      transition: transform .45s var(--feder), box-shadow .26s var(--ease), color .2s ease;
+    }
+@media (hover: hover){.ra-weitere .shelf-nav button{
+        --lift: -2px;
+        --o2: 0 4px 7px -2px rgb(var(--sh) / .13);
+        --o3: 0 11px 16px -8px rgb(var(--sh) / .24);
+      }}
+.ra-weitere .shelf-nav button{
+      --lift: 1px;
+      --o1: 0 1px 0 rgb(255 255 255 / .9);
+      --o2: 0 0 0 0 rgb(var(--sh) / 0);
+      --o3: 0 0 0 -12px rgb(var(--sh) / 0);
+      --hl: 0 -1px 0 0 rgb(var(--sh) / .16);
+      --gl: 0 0 0 0 rgb(var(--glow) / 0);
+      --i1: inset 0 1.5px 0 rgb(var(--hi) / 0);
+      --i2: inset 0 -1.5px 0 rgb(var(--lip) / var(--lip-a));
+      --i3: inset 0 10px 14px -10px rgb(var(--hi) / 0);
+      --i4: inset 0 -10px 14px -10px rgb(var(--lip) / var(--lip-a2));
+      --p1: inset 0 2px 4px 0 rgb(var(--lo) / .26);
+      --p2: inset 0 8px 14px -6px rgb(var(--lo) / .2);
+      background: linear-gradient(175deg, var(--clay-in) 0%, #efe9df 100%);
+    }
+.ra-weitere .shelf-nav button{ transition-duration: .09s; }
+.ra-weitere .shelf-nav button):disabled{
+      --lift: 0px;
+      --o1: 0 1px 0 rgb(255 255 255 / .85);
+      --o2: 0 0 0 0 rgb(var(--sh) / 0);
+      --o3: 0 0 0 -12px rgb(var(--sh) / 0);
+      --hl: 0 -1px 0 0 rgb(var(--sh) / .1);
+      --gl: 0 0 0 0 rgb(var(--glow) / 0);
+      --i1: inset 0 1px 0 rgb(255 255 255 / .55);
+      --i2: inset 0 -1px 0 rgb(var(--sh) / .06);
+      --i3: inset 0 0 0 0 rgb(255 255 255 / 0);
+      --i4: inset 0 0 0 0 rgb(var(--sh) / 0);
+      --p1: inset 0 0 0 0 rgb(var(--sh) / 0);
+      --p2: inset 0 0 0 0 rgb(var(--sh) / 0);
+      background: #e3dcd1; color: #675f56; cursor: not-allowed;
+    }
+.ra-weitere .pal-coral{ --fa: var(--coral-a); --fb: var(--coral-b); --fc: var(--coral-c); --ml: 6%; --mt: 22%; --mb: 46%; }
+.ra-weitere .pal-sand{ --fa: var(--sand-a); --fb: var(--sand-b); --fc: var(--sand-c); --ml: 10%; --mt: 26%; --mb: 58%; }
+.ra-weitere .pal-green{ --fa: var(--green-a); --fb: var(--green-b); --fc: var(--green-c); --ml: 0%; --mt: 4%; --mb: 26%; }
+.ra-weitere .pal-blue{ --fa: var(--blue-a); --fb: var(--blue-b); --fc: var(--blue-c); --ml: 0%; --mt: 4%; --mb: 26%; }
+.ra-weitere .pal-plum{ --fa: var(--plum-a); --fb: var(--plum-b); --fc: var(--plum-c); --ml: 0%; --mt: 0%; --mb: 18%; }
+.ra-weitere .pal-moss{ --fa: var(--moss-a); --fb: var(--moss-b); --fc: var(--moss-c); --ml: 2%; --mt: 16%; --mb: 40%; }
+.ra-weitere .field{
+      --top: color-mix(in oklab, var(--fb), var(--fc) var(--mt));
+      --bot: color-mix(in oklab, var(--fb), var(--fc) var(--mb));
+      --sheen: color-mix(in oklab, var(--fa) 70%, #fff);
+      position: relative; isolation: isolate; overflow: hidden; color: #fff;
+      background-image: var(--noise), radial-gradient(90% 60% at 18% -6%, color-mix(in oklab, var(--sheen) 34%, transparent) 0%, transparent 62%), linear-gradient(172deg, var(--top) 0%, var(--bot) 100%);
+      background-size: 220px 220px, auto, auto;
+      background-blend-mode: soft-light, normal, normal;
+      
+      --bevel: inset 0 1.5px 0 color-mix(in oklab, var(--sheen) 85%, transparent), inset 1.5px 0 0 color-mix(in oklab, var(--sheen) 35%, transparent), inset 0 26px 30px -22px color-mix(in oklab, var(--sheen) 70%, transparent), inset 16px 0 26px -20px color-mix(in oklab, var(--sheen) 34%, transparent), inset -18px 0 28px -20px color-mix(in oklab, var(--fc) 42%, transparent), inset 0 -30px 36px -24px color-mix(in oklab, var(--fc) 72%, transparent), inset 0 -2px 0 color-mix(in oklab, var(--fc) 50%, transparent);
+    }
+@supports not (color: color-mix(in oklab, red, blue)){.ra-weitere .field{ background: linear-gradient(172deg, var(--fb), var(--fc)); }}
+.ra-weitere .glow{ display: none; }
+.ra-weitere .tag{ display: inline-flex; align-items: center; min-height: 26px; padding: 3px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 700; letter-spacing: .01em; white-space: nowrap; }
+.ra-weitere .tag--cat{ color: var(--fc, var(--ink)); background: linear-gradient(180deg, #fff 0%, #f5f1eb 100%); box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 color-mix(in oklab, var(--fc, #23201c) 16%, transparent), 0 1px 1px color-mix(in oklab, var(--fc, #23201c) 34%, transparent), 0 4px 8px -3px color-mix(in oklab, var(--fc, #23201c) 44%, transparent); }
+.ra-weitere .tag--soon{ color: #fff; background: color-mix(in oklab, var(--fc, #23201c) 46%, transparent); box-shadow: inset 0 1.5px 3px color-mix(in oklab, var(--fc, #23201c) 80%, transparent), inset 0 -1px 0 rgb(255 255 255 / .2), 0 1px 0 rgb(255 255 255 / .28); }
+.ra-weitere .tag--match{ color: #fbf7f0; background: linear-gradient(180deg, #44728d, var(--k-blue)); box-shadow: inset 0 1px 0 rgb(255 255 255 / .3), inset 0 -1px 1px rgb(0 0 0 / .25), 0 1px 1px rgb(20 40 55 / .4), 0 4px 8px -3px rgb(20 40 55 / .45); }
+.ra-weitere .mcard[data-status="ready"]::before{ content: ""; position: absolute; top: -6px; right: -6px; z-index: 3; width: 22px; height: 22px; border-radius: 50%; background: radial-gradient(circle at 34% 30%, #ff7a6e 0%, #e5372c 48%, #c2261d 100%); box-shadow: 0 1px 1.5px rgb(60 20 10 / .35), 0 4px 8px -3px rgb(60 20 10 / .35), inset 0 1px 0 rgb(255 255 255 / .35); pointer-events: none; }
+.ra-weitere .mcard{
+      --c-lift: 0px;
+      --co1: 0 1px 1px rgb(var(--sh) / .14);
+      --co2: 0 3px 7px -2px rgb(var(--sh) / .1);
+      --co3: 0 13px 20px -11px rgb(var(--sh) / .24);
+      --chl: -2px -3px 6px -2px rgb(255 255 255 / .6);
+      --cgl: 0 0 0 0 transparent;
+      --cring: 0 0 0 0 color-mix(in oklab, var(--k-blue) 0%, transparent);
+      position: relative; display: flex; flex-direction: column; min-width: 0; padding: 7px; border-radius: 28px;
+      background: linear-gradient(175deg, var(--clay-hi) 0%, var(--clay) 42%, #eee7dc 100%);
+      box-shadow: var(--co1), var(--co2), var(--co3), var(--chl), var(--cgl), var(--cring), inset 0 1.5px 0 rgb(255 255 255 / .95), inset 0 -1.5px 0 rgb(var(--sh) / .1), inset 0 14px 18px -14px rgb(255 255 255 / .9), inset 0 -16px 22px -16px rgb(var(--sh) / .16);
+      transform: translateY(var(--c-lift));
+      transition: transform .5s var(--feder), box-shadow .45s var(--ease);
+    }
+@media (hover: hover){.ra-weitere .mcard:hover{ --c-lift: -5px; --co2: 0 6px 10px -4px rgb(var(--sh) / .12); --co3: 0 19px 26px -12px rgb(var(--sh) / .26); }
+.ra-weitere .mcard:hover .field{ --f-lift: -1.5px; --f-o: 0 5px 8px -3px rgb(var(--sh) / .22); }}
+.ra-weitere .mcard:active{ --c-lift: 1px; --co2: 0 1px 3px -1px rgb(var(--sh) / .1); --co3: 0 5px 8px -6px rgb(var(--sh) / .18); transition-duration: .1s; }
+.ra-weitere .mcard:active .field{ --f-lift: .5px; --f-o: 0 1px 2px -1px rgb(var(--sh) / .2); }
+.ra-weitere .mcard:has(.mcard-link:focus-visible){ --c-lift: -5px; --cring: 0 0 0 3px var(--focus); --co2: 0 6px 10px -4px rgb(var(--sh) / .12); --co3: 0 19px 26px -12px rgb(var(--sh) / .26); }
+.ra-weitere .mcard a.mcard-link:focus-visible{ outline: none; }
+.ra-weitere .mcard a.mcard-link{ display: flex; flex-direction: column; flex: 1; border-radius: 22px; color: inherit; text-decoration: none; }
+.ra-weitere .mcard .field{ --lite: color-mix(in oklab, var(--fb), var(--fc) var(--ml));
+      background-image: var(--noise), radial-gradient(90% 60% at 18% -6%, color-mix(in oklab, var(--sheen) 36%, transparent) 0%, transparent 62%), linear-gradient(172deg, color-mix(in oklab, var(--fa) 24%, var(--lite)) 0%, var(--lite) 26%, var(--bot) 60%, var(--bot) 100%);
+      --f-lift: 0px; --f-o: 0 3px 6px -2px rgb(var(--sh) / .2); display: flex; flex-direction: column; justify-content: space-between; gap: 12px; aspect-ratio: 5 / 3.55; padding: 15px 15px 17px; border-radius: 21px;
+      box-shadow: var(--bevel), 0 1px 1px color-mix(in oklab, var(--fc) 38%, transparent), var(--f-o);
+      transform: translateY(var(--f-lift)); transition: transform .5s var(--feder) .04s, box-shadow .45s var(--ease); }
+.ra-weitere .mcard .field-top{ display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.ra-weitere .field-tags{ display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+.ra-weitere .mcard h3.title{ margin: 0; font-family: var(--font-display); font-size: clamp(19px, 1.45vw, 21px); line-height: 1.2; font-weight: 650; letter-spacing: -.012em; text-wrap: balance; hyphens: manual; overflow-wrap: break-word; text-shadow: 0 1px 1px color-mix(in oklab, var(--fc) 50%, transparent); }
+.ra-weitere .mcard .body{ display: flex; flex-direction: column; flex: 1 1 auto; gap: 10px; padding: 15px 11px 9px; color: var(--ink-soft); }
+.ra-weitere .mcard .situation{ margin: 0; font-family: var(--font-ui); font-size: 16px; line-height: 1.45; font-weight: 450; color: #2f2a24; text-wrap: pretty; }
+.ra-weitere .mcard .anriss-ende{ white-space: nowrap; }
+.ra-weitere .mcard .anriss-ende::after{ content: ""; display: inline-block; width: .82em; height: .82em; margin-left: .32em; vertical-align: -.06em; background: color-mix(in oklab, var(--fc) 70%, var(--ink)); -webkit-mask: var(--arrow-mask) center / contain no-repeat; mask: var(--arrow-mask) center / contain no-repeat; transition: transform .35s var(--ease); }
+.ra-weitere .mcard:hover .anriss-ende::after,.ra-weitere .mcard:focus-within .anriss-ende::after{ transform: translateX(3px); }
+.ra-weitere .mcard .outcome{ margin: 0 0 4px; color: var(--muted); font-size: 13.5px; line-height: 1.5; }
+.ra-weitere .mcard .outcome b{ color: var(--ink); font-weight: 680; }
+.ra-weitere{ --arrow-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14'/%3E%3Cpath d='m12 5 7 7-7 7'/%3E%3C/svg%3E"); }
+.ra-weitere .pal-rinne{ --fa: #7fa3b8; --fb: #406b85; --fc: #1d384c; --ml: 0%; --mt: 8%; --mb: 58%; }
+.ra-weitere .teaser-visual.field{ display: grid; place-items: center; width: clamp(76px, 6.6vw, 98px); border-radius: 24px; filter: none;
+      box-shadow: var(--bevel), 0 1px 1px rgba(3, 12, 20, .45), 0 6px 10px -4px rgba(3, 12, 20, .5), 0 14px 22px -12px rgba(3, 12, 20, .55); }
+.ra-weitere .teaser-visual.field img{ width: 82%; height: 82%; filter: drop-shadow(0 2px 2px rgba(3, 12, 20, .45)) drop-shadow(0 7px 9px rgba(3, 12, 20, .35)); }
+.ra-weitere .shelf[data-kat] .shelf-title{ position: relative; padding-bottom: 10px; }
+.ra-weitere .shelf[data-kat] .shelf-title::after{ content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 5px; border-radius: 999px; background: linear-gradient(180deg, color-mix(in oklab, var(--fa) 45%, var(--fb)), color-mix(in oklab, var(--fb), var(--fc) 25%)); box-shadow: inset 0 1px 0 rgb(255 255 255 / .45), 0 1px 1px color-mix(in oklab, var(--fc) 40%, transparent), 0 3px 5px -2px color-mix(in oklab, var(--fc) 45%, transparent); }
+.ra-weitere .shelf{ margin-top: clamp(30px, 3.2vw, 46px); scroll-margin-top: 20px; }
+.ra-weitere .shelf--foryou + .shelf{ margin-top: clamp(18px, 2vw, 26px); }
+.ra-weitere .shelf--foryou:not(:has(#grid-note:not([hidden]))){ display: none; }
+.ra-weitere .shelf--foryou .mcard:not(.is-match){ display: none; }
+.ra-weitere .shelf-head{ display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; }
+.ra-weitere .shelf-title{ display: inline-flex; align-items: center; gap: 12px; margin: 0; font-family: var(--font-display); font-size: clamp(22px, 2vw, 27px); line-height: 1.15; font-weight: 600; letter-spacing: -.016em; text-shadow: 0 1px 0 rgb(255 255 255 / .8); }
+.ra-weitere .shelf .grid-note{ margin: 4px 0 0; color: var(--muted); font-size: 14px; font-weight: 600; }
+.ra-weitere .shelf-nav{ display: flex; gap: 10px; flex: none; }
+.ra-weitere .shelf-nav button{ display: inline-grid; place-items: center; width: 44px; height: 44px; padding: 0; border-radius: 50%; color: var(--ink); font-size: 18px; cursor: pointer; }
+@media (pointer: coarse){.ra-weitere .shelf-nav{ display: none; }}
+.ra-weitere .shelf-track{ --edge: max(var(--gutter), calc((100% - var(--content)) / 2)); display: flex; gap: 22px; overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: var(--edge); scrollbar-width: none; padding: 24px var(--edge) 104px; margin-bottom: -70px; }
+.ra-weitere .shelf-track::-webkit-scrollbar{ display: none; }
+.ra-weitere .shelf-track::after{ content: ""; flex: 0 0 1px; }
+.ra-weitere .shelf-track:focus-visible{ outline: 3px solid var(--focus); outline-offset: -3px; }
+.ra-weitere .shelf .mcard{ flex: 0 0 clamp(268px, 21vw, 304px); width: clamp(268px, 21vw, 304px); scroll-snap-align: start; }
+.ra-weitere{ zoom: 1.12; }
+@media (max-width: 700px){.ra-weitere .teaser-visual.field{ width: 64px; border-radius: 18px; }
+.ra-weitere .shelf-track{ gap: 16px; padding-bottom: 96px; }
+.ra-weitere .shelf .mcard{ flex-basis: min(78vw, 304px); width: min(78vw, 304px); }
+.ra-weitere .mcard{ border-radius: 24px; padding: 6px; }
+.ra-weitere .mcard .field{ border-radius: 19px; }
+.ra-weitere .mcard h3.title{ font-size: clamp(19px, 5.3vw, 21px); }}
+@media (prefers-reduced-motion: reduce){.ra-weitere .mcard,.ra-weitere .mcard .field,.ra-weitere .shelf-nav button{ transform: none !important; }}
+.ra-weitere{ --herz: #d24b3a; --feder: cubic-bezier(.34, 1.56, .64, 1); }
+.ra-weitere .herz{ display: inline-grid; place-items: center; flex: none; width: 38px; height: 38px; padding: 0; border: 0; border-radius: 50%; cursor: pointer; -webkit-tap-highlight-color: transparent;
+      transition: transform .3s var(--spring), box-shadow .3s var(--ease), background .3s ease, color .2s ease; }
+.ra-weitere .herz{ position: absolute; z-index: 2; right: 15px; bottom: 18px; color: var(--muted);
+      background: linear-gradient(175deg, var(--clay-hi), var(--clay) 60%, #efe9df);
+      box-shadow: 0 1px 1px rgb(var(--sh) / .16), 0 3px 6px -2px rgb(var(--sh) / .2), inset 0 1.5px 0 #fff, inset 0 -6px 10px -8px rgb(var(--sh) / .24); }
+.ra-weitere .herz-ic{ width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
+@media (hover: hover){.ra-weitere .herz:hover{ transform: translateY(-1.5px); }
+.ra-weitere .herz:hover{ color: var(--ink); }}
+.ra-weitere .herz:active{ transform: translateY(.5px); transition-duration: .1s; }
+.ra-weitere .herz:focus-visible,.ra-weitere .herz-ablage:focus-visible{ outline: 3px solid var(--focus); outline-offset: 2px; }
+.ra-weitere [data-herz][aria-pressed="true"] .herz-ic{ fill: currentColor; }
+.ra-weitere [data-herz].is-pop .herz-ic{ animation: herz-pop .5s var(--spring); }
+.ra-weitere .mcard .steckbrief{ padding-right: 46px; }
+.ra-weitere .mcard:has(.herz:active){ --c-lift: -5px; }
+.ra-weitere .mcard:has(.herz:active) .field{ --f-lift: -1.5px; }
+.ra-weitere .herz-ablage{ position: fixed; z-index: 35; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+      display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 7px 16px 7px 7px; border: 0; border-radius: 999px; color: var(--ink); font: inherit; font-size: 14.5px; font-weight: 680; cursor: pointer;
+      background: linear-gradient(175deg, var(--clay-hi), var(--clay) 60%, #efe9df);
+      box-shadow: inset 0 1.5px 0 #fff, inset 0 -1.5px 0 rgb(var(--sh) / .08), 0 1px 2px rgb(var(--sh) / .14), 0 8px 16px -8px rgb(var(--sh) / .24), 0 18px 34px -18px rgb(var(--sh) / .3);
+      transform-origin: 80% 100%; transition: bottom .45s var(--spring), transform .3s var(--spring); }
+.ra-weitere .herz-ablage:not([hidden]){ animation: ablage-rein .6s var(--spring); }
+@media (hover: hover){.ra-weitere .herz-ablage:hover{ transform: translateY(-2px); }}
+.ra-weitere .herz-ablage__herz{ display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; color: var(--herz); background: var(--clay-in);
+      box-shadow: inset 0 2px 4px rgb(var(--sh) / .28), inset 0 -1px 0 rgb(255 255 255 / .8), 0 1px 0 rgb(255 255 255 / .9); }
+.ra-weitere .herz-ablage__herz .herz-ic{ fill: currentColor; }
+.ra-weitere .herz-zahl{ min-width: 1ch; font-size: 17px; font-weight: 760; font-variant-numeric: tabular-nums; }
+.ra-weitere .herz-ablage__text{ padding-left: 11px; border-left: 1px solid rgb(var(--sh) / .2); color: var(--ink-soft); white-space: nowrap; }
+.ra-weitere .herz-ablage .icon{ font-size: 16px; color: var(--ink-soft); }
+.ra-weitere .herz-flug{ position: fixed; z-index: 45; left: 0; top: 0; width: 0; height: 0; pointer-events: none; }
+.ra-weitere .herz-flug > span{ display: block; width: 0; height: 0; }
+.ra-weitere .herz-flug .herz-ic{ display: block; width: 26px; height: 26px; margin: -13px 0 0 -13px; fill: var(--herz); stroke: var(--herz); filter: drop-shadow(0 3px 5px rgb(120 30 20 / .35)); }
+.ra-weitere .herz-liste{ display: grid; gap: 8px; margin: 0 0 18px; padding: 0; list-style: none; }
+.ra-weitere .herz-liste li{ display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 14px; background: var(--clay-in); color: var(--ink); font-size: 15px; font-weight: 600; line-height: 1.35;
+      box-shadow: inset 0 1px 2px rgb(var(--sh) / .2), 0 1px 0 rgb(255 255 255 / .9); }
+.ra-weitere .herz-liste .herz-ic{ width: 16px; height: 16px; flex: none; fill: var(--herz); stroke: var(--herz); }
+.ra-weitere .herz-toast{ position: fixed; z-index: 46; left: 50%; bottom: calc(86px + env(safe-area-inset-bottom, 0px)); width: max-content; max-width: calc(100vw - 32px); padding: 10px 16px; text-align: center; border-radius: 999px; background: #23201c; color: #fbf7f0; font-size: 14px; font-weight: 600;
+      opacity: 0; transform: translate(-50%, 12px); pointer-events: none; transition: opacity .25s ease, transform .35s var(--spring); }
+.ra-weitere .herz-toast.is-da{ opacity: 1; transform: translate(-50%, 0); }
+@media (max-width: 700px){.ra-weitere .herz-ablage{ min-height: 46px; gap: 8px; padding: 5px 12px 5px 5px; }
+.ra-weitere .herz-ablage__herz{ width: 36px; height: 36px; }
+.ra-weitere .herz-ablage__text{ display: none; }}
+.ra-weitere .mcard .field{ overflow: clip; }
+.ra-weitere .mcard .field-top{ display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 6px; }
+.ra-weitere .mcard .field-tags{ display: flex; flex-direction: column; align-items: flex-start; gap: 6px; min-width: 0; }
+.ra-weitere .mcard .field-top > :not(.stufe){ grid-column: 1; justify-self: start; max-width: 100%; }
+.ra-weitere .mcard .field-top > .stufe{ grid-column: 2; grid-row: 1; justify-self: end; }
+.ra-weitere .mcard .field-top .tag--cat{ white-space: normal; text-wrap: balance; line-height: 1.2; }
+@media (min-width: 701px){.ra-weitere .shelf .mcard{ flex-basis: clamp(296px, 21vw, 304px); width: clamp(296px, 21vw, 304px); }}
+.ra-weitere .shelf-head{ position: relative; z-index: 2; }
+.ra-weitere .ki-emoji--herz .herz-ic{ width: 20px; height: 20px; fill: currentColor; }
+.ra-weitere html[data-geraet="handy"] .v22s-reihe .mcard[data-status="ready"]{ order: -1; }
+.ra-weitere #mehr-themen > .shelf:first-child{ margin-top: clamp(14px, 1.6vw, 22px); }
+.ra-weitere .shelf .v22i-fuell{ flex: 0 0 clamp(268px, 21vw, 304px); width: clamp(268px, 21vw, 304px); scroll-snap-align: start; position: relative; display: flex; flex-direction: column; min-width: 0; padding: 7px; border-radius: 28px;
+      background: linear-gradient(175deg, var(--clay-hi) 0%, var(--clay) 42%, #eee7dc 100%);
+      box-shadow: 0 1px 1px rgb(var(--sh) / .14), 0 3px 7px -2px rgb(var(--sh) / .1), 0 13px 20px -11px rgb(var(--sh) / .24), -2px -3px 6px -2px rgb(255 255 255 / .6), inset 0 1.5px 0 rgb(255 255 255 / .95), inset 0 -1.5px 0 rgb(var(--sh) / .1), inset 0 14px 18px -14px rgb(255 255 255 / .9), inset 0 -16px 22px -16px rgb(var(--sh) / .16);
+      transition: transform .5s var(--feder), box-shadow .45s var(--ease); }
+@media (hover: hover){.ra-weitere .shelf .v22i-fuell:hover{ transform: translateY(-5px); }}
+.ra-weitere .v22i-fuell .field{ display: flex; flex-direction: column; justify-content: space-between; gap: 12px; aspect-ratio: 5 / 3.55; padding: 15px 15px 17px; border-radius: 21px;
+      box-shadow: var(--bevel), 0 1px 1px color-mix(in oklab, var(--fc) 38%, transparent), 0 3px 6px -2px rgb(var(--sh) / .2); }
+.ra-weitere .v22i-fuell .field-top{ display: flex; }
+.ra-weitere .v22i-fuell h3.title{ margin: 0; font-family: var(--font-display); font-size: clamp(19px, 1.45vw, 21px); line-height: 1.2; font-weight: 650; letter-spacing: -.012em; text-wrap: balance; overflow-wrap: break-word; text-shadow: 0 1px 1px color-mix(in oklab, var(--fc) 50%, transparent); }
+@media (max-width: 700px){.ra-weitere .shelf .v22i-fuell{ flex-basis: min(82vw, 300px); width: min(82vw, 300px); }}
+@media (prefers-reduced-motion: reduce){.ra-weitere .shelf .v22i-fuell{ transform: none !important; }}
+.ra-weitere{ --copper-a: #ecc19c; --copper-b: #9e5c26; --copper-c: #592c1d;
+            --indigo-a: #bbb9dd; --indigo-b: #6f6a9e; --indigo-c: #3a3156;
+            --petrol-a: #a0cbca; --petrol-b: #2f7576; --petrol-c: #0c3d42; }
+.ra-weitere .pal-copper{ --fa: var(--copper-a); --fb: var(--copper-b); --fc: var(--copper-c); --ml: 0%; --mt: 0%; --mb: 26%; }
+.ra-weitere .pal-indigo{ --fa: var(--indigo-a); --fb: var(--indigo-b); --fc: var(--indigo-c); --ml: 0%; --mt: 0%; --mb: 26%; }
+.ra-weitere .pal-petrol{ --fa: var(--petrol-a); --fb: var(--petrol-b); --fc: var(--petrol-c); --ml: 0%; --mt: 0%; --mb: 26%; }
+.ra-weitere .mcard .field{ aspect-ratio: 5 / 2.8 !important; position: relative; }
+.ra-weitere .mcard .field h3.title{ font-size: 1.5rem !important; line-height: 1.15 !important; }
+.ra-weitere .mcard .field .mcard-symbol{ position: absolute; right: -15%; bottom: -24%; height: 104%; width: auto; aspect-ratio: 1; fill: none; stroke: #000; stroke-width: 1.5;
+    stroke-linecap: round; stroke-linejoin: round; opacity: .12; pointer-events: none; z-index: 0;
+    filter: none; }
+.ra-weitere .mcard .field > :not(.mcard-symbol):not(.glow){ position: relative; z-index: 1; }
+.ra-weitere .tag--frei{ --frei-bg: #e3ecd9; --frei-ink: #2f4a26; color: var(--frei-ink); background: var(--frei-bg); white-space: normal; line-height: 1.2;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / .6), 0 1px 1px rgb(47 74 38 / .22); }
+.ra-weitere .mcard .mcard-los::after{ content: ""; display: inline-block; width: .82em; height: .82em; margin-left: .32em; vertical-align: -.06em;
+    background: color-mix(in oklab, var(--fc) 70%, var(--ink)); -webkit-mask: var(--arrow-mask) center / contain no-repeat; mask: var(--arrow-mask) center / contain no-repeat;
+    transition: transform .35s var(--ease); }
+.ra-weitere .mcard:hover .mcard-los::after,.ra-weitere .mcard:focus-within .mcard-los::after{ transform: translateX(3px); }
+
+/* Runde 24, Jim: was Entwurf 3 aus Oscars Seite /wochenende-planen mitbrachte und den Seiten der Hülle fehlt, plus Kleinigkeiten */
+.ra-board { --zettel: #fffefb; --zettel-lo: #faf6ee; --klebeband: rgba(232, 214, 178, .82);
+  --platte: inset 0 2px 0 #ffffff, inset 0 -2px 0 rgba(96,72,46,.08), 0 2px 4px rgba(96,72,46,.14), 0 14px 26px -10px rgba(40,26,14,.24), 0 36px 66px -26px rgba(40,26,14,.3);
+  --zettel-liegt: 0 1px 1px rgba(96,72,46,.16), 0 14px 24px -14px rgba(96,72,46,.4);
+  --mulde: inset 0 1px 2px rgba(96,72,46,.22), 0 1px 0 #ffffff; }
+.ra-blatt { --zettel: #fffefb; --zettel-lo: #faf6ee; --platte: inset 0 2px 0 #ffffff, 0 14px 26px -10px rgba(40,26,14,.24), 0 36px 66px -26px rgba(40,26,14,.3); }
+.ra3 .ra-ki-mehr { display: block; margin-top: 2px; font-size: 15px; line-height: 1.45; opacity: .92; }
+.ra3 .ra-ki-abo { margin: 14px 0 8px; }
+.ra3 .ra-abo-knoepfe { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 18px; }
+.ra3 .ra-auf-innen a:not(.ra-leise):not(.clay-btn) { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.ra3 .ra-schritte li p a.ra-leise { display: inline-flex; align-items: center; min-height: 44px; padding: 0; }
+/* Herzen auf den Ideenkarten mindestens 44 × 44 px (Pam, Bauauftrag Punkt 11) */
+.ra-weitere .mcard .herz { min-width: 44px; min-height: 44px; }
+.ra3 .ra-herz { flex: none; }
+@media (prefers-reduced-motion: reduce) { .ra3 .ra-leiste, .ra3 .ra-auf summary .icon { transition: none !important; } }
+</style>
 </head>
-<body><div class="live-aufbau" role="note"><b>Diese Seite ist im Aufbau.</b> Du siehst eine Testfassung, noch nicht alles funktioniert.</div><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><!-- Symbole: Lucide 1.31.0 (lucide.dev, gebündelt aus lucide-react). Lizenz:
+<body><div class="live-aufbau" role="note"><b>Diese Seite ist im Aufbau.</b> Du siehst eine Testfassung, noch nicht alles funktioniert.</div><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="ls-package" viewBox="0 0 24 24"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></symbol><symbol id="ls-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></symbol></defs></svg><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><!-- Symbole: Lucide 1.31.0 (lucide.dev, gebündelt aus lucide-react). Lizenz:
 ISC License
 
 Copyright (c) 2026 Lucide Icons and Contributors
@@ -1570,19 +2102,12 @@ SOFTWARE. --><symbol id="ls-mail" viewBox="0 0 24 24"><path d="m22 7-8.991 5.727
   <svg class="sb-sprite" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="l-openai" viewBox="0 0 24 24"><path fill="currentColor" d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></symbol><symbol id="l-claude" viewBox="0 0 24 24"><path fill="currentColor" d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/></symbol><symbol id="l-googlegemini" viewBox="0 0 24 24"><path fill="currentColor" d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></symbol><symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /> <path d="M12 6v6l4 2" /></symbol><symbol id="i-user-round" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5" /> <path d="M20 21a8 8 0 0 0-16 0" /></symbol><symbol id="i-bell-ring" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0" /> <path d="M22 8c0-2.3-.8-4.3-2-6" /> <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" /> <path d="M4 2C2.8 3.7 2 5.7 2 8" /></symbol><symbol id="i-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z" /> <circle cx="12" cy="13" r="3" /></symbol><symbol id="i-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49" /> <path d="M14.084 14.158a3 3 0 0 1-4.242-4.242" /> <path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143" /> <path d="m2 2 20 20" /></symbol><symbol id="i-file-text" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /> <path d="M14 2v5a1 1 0 0 0 1 1h5" /> <path d="M10 9H8" /> <path d="M16 13H8" /> <path d="M16 17H8" /></symbol><symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34" /> <circle cx="11" cy="11" r="8" /></symbol><symbol id="i-browser-ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3.5" width="18" height="14" rx="2"/><path d="M2 7.5h18"/><path d="M5.5 5.5h.01M8 5.5h.01"/><path d="M13.2 12.2l7.6 2.9-3.3 1.1-1.1 3.3z" fill="currentColor"/></symbol><symbol id="i-layout-dashboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1" /> <rect width="7" height="5" x="14" y="3" rx="1" /> <rect width="7" height="9" x="14" y="12" rx="1" /> <rect width="7" height="5" x="3" y="16" rx="1" /></symbol><symbol id="i-euro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12" /> <path d="M4 14h9" /> <path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2" /></symbol><symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol><symbol id="i-arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></symbol><symbol id="i-arrow-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></symbol><symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol><symbol id="i-compass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"/></symbol><symbol id="i-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol><symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol><symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol><symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol><symbol id="i-smartphone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></symbol><symbol id="i-monitor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2" /><path d="M8 21h8" /><path d="M12 17v4" /></symbol><symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol><symbol id="i-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v13"/><path d="m16 6-4-4-4 4"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/></symbol><symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></symbol></defs></svg>
   
 
-  <div class="guide" id="guide" aria-hidden="true">
-    <strong>Keller ausmisten</strong>
-    <nav class="segs" id="segs" aria-label="Stationen dieser Anleitung">
-      <span class="seg-knob" id="seg-knob" aria-hidden="true"></span>
-      <a class="seg" href="#b2"><span class="n">1</span><span class="l">Was passiert</span></a>
-      <a class="seg" href="#b3"><span class="n">2</span><span class="l">Weitergedacht</span></a>
-    </nav>
-    <a class="button-primary" href="#" data-start data-art="prompt" target="_blank" rel="noopener"><svg class="logo" aria-hidden="true" data-ki-logo><use href="#l-openai"/></svg><span>Mit <span data-ki-name>ChatGPT</span> starten</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
-  </div>
+  
 
-  <main class="board" id="board">
-    <section class="case-top pal-sand">
-      <header class="site-nav wrap">
+  
+
+  <main class="board ra-board" id="board">
+    <header class="site-nav wrap">
         <a class="brand" href="/" aria-label="Zur Startseite"><span class="brand-mark" aria-hidden="true"></span><span class="kiosk"><span class="kiosk-ki">KI</span>osk</span></a>
         <div class="nav-end">
           <nav class="nav-links" aria-label="Hauptnavigation"><a href="/#moeglich">Entdecken</a><a href="/#so-gehts">Machen</a><a href="/#wissen">Verstehen</a></nav>
@@ -1591,115 +2116,41 @@ SOFTWARE. --><symbol id="ls-mail" viewBox="0 0 24 24"><path d="m22 7-8.991 5.727
         </div>
       </header>
 
-      <div class="wrap">
-        <div class="crumbs"><a class="clay-btn crumb" href="/ideen"><svg class="icon" aria-hidden="true"><use href="#i-arrow-left"/></svg><span>Zurück zu den Ideen</span></a></div>
-
-        <header class="title-plate field pal-sand" aria-labelledby="case-title">
-          <div class="plate-main">
-            <div>
-              <div class="plate-tags">
-                <span class="tag tag--cat">Geld und Einkauf</span>
-                <span class="stufe stufe-lang" role="img" aria-label="Stufe 2 von 3, etwas Übung"><i aria-hidden="true"><b class="an"></b><b class="an"></b><b></b></i><span aria-hidden="true">Stufe 2 <span class="von">von 3 · etwas Übung</span></span></span>
-                <div class="plate-tools" role="group" aria-label="Merken, teilen, hinzufügen"><button class="tool" type="button" data-herz="keller" data-titel="Keller ausmisten" aria-pressed="false" aria-label="Merken: Keller ausmisten" title="Merken"><svg class="herz-ic" aria-hidden="true"><use href="#i-heart"/></svg></button><button class="tool" type="button" data-teilen aria-label="Teilen" title="Teilen"><svg class="icon" aria-hidden="true"><use href="#i-share"/></svg></button><button class="tool" type="button" data-sammlung-fuer="keller" data-titel="Keller ausmisten" aria-label="Zu einer Sammlung hinzufügen" title="Zu einer Sammlung hinzufügen"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></button></div>
-              </div>
-              <h1 class="display" id="case-title">Keller ausmisten</h1><p class="v26-unterzeile">Was verkaufen, spenden, verschenken, entsorgen?</p>
-              <p class="intro">Du fotografierst, was weg soll, auch ganze Regale auf einmal. Die KI sagt dir für jedes Ding, <strong>ob sich Verkaufen lohnt und was es bringt</strong>, und <strong>wo du den Rest in deiner Nähe spenden, verschenken oder entsorgen kannst</strong>.</p>
-            </div>
-            <div class="plate-actions" id="einstieg">
-              <div class="ki-wahl ki-wahl--platte" role="radiogroup" aria-label="Mit welcher KI möchtest du starten?"><button type="button" role="radio" aria-checked="true" data-ki="chatgpt"><svg class="logo" aria-hidden="true"><use href="#l-openai"/></svg>ChatGPT</button><button type="button" role="radio" aria-checked="false" tabindex="-1" data-ki="claude"><svg class="logo" aria-hidden="true"><use href="#l-claude"/></svg>Claude</button></div>
-              <div class="row">
-                <a class="moment-cta" href="#" data-start data-art="prompt" target="_blank" rel="noopener"><svg class="logo" aria-hidden="true" data-ki-logo><use href="#l-openai"/></svg><span>Mit <span data-ki-name>ChatGPT</span> starten</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
-                <a class="step-link" href="#b2">Was passiert dann? <svg class="icon" aria-hidden="true"><use href="#i-arrow-down"/></svg></a>
-              </div>
-              <details class="ks-konto ks-konto--platte">
-                <summary><span>Noch nicht bei <span data-ki-name>ChatGPT</span> angemeldet?</span><svg class="icon chev" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary>
-                <div class="ks-konto-inhalt">
-                  <p><span data-nur-geraet="computer">Melde dich vorher in diesem Browser an.</span><span data-nur-geraet="handy">Melde dich vorher in der <span data-ki-name>ChatGPT</span>-App an.</span> Dann öffnet der Knopf direkt den fertigen Auftrag. Noch kein Konto? Das legst du dort kostenlos an, mit E-Mail oder Google-Konto.</p>
-                  <a class="ks-anmelden" href="https://chatgpt.com/auth/login" data-anmelden target="_blank" rel="noopener"><span>Zur Anmeldung</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
-                </div>
-              </details>
-              <p class="safe-note"><svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg><span>Öffnet <span data-ki-name>ChatGPT</span> mit dem fertigen Auftrag. Er enthält nichts über dich. Deine Fotos hängst du erst in <span data-ki-name>ChatGPT</span> an, wir sehen sie nicht.</span></p>
-            </div>
-          </div>
-          <div class="ki-well">
-            <div>
-              <p class="schritte-titel">Das erledigt die KI</p>
-              <ol class="kette"><li>Erkennt viele Dinge auf einmal, auch auf einem Foto</li><li class="fuer-dich">Sagt dir, was sich zu verkaufen lohnt und was es bringt</li><li>Sucht Spendenstellen und den Wertstoffhof in deiner Nähe, mit Öffnungszeiten</li><li>Schreibt dir den Text zum Verschenken</li></ol>
-            </div>
-            <p class="ergebnis-token"><b>Ergebnis</b>Du weißt für jedes Ding, was damit passiert und was der Verkauf ungefähr bringt. Für den Rest hast du Orte in deiner Nähe, mit Adresse und Öffnungszeiten.<br><button class="erg-zeigen" type="button" data-beispiel>So sieht das aus<svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></button></p>
-          </div>
-        </header>
-
-        <section class="glance" aria-label="Auf einen Blick">
-          <ul class="glance-list">
-            <li><span class="socket socket--wide" aria-hidden="true"><svg class="logo"><use href="#l-openai"/></svg><svg class="logo"><use href="#l-claude"/></svg></span><span>Klappt mit <b>ChatGPT und Claude</b></span></li>
-            <li><span class="socket" aria-hidden="true"><svg class="ic"><use href="#i-clock"/></svg></span><span>Etwa <b>20 Minuten</b> für dich</span></li>
-            <li><span class="socket" aria-hidden="true"><svg class="ic"><use href="#i-camera"/></svg></span><span><b>Ein paar Fotos</b> reichen, auch von ganzen Regalen</span></li>
-            <li><span class="socket" aria-hidden="true"><span class="sb-segs"><i class="sb-seg an"></i><i class="sb-seg"></i><i class="sb-seg"></i></span></span><span>Persönliche Daten: <b>wenig</b>. Du nennst nur deine Postleitzahl</span></li>
-            <li><span class="socket" aria-hidden="true"><svg class="ic"><use href="#i-smartphone"/></svg></span><span>Am <b>Handy</b> oder am <b>Computer</b></span></li>
-            <li><span class="socket" aria-hidden="true"><svg class="ic"><use href="#i-euro"/></svg></span><span><b>Am besten mit Abo</b>. Kostenlos lädt ChatGPT nur drei Fotos am Tag hoch</span></li>
-          </ul>
-        </section>
-        <section class="v25-angebot" data-v25-angebot aria-labelledby="v25-angebot-titel">
-          <span class="v25-angebot-marke">Mit Abo geht hier mehr</span>
-          <h2 class="display" id="v25-angebot-titel">Den ganzen Keller auf einmal</h2>
-          <p>Kostenlos lädt ChatGPT nur drei Fotos am Tag hoch, und es antwortet ein kleineres Modell. Mit einem Abo schaffst du den ganzen Keller in einem Rutsch.</p>
-          <p class="v25-angebot-du" hidden></p>
-          <div class="v25-angebot-begleitung">
-            <p><b>Teste ein Abo einen Monat. Wir begleiten dich drei Wochen dabei, kostenlos.</b> Das Abo kostet beim Anbieter um die 22 € im Monat und ist monatlich kündbar.</p>
-            <div class="v25-angebot-knoepfe"><button type="button" class="button-primary v25-angebot-los" aria-expanded="false" aria-controls="v25-angebot-danke"><span>Begleitung anfragen</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></button><a class="v25-angebot-link" href="/mein-bereich#artikel-kostenlos">Was bringt ein Abo?</a></div>
-            <p class="v25-angebot-danke" id="v25-angebot-danke" hidden>Schön, dass du dabei sein willst. Schreib uns einfach „Test“ per WhatsApp oder Instagram. Wir melden uns und starten mit dir.</p>
-          </div>
-        </section>
-        <section class="kl-beispiel" aria-labelledby="kl-beispiel-titel"><div class="kl-beispiel-kopf"><span class="ks-vorher-marke">Beispiel</span><h2 class="display" id="kl-beispiel-titel">So sieht das Ergebnis aus</h2><p>Nachgestellt, mit Orten aus Stuttgart. Bei dir sucht die KI Orte für deine Postleitzahl.</p></div><div class="kl-beispiel-teile"><div><p class="kl-teil-titel">Die Übersicht</p><table class="kl-tabelle"><caption class="sr-only">Beispiel: Empfehlung für jedes Ding</caption><thead><tr><th scope="col">Ding</th><th scope="col">Empfehlung</th><th scope="col">bringt</th></tr></thead><tbody><tr><td>Stehlampe aus den 70ern</td><td><span class="kl-empf kl-empf--verkaufen">verkaufen</span></td><td>ca. 30 €</td></tr><tr><td>Konzertgitarre mit Tasche</td><td><span class="kl-empf kl-empf--verkaufen">verkaufen</span></td><td>ca. 60 €</td></tr><tr><td>Kiste Bücher</td><td><span class="kl-empf kl-empf--spenden">spenden</span></td><td><span aria-hidden="true">–</span><span class="sr-only">nichts</span></td></tr><tr><td>Umzugskartons</td><td><span class="kl-empf kl-empf--verschenken">verschenken</span></td><td><span aria-hidden="true">–</span><span class="sr-only">nichts</span></td></tr><tr><td>Alter Stuhl, wackelt</td><td><span class="kl-empf kl-empf--entsorgen">entsorgen</span></td><td><span aria-hidden="true">–</span><span class="sr-only">nichts</span></td></tr></tbody><tfoot><tr><td colspan="2">Verkauf zusammen</td><td>ca. 90 €</td></tr></tfoot></table></div><div><p class="kl-teil-titel">Der Plan für den Rest</p><ul class="kl-plan" aria-label="Beispiel: der Plan für den Rest"><li><span class="kl-empf kl-empf--verkaufen">Verkaufen</span><span>Fotos in der Kleinanzeigen-App hochladen, Preis von hier übernehmen</span></li><li><span class="kl-empf kl-empf--spenden">Spenden</span><span>Bücher · Gebrauchtbuchladen, 600 m, Mo–Sa geöffnet</span></li><li><span class="kl-empf kl-empf--verschenken">Verschenken</span><span>Kartons · Nachbarschaftsgruppe, Text ist fertig</span></li><li><span class="kl-empf kl-empf--entsorgen">Entsorgen</span><span>Stuhl · Wertstoffhof, Sa 8–13 Uhr, vorher online anmelden</span></li></ul></div></div></section>
+<div class="ra ra3" id="fall-keller" data-fall="keller">
+  <div class="ra-wrap"><a class="ra-zurueck" href="/ideen"><svg class="icon" aria-hidden="true"><use href="#i-arrow-left"/></svg>Alle Ideen</a></div>
+  <figure class="ra-szene">
+    <picture>
+      <source media="(min-width: 1024px)" srcset="/a-ca055894443c.webp">
+      <img src="/a-af87ff3fb98f.webp" alt="Ein Stapel Umzugskartons mit Plattenspieler, Gitarre, Stehlampe, Stuhl und Kinderfahrrad" style="--pos-hoch:50% 18%;--pos-quer:50% 30%" width="800" height="978">
+    </picture>
+  </figure>
+  <article class="ra-karte" style="--fa:#ecc19c;--fb:#9e5c26;--fc:#592c1d;--ml:0%;--mb:26%">
+    <svg class="ra-karte-symbol" viewBox="0 0 24 24" aria-hidden="true"><use href="#ls-package"/></svg>
+    <div class="ra-karte-innen">
+      <div class="ra-lesen">
+        <div class="ra-meta"><span class="ra-chip">Umzug stemmen</span><a class="ra-siegel offen" href="#" data-oeffne="gut">Noch im Test</a>
+          <button type="button" class="ra-herz" data-herz="keller" data-titel="Keller ausmisten" aria-pressed="false" aria-label="Merken: Keller ausmisten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></button></div>
+        <h1>Keller ausmisten</h1>
+        <p class="ra-kurztext">Im Keller stapelt sich Zeug, das weg soll, aber du findest keinen Anfang. Die KI sortiert den ganzen Haufen auf einmal und sagt je Stück, welcher Weg sich lohnt. Fotografieren musst du, den Rest übernimmt sie:</p>
+        <section class="ra-ergebnis" aria-label="Ergebnis"><div class="ra-zettel">
+        <span class="ra-band" aria-hidden="true"></span>
+        <p class="ra-ergebnis-satz"><b>Ergebnis:</b> Du weißt für jedes Ding, was damit passiert und was der Verkauf ungefähr bringt.</p>
+        <ul class="ra-haken"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Je Ding: Empfehlung, erwarteter Preis und Startpreis</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Was der Verkauf zusammen bringt</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Spendenstelle, die so etwas annimmt, mit Adresse und Öffnungszeiten</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Text zum Verschenken, fertig zum Kopieren</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Wertstoffhof mit Öffnungszeiten von heute und Link</span></li></ul>
+        <button type="button" class="ra-beispiel-knopf" data-dialog="bsp-keller">Beispiel ansehen</button>
+      </div></section>
+        <section class="ra-brauchst" aria-labelledby="keller-b"><h2 class="ra-versal" id="keller-b">Das brauchst du</h2><ul><li>Ein paar Fotos, auch von ganzen Regalen</li><li>Deine Postleitzahl</li><li>Etwa 20 Minuten</li><li class="ra-kosten"><span class="ra-marke abo">Am besten mit Abo</span> <span>kostenlos nur drei Fotos am Tag.</span> <a class="ra-leise" href="#" data-oeffne="abo">Was bringt ein Abo?</a></li></ul></section>
       </div>
-    </section>
-
-    <div class="reading">
-      <div class="wrap">
-        <section class="station" id="b2" aria-labelledby="b2-title">
-          <div class="bead" aria-hidden="true">1</div>
-          <div class="station-body">
-            <h2 class="display" id="b2-title">Was passiert, wenn du <span data-nur-geraet="handy">tippst</span><span data-nur-geraet="computer">klickst</span></h2>
-            <div class="how">
-              
-              <div class="ks pal-sand">
-                <div class="ks-vorher"><span class="ks-vorher-marke">Vorher</span><div><h3>Fotografiere, was weg soll</h3><p>Einzeln oder ganze Regale und Ecken auf einmal.</p>
-                  <div class="hint-links"><a class="hint-link" href="#kommt-bald" data-sheet="grundlagen" data-titel="Wie viele Fotos gehen?" data-text="Ganze Regale oder Ecken auf einem Foto sind ausdrücklich erlaubt, die KI erkennt mehrere Dinge auf einmal. Bei ChatGPT gehen mit dem Abo Plus bis zu 80 Dateien in drei Stunden, im kostenlosen Konto nur drei am Tag. Nimmt die KI nicht alle Fotos in einer Nachricht an, schick sie in zwei Nachrichten.">Wie viele Fotos gehen? <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></div></div></div>
-                <div class="ks-start">
-                  <div class="ki-wahl ki-wahl--hell" role="radiogroup" aria-label="Mit welcher KI möchtest du starten?"><button type="button" role="radio" aria-checked="true" data-ki="chatgpt"><svg class="logo" aria-hidden="true"><use href="#l-openai"/></svg>ChatGPT</button><button type="button" role="radio" aria-checked="false" tabindex="-1" data-ki="claude"><svg class="logo" aria-hidden="true"><use href="#l-claude"/></svg>Claude</button></div>
-                  <a class="button-primary ks-knopf" href="#" data-start data-art="prompt" target="_blank" rel="noopener"><svg class="logo" aria-hidden="true" data-ki-logo><use href="#l-openai"/></svg><span>Mit <span data-ki-name>ChatGPT</span> starten</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
-                  <details class="ks-konto ks-konto--hell">
-                <summary><span>Noch nicht bei <span data-ki-name>ChatGPT</span> angemeldet?</span><svg class="icon chev" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary>
-                <div class="ks-konto-inhalt">
-                  <p><span data-nur-geraet="computer">Melde dich vorher in diesem Browser an.</span><span data-nur-geraet="handy">Melde dich vorher in der <span data-ki-name>ChatGPT</span>-App an.</span> Dann öffnet der Knopf direkt den fertigen Auftrag. Noch kein Konto? Das legst du dort kostenlos an, mit E-Mail oder Google-Konto.</p>
-                  <a class="ks-anmelden" href="https://chatgpt.com/auth/login" data-anmelden target="_blank" rel="noopener"><span>Zur Anmeldung</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
-                </div>
-              </details>
-                  <p class="ks-geraet">Diese Seite bleibt offen, du kannst jederzeit zurückkommen.</p>
-                  <p class="ks-rueckfall" hidden>Hat sich nichts geöffnet? <a href="#" data-start-web target="_blank" rel="noopener">Im Browser öffnen</a></p>
-                </div>
-                <ol class="ks-schritte">
-                  <li><b><span data-ki-name>ChatGPT</span> öffnet sich</b><span><span data-nur-geraet="handy">In der App.</span><span data-nur-geraet="computer">In einem neuen Tab.</span> Der Auftrag steht schon im Eingabefeld.<span data-nur-ki="claude"> Darüber zeigt Claude einen roten Sicherheitshinweis. Der kommt bei jedem vorbereiteten Auftrag.</span></span></li>
-                  <li><b>Falls gefragt: anmelden</b><span>Beantworte zuerst die Frage nach Cookies, dann melde dich an. Danach geht es von selbst weiter.</span></li>
-                  <li><b>Fotos anhängen und absenden</b><span><span data-nur-geraet="handy">Tippe auf das Plus, wähle deine Fotos und schick ab.</span><span data-nur-geraet="computer">Klicke auf das Plus oder zieh die Fotos ins Fenster, dann abschicken.</span></span></li>
-                  <li class="ks-ziel"><b>Postleitzahl nennen, Plan abarbeiten</b><span>Die KI zeigt dir für jedes Ding, was sie empfiehlt und was es bringt. Nach deiner Postleitzahl sucht sie Spendenstellen und den Wertstoffhof in deiner Nähe. Verkaufen kannst du über die Kleinanzeigen-App, den Rest bringst du weg oder verschenkst ihn. <button class="erg-link" type="button" data-beispiel>So sieht das aus</button></span></li>
-                </ol>
-                <div class="kl-gut"><span class="ks-vorher-marke">Gut zu wissen</span><p>Für die Anzeigen selbst brauchst du keine KI-Texte. In der Kleinanzeigen-App lädst du einfach die Fotos hoch, ihre eingebaute KI schreibt Titel und Beschreibung. Den Preis nimmst du von hier.</p></div>
-                <details class="ks-hilfe">
-                  <summary class="clay-btn">Falls etwas hakt <svg class="icon chev" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary>
-                  <dl>
-                    <div><dt>Es hat sich nichts geöffnet</dt><dd><a href="#" data-start-web target="_blank" rel="noopener">Im Browser öffnen</a>.<span data-nur-geraet="handy"> Dann fehlt meist die App.</span></dd></div>
-                    <div><dt>Das Eingabefeld ist leer</dt><dd>Das passiert manchmal nach dem Anmelden. Der Auftrag liegt schon in deiner Zwischenablage: <span data-nur-geraet="handy">ins Feld tippen, gedrückt halten und „Einfügen“ wählen.</span><span data-nur-geraet="computer">ins Feld klicken, Rechtsklick und „Einfügen“.</span></dd></div>
-                    <div><dt>Ich habe noch nie einen KI-Chat benutzt</dt><dd><a href="/mein-bereich#artikel-erster-chat">So fängst du an, in zwei Minuten</a></dd></div>
-                    <div><dt>ChatGPT oder Claude?</dt><dd>Beide klappen hier. <a href="/mein-bereich#artikel-anbieter">Welche KI soll ich nehmen?</a></dd></div>
-                    <div><dt>Was passiert mit meinen Daten?</dt><dd>Der Auftrag enthält nichts über dich. Deine Fotos hängst du erst in <span data-ki-name>ChatGPT</span> an, wir sehen sie nicht. <a href="/mein-bereich#artikel-daten">Mehr dazu</a></dd></div>
-                    <div><dt>Die Antwort passt nicht</dt><dd><a href="/mein-bereich#artikel-falsch">Was, wenn die KI etwas falsch versteht?</a></dd></div>
-                  </dl>
-                </details>
-                <p class="ks-auftrag-titel">Der Auftrag, den die KI bekommt</p>
-                <div class="prompt-card" id="prompt-card">
-                    <div class="prompt-well" id="prompt-body"><pre id="prompt-text">Hilf mir, meinen Keller auszumisten. Schau dir alles auf einmal an und sag mir, was wohin kommt.
+      <div class="ra-handeln">
+        <section class="ra-schritte" aria-labelledby="keller-s"><h2 class="ra-versal" id="keller-s">So geht's</h2><ol><li><span class="ra-nr" aria-hidden="true">1</span><p>Fotografiere, was weg soll</p></li>
+<li class="ra-start-schritt"><span class="ra-nr" aria-hidden="true">2</span>
+        <div class="ra-start">
+          <a class="button-primary ra-knopf" href="#" data-start data-art="prompt" target="_blank" rel="noopener"><svg class="logo" aria-hidden="true"><use href="#l-openai"/></svg><span>Mit ChatGPT starten</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+          <p class="ra-hinweis">Der Auftrag enthält nichts über dich. Deine Fotos hängst du erst in ChatGPT an, wir sehen sie nicht.</p>
+          <p class="ra-links"><a class="ra-leise ra-claude" href="#" data-start data-start-ki="claude" data-art="prompt" target="_blank" rel="noopener"><svg class="logo" aria-hidden="true"><use href="#l-claude"/></svg>Mit Claude starten</a><a class="ra-leise" href="#" data-oeffne="hakt">Noch nicht angemeldet?</a></p>
+        </div></li>
+<li><span class="ra-nr" aria-hidden="true">3</span><p>Fotos anhängen und absenden</p></li>
+<li><span class="ra-nr" aria-hidden="true">4</span><p>Postleitzahl nennen, Plan abarbeiten</p></li></ol></section>
+        <section class="ra-mehr" aria-labelledby="keller-m"><h2 class="ra-versal" id="keller-m">Mehr dazu</h2><details class="ra-auf" data-teil="ki"><summary><span>Was die KI dabei macht</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></summary><div class="ra-auf-innen"><ol class="ra-ki"><li><b>Erkennt jedes Ding auf deinem Foto</b></li><li>Schätzt, was es noch wert ist</li><li>Rät dir: verkaufen, spenden, verschenken oder entsorgen</li><li>Findet die Stellen in deiner Nähe, mit Öffnungszeiten</li></ol></div></details><details class="ra-auf" data-teil="abo" data-v25-angebot><summary><span>Mit Abo geht mehr</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></summary><div class="ra-auf-innen"><p>Kostenlos lädt ChatGPT nur drei Fotos am Tag hoch, und es antwortet ein kleineres Modell. Mit einem Abo schaffst du den ganzen Keller in einem Rutsch.</p><p><b>Teste ein Abo einen Monat. Wir begleiten dich drei Wochen dabei, kostenlos.</b> Das Abo kostet beim Anbieter 23 € im Monat und ist monatlich kündbar.</p><p class="v25-angebot-du" hidden></p><p class="ra-abo-knoepfe"><button type="button" class="clay-btn ra-zweit v25-angebot-los" aria-expanded="false" aria-controls="ra-abo-danke">Begleitung anfragen</button> <a class="ra-leise" href="/mein-bereich#artikel-kostenlos">Was bringt ein Abo?</a></p><p class="v25-angebot-danke" id="ra-abo-danke" hidden>Schön, dass du dabei sein willst. Schreib uns einfach „Test“ per WhatsApp oder Instagram. Wir melden uns und starten mit dir.</p></div></details><details class="ra-auf" data-teil="gut"><summary><span>Gut zu wissen</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></summary><div class="ra-auf-innen"><ul class="ra-punkte"><li><b>Anzeigen:</b> Für die Anzeigen selbst brauchst du keine KI-Texte. In der Kleinanzeigen-App lädst du einfach die Fotos hoch, ihre eingebaute KI schreibt Titel und Beschreibung. Den Preis nimmst du von hier.</li><li><b>Preise sind Schätzungen:</b> Was du bekommst, hängt von Zustand, Nachfrage und Verhandlung ab.</li><li><b>Vor dem Losfahren:</b> Öffnungszeiten und Annahmeregeln ändern sich. Schau kurz auf die verlinkte Seite.</li><li><b>Nur, was weg soll:</b> Keine Briefe, Ausweise oder Familienfotos mit im Bild.</li><li><b>Noch im Test:</b> Diese Anleitung ist neu und noch nicht von unserer Redaktion getestet. Das Siegel „Geprüft“ bekommt sie erst nach dem Test.</li></ul></div></details><details class="ra-auf" data-teil="hakt"><summary><span>Falls etwas hakt</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></summary><div class="ra-auf-innen"><ul class="ra-punkte"><li><b>Noch nicht bei ChatGPT angemeldet?</b> <span data-nur-geraet="computer">Melde dich vorher in diesem Browser an.</span><span data-nur-geraet="handy">Melde dich vorher in der ChatGPT-App an.</span> Dann öffnet der Knopf direkt den fertigen Auftrag. Noch kein Konto? Das legst du dort kostenlos an, mit E-Mail oder Google-Konto.</li><li><b>Nur im Eingabefeld?</b> Dann tippe auf Senden.</li><li><b>Zu viele Fotos:</b> Schick sie in zwei Nachrichten.</li><li><b>Ein Ding falsch erkannt:</b> Sag der KI, was es ist; Unsicheres markiert sie mit „(?)“.</li><li><b>Keine Orte in der Nähe:</b> Schreib „Such bitte im Netz nach Stellen für meine Postleitzahl“.</li></ul><p><a class="ra-leise" href="#" data-start-web target="_blank" rel="noopener">Im Browser öffnen</a></p></div></details><details class="ra-auf" data-teil="auftrag"><summary><span>Den Auftrag lesen</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></summary><div class="ra-auf-innen"><p class="ra-klein">Das bekommt ChatGPT von dir, wenn du auf „Mit ChatGPT starten“ tippst:</p><pre class="ra-auftrag" id="prompt-text">Hilf mir, meinen Keller auszumisten. Schau dir alles auf einmal an und sag mir, was wohin kommt.
 
 1. Bitte mich um Fotos. Es dürfen auch Fotos von einem ganzen Regal oder einer Ecke sein. Frag sonst nichts.
 2. Nach den Fotos: eine Übersicht als Tabelle. Je Ding: was es ist (Unsicheres mit „(?)“), deine Empfehlung (verkaufen, spenden, verschenken oder entsorgen), kurz warum, und bei „verkaufen“ ein realistischer Preis. Darunter, was der Verkauf zusammen ungefähr bringt.
@@ -1711,107 +2162,33 @@ SOFTWARE. --><symbol id="ls-mail" viewBox="0 0 24 24"><path d="m22 7-8.991 5.727
 – Entsorgen: der nächste Wertstoffhof oder die Sperrmüll-Abholung mit Adresse, Öffnungszeiten, was ich mitbringen oder vorher anmelden muss, und Link. Elektrogeräte und Sonderabfall extra nennen.
 5. Zum Schluss ein Satz: Bin ich am Computer statt am Handy, schreibst du mir die Anzeigentexte gern selbst.
 
-Öffnungszeiten und Annahmeregeln nimmst du von der offiziellen Seite; was du nicht prüfen konntest, kennzeichnest du. Erfinde keine Orte, Preise oder Links. Arbeite jeden Schritt ganz durch und hör nie nach einer Ankündigung auf.</pre>
-                      <div class="prompt-foot">
-                        <button class="prompt-toggle" id="prompt-toggle" type="button" aria-expanded="false" aria-controls="prompt-text"><span>Ganzen Auftrag lesen</span><svg class="icon chev" aria-hidden="true"><use href="#i-chevron-down"/></svg></button>
-                        <button class="clay-btn copy-button" type="button" data-copy><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-label">Text kopieren</span></button>
-                      </div>
-                    </div>
-                    <p class="prompt-hint"><svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg><span>In diesem Text steht nichts über dich, und du musst nichts ausfüllen.</span></p>
-                  </div>
-              </div>
-
-              <aside class="chat-panel ef" aria-label="So funktioniert es mit deinem KI-Chat">
-              <div class="ef-howto-head">So einfach geht’s <span class="ef-head-r"><span class="ef-chip">Beispiel</span><button class="ef-pause" id="ef-pause" type="button" aria-pressed="false" aria-label="Animation anhalten">
-                  <svg class="ef-pz" viewBox="0 0 14 14" aria-hidden="true"><rect x="2.5" y="2" width="3" height="10" rx="1"/><rect x="8.5" y="2" width="3" height="10" rx="1"/></svg>
-                  <svg class="ef-play" viewBox="0 0 14 14" aria-hidden="true"><path d="M4 2.2v9.6a.6.6 0 0 0 .9.5l7.6-4.8a.6.6 0 0 0 0-1L4.9 1.7a.6.6 0 0 0-.9.5z"/></svg>
-                </button></span></div>
-              <div class="ef-howto-screen">
-          
-                <div class="ef-stage" id="ef-stage" aria-hidden="true">
-                  <div class="ef-dev ef-dev-phone">
-                    <div class="ef-screen"><div class="ef-vp"></div><div class="ef-homebar"></div><div class="ef-tap"><svg viewBox="0 0 18 22"><path d="M2 1.5v16.5l4.4-4.2 3 6.7 2.7-1.2-3-6.6h6.2z" fill="#23201c" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg></div></div>
-                  </div>
-                  <div class="ef-dev ef-dev-laptop">
-                    <div class="ef-lid"><div class="ef-screen">
-                      <div class="ef-tabs"><span class="ef-dots"><i></i><i></i><i></i></span><span class="ef-tab ef-tab-a ef-on"><i class="ef-fav"></i>KIosk</span><span class="ef-tab ef-tab-b"><i class="ef-fav ef-fav-b"></i>KI-Chat</span></div>
-                      <div class="ef-vp"></div>
-                      <div class="ef-tap"><svg viewBox="0 0 18 22"><path d="M2 1.5v16.5l4.4-4.2 3 6.7 2.7-1.2-3-6.6h6.2z" fill="#23201c" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg></div>
-                    </div></div>
-                    <div class="ef-base"></div>
-                  </div>
-                </div>
-          
-                <ol class="ef-steps" id="ef-steps">
-                  <li data-s="1"><span class="ef-n">1</span>Kopieren</li>
-                  <li data-s="2"><span class="ef-n">2</span>Einfügen</li>
-                  <li data-s="3"><span class="ef-n">3</span>Absenden</li>
-                  <li data-s="4" class="ef-rest">Den Rest macht die KI</li>
-                </ol>
-              </div>
-              <p class="chat-caption">Vereinfachte Darstellung. Jede KI-App sieht etwas anders aus.</p>
-            </aside>
-            </div>
-          </div>
-        </section>
-
-        <section class="station transfer" id="b3" aria-labelledby="b3-title">
-          <div class="bead" aria-hidden="true">2</div>
-          <div class="station-body">
-            <h2 class="display" id="b3-title">Weitergedacht</h2>
-            <p>Das klappt überall, wo sich Dinge angesammelt haben: auf dem Dachboden, in der Garage oder im Kinderzimmer, wenn die Kinder aus Spielsachen und Kleidung herausgewachsen sind. Auch vor einem Umzug sagt dir die KI, was sich zu verkaufen lohnt und was du besser weitergibst.</p>
-            <p class="nudge">Denk an den Karton, der seit dem letzten Umzug ungeöffnet herumsteht.</p>
-          </div>
-        </section>
-
-        <div class="fine-row">
-          <details class="fine">
-            <summary class="clay-btn">Datenschutz, Grenzen, Prüfung, Programme <svg class="icon chev" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary>
-            <div class="fine-grid">
-              <div><h3>Datenschutz</h3><p>Der Auftrag enthält keine persönlichen Daten. Fotografiere nur, was weg soll, und achte darauf, dass keine Briefe, Ausweise oder Familienfotos mit im Bild sind. Deine Postleitzahl nennst du erst im Chat. Was du in deinem KI-Chat teilst, entscheidest du.</p></div>
-              <div><h3>Grenzen</h3><p>Die Preise sind Schätzungen. Was du am Ende bekommst, hängt von Zustand, Nachfrage und Verhandlung ab. Öffnungszeiten und Annahmeregeln ändern sich: Schau vor dem Losfahren kurz auf die verlinkte Seite. Die KI kann ein Ding auch falsch erkennen; Unsicheres soll sie mit „(?)“ kennzeichnen.</p></div>
-              <div><h3>Noch im Test</h3><p>Diese Anleitung ist neu und noch nicht von unserer Redaktion getestet. Das Siegel „Geprüft“ bekommt sie erst nach dem Test. Stand: Oktober 2026.</p></div>
-              <div><h3>Programme</h3><p>Gedacht für <a href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT</a> und <a href="https://claude.ai" target="_blank" rel="noopener">Claude</a>, am Handy oder am Computer. Wir empfehlen ein Abo: Im kostenlosen ChatGPT gehen nur drei Fotos am Tag, und es antwortet ein kleineres Modell. Zum Verkaufen nimmst du die Kleinanzeigen-App. Warum wir diese beiden KIs empfehlen, steht unter <a href="/mein-bereich#artikel-anbieter">„Welche KI soll ich nehmen?“</a></p></div>
-            </div>
-          </details>
-        </div>
+Öffnungszeiten und Annahmeregeln nimmst du von der offiziellen Seite; was du nicht prüfen konntest, kennzeichnest du. Erfinde keine Orte, Preise oder Links. Arbeite jeden Schritt ganz durch und hör nie nach einer Ankündigung auf.</pre><p><button type="button" class="clay-btn ra-zweit" data-kopieren>Auftrag als Text kopieren</button></p></div></details><details class="ra-auf" data-teil="weiter"><summary><span>Weitergedacht</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></summary><div class="ra-auf-innen"><p>Das klappt überall, wo sich Dinge angesammelt haben: auf dem Dachboden, in der Garage oder im Kinderzimmer, wenn die Kinder aus Spielsachen und Kleidung herausgewachsen sind. Auch vor einem Umzug sagt dir die KI, was sich zu verkaufen lohnt und was du besser weitergibst.</p></div></details></section>
       </div>
     </div>
-
-    <section class="more-cases" aria-labelledby="more-title">
-      <div class="wrap">
-        <h2 class="display" id="more-title">Weitere Ideen</h2>
-        <div class="more-grid">
-          <article class="mcard pal-sand" data-case="abo" data-einleitung="Ein paar Euro hier, ein paar Euro da und dann: „Wofür war diese Überweisung noch mal? Welche Abos brauche ich noch, welche können weg?“ Den Überblick über das eigene Konto zu behalten ist aufwendig und macht keinen Spaß. Dabei könnte man hier ganz schön viel Geld sparen. KI kann dein Konto auf einen Schlag durchleuchten, so wie es ein Finanzberater tun würde: Sie findet jedes Abo, fragt nach, was weg kann, und kümmert sich auf deinen Wunsch gleich um die Kündigungen." data-kategorie="geld" data-themen="geld" data-ease="2" data-sensitive="1" data-status="ready" data-tags="kategorie:geld stufe:2 kosten:kostenlos daten:finanzen werkzeug:dateien ergebnis:tabelle ergebnis:brief automatisch:nein anbieter:chatgpt anbieter:claude anbieter:gemini zeit:20 datenstufe:3 geraet:computer" data-oha="R30">
-            <a class="mcard-link" href="/kontoauszug-abos" aria-label="Anleitung öffnen: Vergessene Abos finden">
-              <div class="field pal-sand tone-2"><svg class="mcard-symbol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ls-refresh-cw"/></svg><span class="glow glow--tr" aria-hidden="true"></span><div class="field-top"><span class="tag tag--cat">Geld und Einkauf</span><span class="stufe" title="Stufe 2 von 3: etwas Übung" aria-label="Stufe 2 von 3, etwas Übung"><i aria-hidden="true"><b class="an"></b><b class="an"></b><b class=""></b></i><span class="stufe-wort">Stufe </span>2</span></div><h3 class="title">Vergessene Abos finden</h3></div>
-              <div class="body"><p class="situation anriss">Kontoumsätze der letzten Monate hochladen. Die KI findet jedes Abo, rechnet die Jahreskosten und schreibt die <span class="anriss-ende">Kündigungen.</span></p><p class="outcome"><b>Ergebnis:</b> Alle Abos mit Jahreskosten, dein Haushaltsbuch und fertige Kündigungen.</p><span class="sr-only sb-sr">Klappt mit ChatGPT und Claude. Etwa 20 Minuten. Persönliche Daten: viel. Kostenlos.</span><div class="steckbrief" aria-hidden="true"><div class="sb-zeile"><span class="sb-logos"><span class="sym ki"><svg class="logo" aria-hidden="true"><use href="#l-openai"/></svg><span class="sb-tip">Klappt mit ChatGPT, am besten am Computer.</span></span><span class="sym ki"><svg class="logo" aria-hidden="true"><use href="#l-claude"/></svg><span class="sb-tip">Klappt mit Claude, am besten am Computer.</span></span></span><span class="sb-trenner"></span><span class="sym"><svg class="ic" aria-hidden="true"><use href="#i-file-text"/></svg><span class="sb-tip">Deine Kontoauszüge als Datei.</span></span><span class="sym"><svg class="ic" aria-hidden="true"><use href="#i-eye-off"/></svg><span class="sb-tip">Achte darauf, Kontonummer &amp; Namen zu verbergen.</span></span></div><div class="sb-zeile"><span class="sym sb-zeit"><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg><span class="sb-min"><b>20</b> Min</span><span class="sb-tip">Etwa 20 Minuten brauchst du selbst. Wie lange die KI rechnet, zählt nicht mit.</span></span><span class="sym sb-daten"><svg class="ic" aria-hidden="true"><use href="#i-user-round"/></svg><span class="sb-segs"><i class="sb-seg an"></i><i class="sb-seg an"></i><i class="sb-seg an"></i></span><span class="sb-tip">Persönliche Daten: viel. Es geht um Geld: deine Kontoauszüge.</span></span><span class="sym sb-kosten sb-kosten--frei"><b>0 €</b><span class="sb-tip">Kostenlos. Die Gratis-Version reicht.</span></span></div></div></div>
-            </a>
-          <button class="herz" type="button" data-herz="abo" data-titel="Vergessene Abos finden" aria-pressed="false" aria-label="Merken: Vergessene Abos finden" title="Merken"><svg class="herz-ic" aria-hidden="true"><use href="#i-heart"/></svg></button>
-          </article>
-          <article class="mcard pal-moss" data-case="wohnzimmer" data-einleitung="Seit Jahren steht im Wohnzimmer alles an derselben Stelle. Du hättest Lust auf etwas Neues, aber wie es anders aussehen könnte, kannst du dir schwer vorstellen, und Fehlkäufe willst du dir sparen. KI zeigt es dir auf deinem eigenen Foto, in drei verschiedenen Stilen, bevor du einen Euro ausgibst. Mit einem Abo geht sie noch weiter und plant mit dir den Einkauf." data-kategorie="wohnen" data-themen="haushalt kreativ einkauf" data-ease="1" data-sensitive="0" data-status="ready" data-tags="kategorie:wohnen stufe:1 kosten:kostenlos daten:keine werkzeug:bild werkzeug:recherche ergebnis:bild ergebnis:liste automatisch:nein anbieter:chatgpt zeit:10 datenstufe:1 geraet:handy" data-oha="R33">
-            <a class="mcard-link" href="/wohnzimmer-neu-denken" aria-label="Anleitung öffnen: Wohnzimmer neu denken">
-              <div class="field pal-moss tone-2"><svg class="mcard-symbol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ls-sofa"/></svg><span class="glow glow--tr" aria-hidden="true"></span><div class="field-top"><span class="tag tag--cat">Wohnen und Zuhause</span><span class="stufe" title="Stufe 1 von 3: ohne Vorwissen" aria-label="Stufe 1 von 3, ohne Vorwissen"><i aria-hidden="true"><b class="an"></b><b class=""></b><b class=""></b></i><span class="stufe-wort">Stufe </span>1</span></div><h3 class="title">Wohnzimmer neu denken</h3></div>
-              <div class="body"><p class="situation anriss">Foto und Wünsche rein. Die KI zeigt drei Stile im eigenen Raum. Mit Abo plant sie auch den <span class="anriss-ende">Einkauf.</span></p><p class="outcome"><b>Ergebnis:</b> Drei Entwürfe in deinem eigenen Raum als Inspiration. Mit Abo auch eine Einkaufsliste im Budget.</p><span class="sr-only sb-sr">Klappt mit ChatGPT. Etwa 10 Minuten. Persönliche Daten: wenig. Kostenlos.</span><div class="steckbrief" aria-hidden="true"><div class="sb-zeile"><span class="sb-logos"><span class="sym ki"><svg class="logo" aria-hidden="true"><use href="#l-openai"/></svg><span class="sb-tip">Klappt mit ChatGPT, am Handy und am Computer.</span></span><span class="sym ki ki--nein"><svg class="logo" aria-hidden="true"><use href="#l-claude"/></svg><span class="sb-tip">Mit Claude klappt das nicht: Claude kann keine Bilder erzeugen.</span></span></span><span class="sb-trenner"></span><span class="sym"><svg class="ic" aria-hidden="true"><use href="#i-camera"/></svg><span class="sb-tip">Mach ein Foto vom Raum, so wie er jetzt ist.</span></span></div><div class="sb-zeile"><span class="sym sb-zeit"><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg><span class="sb-min"><b>10</b> Min</span><span class="sb-tip">Etwa 10 Minuten brauchst du selbst. Wie lange die KI rechnet, zählt nicht mit.</span></span><span class="sym sb-daten"><svg class="ic" aria-hidden="true"><use href="#i-user-round"/></svg><span class="sb-segs"><i class="sb-seg an"></i><i class="sb-seg"></i><i class="sb-seg"></i></span><span class="sb-tip">Persönliche Daten: wenig. Die KI sieht ein Foto von deiner Wohnung.</span></span><span class="sym sb-kosten sb-kosten--frei"><b>0 €</b><span class="sb-tip">Kostenlos. Mit Abo mehr Möglichkeiten: Die KI plant auch den Einkauf.</span></span></div></div></div>
-            </a>
-          <button class="herz" type="button" data-herz="wohnzimmer" data-titel="Wohnzimmer neu denken" aria-pressed="false" aria-label="Merken: Wohnzimmer neu denken" title="Merken"><svg class="herz-ic" aria-hidden="true"><use href="#i-heart"/></svg></button>
-          </article>
-          <article class="mcard pal-blue" data-case="brief" data-einleitung="Ein offizieller Brief lässt den Puls schnell in die Höhe schießen, erst recht in Behördendeutsch, wenn du nicht verstehst, was „die von dir wollen“. Hier kann KI eine echte Hilfe sein: Sie erklärt dir, was gemeint ist, welche Optionen du hast und was du als Nächstes tun solltest." data-kategorie="amt" data-themen="amt" data-ease="1" data-sensitive="1" data-status="ready" data-tags="kategorie:amt stufe:1 kosten:kostenlos daten:abdecken werkzeug:foto werkzeug:chat ergebnis:erklaerung ergebnis:brief automatisch:nein anbieter:chatgpt anbieter:claude anbieter:gemini zeit:10 datenstufe:2 geraet:handy" data-oha="Pilot">
-            <a class="mcard-link" href="/brief-verstehen" aria-label="Anleitung öffnen: Brief vom Amt verstehen">
-              <div class="field pal-blue tone-1"><svg class="mcard-symbol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ls-mail"/></svg><span class="glow glow--tl" aria-hidden="true"></span><div class="field-top"><span class="tag tag--cat">Behörden und Formulare</span><span class="stufe" title="Stufe 1 von 3: ohne Vorwissen" aria-label="Stufe 1 von 3, ohne Vorwissen"><i aria-hidden="true"><b class="an"></b><b class=""></b><b class=""></b></i><span class="stufe-wort">Stufe </span>1</span></div><h3 class="title">Brief vom Amt verstehen</h3></div>
-              <div class="body"><p class="situation anriss">Ein offizieller Brief lässt den Puls schnell in die Höhe schießen, erst recht in <span class="anriss-ende">Behördendeutsch …</span></p><p class="outcome"><b>Ergebnis:</b> Du weißt, was der Brief für dich bedeutet, welche Möglichkeiten du hast und was passiert, wenn du nichts tust.</p><span class="sr-only sb-sr">Klappt mit ChatGPT und Claude. Etwa 10 Minuten. Persönliche Daten: mittel. Kostenlos möglich, mit Abo stärkeres Ergebnis.</span><div class="steckbrief" aria-hidden="true"><div class="sb-zeile"><span class="sb-logos"><span class="sym ki"><svg class="logo" aria-hidden="true"><use href="#l-openai"/></svg><span class="sb-tip">Klappt mit ChatGPT, am Handy und am Computer.</span></span><span class="sym ki"><svg class="logo" aria-hidden="true"><use href="#l-claude"/></svg><span class="sb-tip">Klappt mit Claude, am Handy und am Computer.</span></span></span><span class="sb-trenner"></span><span class="sym"><svg class="ic" aria-hidden="true"><use href="#i-camera"/></svg><span class="sb-tip">Ein Foto vom Brief reicht.</span></span><span class="sym"><svg class="ic" aria-hidden="true"><use href="#i-eye-off"/></svg><span class="sb-tip">Name, Adresse und Aktenzeichen kannst du vorher abdecken.</span></span></div><div class="sb-zeile"><span class="sym sb-zeit"><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg><span class="sb-min"><b>10</b> Min</span><span class="sb-tip">Etwa 10 Minuten brauchst du selbst. Wie lange die KI rechnet, zählt nicht mit.</span></span><span class="sym sb-daten"><svg class="ic" aria-hidden="true"><use href="#i-user-round"/></svg><span class="sb-segs"><i class="sb-seg an"></i><i class="sb-seg an"></i><i class="sb-seg"></i></span><span class="sb-tip">Persönliche Daten: mittel. Du zeigst der KI einen Brief an dich. Persönliches deckst du vorher ab.</span></span><span class="sym sb-kosten sb-kosten--frei"><b>0 €</b><span class="sb-tip">Kostenlos möglich. Mit Abo stärkeres Ergebnis.</span></span></div></div></div>
-            </a>
-          <button class="herz" type="button" data-herz="brief" data-titel="Brief vom Amt verstehen" aria-pressed="false" aria-label="Merken: Brief vom Amt verstehen" title="Merken"><svg class="herz-ic" aria-hidden="true"><use href="#i-heart"/></svg></button>
-          </article>
-          </div>
-        <div class="more-all-row"><a class="clay-btn more-all" href="/ideen"><strong>Was kann KI noch für dich tun?</strong><span>Alle Ideen</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></div>
+  </article>
+  <section class="ra-weitere" aria-labelledby="keller-w">
+    <div class="ra-wrap"><h2 class="ra-versal" id="keller-w">Weitere Ideen</h2></div>
+    <div class="shelf ra-reihe"><article class="mcard pal-sand" data-case="abo" data-einleitung="Du lädst deine Kontoumsätze hoch. Die KI listet alle Abos mit ihren Kosten auf und kündigt auf Wunsch die, die du nicht mehr brauchst." data-kategorie="geld" data-themen="geld einkauf" data-ease="2" data-sensitive="0" data-status="ready" data-fall="R30"><a class="mcard-link" href="/kontoauszug-abos" aria-label="Anleitung öffnen: Vergessene Abos finden"><div class="field pal-sand tone-1"><svg class="mcard-symbol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ls-refresh-cw"/></svg><span class="glow glow--t" aria-hidden="true"></span><div class="field-top"><span class="field-tags"><span class="tag tag--cat">Geld sparen</span><span class="tag tag--frei">Mit Free nutzbar</span></span></div><h3 class="title">Vergessene Abos finden</h3></div><div class="body"><p class="situation anriss">Du lädst deine Kontoumsätze hoch. Die KI listet alle Abos mit ihren Kosten auf und kündigt auf Wunsch die, die <span class="anriss-ende">du …</span></p><p class="outcome"><b class="mcard-los">Anleitung</b></p></div></a><button class="herz" type="button" data-herz="abo" data-titel="Vergessene Abos finden" aria-pressed="false" aria-label="Merken: Vergessene Abos finden" title="Merken"><svg class="herz-ic" aria-hidden="true"><use href="#i-heart"/></svg></button></article><article class="mcard pal-copper" data-case="wohnzimmer" data-einleitung="Du schickst ein Foto deines Wohnzimmers und deine Wünsche, und die KI zeigt dir drei Stile in genau diesem Raum; mit Abo plant sie auch den Einkauf im Budget." data-kategorie="umzug" data-themen="haushalt" data-ease="2" data-sensitive="0" data-status="ready" data-fall="F-Wohnzimmer"><a class="mcard-link" href="/wohnzimmer-neu-denken" aria-label="Anleitung öffnen: Wohnzimmer neu denken"><div class="field pal-copper tone-2"><svg class="mcard-symbol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ls-sofa"/></svg><span class="glow glow--t" aria-hidden="true"></span><div class="field-top"><span class="field-tags"><span class="tag tag--cat">Umzug stemmen</span><span class="tag tag--frei">Mit Free nutzbar</span></span></div><h3 class="title">Wohnzimmer neu denken</h3></div><div class="body"><p class="situation anriss">Du schickst ein Foto deines Wohnzimmers und deine Wünsche, und die KI zeigt dir drei Stile in genau diesem Raum; <span class="anriss-ende">mit …</span></p><p class="outcome"><b class="mcard-los">Anleitung</b></p></div></a><button class="herz" type="button" data-herz="wohnzimmer" data-titel="Wohnzimmer neu denken" aria-pressed="false" aria-label="Merken: Wohnzimmer neu denken" title="Merken"><svg class="herz-ic" aria-hidden="true"><use href="#i-heart"/></svg></button></article><article class="mcard pal-blue" data-case="brief" data-einleitung="Du fotografierst einen Brief vom Amt, der Versicherung oder dem Vermieter, und die KI sagt dir in einfachen Worten, worum es geht, was du bis wann tun musst, und schreibt auf Wunsch die Antwort." data-kategorie="papier" data-themen="amt" data-ease="2" data-sensitive="0" data-status="ready" data-fall="F-Brief"><a class="mcard-link" href="/brief-verstehen" aria-label="Anleitung öffnen: Brief vom Amt verstehen"><div class="field pal-blue tone-2"><svg class="mcard-symbol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ls-mail"/></svg><span class="glow glow--t" aria-hidden="true"></span><div class="field-top"><span class="field-tags"><span class="tag tag--cat">Papierkram erledigen</span><span class="tag tag--frei">Mit Free nutzbar</span></span></div><h3 class="title">Brief vom Amt verstehen</h3></div><div class="body"><p class="situation anriss">Du fotografierst einen Brief vom Amt, der Versicherung oder dem Vermieter, und die KI sagt dir in einfachen <span class="anriss-ende">Worten, …</span></p><p class="outcome"><b class="mcard-los">Anleitung</b></p></div></a><button class="herz" type="button" data-herz="brief" data-titel="Brief vom Amt verstehen" aria-pressed="false" aria-label="Merken: Brief vom Amt verstehen" title="Merken"><svg class="herz-ic" aria-hidden="true"><use href="#i-heart"/></svg></button></article><article class="mcard pal-coral" data-case="y4" data-einleitung="Die KI fragt zuerst, was du gern machst, was dir wichtig ist und welches Gefühl das Wochenende dir geben soll. Dann sucht sie, was in deiner Stadt los ist, und schlägt vor, was zu dir passt." data-kategorie="urlaub" data-themen="reisen kreativ" data-ease="2" data-sensitive="0" data-status="ready" data-fall="Y4"><a class="mcard-link" href="/wochenende-planen" aria-label="Anleitung öffnen: Was mach ich am Wochenende?"><div class="field pal-coral tone-1"><svg class="mcard-symbol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ls-sun"/></svg><span class="glow glow--t" aria-hidden="true"></span><div class="field-top"><span class="field-tags"><span class="tag tag--cat">Urlaub &amp; Freizeit planen</span><span class="tag tag--frei">Mit Free nutzbar</span></span></div><h3 class="title">Was mach ich am Wochenende?</h3></div><div class="body"><p class="situation anriss">Die KI fragt zuerst, was du gern machst, was dir wichtig ist und welches Gefühl das Wochenende dir geben soll. <span class="anriss-ende">Dann …</span></p><p class="outcome"><b class="mcard-los">Anleitung</b></p></div></a><button class="herz" type="button" data-herz="y4" data-titel="Was mach ich am Wochenende?" aria-pressed="false" aria-label="Merken: Was mach ich am Wochenende?" title="Merken"><svg class="herz-ic" aria-hidden="true"><use href="#i-heart"/></svg></button></article></div>
+    <div class="ra-wrap"><a class="ra-leise ra-alle" href="/ideen">Alle Ideen</a></div>
+  </section>
+  <dialog class="ra-blatt" id="bsp-keller" aria-labelledby="bsp-keller-t">
+      <div class="ra-blatt-kopf"><h2 id="bsp-keller-t">So sieht das Ergebnis aus</h2>
+        <button type="button" class="ra-zu" data-zu aria-label="Schließen"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button></div>
+      <p class="ra-klein">Nachgestellt, mit Orten aus Stuttgart. Bei dir sucht die KI Orte für deine Postleitzahl.</p>
+      <div class="ra-zettel ra-zettel-flach">
+        <p class="ra-versal">Die Übersicht</p>
+        <table><thead><tr><th>Ding</th><th>Empfehlung</th><th>bringt</th></tr></thead><tbody><tr><td>Stehlampe aus den 70ern</td><td>verkaufen</td><td>ca. 30 €</td></tr><tr><td>Konzertgitarre mit Tasche</td><td>verkaufen</td><td>ca. 60 €</td></tr><tr><td>Kiste Bücher</td><td>spenden</td><td>–</td></tr><tr><td>Umzugskartons</td><td>verschenken</td><td>–</td></tr><tr><td>Alter Stuhl, wackelt</td><td>entsorgen</td><td>–</td></tr></tbody>
+        <tfoot><tr><td colspan="2">Verkauf zusammen</td><td>ca. 90 €</td></tr></tfoot></table>
+        <p class="ra-versal">Der Plan für den Rest</p>
+        <ul class="ra-plan"><li><b>Verkaufen</b> Fotos in der Kleinanzeigen-App hochladen, Preis von hier übernehmen</li><li><b>Spenden</b> Bücher · Gebrauchtbuchladen, 600 m, Mo–Sa geöffnet</li><li><b>Verschenken</b> Kartons · Nachbarschaftsgruppe, Text ist fertig</li><li><b>Entsorgen</b> Stuhl · Wertstoffhof, Sa 8–13 Uhr, vorher online anmelden</li></ul>
       </div>
-    </section>
-
+    </dialog>
+  <div class="ra-leiste" data-leiste aria-hidden="true"><a class="button-primary" href="#" data-start data-art="prompt" target="_blank" rel="noopener" tabindex="-1"><svg class="logo" aria-hidden="true"><use href="#l-openai"/></svg><span>Mit ChatGPT starten</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></div>
+</div>
+    
     <footer class="footer"><div class="wrap"><span>KIosk</span><span>Von Menschen für Menschen</span></div></footer>
   </main>
-
-  <div class="mobile-cta" id="mobile-cta" aria-hidden="true"><small>Fertig vorbereitet<br>Öffnet <span data-ki-name>ChatGPT</span> mit dem Auftrag</small><a class="button-primary" href="#" data-start data-art="prompt" target="_blank" rel="noopener"><svg class="logo" aria-hidden="true" data-ki-logo><use href="#l-openai"/></svg><span>Mit <span data-ki-name>ChatGPT</span> starten</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></div>
+  
 
   <div class="soon-sheet" id="kommt-bald" role="dialog" aria-modal="true" aria-labelledby="sheet-title" aria-hidden="true">
     <div class="soon-sheet__panel">
@@ -1830,292 +2207,8 @@ SOFTWARE. --><symbol id="ls-mail" viewBox="0 0 24 24"><path d="m22 7-8.991 5.727
     document.addEventListener('touchstart', () => {}, { passive: true });
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const promptText = document.getElementById('prompt-text');
-    const promptBody = document.getElementById('prompt-body');
-    const promptCard = document.getElementById('prompt-card');
-    const promptToggle = document.getElementById('prompt-toggle');
     const copyStatus = document.getElementById('copy-status');
-    const copyButtons = document.querySelectorAll('[data-copy]');
-    let copyResetTimer;
-
-    // Auftrag: aufklappen (der Knopf rastet ein, solange der Text offen ist), kopieren, bestätigen
-    function setPromptOpen(open) {
-      promptBody.classList.toggle('is-expanded', open);
-      promptToggle.setAttribute('aria-expanded', String(open));
-      promptToggle.querySelector('span').textContent = open ? 'Weniger anzeigen' : 'Ganzen Auftrag lesen';
-    }
-    promptToggle.addEventListener('click', () => setPromptOpen(!promptBody.classList.contains('is-expanded')));
-    function fallbackCopy(value) {
-      const field = document.createElement('textarea');
-      field.value = value; field.setAttribute('readonly', ''); field.style.position = 'fixed'; field.style.opacity = '0';
-      document.body.append(field); field.select();
-      const copied = document.execCommand('copy'); field.remove(); return copied;
-    }
-    // Alle Kopierknöpfe zeigen denselben Zustand: eingedrückt, Haken und „Kopiert“, nach dreieinhalb Sekunden wieder bereit.
-    function markCopied(copied) {
-      copyButtons.forEach(b => {
-        b.classList.toggle('is-copied', copied);
-        b.querySelector('.copy-label').textContent = copied ? 'Kopiert' : 'Text kopieren';
-        b.querySelector('use').setAttribute('href', copied ? '#i-check' : '#i-copy');
-      });
-    }
-    async function copyPrompt() {
-      const value = promptText.textContent.trim();
-      let copied = false;
-      try { if (navigator.clipboard && window.isSecureContext) { await navigator.clipboard.writeText(value); copied = true; } } catch (e) { /* weiter mit dem Ersatzweg */ }
-      if (!copied) { try { copied = fallbackCopy(value); } catch (e) { copied = false; } }
-      clearTimeout(copyResetTimer);
-      if (copied) { markCopied(true); copyStatus.textContent = 'Der vollständige Auftrag wurde kopiert.'; }
-      else {
-        setPromptOpen(true);
-        promptCard.scrollIntoView({ behavior: reducedMotion.matches ? 'auto' : 'smooth', block: 'center' });
-        const selection = window.getSelection(); const range = document.createRange(); range.selectNodeContents(promptText); selection.removeAllRanges(); selection.addRange(range);
-        copyStatus.textContent = 'Automatisches Kopieren ist hier nicht verfügbar. Der vollständige Auftrag ist zum manuellen Kopieren markiert.';
-      }
-      copyResetTimer = setTimeout(() => markCopied(false), 3500);
-    }
-    copyButtons.forEach(b => b.addEventListener('click', copyPrompt));
-
-    // Erklärfilm (01.10.2026): läuft in Schleife, hält außerhalb des Bildes an, Pause-Knopf, bei reduzierter Bewegung das Endbild
-    (() => {
-      const $ = (id) => document.getElementById('ef-' + id);
-      if (!$('stage')) return;
-      const C = (n) => '.ef-' + n;
-      const stage = $('stage'), pauseBtn = $('pause');
-      const steps = [...document.querySelectorAll('#ef-steps li')];
-      const SIZE = { phone: [300, 560], laptop: [600, 386] };
-    
-      // Beide Geräte zeigen dieselben zwei Apps: die Plattform und einen allgemeinen KI-Chat
-      const APPS = `
-        <section class="ef-app ef-app-a">
-          <div class="ef-a-top"><span class="ef-a-step">2</span><span class="ef-a-label">Dein fertiger Auftrag</span></div>
-          <div class="ef-bars"><div class="ef-bar ef-t" style="width:88%"></div><div class="ef-bar ef-t" style="width:56%"></div></div>
-          <div class="ef-prompt-card">
-            <span class="ef-k">Auftrag</span>
-            <div class="ef-bars">
-              <div class="ef-bar" style="width:100%"></div><div class="ef-bar" style="width:92%"></div><div class="ef-bar" style="width:97%"></div>
-              <div class="ef-bar" style="width:80%"></div><div class="ef-bar" style="width:94%"></div><div class="ef-bar" style="width:62%"></div>
-            </div>
-          </div>
-          <div class="ef-copy">
-            <span class="ef-ic">
-              <svg class="ef-cp" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-              <svg class="ef-chk" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
-            </span>
-            <span class="ef-lbl"><span class="ef-idle">Auftrag kopieren</span><span class="ef-done">Kopiert</span></span>
-          </div>
-          <div class="ef-bars" style="margin-top:6px"><div class="ef-bar" style="width:70%"></div><div class="ef-bar" style="width:84%"></div><div class="ef-bar" style="width:45%"></div></div>
-          <div class="ef-toast">In die Zwischenablage kopiert</div>
-        </section>
-    
-        <section class="ef-app ef-app-b">
-          <div class="ef-b-head">
-            <span class="ef-ai-mark"><svg viewBox="0 0 16 16"><path d="M8 0c.5 3.9 2.1 5.5 6 6-3.9.5-5.5 2.1-6 6-.5-3.9-2.1-5.5-6-6 3.9-.5 5.5-2.1 6-6z" transform="translate(0 2)"/></svg></span>
-            <span><b>KI-Chat</b><small>Neuer Chat</small></span>
-          </div>
-          <div class="ef-msgs"><div class="ef-empty">Wie kann ich helfen?</div></div>
-          <div class="ef-composer">
-            <div class="ef-field">
-              <span class="ef-ph">Nachricht …</span>
-              <span class="ef-txt">Du hilfst mir bei einer Aufgabe aus meinem Alltag. Geh Schritt für Schritt vor und frag nach, was du wissen musst.
-                <span class="ef-bars"><span class="ef-bar" style="width:100%;display:block"></span><span class="ef-bar" style="width:86%;display:block"></span><span class="ef-bar" style="width:93%;display:block"></span></span>
-              </span>
-            </div>
-            <div class="ef-send"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg></div>
-            <div class="ef-paste">Einfügen</div>
-            <div class="ef-ctx"><div class="ef-off">Ausschneiden</div><div class="ef-off">Kopieren</div><div class="ef-hit">Einfügen</div></div>
-          </div>
-        </section>`;
-      const devs = { phone: stage.querySelector(C('dev-phone')), laptop: stage.querySelector(C('dev-laptop')) };
-      Object.values(devs).forEach((d) => { d.querySelector(C('vp')).innerHTML = APPS; });
-    
-      // Am Desktop der Laptop, am Handy das Telefon; gleiche Grenze wie das Seitenlayout
-      const wide = matchMedia('(min-width: 981px)');
-      let D, isLaptop = false, el = {}, S = 1;
-      const fit = () => {
-        const [W, H] = isLaptop ? SIZE.laptop : SIZE.phone;
-        S = Math.min(1, stage.clientWidth / W); D.style.transform = `scale(${S})`; stage.style.height = H * S + 'px';
-      };
-      const pick = () => {
-        isLaptop = wide.matches; D = isLaptop ? devs.laptop : devs.phone;
-        const isPhone = !isLaptop;
-        devs.phone.classList.toggle('ef-active', isPhone);
-        devs.laptop.classList.toggle('ef-active', isLaptop);
-        stage.classList.toggle('ef-is-laptop', isLaptop);
-        const g = (n) => D.querySelector(C(n));
-        el = { screen: g('screen'), tap: g('tap'), copy: g('copy'), toast: g('toast'), msgs: g('msgs'), empty: g('empty'), field: g('field'),
-          send: g('send'), paste: g('paste'), ctx: g('ctx'), hit: g('hit'), tabA: g('tab-a'), tabB: g('tab-b') };
-        fit();
-      };
-      pick();
-      new ResizeObserver(fit).observe(stage);
-    
-      // Finger oder Zeiger auf ein Element setzen (Koordinaten im unskalierten Gerät)
-      const at = (t, ax = .5, ay = .5) => {
-        const r = t.getBoundingClientRect(), s = el.screen.getBoundingClientRect();
-        return [(r.left - s.left + r.width * ax) / S, (r.top - s.top + r.height * ay) / S];
-      };
-      const fingerTo = (p, show = true) => { el.tap.style.transform = `translate(${p[0]}px, ${p[1]}px)`; el.tap.classList.toggle('ef-on', show); };
-      const press = (t) => { el.tap.classList.add('ef-down'); if (t) t.classList.add('ef-down'); };
-      const release = (t) => { el.tap.classList.remove('ef-down'); if (t) t.classList.remove('ef-down'); };
-      const step = (n) => steps.forEach((li) => li.classList.toggle('ef-on', +li.dataset.s === n));
-      // Neue Blase anhängen; die älteren rutschen weich nach oben statt zu springen
-      const add = (cls, html, swap) => {
-        const old = [...el.msgs.querySelectorAll('.ef-bubble')].filter((b) => b !== swap);
-        const before = old.map((b) => b.getBoundingClientRect().top);
-        if (swap) swap.remove();
-        const d = document.createElement('div'); d.className = 'ef-bubble ' + cls.split(' ').map((c) => 'ef-' + c).join(' '); d.innerHTML = html; el.msgs.appendChild(d);
-        old.forEach((b, k) => {
-          const dy = (before[k] - b.getBoundingClientRect().top) / S;
-          if (!dy) return;
-          b.style.transition = 'none'; b.style.transform = `translateY(${dy}px)`; b.offsetWidth;
-          b.style.transition = 'transform .75s cubic-bezier(.22, .8, .3, 1)'; b.style.transform = '';
-        });
-        return d;
-      };
-      const bars = (ws) => '<span class="ef-bars" style="display:grid">' + ws.map((w) => `<span class="ef-bar" style="width:${w}%"></span>`).join('') + '</span>';
-      let typingEl = null;
-      const typing = () => { typingEl = add('ai typing', '<i></i><i></i><i></i>'); };
-      const reply = (html) => { add('ai', html, typingEl); typingEl = null; };
-      const result = '<span class="ef-result-h"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="#5f8a77"/><path d="M4.6 8.3l2.2 2.2 4.6-4.8" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Hier ist dein Ergebnis</span>'
-        + '<span class="ef-rows" style="display:grid"><div><span class="ef-bar" style="width:100%"></span></div><div><span class="ef-bar"></span></div><div><span class="ef-bar"></span></div></span>Soll ich noch etwas anpassen?';
-      const PROMPT = 'Du hilfst mir bei einer Aufgabe aus meinem Alltag …' + bars([100, 74]);
-      // Was am Ende herauskommt, legt der Auftrag fest; die KI fragt nur nach Angaben (Yannis, 01.10.)
-      const QUESTION = 'Gern. Gib mir noch ein paar Infos:' + bars([100, 82, 58]);
-      const ANSWER = 'Klar, hier die Infos.' + bars([90]);
-    
-      const reset = () => {
-        stage.classList.add('ef-instant');
-        Object.values(devs).forEach((d) => d.classList.remove('ef-switched'));
-        el.copy.classList.remove('ef-copied', 'ef-down');
-        el.toast.classList.remove('ef-on');
-        el.msgs.querySelectorAll('.ef-bubble').forEach((b) => b.remove());
-        el.empty.classList.remove('ef-gone');
-        el.field.classList.remove('ef-filled', 'ef-sending');
-        el.send.classList.remove('ef-ready', 'ef-down');
-        el.paste.classList.remove('ef-on', 'ef-down');
-        el.ctx.classList.remove('ef-on');
-        el.hit.classList.remove('ef-hl', 'ef-down');
-        if (el.tabA) { el.tabA.classList.add('ef-on'); el.tabB.classList.remove('ef-on', 'ef-down'); }
-        el.tap.classList.remove('ef-on', 'ef-down', 'ef-slow', 'ef-hold');
-        step(0);
-        const [x, y] = at(el.copy, .5, .5);
-        fingerTo(isLaptop ? [x + 150, y + 90] : [x, y + 70], false);
-        stage.offsetWidth; stage.classList.remove('ef-instant', 'ef-fade');
-      };
-    
-      const showEnd = () => {
-        reset(); stage.classList.add('ef-instant');
-        D.classList.add('ef-switched'); el.empty.classList.add('ef-gone');
-        if (el.tabA) { el.tabA.classList.remove('ef-on'); el.tabB.classList.add('ef-on'); }
-        add('me', PROMPT); add('ai', QUESTION); add('me', ANSWER); add('ai', result);
-        step(4); stage.offsetWidth; stage.classList.remove('ef-instant');
-      };
-    
-      // Drehbuch in Millisekunden. Nach dem Wechsel in den Chat geht es ohne lange Pausen weiter (Yannis, 01.10.).
-      const pasteTarget = () => (isLaptop ? el.hit : el.paste);
-      const script = [
-        [0, reset],
-        [600, () => { el.tap.classList.add('ef-on'); fingerTo(at(el.copy, .42, .5)); }],
-        [1800, () => press(el.copy)],
-        [1960, () => { release(el.copy); el.copy.classList.add('ef-copied'); el.toast.classList.add('ef-on'); step(1); }],
-        [3100, () => { el.toast.classList.remove('ef-on'); fingerTo(isLaptop ? at(el.tabB, .45, .55) : [88, 531]); }],
-        [4200, () => {
-          if (isLaptop) { press(el.tabB); return; }
-          el.tap.classList.add('ef-slow', 'ef-down'); fingerTo([196, 531]); D.classList.add('ef-switched');
-        }],
-        [4350, () => {
-          if (!isLaptop) return;
-          release(el.tabB); el.tabA.classList.remove('ef-on'); el.tabB.classList.add('ef-on'); D.classList.add('ef-switched');
-        }],
-        [5400, () => { el.tap.classList.remove('ef-slow', 'ef-down'); fingerTo(at(el.field, isLaptop ? .22 : .32, .5)); }],
-        [6400, () => { if (isLaptop) press(); else el.tap.classList.add('ef-hold'); }],
-        [6550, () => { if (isLaptop) { release(); el.ctx.classList.add('ef-on'); step(2); } }],
-        [7100, () => { if (!isLaptop) { el.tap.classList.remove('ef-hold'); el.paste.classList.add('ef-on'); step(2); } }],
-        [7500, () => fingerTo(at(pasteTarget(), isLaptop ? .3 : .5, .5))],
-        [8400, () => { el.hit.classList.add('ef-hl'); press(pasteTarget()); }],
-        [8550, () => { release(pasteTarget()); el.paste.classList.remove('ef-on'); el.ctx.classList.remove('ef-on'); el.field.classList.add('ef-filled'); el.send.classList.add('ef-ready'); }],
-        [9300, () => fingerTo(at(el.send))],
-        [10300, () => press(el.send)],
-        [10450, () => { release(el.send); step(3); el.empty.classList.add('ef-gone'); el.field.classList.add('ef-sending'); el.send.classList.remove('ef-ready'); add('me', PROMPT); }],
-        [11100, () => { el.field.classList.remove('ef-filled', 'ef-sending'); el.tap.classList.remove('ef-on'); }],
-        [11600, typing],
-        [13800, () => reply(QUESTION)],
-        [16800, () => add('me', ANSWER)],
-        [17800, typing],
-        [20200, () => { reply(result); step(4); }],
-        [28500, () => stage.classList.add('ef-fade')],
-      ];
-      const LOOP = 29200;
-    
-      // Uhr mit Pause: läuft nur, wenn sichtbar und nicht angehalten
-      let t = 0, i = 0, last = null, visible = true, userPaused = false, raf = null;
-      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const tick = (now) => {
-        if (last != null) t += now - last;
-        last = now;
-        while (i < script.length && script[i][0] <= t) script[i++][1]();
-        if (t >= LOOP) { t = 0; i = 0; }
-        raf = requestAnimationFrame(tick);
-      };
-      const run = () => { if (!raf && visible && !userPaused && !document.hidden) { last = null; raf = requestAnimationFrame(tick); } };
-      const halt = () => { cancelAnimationFrame(raf); raf = null; };
-      const setPaused = (p) => { userPaused = p; pauseBtn.setAttribute('aria-pressed', p); pauseBtn.setAttribute('aria-label', p ? 'Animation abspielen' : 'Animation anhalten'); p ? halt() : run(); };
-      pauseBtn.addEventListener('click', () => setPaused(!userPaused));
-      new IntersectionObserver(([e]) => { visible = e.isIntersecting; visible ? run() : halt(); }).observe(stage);
-      document.addEventListener('visibilitychange', () => document.hidden ? halt() : run());
-      const start = () => {
-        if (reduce) { showEnd(); t = LOOP; i = script.length; setPaused(true); }
-        else { t = 0; i = 0; reset(); run(); }
-      };
-      wide.addEventListener('change', () => { pick(); start(); });
-      start();
-    })();
-
-    // Stationen-Leiste: erscheint, sobald die Titelplatte aus dem Bild ist. Der helle Reiter gleitet zur aktuellen
-    // Station, erreichte Stationen leuchten blau. Am Handy steht unten der Kopierknopf bereit.
-    const guide = document.getElementById('guide');
-    const knob = document.getElementById('seg-knob');
-    const mobileCta = document.getElementById('mobile-cta');
-    const plate = document.querySelector('.title-plate');
-    const startCard = document.getElementById('einstieg');
-    const stations = Array.from(document.querySelectorAll('.station'));
-    const segs = Array.from(document.querySelectorAll('.seg'));
-    let ticking = false, aktivVorher = -2;
-    function inView(el) { const r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < window.innerHeight; }
-    function reiter(i) {
-      if (i < 0) { knob.style.opacity = '0'; return; }
-      const s = segs[i];
-      knob.style.opacity = '1';
-      knob.style.width = s.offsetWidth + 'px';
-      knob.style.transform = 'translateX(' + (s.offsetLeft - 4) + 'px)';
-    }
-    function update() {
-      ticking = false;
-      const vh = window.innerHeight;
-      const probe = vh * 0.4;
-      const plateGone = plate.getBoundingClientRect().bottom < 60;
-      guide.classList.toggle('is-visible', plateGone);
-      guide.setAttribute('aria-hidden', String(!plateGone));
-      let active = -1;
-      stations.forEach((s, i) => { if (s.getBoundingClientRect().top <= probe) active = i; });
-      const atEnd = window.scrollY + vh >= document.documentElement.scrollHeight - 4;
-      if (atEnd) active = stations.length - 1;
-      stations.forEach((s, i) => s.classList.toggle('is-reached', i <= active));
-      segs.forEach((s, i) => {
-        s.classList.toggle('is-active', i === active);
-        s.classList.toggle('is-done', i < active);
-        if (i === active) s.setAttribute('aria-current', 'step'); else s.removeAttribute('aria-current');
-      });
-      if (active !== aktivVorher) { reiter(active); aktivVorher = active; }
-      const showCta = plateGone && !inView(startCard) && !inView(promptCard) && !atEnd;
-      mobileCta.classList.toggle('is-visible', showCta);
-      mobileCta.setAttribute('aria-hidden', String(!showCta));
-    }
-    function requestUpdate() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
-    window.addEventListener('scroll', requestUpdate, { passive: true });
-    window.addEventListener('resize', () => { aktivVorher = -2; requestUpdate(); });
-    update();
-
+    // Runde 24: Auftrag aufklappen und kopieren, Erklärfilm und Stationen-Leiste sind mit der alten Seite weg.
     // „Kommt bald“: Karten mit Einleitung zeigen hier den ganzen Text, solange es die Seite zum Fall noch nicht gibt.
     const sheet = document.getElementById('kommt-bald');
     const sheetTitle = document.getElementById('sheet-title');
@@ -2950,18 +3043,7 @@ SOFTWARE. --><symbol id="ls-mail" viewBox="0 0 24 24"><path d="m22 7-8.991 5.727
     };
   </script>
 
-  <dialog class="erg-dialog pal-sand" id="erg-dialog" aria-labelledby="erg-titel">
-    <div class="erg-kopf">
-      <p id="erg-titel">So sieht das Ergebnis aus</p>
-      <button class="erg-zu" type="button" data-erg-zu aria-label="Schließen"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
-    </div>
-    <div class="erg-chat">
-      <p class="erg-app"><svg class="logo" aria-hidden="true" data-ki-logo><use href="#l-openai"/></svg><span data-ki-name>ChatGPT</span><span class="erg-marke">Beispiel</span></p>
-      <div class="erg-blase erg-ich"><span class="erg-datei"><svg class="icon" aria-hidden="true"><use href="#i-file-text"/></svg>4 Fotos</span><span>Hilf mir, meinen Keller auszumisten …</span></div><div class="erg-blase erg-ki"><p>Auf deinen Fotos sehe ich fünf Dinge:</p><table class="kl-tabelle"><caption class="sr-only">Beispiel: Empfehlung für jedes Ding</caption><thead><tr><th scope="col">Ding</th><th scope="col">Empfehlung</th><th scope="col">bringt</th></tr></thead><tbody><tr><td>Stehlampe aus den 70ern</td><td><span class="kl-empf kl-empf--verkaufen">verkaufen</span></td><td>ca. 30 €</td></tr><tr><td>Konzertgitarre mit Tasche</td><td><span class="kl-empf kl-empf--verkaufen">verkaufen</span></td><td>ca. 60 €</td></tr><tr><td>Kiste Bücher</td><td><span class="kl-empf kl-empf--spenden">spenden</span></td><td><span aria-hidden="true">–</span><span class="sr-only">nichts</span></td></tr><tr><td>Umzugskartons</td><td><span class="kl-empf kl-empf--verschenken">verschenken</span></td><td><span aria-hidden="true">–</span><span class="sr-only">nichts</span></td></tr><tr><td>Alter Stuhl, wackelt</td><td><span class="kl-empf kl-empf--entsorgen">entsorgen</span></td><td><span aria-hidden="true">–</span><span class="sr-only">nichts</span></td></tr></tbody><tfoot><tr><td colspan="2">Verkauf zusammen</td><td>ca. 90 €</td></tr></tfoot></table><p>Wie lautet deine Postleitzahl?</p></div><div class="erg-blase erg-ich"><span>70180</span></div><div class="erg-blase erg-ki"><p><b>Dein Plan:</b></p><ul class="kl-plan" aria-label="Beispiel: der Plan für den Rest"><li><span class="kl-empf kl-empf--verkaufen">Verkaufen</span><span>Fotos in der Kleinanzeigen-App hochladen, Preis von hier übernehmen</span></li><li><span class="kl-empf kl-empf--spenden">Spenden</span><span>Bücher · Gebrauchtbuchladen, 600 m, Mo–Sa geöffnet</span></li><li><span class="kl-empf kl-empf--verschenken">Verschenken</span><span>Kartons · Nachbarschaftsgruppe, Text ist fertig</span></li><li><span class="kl-empf kl-empf--entsorgen">Entsorgen</span><span>Stuhl · Wertstoffhof, Sa 8–13 Uhr, vorher online anmelden</span></li></ul><p>Den Text für die Nachbarschaftsgruppe findest du darunter.</p></div>
-    </div>
-    <p class="erg-wo">Nachgestellt und gekürzt, mit Orten aus Stuttgart. Bei dir nennt die KI Orte für deine Postleitzahl, mit Adresse, Öffnungszeiten und Link.</p>
-    <div class="erg-fuss"><a class="button-primary erg-start" href="#" data-start data-art="prompt" target="_blank" rel="noopener"><svg class="logo" aria-hidden="true" data-ki-logo><use href="#l-openai"/></svg><span>Mit <span data-ki-name>ChatGPT</span> starten</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></div>
-  </dialog>
+  
 
   <script>
     // Version 22: Start-Knöpfe (Yannis, 05.10.2026 abends). Computer: Browser im neuen Tab. Handy: App.
@@ -2973,13 +3055,13 @@ SOFTWARE. --><symbol id="ls-mail" viewBox="0 0 24 24"><path d="m22 7-8.991 5.727
       var handy = /iPhone|iPod|Android/i.test(ua) || /iPad/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
       document.documentElement.setAttribute('data-geraet', handy ? 'handy' : 'computer');
       var ki = CFG.kis[0];
-      try { var g = localStorage.getItem('ki-wahl'); if (g && CFG.kis.indexOf(g) > -1) ki = g; } catch (e) {}
+      // Runde 24: kein Umschalter mehr. Der Knopf startet ChatGPT, Claude hat einen eigenen Link (data-start-ki).
       function auftrag() { var p = document.getElementById('prompt-text'); return p ? p.textContent.trim() : ''; }
-      function text(art) { return art === 'skill' ? (CFG.skill[ki] || '') : auftrag(); }
+      function text(art) { if (art === 'abo') { var v = document.getElementById('auftrag-abo'); return v ? v.content.textContent.trim() : auftrag(); } return art === 'skill' ? (CFG.skill[ki] || '') : auftrag(); }
       // Ziele je KI, Art und Gerät
-      function links(art) {
+      function links(art, k) {
         var q = enc(text(art));
-        if (ki === 'claude') {
+        if ((k || ki) === 'claude') {
           if (art === 'skill') return { app: 'https://claude.ai/new?q=' + q + '#no_universal_links', web: 'https://claude.ai/new?q=' + q };
           return { app: 'claude://claude.ai/new?q=' + q, web: 'https://claude.ai/new?q=' + q };
         }
@@ -2994,7 +3076,7 @@ SOFTWARE. --><symbol id="ls-mail" viewBox="0 0 24 24"><path d="m22 7-8.991 5.727
           var an = b.getAttribute('data-ki') === ki; b.setAttribute('aria-checked', String(an)); b.tabIndex = an ? 0 : -1;
         });
         document.querySelectorAll('[data-start]').forEach(function (a) {
-          var L = links(a.getAttribute('data-art') || 'prompt');
+          var L = links(a.getAttribute('data-art') || 'prompt', a.getAttribute('data-start-ki'));
           var ziel = handy ? L.app : L.web;
           a.href = ziel;
           // App-Schema im Rahmen der Hülle: oben öffnen; Webadressen im neuen Tab, damit die Seite offen bleibt
@@ -3018,7 +3100,6 @@ SOFTWARE. --><symbol id="ls-mail" viewBox="0 0 24 24"><path d="m22 7-8.991 5.727
         });
       });
       // Wahl auf einer anderen Anleitungsseite übernehmen
-      window.addEventListener('storage', function (e) { if (e.key === 'ki-wahl' && e.newValue && CFG.kis.indexOf(e.newValue) > -1) { ki = e.newValue; setzen(); } });
       // Klick: Links frisch setzen (der Auftrag kann sich mit dem Abo-Umschalter ändern), Auftrag in die Zwischenablage,
       // und falls sich nach 2,5 s nichts geöffnet hat, den Weg im Browser anbieten
       var rueck = document.querySelector('.ks-rueckfall');
@@ -3218,6 +3299,43 @@ SOFTWARE. --><symbol id="ls-mail" viewBox="0 0 24 24"><path d="m22 7-8.991 5.727
       else if (t.matches('[data-v25r7-umbenennen]')) oeffne(3);
       else oeffne(1);
     }, true);
+  })();
+</script>
+<script>
+  // Runde 24 (Pams Entwurf 3): Leiste unten nur, solange der Start-Knopf in „So geht's“ ganz aus dem Bild ist; Siegel und „Noch nicht
+  // angemeldet?“ öffnen ihren Aufklapper; Beispiel-Blatt; Auftrag kopieren. Herzen und Start-Links machen die Skripte der Seite.
+  (function () {
+    var knopf = document.querySelector('.ra-knopf'), leiste = document.querySelector('[data-leiste]');
+    if ('IntersectionObserver' in window && knopf && leiste) {
+      new IntersectionObserver(function (es) {
+        var sichtbar = es[0].isIntersecting;
+        leiste.classList.toggle('zeigen', !sichtbar);
+        leiste.setAttribute('aria-hidden', sichtbar ? 'true' : 'false');
+        leiste.querySelector('a').tabIndex = sichtbar ? -1 : 0;
+      }, { threshold: 0, rootMargin: '0px 0px -84px 0px' }).observe(knopf);   // unten liegt die Leiste selbst (84 px): dort verdeckt sie den Knopf
+    }
+    var ruhig = matchMedia('(prefers-reduced-motion: reduce)');
+    document.addEventListener('click', function (ev) {
+      var t = ev.target.closest('[data-oeffne]');
+      if (t) {
+        ev.preventDefault();
+        var d = document.querySelector('details[data-teil="' + t.dataset.oeffne + '"]');
+        if (d) { d.open = true; d.scrollIntoView({ block: 'start', behavior: ruhig.matches ? 'auto' : 'smooth' }); d.querySelector('summary').focus({ preventScroll: true }); }
+        return;
+      }
+      var b = ev.target.closest('[data-dialog]');
+      if (b) { var dl = document.getElementById(b.dataset.dialog); if (dl && dl.showModal) dl.showModal(); return; }
+      var z = ev.target.closest('[data-zu]');
+      if (z) { z.closest('dialog').close(); return; }
+      var k = ev.target.closest('[data-kopieren]');
+      if (k) {
+        var txt = document.getElementById('prompt-text').textContent;
+        if (navigator.clipboard) navigator.clipboard.writeText(txt).then(function () { k.textContent = 'Kopiert'; }, function () {});
+      }
+    });
+    document.querySelectorAll('dialog.ra-blatt').forEach(function (d) {
+      d.addEventListener('click', function (ev) { if (ev.target === d) d.close(); });
+    });
   })();
 </script>
 <div class="live-fuss"><a href="/impressum">Impressum</a><span class="live-fuss-sep" aria-hidden="true"> · </span><a href="/datenschutz">Datenschutz</a><span class="live-fuss-sep" aria-hidden="true"> · </span><span class="live-fuss-t">Testfassung im Aufbau</span></div></body>
