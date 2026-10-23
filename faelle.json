@@ -35,6 +35,11 @@
   "adresse": "/betrug-oder-echt"
  },
  {
+  "kennung": "R45",
+  "seite": "anschaffung",
+  "adresse": "/grosse-anschaffung-planen"
+ },
+ {
   "kennung": "R07",
   "seite": "miete",
   "adresse": "/zahlst-du-zu-viel-miete"
