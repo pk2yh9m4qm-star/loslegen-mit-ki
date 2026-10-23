@@ -2922,7 +2922,7 @@
 <style>
 /* Runde 29 (Jim, 23.10.2026): „Machen“ in drei Stufen, Stil aus Pams Entwurf 2 (entwurf2.css, Stand 23.10., 11:40) */
 .mz2 { max-width: 1180px; margin: clamp(30px, 5vw, 60px) auto 0; }
-/* Runde 29 (Jim, 23.10.2026): Stil „Machen“, gefiltert aus Pams entwurf2.css (Stand 23.10., 11:40). Nicht von Hand ändern ohne Pam. */
+/* Runde 33 (Jim, 23.10.2026): Stil „Machen“, gefiltert aus Pams entwurf2.css (Stand 23.10., ~12:20: Bilder oben am Rechner, Auftritt nacheinander). Nicht von Hand ändern ohne Pam. */
 /* ---------- „Machen“: vier Stufen mit Pfeilen, darunter je ein kleines Bild ohne Text ---------- */
 .mz2-stufen { list-style: none; margin: 0; padding: 0; text-align: left; }
 .mz2-stufe { position: relative; display: grid; grid-template-columns: 44px minmax(0, 1fr); column-gap: 14px; row-gap: 8px; padding-bottom: 26px; }
@@ -2940,6 +2940,35 @@
   .mz2-stufe::before { left: 56px; right: -18px; top: 21px; bottom: auto; width: auto; height: 2px; }
   .mz2-stufe::after { content: ""; position: absolute; right: -20px; top: 16px; width: 10px; height: 10px; border-top: 2px solid rgb(var(--sh) / .4); border-right: 2px solid rgb(var(--sh) / .4); transform: rotate(45deg); }
   .mz2-stufe:last-child::after { display: none; }
+  /* Yannis 23.10., 11:48 („nicht symmetrisch“): drei gleich breite Spalten, mittig zur Seite; Zahl, Titel und Bild auf einer Mittelachse, Pfeile zwischen den Zahlen */
+  .mz2 { max-width: 1020px; }
+  .mz2-stufen { column-gap: 30px; }
+  .mz2-stufe { justify-items: center; text-align: center; }
+  .mz2-nr { grid-column: 1; justify-self: center; }
+  .mz2-titel { justify-self: center; max-width: 15em; }
+  .mz2-bild { width: 100%; }
+  .mz2-stufe::before { left: calc(50% + 30px); right: -50%; }
+  .mz2-stufe::after { right: calc(-50% + 1px); }
+  /* Pam 23.10., Yannis' freie Hand: alles in einen Bildschirm (nach „Weiter“), Bilder näher an den Titeln */
+  .v22z-so.v25-so#so-gehts { padding-top: 120px; padding-bottom: 64px; }
+  .mz2-bild { height: 160px; }
+  .mz2-titel { min-height: 2.6em; }
+  /* Yannis 23.10.: am Rechner Bilder oben, darunter Zahlenreihe mit Pfeilen und Titel (am Handy bleibt das Bild unter dem Titel) */
+  .mz2-stufe { grid-template-rows: 160px 44px auto; }
+  .mz2-bild { grid-row: 1; }
+  .mz2-nr { grid-row: 2; }
+  .mz2-titel { grid-row: 3; }
+  .mz2-stufe::before { top: 195px; }
+  .mz2-stufe::after { top: 190px; }
+  /* Auftritt einmal beim Hereinscrollen: Stufen steigen nacheinander auf, die Pfeile zeichnen sich von Zahl zu Zahl */
+  .mz2-an:not(.mz2-da) .mz2-stufe { opacity: 0; translate: 0 18px; }
+  .mz2-an:not(.mz2-da) .mz2-stufe::before { scale: 0 1; }
+  .mz2-an:not(.mz2-da) .mz2-stufe::after { opacity: 0; }
+  /* Yannis 23.10.: nichts überlagert sich. Eine Stufe erscheint und spielt, erst wenn sie still steht, zeichnet sich der Pfeil, dann kommt die nächste (Zeiten --t aus dem Skript) */
+  .mz2-an.mz2-da .mz2-stufe { transition: opacity .45s var(--ease), translate .5s var(--ease); transition-delay: calc(var(--t, 0) * 1s); }
+  .mz2-an .mz2-stufe::before { transform-origin: 0 50%; }
+  .mz2-an.mz2-da .mz2-stufe::before { transition: scale .45s var(--ease); transition-delay: calc(var(--t, 0) * 1s + 1.75s); }
+  .mz2-an.mz2-da .mz2-stufe::after { transition: opacity .15s; transition-delay: calc(var(--t, 0) * 1s + 2.15s); }
 }
 
 /* 1 · Idee auswählen: Karten fächern sich auf, eine hebt sich und bekommt einen Haken */
@@ -3000,11 +3029,27 @@
 /* am Handy: bevor eine Stufe ins Bild kommt, wartet ihr Bild im Anfangszustand */
 @media (max-width: 959px) {
   .mz2-an .mz2-stufe:not(.ist-aktiv) .mz2-k { rotate: 0deg; translate: 0 0; }
+  /* Yannis 23.10.: auch untereinander erscheint jede Stufe erst, wenn sie dran ist (Zahl, Titel, Bild), die Linie zur nächsten zeichnet sich nach dem Stillstand */
+  .mz2-an .mz2-stufe:not(.ist-aktiv) { opacity: 0; translate: 0 14px; }
+  .mz2-an .mz2-stufe.ist-aktiv { transition: opacity .45s var(--ease), translate .5s var(--ease); }
+  .mz2-an .mz2-stufe::before { transform-origin: 50% 0; scale: 1 0; transition: scale .45s var(--ease); }
+  .mz2-an .mz2-stufe.ist-fertig::before { scale: 1 1; }
   .mz2-an .mz2-stufe:not(.ist-aktiv) :is(.mz2-haken, .mz2-maus, .mz2-zeile > b, .mz2-stern) { opacity: 0; }
   /* Stufe 3 ist nie leer: die Frage der KI steht schon da und wippt beim Hereinscrollen kurz, die Antwort kommt dazu */
 }
 
-
+</style>
+<style>
+/* Runde 32 (Jim, 23.10.2026): „Machen“ symmetrisch am Rechner (Pam nach Yannis, 11:48) */
+@media (min-width: 960px) {
+  .mz2 { max-width: 1020px; }
+  .mz2-stufe { justify-items: center; text-align: center; }
+  .mz2-nr { grid-column: 1; justify-self: center; }
+  .mz2-titel { justify-self: center; max-width: 15em; }
+  .mz2-bild { width: 100%; }
+  .mz2-stufe::before { left: calc(50% + 30px); right: -50%; }
+  .mz2-stufe::after { right: calc(-50% + 1px); }
+}
 </style>
 </head>
 <body><div class="live-aufbau" role="note"><b>Diese Seite ist im Aufbau.</b> Du siehst eine Testfassung, noch nicht alles funktioniert.</div><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><!-- Symbole der Laufbänder: Lucide 1.31.0 (lucide.dev, gebündelt aus lucide-react). Lizenz:
@@ -7569,9 +7614,9 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
   })();
 </script>
 <script>
-  // Runde 29 (Jim, 23.10.2026): „Machen“ – drei Stufen, nichts gedimmt, nichts läuft von selbst (Yannis, 23.10.; Verhalten aus Pams entwurf2.js).
-  // Rechner: alle Bilder stehen fertig da; fährt die Maus über eine Stufe, spielt ihre kleine Animation einmal.
-  // Handy: jede Stufe spielt einmal, wenn sie beim Scrollen ins Bild kommt. Bewegung reduziert: alles im Endzustand.
+  // Runde 33 (Jim, 23.10.2026): „Machen“ – Auftritt nacheinander, nie zwei Stufen zugleich in Bewegung (Yannis, 23.10.; Verhalten aus Pams entwurf2.js, Version 9).
+  // Rechner: einmaliger Auftritt, sobald die Stufen zu 45 % im Bild sind; jede Stufe spielt, wenn sie ankommt, danach steht alles still; die Maus spielt eine Stufe erneut.
+  // Schmal: jede Stufe erscheint erst, wenn sie dran ist; sind mehrere zugleich im Bild, spielen sie nacheinander. Bewegung reduziert: alles im Endzustand.
   (function () {
     var mz = document.querySelector('[data-mz2]');
     if (!mz) return;
@@ -7581,12 +7626,42 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
     if (ruhig() || !('IntersectionObserver' in window)) { mz.classList.add('mz2-ruhig'); return; }
     mz.classList.add('mz2-an');
     stufen.forEach(function (s) { s.addEventListener('pointerenter', function (e) { if (breit.matches && e.pointerType === 'mouse') spiel(s); }); });
+    // Startzeiten in s: Stufe 1 sofort; jede weitere erst, wenn die vorige still steht (ihre Animation ~1,8 s, Stufe 3 ~2,9 s) und der Pfeil gezeichnet ist
+    var START = [0.15, 2.4, 4.65];
+    stufen.forEach(function (s, i) { s.style.setProperty('--t', START[i] || 0); });
+    if (breit.matches) {
+      var auftritt = new IntersectionObserver(function (es) {
+        if (!es[0].isIntersecting) return;
+        auftritt.disconnect(); mz.classList.add('mz2-da');
+        stufen.forEach(function (s, i) { setTimeout(function () { spiel(s); }, (START[i] || 0) * 1000); });
+      }, { threshold: 0.45 });
+      auftritt.observe(mz.querySelector('.mz2-stufen'));
+    } else mz.classList.add('mz2-da');
+    var DAUER = [1900, 1900, 3000], warte = [], besetzt = false;
+    function weiter() {
+      if (besetzt || !warte.length) return;
+      warte.sort(function (a, b) { return stufen.indexOf(a) - stufen.indexOf(b); });
+      var s = warte.shift(); besetzt = true; spiel(s);
+      setTimeout(function () { s.classList.add('ist-fertig'); setTimeout(function () { besetzt = false; weiter(); }, 450); }, DAUER[stufen.indexOf(s)] || 1900);
+    }
     var einzeln = new IntersectionObserver(function (es) { es.forEach(function (x) {
-      if (x.isIntersecting && !breit.matches) { einzeln.unobserve(x.target); spiel(x.target); }
+      if (x.isIntersecting && !breit.matches) { einzeln.unobserve(x.target); warte.push(x.target); weiter(); }
     }); }, { threshold: 0.6 });
     stufen.forEach(function (s) { einzeln.observe(s); });
-    function wechsel() { stufen.forEach(function (s) { s.classList.remove('ist-aktiv'); if (!breit.matches) einzeln.observe(s); }); }
+    function wechsel() { mz.classList.add('mz2-da'); stufen.forEach(function (s) { s.classList.remove('ist-aktiv'); s.classList.add('ist-fertig'); if (!breit.matches) s.classList.add('ist-aktiv'); }); }
     if (breit.addEventListener) breit.addEventListener('change', wechsel);
+  })();
+</script>
+<script>
+  // Runde 32 (Jim, 23.10.2026): Durchstreichung der Pillen im Kopf von „Machen“ starten (der alte Auslöser liegt im versteckten Abschnitt)
+  (function () {
+    var mz = document.querySelector('[data-mz2]');
+    if (!mz) return;
+    var so = mz.closest('.v22z-so'), pillen = so && so.querySelector('.v22z-nicht');
+    if (pillen && 'IntersectionObserver' in window) {
+      var strich = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { so.classList.add('spielt'); strich.disconnect(); } }, { threshold: 0.6 });
+      strich.observe(pillen);
+    } else if (so) so.classList.add('spielt');
   })();
 </script>
 <div class="live-fuss"><a href="/impressum">Impressum</a><span class="live-fuss-sep" aria-hidden="true"> · </span><a href="/datenschutz">Datenschutz</a><span class="live-fuss-sep" aria-hidden="true"> · </span><span class="live-fuss-t">Testfassung im Aufbau</span></div></body>
