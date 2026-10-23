@@ -28,5 +28,10 @@
   "kennung": "I10",
   "seite": "vorsorge",
   "adresse": "/vorsorgemappe-anlegen"
+ },
+ {
+  "kennung": "N01",
+  "seite": "betrug",
+  "adresse": "/betrug-oder-echt"
  }
 ]
