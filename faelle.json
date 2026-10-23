@@ -33,5 +33,10 @@
   "kennung": "N01",
   "seite": "betrug",
   "adresse": "/betrug-oder-echt"
+ },
+ {
+  "kennung": "R07",
+  "seite": "miete",
+  "adresse": "/zahlst-du-zu-viel-miete"
  }
 ]
