@@ -2903,6 +2903,109 @@
     background-image: var(--noise), var(--noise-coarse); background-size: var(--v26-kg, 210px) var(--v26-kg, 210px), calc(var(--v26-kg, 210px) * 4 / 3) calc(var(--v26-kg, 210px) * 4 / 3);
     opacity: var(--v26-korn, 0); }
 </style>
+<style>
+  /* Runde 28 (23.10.2026, Jim): Halt am Film statt Scroll-Steuerung; „Überspringen“ als schlichter Text mit Pfeil, ohne Pille (Yannis) */
+  .v28-skip { display: none; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 0 12px; border: 0; border-radius: 8px;
+    background: none; color: var(--muted); font: inherit; font-size: 15px; font-weight: 500; line-height: 1; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  .v28-skip.ist-da { display: inline-flex; }
+  .v28-skip:hover { color: var(--ink); }
+  .v28-skip:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .v28-skip .v28-i { flex: none; width: 18px; height: 18px; }
+  .v28-skip--szene { position: fixed; z-index: 96; translate: -50% 0; }
+  .v28-skip--kp.ist-da { display: flex; margin: 6px auto 0; }
+  /* Während der Film läuft: der Knopf aus Runde 26 in der Leiste unter dem Film, jetzt als schlichter Text ohne Pille („Weiter“ am Halt bleibt) */
+  .v26-skip:not(.v26-skip--halt) { border: 0 !important; background: none !important; box-shadow: none !important; padding: 0 12px !important;
+    color: var(--muted) !important; font-weight: 500 !important; }
+  .v26-skip:not(.v26-skip--halt):hover { color: var(--ink) !important; }
+  .v26-skip:not(.v26-skip--halt) svg { width: 18px !important; height: 18px !important; }
+</style>
+<style>
+/* Runde 29 (Jim, 23.10.2026): „Machen“ in drei Stufen, Stil aus Pams Entwurf 2 (entwurf2.css, Stand 23.10., 11:40) */
+.mz2 { max-width: 1180px; margin: clamp(30px, 5vw, 60px) auto 0; }
+/* Runde 29 (Jim, 23.10.2026): Stil „Machen“, gefiltert aus Pams entwurf2.css (Stand 23.10., 11:40). Nicht von Hand ändern ohne Pam. */
+/* ---------- „Machen“: vier Stufen mit Pfeilen, darunter je ein kleines Bild ohne Text ---------- */
+.mz2-stufen { list-style: none; margin: 0; padding: 0; text-align: left; }
+.mz2-stufe { position: relative; display: grid; grid-template-columns: 44px minmax(0, 1fr); column-gap: 14px; row-gap: 8px; padding-bottom: 26px; }
+.mz2-stufe:last-child { padding-bottom: 0; }
+.mz2-stufe::before { content: ""; position: absolute; left: 21px; top: 44px; bottom: 0; width: 2px; border-radius: 2px; background: rgb(var(--sh) / .24); }
+.mz2-stufe:last-child::before { display: none; }
+.mz2-nr { position: relative; z-index: 1; grid-column: 1; grid-row: 1; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; color: #fbf7f0; font-size: 1.0625rem; font-weight: 750; font-variant-numeric: tabular-nums; background: linear-gradient(175deg, #4a433b 0%, #2b2722 45%, #1d1a16 100%); box-shadow: inset 0 1px 0 rgb(255 255 255 / .16), 0 2px 6px -2px rgb(var(--sh) / .5); transition: background .45s var(--ease), color .45s var(--ease), box-shadow .45s var(--ease), transform .5s var(--ease); }
+.mz2-titel { grid-column: 2; grid-row: 1; align-self: center; margin: 0; color: var(--ink); font-family: var(--font-display); font-size: 1.25rem; font-weight: 650; line-height: 1.22; letter-spacing: -.014em; text-wrap: balance; }
+.mz2-bild { grid-column: 2; grid-row: 2; position: relative; height: 150px; transition: opacity .45s var(--ease); }
+@media (min-width: 960px) {
+  .mz2-stufen { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 30px; }
+  .mz2-stufe { grid-template-columns: 1fr; grid-template-rows: 44px auto 1fr; row-gap: 14px; padding-bottom: 0; }
+  .mz2-titel { grid-column: 1; grid-row: 2; align-self: start; min-height: 3.66em; font-size: 1.1875rem; }
+  .mz2-bild { grid-column: 1; grid-row: 3; height: 200px; }
+  .mz2-stufe::before { left: 56px; right: -18px; top: 21px; bottom: auto; width: auto; height: 2px; }
+  .mz2-stufe::after { content: ""; position: absolute; right: -20px; top: 16px; width: 10px; height: 10px; border-top: 2px solid rgb(var(--sh) / .4); border-right: 2px solid rgb(var(--sh) / .4); transform: rotate(45deg); }
+  .mz2-stufe:last-child::after { display: none; }
+}
+
+/* 1 · Idee auswählen: Karten fächern sich auf, eine hebt sich und bekommt einen Haken */
+.mz2-faecher { position: absolute; left: 50%; top: 58%; width: 92px; height: 67px; translate: -50% -50%; }
+.mz2-k { position: absolute; inset: 0; border-radius: 14px; transform-origin: 50% 130%; rotate: var(--r); translate: var(--x) var(--y); box-shadow: 0 10px 18px -10px rgb(0 0 0 / .55); }
+/* eingeprägtes Symbol wie auf den Ideenkarten (.v26-band .lb-symbol) */
+.mz2-k .lb-symbol, .kz-plate .lb-symbol { position: absolute; right: -15%; bottom: -24%; height: 104%; width: auto; aspect-ratio: 1; margin: 0; fill: none; stroke: #000; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; opacity: .14; pointer-events: none; }
+.mz2-k:nth-child(1) { --r: -16deg; --x: -38px; --y: 6px; }
+.mz2-k:nth-child(2) { --r: -8deg; --x: -20px; --y: 1px; }
+.mz2-k:nth-child(3) { --r: 0deg; --x: 0px; --y: -18px; z-index: 2; }
+.mz2-k:nth-child(4) { --r: 8deg; --x: 20px; --y: 1px; }
+.mz2-k:nth-child(5) { --r: 16deg; --x: 38px; --y: 6px; }
+.mz2-haken { position: absolute; z-index: 3; right: -10px; top: -28px; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #fff; box-shadow: 0 2px 6px -1px rgb(0 0 0 / .3); }
+.mz2-haken svg, .mz2-zeile > b svg, .kz-check svg, .kz-haken svg { fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.mz2-haken svg { width: 16px; height: 16px; color: var(--ink); }
+@media (min-width: 960px) { .mz2-faecher { width: 104px; height: 76px; } }
+
+/* 2 · Ein Klick: Mauszeiger, Klick, „puff“ */
+.mz2-knopf { position: absolute; left: 50%; top: 50%; translate: -50% -50%; white-space: nowrap; pointer-events: none; }
+.mz2-maus { position: absolute; z-index: 2; left: calc(50% + 30px); top: calc(50% + 2px); width: 28px; height: 28px; overflow: visible; filter: drop-shadow(0 1px 1.5px rgb(0 0 0 / .28)) drop-shadow(0 4px 8px rgb(0 0 0 / .14)); }
+.mz2-maus path { fill: #111; stroke: #fff; stroke-width: 1.4; stroke-linejoin: round; paint-order: stroke; }
+.mz2-puff { position: absolute; z-index: 3; left: calc(50% + 32px); top: calc(50% + 4px); width: 0; height: 0; }
+.mz2-puff i { position: absolute; left: -5px; top: -5px; width: 10px; height: 10px; border-radius: 50%; background: var(--c); opacity: 0; }
+
+/* 3 · Die KI fragt nach: zwei Sprechblasen ohne Text */
+
+/* 4 · Der Rest läuft: ein Blatt, auf dem nacheinander Haken erscheinen */
+.mz2-b4 { display: grid; place-items: center; }
+.mz2-blatt { position: relative; display: grid; gap: 9px; width: min(210px, 88%); padding: 14px 14px 15px; border-radius: 10px; background: #fff; box-shadow: 0 1px 2px rgb(var(--sh) / .18), 0 10px 22px -14px rgb(var(--sh) / .5); }
+.mz2-zeile { display: grid; grid-template-columns: 18px 1fr 20px; align-items: center; gap: 10px; }
+.mz2-zeile .icon { width: 18px; height: 18px; color: var(--muted); }
+.mz2-zeile > i { width: var(--w); height: 6px; border-radius: 3px; background: #e5ded3; }
+.mz2-zeile > b { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--green-b); color: #fff; }
+.mz2-zeile > b svg { width: 12px; height: 12px; }
+.mz2-stern { position: absolute; right: -13px; top: -13px; width: 30px; height: 30px; }
+.mz2-stern svg { display: block; width: 100%; height: 100%; fill: var(--coral-b); }
+
+/* Bewegung nur, wenn erlaubt (Klasse mz2-an); ohne sie steht jedes Bild im Endzustand */
+@keyframes mz2-faechern { from { rotate: 0deg; translate: 0 0; } }
+@keyframes mz2-heben { 0%, 50% { translate: 0 0; } }
+@keyframes mz2-pop { from { opacity: 0; scale: .4; } 70% { opacity: 1; scale: 1.12; } to { opacity: 1; scale: 1; } }
+@keyframes mz2-auf { from { opacity: 0; scale: .6; } 70% { opacity: 1; scale: 1.04; } to { opacity: 1; scale: 1; } }
+@keyframes mz2-maus { 0% { opacity: 0; translate: 72px 58px; } 15% { opacity: 1; } 62% { translate: 0 0; scale: 1; } 70% { scale: .82; } 80%, 100% { opacity: 1; translate: 0 0; scale: 1; } }
+@keyframes mz2-druck { 50% { scale: .96; } }
+@keyframes mz2-puff { 0% { opacity: 0; translate: 0 0; scale: .4; } 25% { opacity: 1; } 100% { opacity: 0; translate: var(--x) var(--y); scale: 1; } }
+.mz2-an .ist-aktiv .mz2-k { animation: mz2-faechern .8s var(--feder) both; }
+.mz2-an .ist-aktiv .mz2-k:nth-child(3) { animation: mz2-heben 1.4s var(--ease) both; }
+.mz2-an .ist-aktiv .mz2-haken { animation: mz2-pop .4s var(--ease) 1.25s both; }
+.mz2-an .ist-aktiv .mz2-maus { animation: mz2-maus 1.5s var(--ease) both; }
+.mz2-an .ist-aktiv .mz2-knopf { animation: mz2-druck .16s ease-out .98s; }
+.mz2-an .ist-aktiv .mz2-puff i { animation: mz2-puff .55s var(--ease) 1.06s both; }
+.mz2-an .ist-aktiv .mz2-zeile > b { animation: mz2-pop .35s var(--ease) both; }
+.mz2-an .ist-aktiv .mz2-zeile:nth-child(1) > b { animation-delay: .4s; }
+.mz2-an .ist-aktiv .mz2-zeile:nth-child(2) > b { animation-delay: .9s; }
+.mz2-an .ist-aktiv .mz2-zeile:nth-child(3) > b { animation-delay: 1.4s; }
+.mz2-an .ist-aktiv .mz2-zeile:nth-child(4) > b { animation-delay: 1.9s; }
+.mz2-an .ist-aktiv .mz2-stern { animation: mz2-pop .45s var(--ease) 2.4s both; }
+/* am Handy: bevor eine Stufe ins Bild kommt, wartet ihr Bild im Anfangszustand */
+@media (max-width: 959px) {
+  .mz2-an .mz2-stufe:not(.ist-aktiv) .mz2-k { rotate: 0deg; translate: 0 0; }
+  .mz2-an .mz2-stufe:not(.ist-aktiv) :is(.mz2-haken, .mz2-maus, .mz2-zeile > b, .mz2-stern) { opacity: 0; }
+  /* Stufe 3 ist nie leer: die Frage der KI steht schon da und wippt beim Hereinscrollen kurz, die Antwort kommt dazu */
+}
+
+
+</style>
 </head>
 <body><div class="live-aufbau" role="note"><b>Diese Seite ist im Aufbau.</b> Du siehst eine Testfassung, noch nicht alles funktioniert.</div><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><!-- Symbole der Laufbänder: Lucide 1.31.0 (lucide.dev, gebündelt aus lucide-react). Lizenz:
 ISC License
@@ -3168,7 +3271,7 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
     </section>
 
     <section class="v22z-abschnitt v22z-so v25-so" id="so-gehts" aria-labelledby="so-gehts-title">
-      <!-- Version 25, Runde 10 (15.10.2026, Yannis, 15.10.): Machen im Takt von Entdecken – Kopf mittig, Bühne in voller Breite, Satz zum Mitnehmen -->
+      <!-- Runde 29 (Jim, 23.10.2026) nach Pams Entwurf 2: Kopf unverändert, darunter drei Stufen mit Pfeilen und je einer kleinen Illustration. -->
       <div class="wrap v25-so-wrap">
         <div class="v22z-kopf v22z-kopf--mitte" id="v22z-k2" data-v22z-auftritt>
           <span class="tag v22z-marke">Machen</span>
@@ -3177,7 +3280,30 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
         </div>
         <p class="v22z-sr">Du musst dich nicht einlesen, nicht prompten, keine Technik verstehen und keine Agenten einrichten.</p>
         <ul class="v22z-nicht" aria-hidden="true"><li>Einlesen<svg viewBox="0 0 100 20" preserveAspectRatio="none" focusable="false"><path d="M3 12 Q 30 7 52 11 T 97 9"/></svg></li><li>Prompten<svg viewBox="0 0 100 20" preserveAspectRatio="none" focusable="false"><path d="M3 10 Q 28 14 50 9 T 97 11"/></svg></li><li>Technik verstehen<svg viewBox="0 0 100 20" preserveAspectRatio="none" focusable="false"><path d="M3 11 Q 34 6 56 12 T 97 9"/></svg></li><li>Agenten einrichten<svg viewBox="0 0 100 20" preserveAspectRatio="none" focusable="false"><path d="M3 9 Q 26 13 54 10 T 97 12"/></svg></li></ul>
-        <div class="v22z-knopfbild v22z-filmbild" data-v22z-nach="#v22z-k2" data-v22z-schwelle="0.35">
+        <div class="mz2" data-mz2>
+          <ol class="mz2-stufen">
+            <li class="mz2-stufe"><span class="mz2-nr" aria-hidden="true">1</span><h3 class="mz2-titel">Idee auswählen.</h3>
+              <div class="mz2-bild mz2-b1" aria-hidden="true"><div class="mz2-faecher"><span class="v22z-wk pal-sand mz2-k"><svg class="lb-symbol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ls-package"/></svg></span><span class="v22z-wk pal-coral mz2-k"><svg class="lb-symbol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#lb-sun"/></svg></span><span class="v22z-wk pal-blue mz2-k"><svg class="lb-symbol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#lb-mail"/></svg></span><span class="v22z-wk pal-green mz2-k"><svg class="lb-symbol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#lb-flower"/></svg></span><span class="v22z-wk pal-plum mz2-k"><svg class="lb-symbol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#lb-briefcase"/></svg></span><i class="mz2-haken"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div></div></li>
+            <li class="mz2-stufe"><span class="mz2-nr" aria-hidden="true">2</span><h3 class="mz2-titel">Ein Klick.</h3>
+              <div class="mz2-bild mz2-b2" aria-hidden="true"><span class="button-primary mz2-knopf"><span>Mit ChatGPT starten</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span><span class="mz2-puff"><i style="--x:32px;--y:0px;--c:var(--coral-a)"></i><i style="--x:23px;--y:-23px;--c:var(--sand-a)"></i><i style="--x:0px;--y:-32px;--c:var(--blue-a)"></i><i style="--x:-23px;--y:-23px;--c:var(--green-a)"></i><i style="--x:-32px;--y:0px;--c:var(--coral-a)"></i><i style="--x:-23px;--y:23px;--c:var(--sand-a)"></i><i style="--x:0px;--y:32px;--c:var(--blue-a)"></i><i style="--x:23px;--y:23px;--c:var(--green-a)"></i></span><svg class="mz2-maus" viewBox="0 0 24 24" aria-hidden="true"><path d="M5.6 3.4v15.3c0 .6.7.9 1.1.5l3.5-3.4 2.3 5.3c.2.4.7.6 1.1.4l1.7-.8c.4-.2.6-.7.4-1.1l-2.3-5.1h4.9c.6 0 .9-.7.5-1.1L6.7 2.9c-.4-.4-1.1-.1-1.1.5z"/></svg></div></li>
+            <li class="mz2-stufe"><span class="mz2-nr" aria-hidden="true">3</span><h3 class="mz2-titel">Der Rest läuft und du siehst jeden Schritt.</h3>
+              <div class="mz2-bild mz2-b4" aria-hidden="true"><span class="mz2-blatt"><span class="mz2-zeile" style="--w:78%"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg><i></i><b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></b></span><span class="mz2-zeile" style="--w:58%"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-file-text"/></svg><i></i><b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></b></span><span class="mz2-zeile" style="--w:70%"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-euro"/></svg><i></i><b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></b></span><span class="mz2-zeile" style="--w:50%"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-bell-ring"/></svg><i></i><b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></b></span><span class="mz2-stern"><svg viewBox="-10 -10 20 20" aria-hidden="true"><path d="M0 -10 C1.4 -2.2 2.2 -1.4 10 0 C2.2 1.4 1.4 2.2 0 10 C-1.4 2.2 -2.2 1.4 -10 0 C-2.2 -1.4 -1.4 -2.2 0 -10 Z"/></svg></span></span></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="v22z-abschnitt v22z-so v25-so" id="so-gehts-alt" hidden aria-labelledby="so-gehts-title-alt">
+      <!-- Version 25, Runde 10 (15.10.2026, Yannis, 15.10.): Machen im Takt von Entdecken – Kopf mittig, Bühne in voller Breite, Satz zum Mitnehmen -->
+      <div class="wrap v25-so-wrap">
+        <div class="v22z-kopf v22z-kopf--mitte" id="v22z-k2-alt" data-v22z-auftritt>
+          <span class="tag v22z-marke">Machen</span>
+          <h2 class="display v22z-titel v22z-titel--3" id="so-gehts-title-alt">Einfach loslegen.</h2>
+          <p class="v22z-lead">Wenn du Zeit und Aufwand sparen willst, nutze unsere Vorlagen. Jede ist von uns geschrieben und getestet.</p>
+        </div>
+        <p class="v22z-sr">Du musst dich nicht einlesen, nicht prompten, keine Technik verstehen und keine Agenten einrichten.</p>
+        <ul class="v22z-nicht" aria-hidden="true"><li>Einlesen<svg viewBox="0 0 100 20" preserveAspectRatio="none" focusable="false"><path d="M3 12 Q 30 7 52 11 T 97 9"/></svg></li><li>Prompten<svg viewBox="0 0 100 20" preserveAspectRatio="none" focusable="false"><path d="M3 10 Q 28 14 50 9 T 97 11"/></svg></li><li>Technik verstehen<svg viewBox="0 0 100 20" preserveAspectRatio="none" focusable="false"><path d="M3 11 Q 34 6 56 12 T 97 9"/></svg></li><li>Agenten einrichten<svg viewBox="0 0 100 20" preserveAspectRatio="none" focusable="false"><path d="M3 9 Q 26 13 54 10 T 97 12"/></svg></li></ul>
+        <div class="v22z-knopfbild v22z-filmbild" data-v22z-nach="#v22z-k2-alt" data-v22z-schwelle="0.35">
 <div class="v22j-film" data-v22j-film>
   <p class="v22j-sr">Kleine Mitmach-Demo, nur eine Vorführung, es öffnet sich nichts: Du wählst die Idee „Den perfekten Job finden lassen“ und startest sie mit einem Klick. Dein KI-Chat geht auf, der fertige Auftrag wird automatisch eingefügt und geht von selbst raus. Die KI fragt einmal nach, was du beruflich machst und was dir wichtig ist, du schickst deine Antwort ab. Dann sucht sie selbstständig und legt dir ab jetzt jeden Morgen ein Job-Briefing mit den passendsten Stellen vor.</p>
   <div class="v22j-rahmen">
@@ -3288,7 +3414,7 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
 
         </div>
         <p class="v22z-erg-satz v25-so-erg"><span class="v22z-nw">Idee auswählen.</span> <span class="v22z-nw">Ein Klick.</span> <span class="v22z-nw">Der Rest läuft</span> <span class="v22z-nw">und du siehst jeden Schritt.</span></p>
-        <p class="v22z-ehrlich" data-v22z-nach="#v22z-k2" data-v22z-schwelle="0.9"><svg class="v22z-sprech" viewBox="0 0 30 28" aria-hidden="true" focusable="false"><path d="M6 2.5h18a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H14.5L8 25.5v-5H6a4 4 0 0 1-4-4v-10a4 4 0 0 1 4-4Z"/><circle cx="10" cy="11.5" r="1.9"/><circle cx="15" cy="11.5" r="1.9"/><circle cx="20" cy="11.5" r="1.9"/></svg><span><span class="v22z-unter">Die KI fragt nach, wenn sie etwas von dir benötigt.</span></span></p>
+        <p class="v22z-ehrlich" data-v22z-nach="#v22z-k2-alt" data-v22z-schwelle="0.9"><svg class="v22z-sprech" viewBox="0 0 30 28" aria-hidden="true" focusable="false"><path d="M6 2.5h18a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H14.5L8 25.5v-5H6a4 4 0 0 1-4-4v-10a4 4 0 0 1 4-4Z"/><circle cx="10" cy="11.5" r="1.9"/><circle cx="15" cy="11.5" r="1.9"/><circle cx="20" cy="11.5" r="1.9"/></svg><span><span class="v22z-unter">Die KI fragt nach, wenn sie etwas von dir benötigt.</span></span></p>
       </div>
     </section>
 
@@ -5620,8 +5746,7 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
           if (nachlauf) { if (!pause && e.deltaY > 0) { e.preventDefault(); return; } nachlauf = false; radAus(); return; }
           if (e.deltaY > 0 && window.scrollY >= grenze() - 2) {
             e.preventDefault();
-            if (videoSperreAktiv() && !pause) return;
-            if (videoSperreAktiv()) { if (!videoAn) videoStart(); else if (r26Versuch()) return; else if (kVideo.paused) { var pv = kVideo.play(); if (pv && pv.catch) pv.catch(function () {}); } }
+            // Runde 28: an der Film-Sperre hält Scrollen nur fest; abgespielt wird nur über Play (Yannis, 23.10.)
           }
         }
         function radAn_() { if (!radAn && !stationGesehen) { radAn = true; addEventListener('wheel', rad, { passive: false }); } }
@@ -5915,8 +6040,16 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
           if (hatteFokus) { if (weg) document.activeElement.blur(); else fokus(nochmal); }
         }
         if (kVideo) kVideo.addEventListener('ended', function () { videoDurch = true; videoEnde(false); });
-        if (kVideo) kVideo.addEventListener('timeupdate', function () { if (!videoDurch && kVideo.currentTime >= VIDEO_SPERRE_T) videoDurch = true; });
+        // Runde 28: keine Öffnung nach VIDEO_SPERRE_T mehr; die Sperre öffnet sich erst mit „ended“ oder über „Überspringen“
         if (kPlay) kPlay.addEventListener('click', function () { videoStart(); });
+        // Runde 28: Haken für „Überspringen“ unter dem Film (Skript am Seitenende)
+        window.v28Szene = {
+          aktiv: function () { return videoSperreAktiv(); },
+          video: function () { return videoAn; },
+          y: function () { return sperrY; },
+          film: function () { var r = kVideo && kVideo.getBoundingClientRect(); if (!r || r.height < 10) { var f = kPlay && kPlay.closest('.v22z-buehne, .v22z-k') || buehne; r = f && f.getBoundingClientRect(); } return r; },
+          ueberspringen: function (tast) { r26Tast = tast; videoDurch = true; videoEnde(true); r26Gleiten(oben + Z.z1 * pxVh + 4); }
+        };
         // Runde 26 (22.10.2026, Jim): Ausweg aus der Film-Sperre und aus dem Halt an „Von vielen.“ (Pam, Yannis 22.10.)
         var R26_NACHGEBEN = 3, r26Versuche = 0, r26Tast = false, r26K = kHudEl && $('.v26-skip', kHudEl), r26HaltK = document.createElement('button');
         r26HaltK.type = 'button'; r26HaltK.className = 'v26-k v26-skip v26-skip--halt ist-weiter';
@@ -6264,7 +6397,7 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
           if (window.scrollY < grenze() - 2 || e.altKey || e.ctrlKey || e.metaKey) return;
           var t = e.target, tag = t && t.tagName;
           if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || tag === 'BUTTON' || (t && t.isContentEditable)) return;
-          if (['ArrowDown', 'PageDown', 'End', ' ', 'Spacebar'].indexOf(e.key) > -1) { if (!e.repeat && videoSperreAktiv() && videoAn && r26Versuch()) return; e.preventDefault(); }
+          if (['ArrowDown', 'PageDown', 'End', ' ', 'Spacebar'].indexOf(e.key) > -1) e.preventDefault();   // Runde 28: Tasten halten an der Sperre nur fest
         });
         addEventListener('resize', function () { szenePruefen(); planen(); });   // auch das resize der Hülle beim Umschalten
         // Webschrift geladen: Zeilen der Wand-Überschrift neu messen
@@ -7323,6 +7456,137 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
         clearTimeout(uhr); uhr = setTimeout(function () { (document.fonts ? document.fonts.ready : Promise.resolve()).then(pruefen); }, 50);
       }
     }).observe(document.body, { childList: true, subtree: true });
+  })();
+</script>
+<script>
+  // Runde 28 (23.10.2026, Jim): Halt am Film statt Scroll-Steuerung, „Überspringen“ unter dem Film (Rechner-Szene und Handy-Player)
+  (function () {
+    var d = document.documentElement;
+    var PFEIL = '<svg class="v28-i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4.5v14M6.5 13l5.5 5.5 5.5-5.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    function knopf(art) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'v28-skip v28-skip--' + art;
+      b.innerHTML = '<span>Überspringen</span>' + PFEIL;
+      b.setAttribute('aria-label', 'Film überspringen, weiter nach unten');
+      return b;
+    }
+    function ruhig() { try { return matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } }
+    function tastatur() { var a = document.activeElement; try { return !!(a && a !== document.body && a.matches(':focus-visible')); } catch (e) { return false; } }
+    function gleiten(y) { try { window.scrollTo({ top: y, behavior: ruhig() ? 'auto' : 'smooth' }); } catch (e) { window.scrollTo(0, y); } }
+    function setzen(y) { var sb = d.style.scrollBehavior; d.style.scrollBehavior = 'auto'; window.scrollTo(0, y); d.style.scrollBehavior = sb; }
+
+    // ---------- Rechner: Szene ----------
+    var sz = window.v28Szene;   // Haken aus dem Szenen-Skript (unten in startseite() eingesetzt)
+    var szK = knopf('szene');
+    var szAbschnitt = document.querySelector('.v22z-k-play');
+    szAbschnitt = szAbschnitt && szAbschnitt.closest('section');
+    (szAbschnitt || document.body).appendChild(szK);   // im Abschnitt der Szene: per Tab gleich nach dem Film
+    function szLage() {
+      var da = !!(sz && sz.aktiv() && !sz.video() && window.scrollY >= sz.y() - 8);   // läuft der Film, steht der Knopf in der Leiste
+      if (da) {
+        var r = sz.film(), b = szK.offsetHeight || 44;
+        if (!r || r.height < 10) da = false;
+        else {
+          var top = Math.min(r.bottom + 4, innerHeight - b - 8);
+          szK.style.left = (r.left + r.width / 2).toFixed(1) + 'px'; szK.style.top = top.toFixed(1) + 'px';
+        }
+      }
+      if (szK.__d !== da) { szK.__d = da; szK.classList.toggle('ist-da', da); if (!da && document.activeElement === szK) szK.blur(); }
+    }
+    szK.addEventListener('click', function () { if (sz) sz.ueberspringen(tastatur()); szLage(); });
+
+    // ---------- Handy und schmale Fenster: Player .v22z-kp ----------
+    var kp = document.querySelector('.v22z-kp'), kv = kp && kp.querySelector('.v22z-kp-video');
+    var kpK = null, kpDurch = false, kpVonOben = false, kpY = 0;
+    if (kp && kv) {
+      kpK = knopf('kp');
+      (kp.closest('figure') || kp).insertAdjacentElement('afterend', kpK);   // hinter das Bild: in der figure liegen alle Teile übereinander
+      kv.addEventListener('ended', function () { kpDurch = true; kpPruefen(); });
+    }
+    function absTop(el) { return el.getBoundingClientRect().top + window.scrollY; }
+    function kpMoeglich() {   // nur, wenn der Player statt der Szene zu sehen ist
+      return !!(kp && kv && kp.offsetParent && !d.classList.contains('v22z-szene') && kp.getBoundingClientRect().height > 40);
+    }
+    function kpMessen() {   // Halt so, dass „Überspringen“ mit 12 px Rand unten im Bild steht (darüber Leiste und Film)
+      kpY = Math.max(0, absTop(kpK) + (kpK.offsetHeight || 44) + 12 - innerHeight);
+    }
+    function kpAktiv() { return kpMoeglich() && !kpDurch && kpVonOben && !ruhig() && Date.now() > sprungBis; }
+    function kpPruefen() {
+      if (!kpK) return;
+      var zeigen = kpMoeglich() && !kpDurch && !ruhig();
+      if (kpK.__d !== zeigen) { kpK.__d = zeigen; kpK.classList.toggle('ist-da', zeigen); }
+    }
+    var sprungBis = 0;   // Sprung per Link: kurz kein Festhalten (wie die Szene)
+    addEventListener('hashchange', function () { sprungBis = Date.now() + 1500; });
+    document.addEventListener('click', function (e) { var a = e.target.closest && e.target.closest('a[href^="#"]'); if (a) sprungBis = Date.now() + 1500; }, true);
+    // Festgehalten wird nur, wer den Film von oben her überquert; wer schon darunter ist (Sprung per Link), scrollt frei (Jim, 23.10., Test Runde 29)
+    var kpZuletzt = 0;
+    function kpAmHalt() { return kpAktiv() && window.scrollY <= kpY + 2; }
+    function kpGrenze() { return kpAmHalt() ? kpY : Infinity; }
+    function kpScroll() {
+      if (!kpMoeglich()) return;
+      kpMessen();
+      var y = window.scrollY;
+      if (!kpVonOben && y < kpY - 10) kpVonOben = true;
+      if (kpAktiv() && kpZuletzt <= kpY + 2 && y > kpY + 1) { setzen(kpY); y = kpY; }
+      kpZuletzt = y;
+    }
+    var fingerY = null;
+    addEventListener('touchstart', function (e) { fingerY = e.touches[0] ? e.touches[0].clientY : null; }, { passive: true });
+    addEventListener('touchmove', function (e) {
+      if (fingerY === null || !e.touches[0] || !e.cancelable) return;
+      var dy = e.touches[0].clientY - fingerY;   // < 0: Finger nach oben = Seite nach unten
+      if (dy < 0 && window.scrollY >= kpGrenze() - 2) e.preventDefault();
+    }, { passive: false });
+    addEventListener('wheel', function (e) { if (e.deltaY > 0 && window.scrollY >= kpGrenze() - 2) e.preventDefault(); }, { passive: false });
+    addEventListener('keydown', function (e) {
+      if (window.scrollY < kpGrenze() - 2 || e.altKey || e.ctrlKey || e.metaKey) return;
+      var t = e.target, tag = t && t.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || tag === 'BUTTON' || (t && t.isContentEditable)) return;
+      if (['ArrowDown', 'PageDown', 'End', ' ', 'Spacebar'].indexOf(e.key) > -1) e.preventDefault();
+    });
+    if (kpK) kpK.addEventListener('click', function () {
+      var tast = tastatur();
+      kpDurch = true; try { kv.pause(); } catch (e) {}
+      if (document.fullscreenElement) { try { document.exitFullscreen(); } catch (e) {} }
+      var ziel = absTop(kpK) + (kpK.offsetHeight || 44) + 8;
+      kpPruefen(); gleiten(ziel);
+      if (tast) {   // Fokus hinter den Film: das nächste fokussierbare Element nach dem Knopf
+        var alle = [].slice.call(document.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'));
+        var n = alle.filter(function (x) { return (kpK.compareDocumentPosition(x) & 4) && x.offsetParent; })[0];
+        if (n) { try { n.focus({ preventScroll: true }); } catch (e) {} }
+      }
+    });
+
+    var geplant = 0;
+    function takt() { geplant = 0; szLage(); kpPruefen(); kpScroll(); }
+    function planen() { if (!geplant) geplant = requestAnimationFrame(takt); }
+    addEventListener('scroll', function () { kpScroll(); planen(); }, { passive: true });
+    addEventListener('resize', planen);
+    if (kv) ['play', 'pause', 'ended'].forEach(function (n) { kv.addEventListener(n, planen); });
+    setInterval(planen, 500);   // Szene: Video-Zustand und Lage des Films ändern sich auch ohne Scrollen
+    planen();
+  })();
+</script>
+<script>
+  // Runde 29 (Jim, 23.10.2026): „Machen“ – drei Stufen, nichts gedimmt, nichts läuft von selbst (Yannis, 23.10.; Verhalten aus Pams entwurf2.js).
+  // Rechner: alle Bilder stehen fertig da; fährt die Maus über eine Stufe, spielt ihre kleine Animation einmal.
+  // Handy: jede Stufe spielt einmal, wenn sie beim Scrollen ins Bild kommt. Bewegung reduziert: alles im Endzustand.
+  (function () {
+    var mz = document.querySelector('[data-mz2]');
+    if (!mz) return;
+    function ruhig() { try { if (sessionStorage.getItem('v22z-ruhig') === '1') return true; } catch (e) {} try { return matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } }
+    var stufen = [].slice.call(mz.querySelectorAll('.mz2-stufe')), breit = matchMedia('(min-width: 960px)');
+    function spiel(s) { s.classList.remove('ist-aktiv'); void s.offsetWidth; s.classList.add('ist-aktiv'); }
+    if (ruhig() || !('IntersectionObserver' in window)) { mz.classList.add('mz2-ruhig'); return; }
+    mz.classList.add('mz2-an');
+    stufen.forEach(function (s) { s.addEventListener('pointerenter', function (e) { if (breit.matches && e.pointerType === 'mouse') spiel(s); }); });
+    var einzeln = new IntersectionObserver(function (es) { es.forEach(function (x) {
+      if (x.isIntersecting && !breit.matches) { einzeln.unobserve(x.target); spiel(x.target); }
+    }); }, { threshold: 0.6 });
+    stufen.forEach(function (s) { einzeln.observe(s); });
+    function wechsel() { stufen.forEach(function (s) { s.classList.remove('ist-aktiv'); if (!breit.matches) einzeln.observe(s); }); }
+    if (breit.addEventListener) breit.addEventListener('change', wechsel);
   })();
 </script>
 <div class="live-fuss"><a href="/impressum">Impressum</a><span class="live-fuss-sep" aria-hidden="true"> · </span><a href="/datenschutz">Datenschutz</a><span class="live-fuss-sep" aria-hidden="true"> · </span><span class="live-fuss-t">Testfassung im Aufbau</span></div></body>
