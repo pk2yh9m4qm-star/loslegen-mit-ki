@@ -3071,6 +3071,15 @@
   /* Im Vollbild ist nichts über dem Film: dort bleibt sein oberster Streifen mit dem Satz stehen */
   html.v22z-szene .v22z-buehne.v22z-video-an .v22z-k-video:fullscreen { clip-path: none; }
 </style>
+<style>
+  /* Runde 36 (Jim, 23.10.2026): Erzählzeile des Keller-Films groß und dicht über dem Bild (Yannis; Pam: Platz, Größe, Abstand) */
+  .v36-zeile { position: fixed; left: 0; top: 0; z-index: 70; box-sizing: border-box; width: max-content; margin: 0; color: var(--ink);
+    font-family: Figtree, var(--font-display); font-size: clamp(28px, 2.8vw, 40px); font-weight: 650; line-height: 1.15; letter-spacing: -.01em;
+    text-wrap: balance; opacity: 0; transition: opacity .1s var(--ease); pointer-events: none; }
+  .v36-zeile.ist-da { opacity: 1; }
+  html:not(.v22z-szene) .v36-zeile { display: none; }
+  @media (prefers-reduced-motion: reduce) { .v36-zeile { transition: none; } }
+</style>
 </head>
 <body><div class="live-aufbau" role="note"><b>Diese Seite ist im Aufbau.</b> Du siehst eine Testfassung, noch nicht alles funktioniert.</div><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><!-- Symbole der Laufbänder: Lucide 1.31.0 (lucide.dev, gebündelt aus lucide-react). Lizenz:
 ISC License
@@ -7685,35 +7694,53 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
   })();
 </script>
 <script>
-  // Runde 34 (Jim, 23.10.2026): Erzählzeile des Keller-Films am Platz des Leitsatzes (Pam, Weg a). Zeiten aus der Spur „metadata“ (Cues), sonst
-  // aus SAETZE (Runde 12). Nur am Rechner (html.v22z-szene), solange der Film über der Bühne läuft (.v22z-video-an); Pause hält den Satz.
+  // Runde 36 (Jim, 23.10.2026): Erzählzeile des Keller-Films als eigene Ebene dicht über dem Bild (Yannis; Pam: links am Bildinhalt, 16 px darüber,
+  // mindestens 12 px, nie über Bild, Karte oder Leitsatz). Zeiten aus der Spur „metadata“ (Cues), sonst aus SAETZE (Runde 12). Nur am Rechner
+  // (html.v22z-szene), solange der Film über der Bühne läuft; Pause hält den Satz. Lage je Schritt aus den gemessenen Inhaltskanten des Films.
   (function () {
     var d = document.documentElement, kv = document.querySelector('.v22z-k-video'), buehne = kv && kv.closest('.v22z-buehne');
-    var platz = document.getElementById('v22z-k1'), ut = platz && platz.querySelector('.pz-ut'), zeile = ut && ut.querySelector('.pz-ut-t');
-    if (!kv || !buehne || !zeile) return;
-    var ERSATZ = [[0, 5.55, "Du machst ein Foto vom Haufen."], [5.55, 11.8, "Die KI erkennt jedes Ding und schätzt den Wert."], [11.8, 14.6, "Sie sagt dir, was wohin gehört."], [14.6, 34.4, "Und plant, wo du den Rest heute loswirst."]];
+    var lead = document.querySelector('#v22z-k1 .v22z-lead');
+    if (!kv || !buehne) return;
+    var ERSATZ = [[0, 5.55, "Du machst ein Foto vom Haufen."], [5.55, 11.8, "Die KI erkennt jedes Ding und schätzt den Wert."], [11.8, 14.6, "Sie sagt dir, was wohin gehört."], [14.6, 34.4, "Und plant, wo du den Rest heute loswirst."]], KANTEN = [[1.0, 1.0, 1.0, 1.0, 1.0, 0.1174, 0.1174, 0.1174, 0.1174, 1.0, 1.0, 1.0, 0.1522, 0.1391, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1348, 0.1391, 0.1478, 1.0, 1.0, 1.0, 1.0, 0.1174, 0.1174, 0.1174, 0.1174, 1.0, 1.0, 1.0, 1.0, 1.0], [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.1913, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.187, 0.6217, 0.5478, 0.5435, 0.5435, 0.5435, 0.5435, 0.5435, 0.5435, 0.5435, 0.5435, 0.5435, 0.5435, 0.5435, 0.5435, 0.5435, 0.5435, 0.5435, 0.5435, 0.5435, 0.5435, 1.0, 1.0], [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.1913, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.187, 1.0, 0.4304, 0.3522, 0.3565, 0.3609, 0.3609, 0.3652, 0.3609, 0.3652, 0.3652, 0.3609, 0.3652, 0.3696, 0.5, 0.5, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0], [1.0, 0.2435, 0.2435, 0.2435, 0.2435, 0.2435, 0.2435, 0.2609, 0.2565, 0.2565, 0.2565, 0.2565, 0.2565, 0.2565, 0.2565, 0.2261, 0.213, 0.213, 0.213, 0.213, 0.2043, 0.187, 0.1826, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1739, 0.1261, 0.1174, 0.1174, 0.1174, 0.1174, 0.1174, 0.1174, 0.1174, 0.1174, 0.1174, 0.1174, 0.1174, 0.1174, 0.1174, 0.1174, 0.1174, 0.1174, 0.1174, 0.1174, 0.1174, 0.1174, 0.1174, 0.1174, 0.1174, 0.1174, 0.1174, 0.1304, 0.1739, 0.1739, 0.1739, 0.1739, 0.0826, 0.087, 0.087, 0.087, 0.087, 0.087, 0.1261, 0.1261, 0.1261, 0.1261, 0.1261, 0.1261, 0.1261, 0.1261, 0.1261, 0.1261, 0.1261, 0.1261, 0.1261, 0.1261, 0.1261, 0.1261, 0.1261, 0.1261, 0.1261, 0.1261, 0.1261, 0.1261, 0.1261, 0.1261, 0.1348, 1.0]];
     var spur = kv.textTracks && kv.textTracks.length ? kv.textTracks[0] : null;
     if (spur && spur.mode === 'disabled') { try { spur.mode = 'hidden'; } catch (e) {} }
+    var z = document.createElement('p'); z.className = 'v36-zeile'; z.setAttribute('aria-hidden', 'true'); document.body.appendChild(z);
     function ruhig() { try { if (sessionStorage.getItem('v22z-ruhig') === '1') return true; } catch (e) {} try { return matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } }
     function saetze() {
       var c = spur && spur.cues;
       if (c && c.length) return [].map.call(c, function (q) { return [q.startTime, q.endTime, q.text]; });
       return ERSATZ;
     }
-    var nr = -1, wechsel = 0, uhr = 0;
+    function leadUnten() {   // Unterkante des Leitsatz-Texts (nicht seines reservierten Platzes)
+      if (!lead) return -1e6;
+      var rg = document.createRange(); rg.selectNodeContents(lead); var q = rg.getBoundingClientRect();
+      return q.height ? q.bottom : -1e6;
+    }
+    var nr = -1, soll = -1, wechsel = 0, uhr = 0;   // nr: gezeigter Satz, soll: Satz zur Filmzeit
+    function lage() {
+      if (nr < 0) return;
+      var r = kv.getBoundingClientRect(); if (!r.width) return;
+      var K = KANTEN[Math.min(nr, KANTEN.length - 1)], B = K.length, l0 = 0;
+      while (l0 < B - 1 && K[l0] >= 1) l0++;
+      var x = r.left + l0 / B * r.width;
+      z.style.left = Math.round(x) + 'px'; z.style.maxWidth = Math.floor(r.right - x - 8) + 'px';
+      var q = z.getBoundingClientRect(), b1 = Math.min(B - 1, Math.floor((q.left + q.width - r.left) / r.width * B)), m = 1;
+      for (var k = l0; k <= b1; k++) m = Math.min(m, K[k]);
+      var inhalt = r.top + m * r.height, grenze = leadUnten() + 4, unten = inhalt - 16;
+      if (unten - q.height < grenze) unten = Math.max(inhalt - 12, grenze + q.height);
+      z.style.top = Math.round(unten - q.height) + 'px';
+      window.v36Lage = { stufe: nr, abstand: Math.round(inhalt - unten), leadFrei: Math.round(unten - q.height - grenze + 4), hoehe: Math.round(q.height) };
+    }
     function an() { return d.classList.contains('v22z-szene') && buehne.classList.contains('v22z-video-an') && !kv.ended; }
     function zeigen() {
       var t = kv.currentTime || 0, S = saetze(), n = -1;
       if (an()) for (var i = 0; i < S.length; i++) if (t >= S[i][0] && (t < S[i][1] || i === S.length - 1)) n = i;
-      if (n === nr) return;
-      var vorher = nr; nr = n; clearTimeout(wechsel);
-      if (n < 0) { zeile.classList.remove('ist-da'); platz.classList.remove('ist-ut'); return; }
-      var r = kv.getBoundingClientRect(); if (r.width) ut.style.setProperty('--pz-w', Math.round(r.width) + 'px');   // so breit wie der Film
-      platz.classList.add('ist-ut');
-      if (ruhig()) { zeile.textContent = S[n][2]; zeile.classList.add('ist-da'); return; }
-      // erst wenn das Alte ausgeblendet ist, kommt der neue Satz: nie zwei zugleich. Leitsatz 0,2 s; Satz zu Satz 0,1 s aus + 0,1 s ein (= 0,2 s)
-      zeile.classList.remove('ist-da');
-      wechsel = setTimeout(function () { zeile.textContent = S[n][2]; zeile.classList.add('ist-da'); }, vorher < 0 ? 200 : 100);
+      if (n === soll) { lage(); return; }
+      soll = n; clearTimeout(wechsel);
+      function setzen() { nr = n; z.textContent = S[n][2]; lage(); z.classList.add('ist-da'); }
+      z.classList.remove('ist-da');
+      if (n < 0) { nr = -1; return; }
+      if (nr < 0 || ruhig()) setzen(); else wechsel = setTimeout(setzen, 100);   // Satz zu Satz: 0,1 s aus, 0,1 s ein
     }
     function tick() { zeigen(); uhr = !kv.paused && !kv.ended ? requestAnimationFrame(tick) : 0; }
     kv.addEventListener('play', function () { if (!uhr) uhr = requestAnimationFrame(tick); });
@@ -7721,6 +7748,7 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
     if (spur && spur.addEventListener) spur.addEventListener('cuechange', zeigen);
     new MutationObserver(zeigen).observe(buehne, { attributes: true, attributeFilter: ['class'] });
     new MutationObserver(zeigen).observe(d, { attributes: true, attributeFilter: ['class'] });
+    addEventListener('scroll', lage, { passive: true }); addEventListener('resize', lage);
   })();
 </script>
 <div class="live-fuss"><a href="/impressum">Impressum</a><span class="live-fuss-sep" aria-hidden="true"> · </span><a href="/datenschutz">Datenschutz</a><span class="live-fuss-sep" aria-hidden="true"> · </span><span class="live-fuss-t">Testfassung im Aufbau</span></div></body>
