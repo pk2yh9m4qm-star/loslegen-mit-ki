@@ -3080,6 +3080,16 @@
   html:not(.v22z-szene) .v36-zeile { display: none; }
   @media (prefers-reduced-motion: reduce) { .v36-zeile { transition: none; } }
 </style>
+<style>
+  /* Runde 37 (Jim, 23.10.2026): Keller-Erzählzeile mittig über dem Film (Yannis) */
+  .v36-zeile { text-align: center; }
+</style>
+<style>
+  /* Runde 38 (Jim, 23.10.2026): Steuerleiste weicht ab dem Schlusssatz des Films (Pam) */
+  .v26-leiste--k { transition: opacity .3s var(--ease); }
+  .v26-leiste--k.v38-weg { opacity: 0; pointer-events: none; }
+  @media (prefers-reduced-motion: reduce) { .v26-leiste--k { transition: none; } }
+</style>
 </head>
 <body><div class="live-aufbau" role="note"><b>Diese Seite ist im Aufbau.</b> Du siehst eine Testfassung, noch nicht alles funktioniert.</div><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><!-- Symbole der Laufbänder: Lucide 1.31.0 (lucide.dev, gebündelt aus lucide-react). Lizenz:
 ISC License
@@ -5729,6 +5739,7 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
             var kPfeil = (BH - 12 - KOPF_P - KOPF_A - 70) / ERG_U;
             if (PILLE_DA && kPfeil < K && kPfeil >= (1 - 0.03) * K) K = kPfeil;
           }
+          var K37 = K; K *= 0.95;   // Runde 37 (Pam, 23.10.): Bühne etwas kleiner, oben Luft für die mittige Erzählzeile, unten mehr Rand für das Endbild
           lw.style.setProperty('--k', K.toFixed(4));
           // Ober- und Unterkante der Komposition in der Bühne; die Bühne rückt um den Leerraum über dem Beispiel nach oben (07.10.)
           var kOben = BH / 2 - LAGE.mitte[1] * K, kUnten = BH / 2 + (LAGE.hoehe - LAGE.mitte[1]) * K;
@@ -5736,7 +5747,8 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
           // Unterkante und Breite des Kellerraums (Mulde 140/40, 920 × 520 in der Leinwand): dort sitzt die Leiste der Schritte
           buehne.style.setProperty('--v22z-kb', (BH / 2 + (560 - LAGE.mitte[1]) * K).toFixed(1) + 'px');
           buehne.style.setProperty('--v22z-kw', (920 * K).toFixed(1) + 'px');
-          film.style.setProperty('--v22z-hoch', Math.max(0, kOben + 36).toFixed(1) + 'px');   // 08.10.: Fenster rückt 40 px dichter an die Unterzeile
+          var D37 = Math.max(0, (ERG_U || 0) * (K37 - K) - 6);   // Runde 37: so weit rückt die Bühne nach unten (Gewinn unten minus 6 px)
+          film.style.setProperty('--v22z-hoch', Math.max(0, kOben + 36 - D37).toFixed(1) + 'px');   // 08.10.: Fenster rückt 40 px dichter an die Unterzeile
           S0 = 348 * K / 230;
           // Größte Entfernung: nur so weit, dass die Kacheln den ganzen Schirm füllen, auch während die Reihen endlos weiterziehen
           // (ein Band deckt höchstens 4198 px Wandmaß in der Breite, die Reihen −2 … 13 decken ±1386 px in der Höhe)
@@ -5765,9 +5777,9 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
           // (12 px Rand, höchstens so weit wie bisher) oder samt Schatten ganz über dem Rand liegt (h2 dann KOPF_H2 unter dem Rand); nie ein
           // Rest. Der Schlusssatz mit Pille steht immer ganz im Bild; die Fußzeile rückt mit (fussSetzen).
           if (KOPF_A !== null) {
-            var h2Y = oben + kOben * zf - KOPF_A;
+            var h2Y = oben + (kOben - D37) * zf - KOPF_A;   // Runde 37: Bühne steht D37 tiefer
             sperrY = PILLE_DA ? Math.min(sperrY, h2Y - KOPF_P - 12) : Math.min(oben, h2Y - KOPF_H2);
-            sperrY = Math.min(oben, Math.max(sperrY, oben + (kOben + ERG_U * K) * zf + 10 - innerHeight));
+            sperrY = Math.min(oben, Math.max(sperrY, oben + (kOben + ERG_U * K) * zf + 16 - innerHeight));   // Runde 37 (Pam): 16 px Rand unter dem Endbild
           }
           startY = sperrY - (STEUER + .25 * (kUnten - kOben)) * zf;
           haltY = oben + (Z.z1 + 1) * pxVh;   // sicher in der Zone „Zoom fertig“, auch wenn der Browser die Position rundet
@@ -7722,11 +7734,13 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
       var r = kv.getBoundingClientRect(); if (!r.width) return;
       var K = KANTEN[Math.min(nr, KANTEN.length - 1)], B = K.length, l0 = 0;
       while (l0 < B - 1 && K[l0] >= 1) l0++;
-      var x = r.left + l0 / B * r.width;
-      z.style.left = Math.round(x) + 'px'; z.style.maxWidth = Math.floor(r.right - x - 8) + 'px';
-      var q = z.getBoundingClientRect(), b1 = Math.min(B - 1, Math.floor((q.left + q.width - r.left) / r.width * B)), m = 1;
-      for (var k = l0; k <= b1; k++) m = Math.min(m, K[k]);
-      var inhalt = r.top + m * r.height, grenze = leadUnten() + 4, unten = inhalt - 16;
+      // Runde 37 (Yannis, 23.10.): immer mittig über dem Film; die Höhe richtet sich nach dem Inhalt unter der mittigen Breite
+      z.style.maxWidth = Math.floor(r.width - 16) + 'px';
+      var w0 = z.getBoundingClientRect().width;
+      z.style.left = Math.round(r.left + (r.width - w0) / 2) + 'px';
+      var q = z.getBoundingClientRect(), b0 = Math.max(0, Math.floor((q.left - r.left) / r.width * B)), b1 = Math.min(B - 1, Math.floor((q.right - r.left) / r.width * B)), m = 1;
+      for (var k = b0; k <= b1; k++) m = Math.min(m, K[k]);
+      var inhalt = r.top + m * r.height, grenze = leadUnten() + 20, unten = inhalt - 16;   // Runde 37 (Pam): mindestens 20 px zum Leitsatz-Text
       if (unten - q.height < grenze) unten = Math.max(inhalt - 12, grenze + q.height);
       z.style.top = Math.round(unten - q.height) + 'px';
       window.v36Lage = { stufe: nr, abstand: Math.round(inhalt - unten), leadFrei: Math.round(unten - q.height - grenze + 4), hoehe: Math.round(q.height) };
@@ -7749,6 +7763,23 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
     new MutationObserver(zeigen).observe(buehne, { attributes: true, attributeFilter: ['class'] });
     new MutationObserver(zeigen).observe(d, { attributes: true, attributeFilter: ['class'] });
     addEventListener('scroll', lage, { passive: true }); addEventListener('resize', lage);
+  })();
+</script>
+<script>
+  // Runde 38 (Jim, 23.10.2026): Ab dem Schlusssatz im Film (32.8 s) weicht die Steuerleiste, damit Satz und Pille frei liegen; bei Pause oder
+  // Zurückspulen kommt sie wieder (Pam).
+  (function () {
+    var kv = document.querySelector('.v22z-k-video'), leiste = document.querySelector('.v26-leiste--k');
+    if (!kv || !leiste) return;
+    var uhr = 0;
+    function pruefen() {
+      var weg = !kv.paused && !kv.ended && (kv.currentTime || 0) >= 32.8;
+      if (weg && leiste.contains(document.activeElement)) document.activeElement.blur();
+      leiste.classList.toggle('v38-weg', weg);
+    }
+    function tick() { pruefen(); uhr = !kv.paused && !kv.ended ? requestAnimationFrame(tick) : 0; }
+    kv.addEventListener('play', function () { if (!uhr) uhr = requestAnimationFrame(tick); });
+    ['pause', 'seeked', 'timeupdate', 'ended', 'emptied'].forEach(function (n) { kv.addEventListener(n, pruefen); });
   })();
 </script>
 <div class="live-fuss"><a href="/impressum">Impressum</a><span class="live-fuss-sep" aria-hidden="true"> · </span><a href="/datenschutz">Datenschutz</a><span class="live-fuss-sep" aria-hidden="true"> · </span><span class="live-fuss-t">Testfassung im Aufbau</span></div></body>
