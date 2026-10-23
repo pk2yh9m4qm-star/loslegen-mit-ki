@@ -2968,7 +2968,7 @@
   .mz2-an.mz2-da .mz2-stufe { transition: opacity .45s var(--ease), translate .5s var(--ease); transition-delay: calc(var(--t, 0) * 1s); }
   .mz2-an .mz2-stufe::before { transform-origin: 0 50%; }
   .mz2-an.mz2-da .mz2-stufe::before { transition: scale .45s var(--ease); transition-delay: calc(var(--t, 0) * 1s + 1.75s); }
-  .mz2-an.mz2-da .mz2-stufe::after { transition: opacity .15s; transition-delay: calc(var(--t, 0) * 1s + 2.15s); }
+  .mz2-an.mz2-da .mz2-stufe::after { transition: opacity .15s; transition-delay: calc(var(--t, 0) * 1s + 2.0s); }
 }
 
 /* 1 · Idee auswählen: Karten fächern sich auf, eine hebt sich und bekommt einen Haken */
@@ -3050,6 +3050,26 @@
   .mz2-stufe::before { left: calc(50% + 30px); right: -50%; }
   .mz2-stufe::after { right: calc(-50% + 1px); }
 }
+</style>
+<style>
+  /* Runde 34 (Jim, 23.10.2026): „ca. 25 Min.“ auf der Karte weg, wie im Film V25g (Yannis) */
+  .v25-runde-k { display: none !important; }
+  /* Erzählzeile am Platz des Leitsatzes, nur am Rechner (Szene), solange der Film läuft (Pam, Weg a; Vorlage Entwurf 2) */
+  /* Leitsatz und Zeile teilen sich einen Platz fester Höhe (--pz-h, zwei Zeilen): die Zeile steht direkt hinter dem Leitsatz in derselben Zelle
+     des Kopf-Rasters (der Kopf selbst bleibt Zeichen für Zeichen wie in Runde 8, dessen Selbstprüfung ihn sucht) */
+  .pz-ut { display: none; }
+  html.v22z-szene #v22z-k1 { --pz-h: max(calc(2 * 1.25 * clamp(20px, 1.9vw, 28px)), calc(2 * 1.45 * clamp(1.1875rem, 1.6vw, 1.5rem))); }
+  html.v22z-szene #v22z-k1 .v22z-lead { min-height: var(--pz-h); box-sizing: border-box; transition: opacity .2s var(--ease) .2s; }
+  html.v22z-szene #v22z-k1.ist-ut .v22z-lead { opacity: 0; transition-delay: 0s; }
+  html.v22z-szene #v22z-k1 :is(.v22z-lead, .pz-ut) { grid-area: 3 / 1; }
+  html.v22z-szene .pz-ut { align-self: start; box-sizing: border-box; width: min(100%, var(--pz-w, 100%)); height: var(--pz-h); margin: 0;
+    display: flex; justify-content: center; pointer-events: none; }
+  html.v22z-szene .pz-ut-t { color: var(--ink); font-family: Figtree, var(--font-display); font-size: clamp(20px, 1.9vw, 28px); font-weight: 650; line-height: 1.25;
+    letter-spacing: -.01em; text-align: center; text-wrap: balance; opacity: 0; transition: opacity .1s var(--ease); }
+  html.v22z-szene #v22z-k1.ist-ut .pz-ut-t.ist-da { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) { html.v22z-szene #v22z-k1 .v22z-lead, html.v22z-szene .pz-ut-t { transition: none; } }
+  /* Im Vollbild ist nichts über dem Film: dort bleibt sein oberster Streifen mit dem Satz stehen */
+  html.v22z-szene .v22z-buehne.v22z-video-an .v22z-k-video:fullscreen { clip-path: none; }
 </style>
 </head>
 <body><div class="live-aufbau" role="note"><b>Diese Seite ist im Aufbau.</b> Du siehst eine Testfassung, noch nicht alles funktioniert.</div><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><!-- Symbole der Laufbänder: Lucide 1.31.0 (lucide.dev, gebündelt aus lucide-react). Lizenz:
@@ -3246,13 +3266,13 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
       <div class="wrap v22z-kopf v22z-kopf--mitte" id="v22z-k1" data-v22z-auftritt>
         <span class="tag v22z-marke">Entdecken</span>
         <h2 class="display v22z-titel" id="moeglich-title">Mehr als mal eben die KI fragen.</h2>
-        <p class="v22z-lead">Ein Beispiel: Du fotografierst deinen Keller. Schau, was daraus wird.</p>
+        <p class="v22z-lead">Ein Beispiel: Du fotografierst deinen Keller. Schau, was daraus wird.</p><p class="pz-ut" aria-hidden="true"><span class="pz-ut-t"></span></p>
       </div>
       <div class="v22z-film" id="v22z-film" data-v22z-nach="#v22z-k1">
         <div class="v22z-buehne">
           <div class="v22z-leinwand">
             <div class="v22z-keller v22z-a" aria-hidden="true"><div class="v22z-mulde"><svg class="v25-kegel" viewBox="0 0 920 520" focusable="false" aria-hidden="true"><path d="M66 98 L172 92 L940 200 L900 520 L410 520 Z" fill="url(#v25-kegel-g)"/><ellipse cx="610" cy="492" rx="250" ry="38" fill="url(#v25-fleck-g)"/></svg><span class="v22z-kfenster"><svg viewBox="0 0 120 74" focusable="false"><rect x="2" y="2" width="116" height="62" rx="9" fill="#fffaf1"/><defs><linearGradient id="v22z-kf-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bcd6e6"/><stop offset="1" stop-color="#e4eef2"/></linearGradient></defs><rect x="11" y="10" width="98" height="46" rx="4" fill="url(#v22z-kf-g)"/><path d="M 11 46 Q 50 36 109 44 L 109 56 L 11 56 Z" fill="#b7cfa8"/><path d="M 36 10 V 56 M 60 10 V 56 M 84 10 V 56" stroke="#8d8174" stroke-width="5" stroke-linecap="round"/><rect x="-4" y="62" width="128" height="10" rx="5" fill="#eadfcd"/></svg></span></div></div>
-            <video class="v22z-k-video" src="/keller-film-v25f.mp4" preload="metadata" playsinline aria-label="Video: Den Keller ausmisten, 34 Sekunden, ohne Ton"><track kind="captions" srclang="de" label="Deutsch" src="/keller-film-v25f.vtt" default></video>
+            <video class="v22z-k-video" src="/keller-film-v25g.mp4" preload="metadata" playsinline aria-label="Video: Den Keller ausmisten, 34 Sekunden, ohne Ton"><track kind="metadata" srclang="de" label="Deutsch" src="/keller-film-v25f.vtt"></video>
             <div class="v22z-vh v22z-vh--k"><p class="v22z-vh-ut" aria-live="polite"></p><p class="v22z-sr v26-sr-k" aria-live="polite"></p><span class="v22z-vh-knoepfe"><button type="button" class="v22z-vh-pause" aria-label="Pause"><svg class="v22z-i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8.5 6v12M15.5 6v12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg><svg class="v22z-i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8.5 5.8v12.4L18.6 12z" fill="currentColor"/></svg></button></span><span class="v22z-vh-fort" aria-hidden="true"><i></i></span><div class="v26-leiste v26-leiste--k"><button type="button" class="v26-k v26-pause" aria-label="Film abspielen"><svg class="v26-i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8.5 5.8v12.4L18.6 12z" fill="currentColor"/></svg><svg class="v26-i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8.5 6v12M15.5 6v12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg><svg class="v26-i-nochmal" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1L3.5 8.5M3.5 3.5v5h5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="v26-k-text">Abspielen</span></button><span class="v26-linie" aria-hidden="true"><b></b></span><button type="button" class="v26-k v26-voll" aria-label="Vollbild"><svg class="v26-i-gross" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><svg class="v26-i-klein" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 4v5H4M15 4v5h5M15 20v-5h5M9 20v-5H4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="v26-k-text">Vollbild</span></button><button type="button" class="v26-k v26-skip" aria-label="Film überspringen"><span class="v26-k-text">Überspringen</span><svg class="v26-i-runter" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4.5v14M6.5 13l5.5 5.5 5.5-5.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div>
             <button type="button" class="v22z-k-play" aria-label="Beispiel abspielen: Den Keller ausmisten"><span class="v22z-k-rund" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M8.5 5.8v12.4L18.6 12z"/></svg></span></button>
             <div class="v25-handfeld" aria-hidden="true"><div class="v22z-hand v22z-a" aria-hidden="true"><svg class="v22z-strahl" viewBox="-130 -130 260 260" focusable="false"><circle r="128" fill="url(#v22z-g-blitz)"/><path d="M 0 -92 V -124 M 0 92 V 124 M -64 0 H -104 M 64 0 H 104 M -56 -62 L -82 -92 M 56 -62 L 82 -92 M -56 62 L -82 92 M 56 62 L 82 92" stroke="#f2b84f" stroke-width="8" stroke-linecap="round"/></svg><svg class="v22z-hand-svg" viewBox="0 0 220 1000" focusable="false"><path class="v25-aermel" d="M120 244 L 148 1000" stroke-width="62" stroke-linecap="round"/><path class="v25-handflaeche" d="M74 118 C 66 166, 78 206, 104 222 C 128 236, 156 228, 164 196 C 168 172, 165 144, 160 118 Z" fill="url(#v25-g-hand)"/><path class="v25-buendchen" d="M92 236 C 108 244, 136 242, 150 232" stroke-width="13" stroke-linecap="round"/><rect x="62" y="0" width="96" height="170" rx="18" fill="#2b2722"/><rect x="68" y="8" width="84" height="154" rx="12" fill="#1d1a16"/></svg><div class="v25-live"><div class="v25-live-welt"><i class="v25-live-grund"></i><span class="v22z-kfenster" style="left:192px;top:70px"><svg viewBox="0 0 120 74" focusable="false"><rect x="2" y="2" width="116" height="62" rx="9" fill="#fffaf1"/><rect x="11" y="10" width="98" height="46" rx="4" fill="url(#v22z-kf-g)"/><path d="M 11 46 Q 50 36 109 44 L 109 56 L 11 56 Z" fill="#b7cfa8"/><path d="M 36 10 V 56 M 60 10 V 56 M 84 10 V 56" stroke="#8d8174" stroke-width="5" stroke-linecap="round"/><rect x="-4" y="62" width="128" height="10" rx="5" fill="#eadfcd"/></svg></span><svg class="v25-kegel" style="left:140px;top:40px" viewBox="0 0 920 520" focusable="false" aria-hidden="true"><path d="M66 98 L172 92 L940 200 L900 520 L410 520 Z" fill="url(#v25-kegel-g)"/><ellipse cx="610" cy="492" rx="250" ry="38" fill="url(#v25-fleck-g)"/></svg><span class="v25-ding" style="left:570px;top:410px;width:230px;height:130px"><svg viewBox="0 0 230 130" focusable="false"><rect width="230" height="130" rx="10" fill="url(#v22z-g-karton)"/><rect width="230" height="9" rx="4.5" fill="#fff" opacity=".22"/><rect x="104" width="22" height="30" rx="2" fill="#d9c09a"/><path d="M10 125 H220" stroke="#a9825a" stroke-width="3" stroke-linecap="round" opacity=".3"/></svg></span><span class="v25-ding" style="left:590px;top:292px;width:190px;height:120px"><svg style="transform:rotate(-2deg)" viewBox="0 0 190 120" focusable="false" overflow="visible"><rect x="-2" y="20" width="58" height="13" rx="4" fill="#cfa679" transform="rotate(-32 2 30)"/><rect x="134" y="20" width="58" height="13" rx="4" fill="#cfa679" transform="rotate(32 188 30)"/><rect x="5" y="20" width="180" height="12" rx="4" fill="#8f6c4a" opacity=".55"/><rect y="26" width="190" height="94" rx="8" fill="url(#v22z-g-karton)"/><rect y="26" width="190" height="7" rx="3.5" fill="#fff" opacity=".22"/><rect x="84" y="26" width="22" height="94" fill="#d9c09a" opacity=".9"/></svg></span><span class="v25-ding" style="left:615px;top:232px;width:140px;height:103px"><svg style="transform:rotate(2.5deg)" focusable="false"><use href="#v22z-buecher"/></svg></span><span class="v25-ding" style="left:622px;top:175px;width:135px;height:81px"><svg style="transform:rotate(-5deg)" focusable="false"><use href="#v22z-platte"/></svg></span><span class="v25-ding" style="left:475px;top:419px;width:150px;height:79px"><svg style="transform:rotate(-78deg)" focusable="false"><use href="#v22z-schlitten"/></svg></span><span class="v25-ding" style="left:800px;top:365px;width:76px;height:169px"><svg style="transform:rotate(-12deg)" focusable="false"><use href="#v22z-gitarre"/></svg></span><span class="v25-ding" style="left:862px;top:320px;width:88px;height:220px"><svg viewBox="0 0 80 200" focusable="false" overflow="visible"><rect x="37" y="60" width="6" height="128" rx="3" fill="url(#v22z-g-dunkel)"/><ellipse cx="40" cy="192" rx="24" ry="7" fill="url(#v22z-g-dunkel)"/><g class="v25-lampenschirm" transform="translate(-14 4) rotate(16 40 10)"><path d="M22 8 H58 L76 70 H4 Z" fill="url(#v22z-g-orange)"/><path d="M22 8 H58 L62 22 H18 Z" fill="#fff" opacity=".18"/></g></svg></span><span class="v25-ding" style="left:450px;top:420px;width:80px;height:120px"><svg focusable="false"><use href="#v22z-stuhl"/></svg></span><span class="v25-ding" style="left:585px;top:477px;width:75px;height:64px"><svg focusable="false"><use href="#v22z-fondue"/></svg></span><span class="v25-ding" style="left:680px;top:451px;width:130px;height:89px"><svg focusable="false"><use href="#v22z-laufrad"/></svg></span></div><svg class="v25-live-ui" viewBox="68 8 84 154" focusable="false"><g class="v25-d-ecken" opacity="0"><path d="M76 62 V55 H83" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><path d="M137 55 H144 V62" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><path d="M76 108 V115 H83" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><path d="M137 115 H144 V108" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></g><g class="v25-d-ausloeser"><circle cx="110" cy="140" r="9.5" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="110" cy="140" r="7" fill="#fff"/></g><circle class="v25-d-tipp2" cx="110" cy="140" r="5" fill="#2b2722" opacity="0"/><rect class="v25-d-foto" x="70.5" y="10.5" width="79" height="149" rx="10" fill="none" stroke="#fffdf9" stroke-width="3" opacity="0"/><rect class="v25-d-blitz" x="68" y="8" width="84" height="154" fill="#fff" opacity="0"/></svg></div><svg class="v25-hand-vorn" viewBox="0 0 220 1000" focusable="false"><rect x="47" y="69" width="23" height="19" rx="9.5" fill="url(#v25-g-finger)" transform="rotate(-4 58.5 78.5)"/><rect x="45" y="92" width="25" height="19" rx="9.5" fill="url(#v25-g-finger)" transform="rotate(-2 57.5 101.5)"/><rect x="47" y="115" width="23" height="19" rx="9.5" fill="url(#v25-g-finger)" transform="rotate(0 58.5 124.5)"/><rect x="51" y="137" width="19" height="19" rx="9.5" fill="url(#v25-g-finger)" transform="rotate(3 60.5 146.5)"/><rect class="v25-daumen" x="144" y="122" width="25" height="80" rx="12.5" fill="url(#v25-g-hand)" transform="rotate(-12 156 165)"/></svg></div></div>
@@ -3274,7 +3294,7 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
                 
                 
               </div>
-              <div class="v22z-kp"><div class="v26-kopf"><p class="v26-satz v26-satz--vor" aria-live="polite">4 Schritte · 34 Sekunden · ohne Ton</p></div><div class="v22z-kp-fenster"><video class="v22z-kp-video" data-hoch-src="/keller-film-hoch.mp4" data-hoch-poster="/a-aa84b3cbd73a.webp" src="/keller-film-v25f.mp4" poster="/a-a543d0f84e89.webp" preload="none" playsinline aria-label="Video: Den Keller ausmisten, 34 Sekunden, ohne Ton"><track kind="captions" srclang="de" label="Deutsch" src="/keller-film-v25f.vtt" default></video><script>(function () {   // Runde 20: unter 768 px die Hochkant-Fassung (vor dem Player-Skript, deshalb direkt hinter dem Video)
+              <div class="v22z-kp"><div class="v26-kopf"><p class="v26-satz v26-satz--vor" aria-live="polite">4 Schritte · 34 Sekunden · ohne Ton</p></div><div class="v22z-kp-fenster"><video class="v22z-kp-video" data-hoch-src="/keller-film-hoch-v25g.mp4" data-hoch-poster="/a-aa84b3cbd73a.webp" src="/keller-film-v25g.mp4" poster="/a-cefecfe10acd.webp" preload="none" playsinline aria-label="Video: Den Keller ausmisten, 34 Sekunden, ohne Ton"><track kind="metadata" srclang="de" label="Deutsch" src="/keller-film-v25f.vtt"></video><script>(function () {   // Runde 20: unter 768 px die Hochkant-Fassung (vor dem Player-Skript, deshalb direkt hinter dem Video)
   var v = document.currentScript.previousElementSibling;
   if (!v || !window.matchMedia || !matchMedia('(max-width: 767px)').matches) return;
   v.setAttribute('poster', v.getAttribute('data-hoch-poster')); v.setAttribute('src', v.getAttribute('data-hoch-src'));
@@ -7662,6 +7682,45 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
       var strich = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { so.classList.add('spielt'); strich.disconnect(); } }, { threshold: 0.6 });
       strich.observe(pillen);
     } else if (so) so.classList.add('spielt');
+  })();
+</script>
+<script>
+  // Runde 34 (Jim, 23.10.2026): Erzählzeile des Keller-Films am Platz des Leitsatzes (Pam, Weg a). Zeiten aus der Spur „metadata“ (Cues), sonst
+  // aus SAETZE (Runde 12). Nur am Rechner (html.v22z-szene), solange der Film über der Bühne läuft (.v22z-video-an); Pause hält den Satz.
+  (function () {
+    var d = document.documentElement, kv = document.querySelector('.v22z-k-video'), buehne = kv && kv.closest('.v22z-buehne');
+    var platz = document.getElementById('v22z-k1'), ut = platz && platz.querySelector('.pz-ut'), zeile = ut && ut.querySelector('.pz-ut-t');
+    if (!kv || !buehne || !zeile) return;
+    var ERSATZ = [[0, 5.55, "Du machst ein Foto vom Haufen."], [5.55, 11.8, "Die KI erkennt jedes Ding und schätzt den Wert."], [11.8, 14.6, "Sie sagt dir, was wohin gehört."], [14.6, 34.4, "Und plant, wo du den Rest heute loswirst."]];
+    var spur = kv.textTracks && kv.textTracks.length ? kv.textTracks[0] : null;
+    if (spur && spur.mode === 'disabled') { try { spur.mode = 'hidden'; } catch (e) {} }
+    function ruhig() { try { if (sessionStorage.getItem('v22z-ruhig') === '1') return true; } catch (e) {} try { return matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } }
+    function saetze() {
+      var c = spur && spur.cues;
+      if (c && c.length) return [].map.call(c, function (q) { return [q.startTime, q.endTime, q.text]; });
+      return ERSATZ;
+    }
+    var nr = -1, wechsel = 0, uhr = 0;
+    function an() { return d.classList.contains('v22z-szene') && buehne.classList.contains('v22z-video-an') && !kv.ended; }
+    function zeigen() {
+      var t = kv.currentTime || 0, S = saetze(), n = -1;
+      if (an()) for (var i = 0; i < S.length; i++) if (t >= S[i][0] && (t < S[i][1] || i === S.length - 1)) n = i;
+      if (n === nr) return;
+      var vorher = nr; nr = n; clearTimeout(wechsel);
+      if (n < 0) { zeile.classList.remove('ist-da'); platz.classList.remove('ist-ut'); return; }
+      var r = kv.getBoundingClientRect(); if (r.width) ut.style.setProperty('--pz-w', Math.round(r.width) + 'px');   // so breit wie der Film
+      platz.classList.add('ist-ut');
+      if (ruhig()) { zeile.textContent = S[n][2]; zeile.classList.add('ist-da'); return; }
+      // erst wenn das Alte ausgeblendet ist, kommt der neue Satz: nie zwei zugleich. Leitsatz 0,2 s; Satz zu Satz 0,1 s aus + 0,1 s ein (= 0,2 s)
+      zeile.classList.remove('ist-da');
+      wechsel = setTimeout(function () { zeile.textContent = S[n][2]; zeile.classList.add('ist-da'); }, vorher < 0 ? 200 : 100);
+    }
+    function tick() { zeigen(); uhr = !kv.paused && !kv.ended ? requestAnimationFrame(tick) : 0; }
+    kv.addEventListener('play', function () { if (!uhr) uhr = requestAnimationFrame(tick); });
+    ['pause', 'ended', 'seeked', 'timeupdate', 'emptied'].forEach(function (n) { kv.addEventListener(n, zeigen); });
+    if (spur && spur.addEventListener) spur.addEventListener('cuechange', zeigen);
+    new MutationObserver(zeigen).observe(buehne, { attributes: true, attributeFilter: ['class'] });
+    new MutationObserver(zeigen).observe(d, { attributes: true, attributeFilter: ['class'] });
   })();
 </script>
 <div class="live-fuss"><a href="/impressum">Impressum</a><span class="live-fuss-sep" aria-hidden="true"> · </span><a href="/datenschutz">Datenschutz</a><span class="live-fuss-sep" aria-hidden="true"> · </span><span class="live-fuss-t">Testfassung im Aufbau</span></div></body>
