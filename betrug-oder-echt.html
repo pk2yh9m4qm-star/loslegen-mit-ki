@@ -4,15 +4,20 @@
   <meta name="robots" content="noindex, nofollow">
   <meta name="description" content="Ideen, wie KI dir im Alltag wirklich Arbeit abnimmt. Von Menschen zusammengestellt und getestet. Diese Seite ist im Aufbau.">
   <meta property="og:site_name" content="KIosk">
-  <meta property="og:title" content="Betrug oder echt? – E-Mail, SMS oder Anruf prüfen, bevor du reagierst · KIosk">
-  <meta property="og:description" content="Ideen, wie KI dir im Alltag wirklich Arbeit abnimmt. Von Menschen zusammengestellt und getestet. Diese Seite ist im Aufbau.">
+  <meta property="og:title" content="Betrug oder echt? · KIosk">
+  <meta property="og:image" content="https://loslegen-mit-ki.de/teilen-betrug-oder-echt.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Betrug oder echt? · KIosk">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:description" content="Eine SMS von deiner Bank, eine E-Mail mit Frist oder ein Anruf von der Polizei: Betrug sieht heute oft täuschend echt aus.">
   <meta property="og:url" content="https://loslegen-mit-ki.de/betrug-oder-echt">
   <meta property="og:type" content="website">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <script>
   // Live-Fassung (15.10.2026): übernimmt, was bisher die Hülle von Version 25 getan hat (Seitenwechsel, Anker, Nachrichten).
   (function () {
-    var ADR = {"start": "/", "ideen": "/ideen", "anleitung": "/brief-verstehen", "abo": "/kontoauszug-abos", "wohnzimmer": "/wohnzimmer-neu-denken", "keller": "/keller-ausmisten", "bereich": "/mein-bereich", "wochenende": "/wochenende-planen", "vorsorge": "/vorsorgemappe-anlegen", "betrug": "/betrug-oder-echt", "anschaffung": "/grosse-anschaffung-planen", "miete": "/zahlst-du-zu-viel-miete"}, SEITE = 'betrug';
+    var ADR = {"start": "/", "ideen": "/ideen", "anleitung": "/brief-verstehen", "abo": "/kontoauszug-abos", "wohnzimmer": "/wohnzimmer-neu-denken", "keller": "/keller-ausmisten", "bereich": "/mein-bereich", "wochenende": "/wochenende-planen", "vorsorge": "/vorsorgemappe-anlegen", "betrug": "/betrug-oder-echt", "anschaffung": "/grosse-anschaffung-planen", "miete": "/zahlst-du-zu-viel-miete", "vertrag": "/ungewollter-vertrag", "gehalt": "/gehaltsgespraech-vorbereiten", "foerderung": "/zuschuesse-finden", "rueckholen": "/geld-nach-betrug-zurueckholen"}, SEITE = 'betrug';
     function ziel(v, a) { if (v === 'start' && a === 'ideen') { v = 'ideen'; a = ''; } return { v: ADR[v] ? v : 'start', a: a || '' }; }
     function liefern(a, von) {
       if (SEITE === 'bereich') { window.postMessage({ mb: a, von: von || '' }, '*'); return; }
@@ -1988,8 +1993,51 @@ body { padding-bottom: 0; }
 @media (prefers-reduced-motion: reduce) { .ra3 .ra-leiste, .ra3 .ra-auf summary .icon { transition: none !important; } }
 </style>
 <style>/* Runde 27: Prompt-Block bricht lange Links um */ .ra-auf, .ra-auf-innen { min-width: 0; } .ra-auftrag { max-width: 100%; box-sizing: border-box; overflow-wrap: anywhere; word-break: normal; }</style>
+<style>
+  /* Runde 44 (Jim, 27.10.2026): Kupfer, Indigo, Petrol auf Helligkeit und Sättigung der übrigen Kategorien gebracht (Bauauftrag Punkt 7); .ra-weitere setzt die alten Töne auf den Anleitungsseiten selbst */
+  :root, .ra-weitere { --copper-a: #ce9780; --copper-b: #9a5a45; --copper-c: #491e1e; --indigo-a: #bdbbdf; --indigo-b: #837eb3; --indigo-c: #443b61; --petrol-a: #9ec9c8; --petrol-b: #4e9393; --petrol-c: #1c4a4f; }
+</style>
+<style>
+  /* Runde 47 (Jim, 27.10.2026), Punkt 1: zwei gleiche Pillen „Alle Ideen“ und „Mein Bereich“ (Pams Skizze v1-nachher), kein KI-Kompass */
+  .site-nav .nav-end { gap: 12px; }
+  .site-nav .nav-links.v44-nav { display: flex; gap: 0; }
+  .site-nav .v44-nav a.v47-pille, .site-nav .nav-mein { display: inline-flex; align-items: center; justify-content: center; gap: 10px; box-sizing: border-box;
+    min-height: 44px; padding: 0 16px; border-radius: 999px; background: linear-gradient(#fdfbf7, #f3ede3); border: 1px solid rgb(60 45 30 / .13);
+    box-shadow: inset 0 1px 0 #fff, 0 2px 4px rgb(96 72 46 / .14), 0 10px 18px -10px rgb(96 72 46 / .45); color: var(--ink); text-decoration: none;
+    font-size: .875rem; font-weight: 650; line-height: 1; white-space: nowrap; }
+  .site-nav .v44-nav a.v47-pille::after { display: none; }
+  .site-nav .v47-pille .v47-ic { width: 18px; height: 18px; flex: none; }
+  .site-nav .nav-mein .nav-mein__ich { width: 18px; height: 18px; background: none; box-shadow: none; color: inherit; font-size: .875rem; }
+  .site-nav .nav-mein .nav-mein__ich .icon { font-size: 18px; }
+  .site-nav .nav-mein.is-konto .nav-mein__ich { width: 24px; height: 24px; margin-left: -4px; }
+  .site-nav :is(.v47-pille, .nav-mein)[aria-current="page"] { background: linear-gradient(#efe8dd, #f6f1e8); box-shadow: inset 0 1.5px 3px rgb(96 72 46 / .22); }
+  .site-nav .v47-pille:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+  @media (max-width: 700px) {
+    .site-nav .nav-end { gap: 8px; }
+    .site-nav .v47-pille .v47-ic { display: none; }
+    .site-nav .v44-nav a.v47-pille { padding: 0 14px; }
+    .site-nav .nav-mein { width: 44px; padding: 0; }
+  }
+  @media (max-width: 340px) { .site-nav .v44-nav a.v47-pille { padding: 0 12px; font-size: .8125rem; } .site-nav .nav-end { gap: 6px; } }
+</style>
+<style>
+  /* Runde 47 (Jim, 27.10.2026), Punkt 6: kleines Fenster am Start-Knopf (Pams Bild v6-nachher) */
+  .v47-hw { position: absolute; z-index: 1000; box-sizing: border-box; width: min(384px, calc(100vw - 32px)); padding: 20px 22px 18px; border-radius: 20px; background: #fff;
+    border: 1px solid #e7dfd4; box-shadow: 0 24px 48px -12px rgb(60 40 20 / .35), 0 2px 6px rgb(60 40 20 / .12); color: #23201c; font-family: inherit; text-align: left; }
+  .v47-hw::before { content: ""; position: absolute; top: -8px; left: calc(var(--pfeil, 40px) - 8px); width: 14px; height: 14px; background: #fff; border: 1px solid #e7dfd4;
+    border-right: 0; border-bottom: 0; transform: rotate(45deg); }
+  .v47-hw.v47-hw--oben::before { top: auto; bottom: -8px; transform: rotate(225deg); }
+  .v47-hw p { margin: 0; font-size: 16px; line-height: 1.5; font-weight: 500; color: #23201c !important; }
+  .v47-hw b { font-weight: 700; }
+  .v47-hw-fuss { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 18px; }
+  .v47-hw-leise { display: inline-flex; align-items: center; min-height: 44px; color: #4a443c !important; font-size: 15px; font-weight: 600; text-decoration: underline;
+    text-underline-offset: 3px; text-decoration-color: rgb(60 45 30 / .35); }
+  .v47-hw-los { min-height: 44px; padding: 0 22px; border: 0; border-radius: 999px; background: linear-gradient(#4a433b, #1d1a16); color: #fbf7f0; font: inherit; font-size: 15px;
+    font-weight: 650; cursor: pointer; box-shadow: inset 0 1px 0 rgb(255 255 255 / .18), 0 2px 4px rgb(96 72 46 / .3), 0 12px 20px -12px rgb(96 72 46 / .7); }
+  :is(.v47-hw-leise, .v47-hw-los):focus-visible { outline: 2px solid #3b5a9a; outline-offset: 3px; }
+</style>
 </head>
-<body><div class="live-aufbau" role="note"><b>Diese Seite ist im Aufbau.</b> Du siehst eine Testfassung, noch nicht alles funktioniert.</div><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="ls-folder-heart" viewBox="0 0 24 24"><path d="M10.638 20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v3.417"/><path d="M14.62 18.8A2.25 2.25 0 1 1 18 15.836a2.25 2.25 0 1 1 3.38 2.966l-2.626 2.856a.998.998 0 0 1-1.507 0z"/></symbol><symbol id="ls-message-square-warning" viewBox="0 0 24 24"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"/><path d="M12 15h.01"/><path d="M12 7v4"/></symbol><symbol id="ls-package" viewBox="0 0 24 24"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></symbol><symbol id="ls-refresh-cw" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></symbol></defs></svg><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><!-- Symbole: Lucide 1.31.0 (lucide.dev, gebündelt aus lucide-react). Lizenz:
+<body data-fall="betrug-oder-echt"><div class="live-aufbau" role="note"><b>Diese Seite ist im Aufbau.</b> Du siehst eine Testfassung, noch nicht alles funktioniert.</div><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="ls-folder-heart" viewBox="0 0 24 24"><path d="M10.638 20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v3.417"/><path d="M14.62 18.8A2.25 2.25 0 1 1 18 15.836a2.25 2.25 0 1 1 3.38 2.966l-2.626 2.856a.998.998 0 0 1-1.507 0z"/></symbol><symbol id="ls-message-square-warning" viewBox="0 0 24 24"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"/><path d="M12 15h.01"/><path d="M12 7v4"/></symbol><symbol id="ls-package" viewBox="0 0 24 24"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></symbol><symbol id="ls-refresh-cw" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></symbol></defs></svg><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><!-- Symbole: Lucide 1.31.0 (lucide.dev, gebündelt aus lucide-react). Lizenz:
 ISC License
 
 Copyright (c) 2026 Lucide Icons and Contributors
@@ -2045,8 +2093,7 @@ SOFTWARE. --><symbol id="ls-mail" viewBox="0 0 24 24"><path d="m22 7-8.991 5.727
     <header class="site-nav wrap">
         <a class="brand" href="/" aria-label="Zur Startseite"><span class="brand-mark" aria-hidden="true"></span><span class="kiosk"><span class="kiosk-ki">KI</span>osk</span></a>
         <div class="nav-end">
-          <nav class="nav-links" aria-label="Hauptnavigation"><a href="/#moeglich">Entdecken</a><a href="/#so-gehts">Machen</a><a href="/#wissen">Verstehen</a></nav>
-          <a class="nav-kompass" href="/#kompass"><svg class="icon" aria-hidden="true"><use href="#i-compass"/></svg><span>KI-Kompass</span></a>
+          <nav class="nav-links v44-nav" aria-label="Hauptnavigation"><a class="v47-pille" href="/ideen"><svg class="v47-ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg><span>Alle Ideen</span></a></nav>
           <a class="nav-mein" href="/mein-bereich" aria-label="Mein Bereich"><span class="nav-mein__ich" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-user-round"/></svg></span><span class="nav-mein__text">Mein Bereich</span></a>
         </div>
       </header>
@@ -2080,7 +2127,7 @@ SOFTWARE. --><symbol id="ls-mail" viewBox="0 0 24 24"><path d="m22 7-8.991 5.727
         </div></li>
 <li><span class="ra-nr" aria-hidden="true">3</span><p>Screenshot schicken oder Anruf schildern</p></li>
 <li><span class="ra-nr" aria-hidden="true">4</span><p>Ggf. weiteren Anweisungen der KI folgen.</p></li></ol></section>
-        <section class="ra-mehr" aria-labelledby="betrug-m"><h2 class="ra-versal" id="betrug-m">Mehr dazu</h2><details class="ra-auf" data-teil="ki"><summary><span>Was die KI dabei macht</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></summary><div class="ra-auf-innen"><ol class="ra-ki"><li><b>Zeigt auf einer Skala von 0 bis 100, wie wahrscheinlich es Betrug ist</b></li><li>Erklärt kurz, welche Warnzeichen sie sieht</li><li>Zeigt dir, wie du in Minuten sicher klärst, ob doch etwas dran ist</li><li>Nennt Notfallschritte mit Links, begleitet dich, wenn du schon reagiert hast, und sucht auf Wunsch heraus, was deine Bank dazu sagt</li></ol></div></details><details class="ra-auf" data-teil="gut"><summary><span>Gut zu wissen</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></summary><div class="ra-auf-innen"><ul class="ra-punkte"><li><b>Nie „echt“:</b> Die Skala ist eine Einschätzung, kein Beweis. Auch bei einem niedrigen Wert prüfst du über den sicheren Weg nach.</li><li><b>Nummer im Display:</b> Eine angezeigte Nummer beweist nichts. Die echte 110 lässt sich nicht fälschen, Nummern von Dienststellen schon.</li><li><b>Online-Shops:</b> Ob ein Shop seriös ist, prüft der Fakeshop-Finder der Verbraucherzentrale gezielter.</li><li><b>Persönliches abdecken:</b> Kontonummer und Namen darfst du auf dem Screenshot schwärzen.</li><li><b>Geprüft:</b> „Geprüft“ heißt: Diese Anleitung wurde von unserer Redaktion erfolgreich getestet und freigegeben. Kein amtliches Prüfzeichen.</li></ul></div></details><details class="ra-auf" data-teil="hakt"><summary><span>Falls etwas hakt</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></summary><div class="ra-auf-innen"><ul class="ra-punkte"><li><b>Noch nicht bei ChatGPT angemeldet?</b> <span data-nur-geraet="computer">Melde dich vorher in diesem Browser an.</span><span data-nur-geraet="handy">Melde dich vorher in der ChatGPT-App an.</span> Dann öffnet der Knopf direkt den fertigen Auftrag. Noch kein Konto? Das legst du dort kostenlos an, mit E-Mail oder Google-Konto.</li><li><b>Nur im Eingabefeld?</b> Dann tippe auf Senden.</li><li><b>Schon Daten oder Geld gegeben:</b> Sofort Bank anrufen oder Sperr-Notruf 116 116, dann Polizei.</li><li><b>Die KI ist unsicher:</b> Nachprüfen über die eigene App oder die Nummer auf deiner Karte.</li><li><b>Akute Gefahr, jemand steht vor der Tür:</b> 110 wählen.</li><li><b>Die KI hält die Geschichte für möglich:</b> Zahl trotzdem nichts, bevor du die Person auf einem Weg erreichst, den du schon vorher kanntest.</li><li><b>Am Ende kommen weitere Vorschläge:</b> Die kannst du übergehen.</li></ul><p><a class="ra-leise" href="#" data-start-web target="_blank" rel="noopener">Im Browser öffnen</a></p></div></details><details class="ra-auf" data-teil="auftrag"><summary><span>Den Auftrag lesen</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></summary><div class="ra-auf-innen"><p class="ra-klein">Das bekommt ChatGPT von dir, wenn du auf „Mit ChatGPT starten“ tippst:</p><pre class="ra-auftrag" id="prompt-text">Eine Nachricht oder ein Anruf stresst mich: Es fühlt sich falsch an, aber was, wenn es doch echt ist? Ich will raus aus dem Stress und gleich Klarheit. Ich will nur zeigen, was ich bekommen habe, du prüfst. Am Ende will ich wissen, wie wahrscheinlich es Betrug ist und was ich jetzt tue.
+        <section class="ra-mehr" aria-labelledby="betrug-m"><h2 class="ra-versal" id="betrug-m">Mehr dazu</h2><details class="ra-auf" data-teil="ki"><summary><span>Was die KI dabei macht</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></summary><div class="ra-auf-innen"><ol class="ra-ki"><li><b>Zeigt auf einer Skala von 0 bis 100, wie wahrscheinlich es Betrug ist</b></li><li>Erklärt kurz, welche Warnzeichen sie sieht</li><li>Zeigt dir, wie du in Minuten sicher klärst, ob doch etwas dran ist</li><li>Nennt Notfallschritte mit Links, begleitet dich, wenn du schon reagiert hast, und sucht auf Wunsch heraus, was deine Bank dazu sagt</li></ol></div></details><details class="ra-auf" data-teil="gut"><summary><span>Gut zu wissen</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></summary><div class="ra-auf-innen"><ul class="ra-punkte"><li><b>Nie „echt“:</b> Die Skala ist eine Einschätzung, kein Beweis. Auch bei einem niedrigen Wert prüfst du über den sicheren Weg nach.</li><li><b>Nummer im Display:</b> Eine angezeigte Nummer beweist nichts.</li><li><b>Online-Shops:</b> Ob ein Shop seriös ist, prüft der Fakeshop-Finder der Verbraucherzentrale gezielter.</li><li><b>Persönliches abdecken:</b> Kontonummer und Namen darfst du auf dem Screenshot schwärzen.</li><li><b>Geprüft:</b> „Geprüft“ heißt: Diese Anleitung wurde von unserer Redaktion erfolgreich getestet und freigegeben. Kein amtliches Prüfzeichen.</li></ul></div></details><details class="ra-auf" data-teil="hakt"><summary><span>Falls etwas hakt</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></summary><div class="ra-auf-innen"><ul class="ra-punkte"><li><b>Noch nicht bei ChatGPT angemeldet?</b> <span data-nur-geraet="computer">Melde dich vorher in diesem Browser an.</span><span data-nur-geraet="handy">Melde dich vorher in der ChatGPT-App an.</span> Dann öffnet der Knopf direkt den fertigen Auftrag. Noch kein Konto? Das legst du dort kostenlos an, mit E-Mail oder Google-Konto.</li><li><b>Nur im Eingabefeld?</b> Dann tippe auf Senden.</li><li><b>Schon Daten oder Geld gegeben:</b> Sofort Bank anrufen oder Sperr-Notruf 116 116, dann Polizei.</li><li><b>Die KI ist unsicher:</b> Nachprüfen über die eigene App oder die Nummer auf deiner Karte.</li><li><b>Akute Gefahr, jemand steht vor der Tür:</b> 110 wählen.</li><li><b>Die KI hält die Geschichte für möglich:</b> Zahl trotzdem nichts, bevor du die Person auf einem Weg erreichst, den du schon vorher kanntest.</li><li><b>Am Ende kommen weitere Vorschläge:</b> Die kannst du übergehen.</li></ul><p><a class="ra-leise" href="#" data-start-web target="_blank" rel="noopener">Im Browser öffnen</a></p></div></details><details class="ra-auf" data-teil="auftrag"><summary><span>Den Auftrag lesen</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></summary><div class="ra-auf-innen"><p class="ra-klein">Das bekommt ChatGPT von dir, wenn du auf „Mit ChatGPT starten“ tippst:</p><pre class="ra-auftrag" id="prompt-text">Eine Nachricht oder ein Anruf stresst mich: Es fühlt sich falsch an, aber was, wenn es doch echt ist? Ich will raus aus dem Stress und gleich Klarheit. Ich will nur zeigen, was ich bekommen habe, du prüfst. Am Ende will ich wissen, wie wahrscheinlich es Betrug ist und was ich jetzt tue.
 
 So redest du mit mir: einfach, ruhig, immer mit Du. Kurze Absätze mit höchstens zwei Sätzen. Keine Fachwörter; ist eins unvermeidbar, erklär es gleich in Alltagsworten, etwa Phishing. Zahlen und Daten nur, wenn sie zählen.
 
@@ -3310,5 +3357,67 @@ Versprich nicht, dass das Geld sicher ist oder zurückkommt, und nenn keine Fris
     });
   })();
 </script>
-<div class="live-fuss"><a href="/impressum">Impressum</a><span class="live-fuss-sep" aria-hidden="true"> · </span><a href="/datenschutz">Datenschutz</a><span class="live-fuss-sep" aria-hidden="true"> · </span><span class="live-fuss-t">Testfassung im Aufbau</span></div></body>
+<script>
+  // Runde 47 (Jim, 27.10.2026), Punkt 4: Start-Knöpfe zeigen die im Pop-up gewählte KI zuerst („ki-wahl“). Punkt 6: nur am Rechner beim ersten Klick
+  // je KI auf „Mit … starten“ ein kleines Fenster am Knopf (Wortlaut Pam). „Erst anmelden“ öffnet die Anmeldung im neuen Tab, das Fenster bleibt.
+  (function () {
+    var ANMELDEN = {"chatgpt": "https://chatgpt.com/auth/login", "claude": "https://claude.ai/login"}, TEXT = {"chatgpt": "Bist du bei ChatGPT angemeldet? Sonst läuft der Chat ohne Konto und wird nicht gespeichert.", "claude": "Bist du bei Claude angemeldet? Sonst geht dein Auftrag bei der Anmeldung verloren."}, NAMEN = {"chatgpt": "ChatGPT", "claude": "Claude"};
+    var d = document.documentElement;
+    function lies(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+    // 4. Gemerkte KI zuerst: Knopf und Claude-Link tauschen Ziel, Logo und Text
+    var p = document.querySelector('.ra-knopf[data-start]'), c = document.querySelector('.ra-claude[data-start-ki="claude"]');
+    if (lies('ki-wahl') === 'claude' && p && c && !p.hasAttribute('data-start-ki')) {
+      var tausch = ['href', 'data-web', 'target'], alt = {};
+      tausch.forEach(function (a) { alt[a] = p.getAttribute(a); });
+      tausch.forEach(function (a) { if (c.getAttribute(a) != null) p.setAttribute(a, c.getAttribute(a)); if (alt[a] != null) c.setAttribute(a, alt[a]); });
+      p.setAttribute('data-start-ki', 'claude'); c.removeAttribute('data-start-ki'); c.setAttribute('data-start-ki-tausch', 'chatgpt');
+      p.querySelector('.logo use').setAttribute('href', '#l-claude'); p.querySelector('span').textContent = 'Mit Claude starten';
+      c.querySelector('.logo use').setAttribute('href', '#l-openai'); c.lastChild.textContent = 'Mit ChatGPT starten';
+      var l = document.querySelector('.ra-leiste [data-start]');
+      if (l) { tausch.forEach(function (a) { if (p.getAttribute(a) != null) l.setAttribute(a, p.getAttribute(a)); }); l.setAttribute('data-start-ki', 'claude');
+        l.querySelector('.logo use').setAttribute('href', '#l-claude'); l.querySelector('span').textContent = 'Mit Claude starten'; }
+    }
+    // 6. Hinweis „im Browser angemeldet“
+    function gesehen() { try { return JSON.parse(lies('ki-anmelde-hinweis') || '{}') || {}; } catch (e) { return {}; } }
+    function merke(k) { var g = gesehen(); g[k] = 1; try { localStorage.setItem('ki-anmelde-hinweis', JSON.stringify(g)); } catch (e) {} }
+    var fenster = null, quelle = null, frei = false;
+    function zu(fokus) { if (!fenster) return; fenster.remove(); fenster = null; if (fokus && quelle) try { quelle.focus({ preventScroll: true }); } catch (e) {} quelle = null; }
+    function lage() {
+      if (!fenster || !quelle) return;
+      var r = quelle.getBoundingClientRect(), b = fenster.offsetWidth, h = fenster.offsetHeight, vw = d.clientWidth;
+      var x = Math.max(16, Math.min(r.left, vw - b - 16)), oben = r.bottom + 14 + h > innerHeight && r.top - 14 - h > 0;
+      fenster.style.left = (x + scrollX) + 'px';
+      fenster.style.top = ((oben ? r.top - 14 - h : r.bottom + 14) + scrollY) + 'px';
+      fenster.classList.toggle('v47-hw--oben', oben);
+      fenster.style.setProperty('--pfeil', Math.max(24, Math.min(b - 24, r.left + Math.min(r.width / 2, 60) - x)) + 'px');
+    }
+    function zeige(a, k) {
+      zu(false); quelle = a;
+      fenster = document.createElement('div');
+      fenster.className = 'v47-hw'; fenster.setAttribute('role', 'dialog'); fenster.setAttribute('aria-labelledby', 'v47-hw-t');
+      fenster.innerHTML = '<p id="v47-hw-t"><b>Kurz vorher:</b> <span></span></p><div class="v47-hw-fuss"><a class="v47-hw-leise" target="_blank" rel="noopener">Erst anmelden</a>'
+        + '<button type="button" class="v47-hw-los">Ja, starten</button></div>';
+      fenster.querySelector('span').textContent = TEXT[k];
+      fenster.querySelector('a').href = ANMELDEN[k];
+      fenster.querySelector('.v47-hw-los').addEventListener('click', function () { merke(k); var q = quelle; zu(false); frei = true; try { q.click(); } finally { frei = false; } });
+      fenster.addEventListener('keydown', function (e) { if (e.key === 'Escape') { e.preventDefault(); zu(true); } });
+      document.body.appendChild(fenster);
+      lage();
+      fenster.querySelector('.v47-hw-los').focus({ preventScroll: true });
+    }
+    window.addEventListener('click', function (e) {
+      if (frei) return;
+      var a = e.target.closest && e.target.closest('a[data-start]');
+      if (!a) { if (fenster && !fenster.contains(e.target)) zu(false); return; }
+      if (d.getAttribute('data-geraet') !== 'computer' || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey) return;
+      var k = a.getAttribute('data-start-ki') === 'claude' ? 'claude' : 'chatgpt';
+      if (!TEXT[k] || gesehen()[k]) return;
+      e.preventDefault(); e.stopImmediatePropagation();
+      zeige(a, k);
+    }, true);
+    addEventListener('resize', lage); addEventListener('scroll', lage, { passive: true });
+  })();
+</script>
+<div class="live-fuss"><a href="/impressum">Impressum</a><span class="live-fuss-sep" aria-hidden="true"> · </span><a href="/datenschutz">Datenschutz</a><span class="live-fuss-sep" aria-hidden="true"> · </span><span class="live-fuss-t">Testfassung im Aufbau</span></div><script src="/messung.js" data-endpunkt="https://script.google.com/macros/s/AKfycbxJ_s2hUjUxQiWQQ0QoXxSoxR5SfS0MiUvpHb7PcEJzYVgLpcVq1a9i5iUWonSEirfWSg/exec" defer></script><script src="/messpunkte.js" defer></script>
+</body>
 </html>

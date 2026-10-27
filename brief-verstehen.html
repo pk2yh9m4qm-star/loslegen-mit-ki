@@ -5,14 +5,19 @@
   <meta name="description" content="Ideen, wie KI dir im Alltag wirklich Arbeit abnimmt. Von Menschen zusammengestellt und getestet. Diese Seite ist im Aufbau.">
   <meta property="og:site_name" content="KIosk">
   <meta property="og:title" content="Brief vom Amt verstehen · KIosk">
-  <meta property="og:description" content="Ideen, wie KI dir im Alltag wirklich Arbeit abnimmt. Von Menschen zusammengestellt und getestet. Diese Seite ist im Aufbau.">
+  <meta property="og:image" content="https://loslegen-mit-ki.de/teilen-brief-verstehen.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Brief vom Amt verstehen · KIosk">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:description" content="Ein Schreiben voller Behördendeutsch liegt auf dem Tisch, und dir wird mulmig.">
   <meta property="og:url" content="https://loslegen-mit-ki.de/brief-verstehen">
   <meta property="og:type" content="website">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <script>
   // Live-Fassung (15.10.2026): übernimmt, was bisher die Hülle von Version 25 getan hat (Seitenwechsel, Anker, Nachrichten).
   (function () {
-    var ADR = {"start": "/", "ideen": "/ideen", "anleitung": "/brief-verstehen", "abo": "/kontoauszug-abos", "wohnzimmer": "/wohnzimmer-neu-denken", "keller": "/keller-ausmisten", "bereich": "/mein-bereich", "wochenende": "/wochenende-planen", "vorsorge": "/vorsorgemappe-anlegen", "betrug": "/betrug-oder-echt", "anschaffung": "/grosse-anschaffung-planen", "miete": "/zahlst-du-zu-viel-miete"}, SEITE = 'anleitung';
+    var ADR = {"start": "/", "ideen": "/ideen", "anleitung": "/brief-verstehen", "abo": "/kontoauszug-abos", "wohnzimmer": "/wohnzimmer-neu-denken", "keller": "/keller-ausmisten", "bereich": "/mein-bereich", "wochenende": "/wochenende-planen", "vorsorge": "/vorsorgemappe-anlegen", "betrug": "/betrug-oder-echt", "anschaffung": "/grosse-anschaffung-planen", "miete": "/zahlst-du-zu-viel-miete", "vertrag": "/ungewollter-vertrag", "gehalt": "/gehaltsgespraech-vorbereiten", "foerderung": "/zuschuesse-finden", "rueckholen": "/geld-nach-betrug-zurueckholen"}, SEITE = 'anleitung';
     function ziel(v, a) { if (v === 'start' && a === 'ideen') { v = 'ideen'; a = ''; } return { v: ADR[v] ? v : 'start', a: a || '' }; }
     function liefern(a, von) {
       if (SEITE === 'bereich') { window.postMessage({ mb: a, von: von || '' }, '*'); return; }
@@ -2137,8 +2142,52 @@ body { padding-bottom: 0; }
 .ra3 .ra-herz { flex: none; }
 @media (prefers-reduced-motion: reduce) { .ra3 .ra-leiste, .ra3 .ra-auf summary .icon { transition: none !important; } }
 </style>
+<style>/* Runde 27: Prompt-Block bricht lange Links um */ .ra-auf, .ra-auf-innen { min-width: 0; } .ra-auftrag { max-width: 100%; box-sizing: border-box; overflow-wrap: anywhere; word-break: normal; }</style>
+<style>
+  /* Runde 44 (Jim, 27.10.2026): Kupfer, Indigo, Petrol auf Helligkeit und Sättigung der übrigen Kategorien gebracht (Bauauftrag Punkt 7); .ra-weitere setzt die alten Töne auf den Anleitungsseiten selbst */
+  :root, .ra-weitere { --copper-a: #ce9780; --copper-b: #9a5a45; --copper-c: #491e1e; --indigo-a: #bdbbdf; --indigo-b: #837eb3; --indigo-c: #443b61; --petrol-a: #9ec9c8; --petrol-b: #4e9393; --petrol-c: #1c4a4f; }
+</style>
+<style>
+  /* Runde 47 (Jim, 27.10.2026), Punkt 1: zwei gleiche Pillen „Alle Ideen“ und „Mein Bereich“ (Pams Skizze v1-nachher), kein KI-Kompass */
+  .site-nav .nav-end { gap: 12px; }
+  .site-nav .nav-links.v44-nav { display: flex; gap: 0; }
+  .site-nav .v44-nav a.v47-pille, .site-nav .nav-mein { display: inline-flex; align-items: center; justify-content: center; gap: 10px; box-sizing: border-box;
+    min-height: 44px; padding: 0 16px; border-radius: 999px; background: linear-gradient(#fdfbf7, #f3ede3); border: 1px solid rgb(60 45 30 / .13);
+    box-shadow: inset 0 1px 0 #fff, 0 2px 4px rgb(96 72 46 / .14), 0 10px 18px -10px rgb(96 72 46 / .45); color: var(--ink); text-decoration: none;
+    font-size: .875rem; font-weight: 650; line-height: 1; white-space: nowrap; }
+  .site-nav .v44-nav a.v47-pille::after { display: none; }
+  .site-nav .v47-pille .v47-ic { width: 18px; height: 18px; flex: none; }
+  .site-nav .nav-mein .nav-mein__ich { width: 18px; height: 18px; background: none; box-shadow: none; color: inherit; font-size: .875rem; }
+  .site-nav .nav-mein .nav-mein__ich .icon { font-size: 18px; }
+  .site-nav .nav-mein.is-konto .nav-mein__ich { width: 24px; height: 24px; margin-left: -4px; }
+  .site-nav :is(.v47-pille, .nav-mein)[aria-current="page"] { background: linear-gradient(#efe8dd, #f6f1e8); box-shadow: inset 0 1.5px 3px rgb(96 72 46 / .22); }
+  .site-nav .v47-pille:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+  @media (max-width: 700px) {
+    .site-nav .nav-end { gap: 8px; }
+    .site-nav .v47-pille .v47-ic { display: none; }
+    .site-nav .v44-nav a.v47-pille { padding: 0 14px; }
+    .site-nav .nav-mein { width: 44px; padding: 0; }
+  }
+  @media (max-width: 340px) { .site-nav .v44-nav a.v47-pille { padding: 0 12px; font-size: .8125rem; } .site-nav .nav-end { gap: 6px; } }
+</style>
+<style>
+  /* Runde 47 (Jim, 27.10.2026), Punkt 6: kleines Fenster am Start-Knopf (Pams Bild v6-nachher) */
+  .v47-hw { position: absolute; z-index: 1000; box-sizing: border-box; width: min(384px, calc(100vw - 32px)); padding: 20px 22px 18px; border-radius: 20px; background: #fff;
+    border: 1px solid #e7dfd4; box-shadow: 0 24px 48px -12px rgb(60 40 20 / .35), 0 2px 6px rgb(60 40 20 / .12); color: #23201c; font-family: inherit; text-align: left; }
+  .v47-hw::before { content: ""; position: absolute; top: -8px; left: calc(var(--pfeil, 40px) - 8px); width: 14px; height: 14px; background: #fff; border: 1px solid #e7dfd4;
+    border-right: 0; border-bottom: 0; transform: rotate(45deg); }
+  .v47-hw.v47-hw--oben::before { top: auto; bottom: -8px; transform: rotate(225deg); }
+  .v47-hw p { margin: 0; font-size: 16px; line-height: 1.5; font-weight: 500; color: #23201c !important; }
+  .v47-hw b { font-weight: 700; }
+  .v47-hw-fuss { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 18px; }
+  .v47-hw-leise { display: inline-flex; align-items: center; min-height: 44px; color: #4a443c !important; font-size: 15px; font-weight: 600; text-decoration: underline;
+    text-underline-offset: 3px; text-decoration-color: rgb(60 45 30 / .35); }
+  .v47-hw-los { min-height: 44px; padding: 0 22px; border: 0; border-radius: 999px; background: linear-gradient(#4a433b, #1d1a16); color: #fbf7f0; font: inherit; font-size: 15px;
+    font-weight: 650; cursor: pointer; box-shadow: inset 0 1px 0 rgb(255 255 255 / .18), 0 2px 4px rgb(96 72 46 / .3), 0 12px 20px -12px rgb(96 72 46 / .7); }
+  :is(.v47-hw-leise, .v47-hw-los):focus-visible { outline: 2px solid #3b5a9a; outline-offset: 3px; }
+</style>
 </head>
-<body><div class="live-aufbau" role="note"><b>Diese Seite ist im Aufbau.</b> Du siehst eine Testfassung, noch nicht alles funktioniert.</div><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="ls-mail" viewBox="0 0 24 24"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></symbol><symbol id="ls-package" viewBox="0 0 24 24"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></symbol><symbol id="ls-refresh-cw" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></symbol><symbol id="ls-sofa" viewBox="0 0 24 24"><path d="M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3"/><path d="M2 16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"/><path d="M4 18v2"/><path d="M20 18v2"/><path d="M12 4v9"/></symbol><symbol id="ls-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></symbol></defs></svg><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><!-- Symbole: Lucide 1.31.0 (lucide.dev, gebündelt aus lucide-react). Lizenz:
+<body data-fall="brief-verstehen"><div class="live-aufbau" role="note"><b>Diese Seite ist im Aufbau.</b> Du siehst eine Testfassung, noch nicht alles funktioniert.</div><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="ls-mail" viewBox="0 0 24 24"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></symbol><symbol id="ls-package" viewBox="0 0 24 24"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></symbol><symbol id="ls-refresh-cw" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></symbol><symbol id="ls-sofa" viewBox="0 0 24 24"><path d="M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3"/><path d="M2 16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"/><path d="M4 18v2"/><path d="M20 18v2"/><path d="M12 4v9"/></symbol><symbol id="ls-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></symbol></defs></svg><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><!-- Symbole: Lucide 1.31.0 (lucide.dev, gebündelt aus lucide-react). Lizenz:
 ISC License
 
 Copyright (c) 2026 Lucide Icons and Contributors
@@ -2197,8 +2246,7 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
     <header class="site-nav wrap">
         <a class="brand" href="/" aria-label="Zur Startseite"><span class="brand-mark" aria-hidden="true"></span><span class="kiosk"><span class="kiosk-ki">KI</span>osk</span></a>
         <div class="nav-end">
-          <nav class="nav-links" aria-label="Hauptnavigation"><a href="/#moeglich">Entdecken</a><a href="/#so-gehts">Machen</a><a href="/#wissen">Verstehen</a></nav>
-          <a class="nav-kompass" href="/#kompass"><svg class="icon" aria-hidden="true"><use href="#i-compass"/></svg><span>KI-Kompass</span></a>
+          <nav class="nav-links v44-nav" aria-label="Hauptnavigation"><a class="v47-pille" href="/ideen"><svg class="v47-ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg><span>Alle Ideen</span></a></nav>
           <a class="nav-mein" href="/mein-bereich" aria-label="Mein Bereich"><span class="nav-mein__ich" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-user-round"/></svg></span><span class="nav-mein__text">Mein Bereich</span></a>
         </div>
       </header>
@@ -2225,7 +2273,7 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
         <ul class="ra-haken"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Das Wichtigste in einem Satz, fett</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Was du tun musst, bis wann, und was sonst passiert</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Deine Möglichkeiten</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Eine ehrliche Empfehlung, was du an deiner Stelle tun würdest</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Nächste Schritte, etwa eine fertige Antwort</span></li></ul>
         
       </div></section>
-        <section class="ra-brauchst" aria-labelledby="brief-b"><h2 class="ra-versal" id="brief-b">Das brauchst du</h2><ul><li>Ein Foto vom Brief, alle Seiten</li><li>Etwa 10 Minuten</li><li class="ra-kosten"><span class="ra-marke frei">Free</span> <span>· funktioniert, ohne für KI zu zahlen</span></li></ul></section>
+        <section class="ra-brauchst" aria-labelledby="brief-b"><h2 class="ra-versal" id="brief-b">Das brauchst du</h2><ul><li>Ein Foto vom Brief, alle Seiten</li><li>Etwa 10 Minuten</li><li class="ra-kosten"><span class="ra-marke frei">Free</span> <span>· funktioniert, ohne für KI zu zahlen. Gratis gehen nur wenige Fotos am Tag.</span></li></ul></section>
       </div>
       <div class="ra-handeln">
         <section class="ra-schritte" aria-labelledby="brief-s"><h2 class="ra-versal" id="brief-s">So geht's</h2><ol><li><span class="ra-nr" aria-hidden="true">1</span><p>Fotografiere alle Seiten, Persönliches abdecken</p></li>
@@ -2237,38 +2285,46 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
         </div></li>
 <li><span class="ra-nr" aria-hidden="true">3</span><p>Foto anhängen und absenden</p></li>
 <li><span class="ra-nr" aria-hidden="true">4</span><p>Nachfragen und entscheiden, wie es weitergeht</p></li></ol></section>
-        <section class="ra-mehr" aria-labelledby="brief-m"><h2 class="ra-versal" id="brief-m">Mehr dazu</h2><details class="ra-auf" data-teil="ki"><summary><span>Was die KI dabei macht</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></summary><div class="ra-auf-innen"><ol class="ra-ki"><li><b>Übersetzt formelle Briefe in Alltagssprache</b></li><li>Fasst alle wichtigen Daten &amp; Zahlen zusammen</li><li>Erklärt, was das für dich bedeutet</li><li>Formuliert bei Bedarf eine Antwort</li></ol></div></details><details class="ra-auf" data-teil="gut"><summary><span>Gut zu wissen</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></summary><div class="ra-auf-innen"><ul class="ra-punkte"><li><b>Persönliches abdecken:</b> Kontodaten und Adresse vor dem Foto abdecken. Was die KI für die Erklärung braucht, steht im Rest des Briefs.</li><li><b>Nachfragen erlaubt:</b> Du kannst zu jeder Stelle nachfragen. Die KI sagt dir auch, wo du besser noch einen Menschen fragst.</li><li><b>Fristen, Geld und Recht:</b> Es gilt, was im Brief steht. Bist du unsicher, ruf beim Absender an oder frag eine Beratungsstelle, etwa die Verbraucherzentrale.</li><li><b>Antwort:</b> Die KI schreibt sie nur aus Angaben, die du bestätigt hast. Abschicken tust du.</li><li><b>Geprüft:</b> „Geprüft“ heißt: Diese Anleitung wurde von unserer Redaktion erfolgreich getestet und freigegeben. Kein amtliches Prüfzeichen.</li></ul></div></details><details class="ra-auf" data-teil="hakt"><summary><span>Falls etwas hakt</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></summary><div class="ra-auf-innen"><ul class="ra-punkte"><li><b>Noch nicht bei ChatGPT angemeldet?</b> <span data-nur-geraet="computer">Melde dich vorher in diesem Browser an.</span><span data-nur-geraet="handy">Melde dich vorher in der ChatGPT-App an.</span> Dann öffnet der Knopf direkt den fertigen Auftrag. Noch kein Konto? Das legst du dort kostenlos an, mit E-Mail oder Google-Konto.</li><li><b>Nur im Eingabefeld?</b> Dann tippe auf Senden.</li><li><b>Es hat sich nichts geöffnet:</b> Öffne es direkt im Browser. Meist fehlt dann die App.</li><li><b>Wie hänge ich das Foto an?</b> Tippe auf das Plus, wähle das Foto vom Brief und schick ab.</li><li><b>Das Eingabefeld ist leer:</b> Der Auftrag liegt schon in deiner Zwischenablage: ins Feld tippen, gedrückt halten und „Einfügen“ wählen.</li><li><b>Die Antwort passt nicht:</b> Sag der KI, was du anders willst, etwa „kürzer“ oder „erklär mir den zweiten Punkt genauer“.</li></ul><p><a class="ra-leise" href="#" data-start-web target="_blank" rel="noopener">Im Browser öffnen</a></p></div></details><details class="ra-auf" data-teil="auftrag"><summary><span>Den Auftrag lesen</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></summary><div class="ra-auf-innen"><p class="ra-klein">Das bekommt ChatGPT von dir, wenn du auf „Mit ChatGPT starten“ tippst:</p><pre class="ra-auftrag" id="prompt-text">Hilf mir, einen offiziellen Brief zu verstehen. Ich lade ihn als Foto
-oder PDF hoch. Ist noch nichts hochgeladen, bitte mich nur darum.
-Stell vorher keine weiteren Fragen.
+        <section class="ra-mehr" aria-labelledby="brief-m"><h2 class="ra-versal" id="brief-m">Mehr dazu</h2><details class="ra-auf" data-teil="ki"><summary><span>Was die KI dabei macht</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></summary><div class="ra-auf-innen"><ol class="ra-ki"><li><b>Übersetzt formelle Briefe in Alltagssprache</b></li><li>Fasst alle wichtigen Daten &amp; Zahlen zusammen</li><li>Erklärt, was das für dich bedeutet</li><li>Formuliert bei Bedarf eine Antwort</li></ol></div></details><details class="ra-auf" data-teil="gut"><summary><span>Gut zu wissen</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></summary><div class="ra-auf-innen"><ul class="ra-punkte"><li><b>Persönliches abdecken:</b> Kontodaten und Adresse vor dem Foto abdecken. Was die KI für die Erklärung braucht, steht im Rest des Briefs.</li><li><b>Nachfragen erlaubt:</b> Du kannst zu jeder Stelle nachfragen. Die KI sagt dir auch, wo du besser noch einen Menschen fragst.</li><li><b>Fristen, Geld und Recht:</b> Es gilt, was im Brief steht. Bist du unsicher, ruf beim Absender an oder frag eine Beratungsstelle, etwa die Verbraucherzentrale.</li><li><b>Antwort:</b> Die KI schreibt sie nur aus Angaben, die du bestätigt hast. Abschicken tust du.</li><li><b>Geprüft:</b> „Geprüft“ heißt: Diese Anleitung wurde von unserer Redaktion erfolgreich getestet und freigegeben. Kein amtliches Prüfzeichen.</li></ul></div></details><details class="ra-auf" data-teil="hakt"><summary><span>Falls etwas hakt</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></summary><div class="ra-auf-innen"><ul class="ra-punkte"><li><b>Noch nicht bei ChatGPT angemeldet?</b> <span data-nur-geraet="computer">Melde dich vorher in diesem Browser an.</span><span data-nur-geraet="handy">Melde dich vorher in der ChatGPT-App an.</span> Dann öffnet der Knopf direkt den fertigen Auftrag. Noch kein Konto? Das legst du dort kostenlos an, mit E-Mail oder Google-Konto.</li><li><b>Nur im Eingabefeld?</b> Dann tippe auf Senden.</li><li><b>Es hat sich nichts geöffnet:</b> Öffne es direkt im Browser. Meist fehlt dann die App.</li><li><b>Wie hänge ich das Foto an?</b> Tippe auf das Plus, wähle das Foto vom Brief und schick ab.</li><li><b>Das Eingabefeld ist leer:</b> Der Auftrag liegt schon in deiner Zwischenablage: ins Feld tippen, gedrückt halten und „Einfügen“ wählen.</li><li><b>Die Antwort passt nicht:</b> Sag der KI, was du anders willst, etwa „kürzer“ oder „erklär mir den zweiten Punkt genauer“.</li></ul><p><a class="ra-leise" href="#" data-start-web target="_blank" rel="noopener">Im Browser öffnen</a></p></div></details><details class="ra-auf" data-teil="auftrag"><summary><span>Den Auftrag lesen</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></summary><div class="ra-auf-innen"><p class="ra-klein">Das bekommt ChatGPT von dir, wenn du auf „Mit ChatGPT starten“ tippst:</p><pre class="ra-auftrag" id="prompt-text">Ein offizieller Brief macht mir Stress, und ich verstehe nicht genau, was die von mir wollen. Erklär ihn mir wie ein guter Freund, der sich damit auskennt: nicht nur übersetzen, sondern einordnen und ehrlich sagen, was du an meiner Stelle tun würdest. Ich will nur den Brief zeigen und entscheiden, du erklärst und rätst. Am Ende will ich wissen, was ich bis wann tun muss und was ich am besten mache.
 
-Sobald du den Brief hast, erklär ihn mir so, wie es ein guter Freund
-tun würde, der sich mit so etwas auskennt: per du, direkt, ehrlich und
-in einfachen Worten. Kein Amtsdeutsch und keine Fachwörter: Kommt ein
-schwieriger Begriff vor, etwa Abschlag, Säumniszuschlag oder
-Rechtsbehelf, sag es mit Alltagsworten oder erklär ihn kurz.
+So redest du mit mir: einfach, direkt, immer mit Du. Kurze Absätze mit höchstens zwei Sätzen. Keine Fachwörter; ist eins unvermeidbar, erklär es gleich in Alltagsworten, etwa Abschlag, Säumniszuschlag oder Rechtsbehelf. Zahlen und Daten nur, wenn sie zählen.
 
-Fang mit einem einzigen, fett gedruckten Satz an: das Wichtigste aus
-dem Brief für mich, so erklärt, dass ich es sofort verstehe.
+Ich lade den Brief als Foto oder PDF hoch. Ist noch nichts hochgeladen, bitte mich nur darum. Stell vorher keine weiteren Fragen.
+Fehlt dir eine Angabe oder ist eine Stelle nicht lesbar, bitte um genau das Foto, das sie zeigt (näher dran, andere Seite), statt ums Abtippen; nur, wenn es fürs Ergebnis zählt.
 
-Danach kurz, jeweils in ein bis zwei Sätzen:
-Was du jetzt tun musst: was ich tun muss, bis wann, und was passiert,
-wenn ich nichts tue.
-Deine Möglichkeiten: nur die, die hier wirklich infrage kommen.
-Noch offen: nur, wenn etwas fehlt oder unklar ist.
+1. Einstieg. Deine erste Antwort beginnt genau so, als Markdown:
+### 📬 Brief vom Amt verstehen
+---
+**Lass uns gemeinsam schauen, was dieser Brief von dir will; am Ende weißt du, was du bis wann tun musst, und hast eine ehrliche Empfehlung.**
+Hängt der Brief schon an, kommt direkt darunter das Ergebnis, sonst die Bitte um ein Foto je Seite.
 
-Meine Empfehlung: Hier darfst du ausführlicher werden. Sag mir, was du
-an meiner Stelle tun würdest und warum, ehrlich und konkret. Mach klar,
-dass das deine Einschätzung ist.
+2. Ergebnis. Sobald du den Brief hast, kommt das ganze Ergebnis als Text in einer Nachricht. Die allererste Zeile nach dem Einstieg, davor nichts, genau so:
+„**Das Wichtigste:** [ein Satz, was der Brief für mich bedeutet, so, dass ich es sofort verstehe]“
+Nennt der Brief eine Frist, kommen darunter genau so, ohne Wochentag, je Frist eine Zeile, die früheste zuerst, und eine Zeile zur Sicherheit:
+„**[Was bis wann, mit dem Wort aus dem Brief, etwa Zahlen bis]:** [Datum] ([steht im Brief] oder [Beginn] + [Frist] = [Datum], [Regel mit Link])
+**Zur Sicherheit:** Schick es ein paar Tage früher ab, bis [Datum, eine Woche vor der frühesten Frist, bei Fristen unter drei Wochen drei Tage].“
+Rechne jede Frist still zweimal; weichen die Tage ab, nimm den früheren. Bleibt weniger Zeit: „**Zur Sicherheit:** Schick es heute ab.“ Passt „abschicken“ nicht, etwa beim Zahlen, nimm das passende Verb.
+Eine Frist „nach Bekanntgabe“ rechnest du nie ab dem Briefdatum: Mit normaler Post gilt der Brief am vierten Tag nach seinem Datum als bekanntgegeben (gelber Umschlag: am Datum darauf), ab da läuft sie. Ein Monat endet am Tag mit derselben Zahl wie die Bekanntgabe, nicht einen Tag davor; fehlt die Zahl im Monat, am Monatsletzten. Wochenende oder Feiertag ändern den Tag nicht; sag dazu nichts. Beispiel: Brief vom 03.03. + 4 Tage = bekanntgegeben 07.03., + 1 Monat = 07.04.
+Regel mit Link, „seit 2025 vier Tage“: Finanzamt, Familienkasse § 122 AO (https://www.gesetze-im-internet.de/ao_1977/__122.html); Sozialleistungen wie Jobcenter, Krankenkasse, Rente § 37 SGB X (https://www.gesetze-im-internet.de/sgb_10/__37.html); andere Ämter § 41 VwVfG (https://www.gesetze-im-internet.de/vwvfg/__41.html).
+Ist eine Frist vorbei, sag es offen und was heute noch geht.
+Darunter kurz, je ein bis zwei Sätze:
+**Was du jetzt tun musst:** Fordert der Brief Geld, zuerst genau so und ohne Einschränkung: „Zahlen musst du bis [Datum].“ Hält ein Einspruch oder Widerspruch das laut Brief nicht auf, sag es dazu. Dann, was sonst Pflicht ist und was nur ratsam, und was passiert, wenn ich nichts tue.
+**Deine Möglichkeiten:** nur die, die hier wirklich infrage kommen.
+**Noch offen:** nur, wenn etwas fehlt oder unklar ist.
+**Meine Empfehlung:** Der erste Satz sagt klar, ob das, was der Brief verlangt, berechtigt ist oder nicht, mit Grund: Stimmen seine Angaben, ist es berechtigt. Danach darfst du ausführlicher werden: was du an meiner Stelle tun würdest und warum, ehrlich und konkret, als deine Einschätzung erkennbar, der passende Weg zuerst.
+Alles außer der Empfehlung bleibt kurz, insgesamt höchstens etwa 170 Wörter. Erfinde nichts, was nicht im Brief steht, auch keine Wenn-dann-Regel für deinen Rat. Deine Einordnung richtet sich nach meinem Brief. Suchfunde ergänzen sie, drehen sie aber nicht um; passt ein Fund nicht dazu, nenn ihn als Hinweis mit Quelle, nicht als neue Empfehlung.
+Schreib nur, was zu meinen Antworten passt; fehlt eine Angabe, lass die Zeile weg.
+Du ersetzt keine Rechtsberatung. Bei hohen Beträgen, gekürztem Geld zum Leben, abgelaufener Frist oder Streit sag in einem Satz, dass der Absender (Telefonnummer im Brief) oder eine Beratungsstelle wie die Verbraucherzentrale hilft (https://www.verbraucherzentrale.de/beratung). Rate deshalb nicht vom Ergebnis ab, und mach keine Angst.
 
-Schließ direkt daran an: Biete mir passende nächste Schritte an, bei
-denen du mir helfen kannst, zum Beispiel eine Antwort formulieren,
-meine Optionen recherchieren oder auf etwas genauer eingehen, und frag
-mich in einem Satz, wie ich weitermachen möchte. Für eine Antwort
-nutzt du nur Angaben, die ich bestätigt habe.
+3. Zum Schluss frag mich genau einmal, mit Knöpfen, ob du noch bei etwas helfen sollst, und erklär jede Wahl in einem Satz: ✍️ Antwort schreiben · 📞 Anruf vorbereiten · 🔎 Möglichkeiten genauer prüfen · 👋 Nein danke. Fragen zu einem Angebot erst nach meiner Wahl. Danach bist du fertig.
+Pass die Angebote an meinen Brief und deine Empfehlung an: Muss ich zahlen, heißt es „✍️ Um Ratenzahlung bitten“, sonst steht bei ✍️ gleich, was die Antwort will, etwa „✍️ Einspruch schreiben“; bei 📞 wer, etwa „📞 Anruf beim Vermieter vorbereiten“.
+Wahlen mit Emoji sind Knöpfe zum Antippen.
+Bei 📞: Stichpunkte, was ich sage und frage, mit Aktenzeichen und Frist aus dem Brief. Was ich sage, schreib so, wie man spricht, und sag einmal dazu, dass es nur die Richtung zeigt und ich es in eigenen Worten sage.
+Bei ✍️: Fehlen für die Antwort Angaben, die nicht im Brief oder meinen Antworten stehen, etwa mein Name, meine Anschrift oder mein Grund, frag vorher: Nenn die fehlenden Angaben und lass mich wählen, ob du sie abfragst und gleich einbaust oder ob ich sie nach dem Kopieren selbst eintrage, weil ich hier keine Daten eingeben will. 🤝 Abfragen und einbauen · 📋 Ich fülle selbst aus
+Nach meiner Wahl schreibst du als Nächstes die Antwort, vor jeder weiteren Frage: bei 📋 gleich in deiner Antwort, ohne diese Angaben je abzufragen; bei 🤝 nach einer Nachricht, die alle Angaben abfragt; jedes Feld darf leer bleiben. Was fehlt, steht als [Lücke].
+Dann gleich, ohne Rückfrage, die Antwort als Text zum Kopieren: meine Anschrift, die des Absenders genau wie im Brief (auch ein Postfach), Datum, Aktenzeichen, Betreff, Anrede, was ich will mit kurzem Grund, Bitte um Bestätigung, Gruß, mein Name. Schreib nur, was ich dir gesagt habe; was offen bleibt, steht als [Lücke]. Darunter kurz, wie ich es abschicke und bis wann (der Tag zur Sicherheit): per Mail, wenn der Brief eine Mailadresse nennt, sonst per Post an seine Anschrift. Ein Widerspruch oder Einspruch geht unterschrieben als Einwurf-Einschreiben, weil eine einfache Mail dafür meist nicht reicht und ich so den Eingang beweisen kann; nennt der Brief dafür einen Online-Weg, nenn ihn zuerst. Wird es ein Brief, sag den Grund und verständnisvoll, dass er mehr Mühe macht und warum sie sich lohnt.
 
-Alles außer der Empfehlung bleibt kurz, insgesamt höchstens etwa
-170 Wörter. Zahlen und Termine nur, wenn sie wirklich zählen. Erfinde
-nichts, was nicht im Brief steht.</pre><p><button type="button" class="clay-btn ra-zweit" data-kopieren>Auftrag als Text kopieren</button></p></div></details><details class="ra-auf" data-teil="weiter"><summary><span>Weitergedacht</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></summary><div class="ra-auf-innen"><p>Das funktioniert nicht nur bei Post vom Amt. Ein Mietvertrag, die Bedingungen deiner Versicherung, ein Angebot vom Handwerker oder ein Mailverlauf, der über Wochen immer länger geworden ist – Auch hier kann KI für dich erklären, sortieren, beraten und handeln.</p><p><b>Denk an das letzte Dokument, das du nach dem lesen der ersten Sätzen, in die mentale Schublade &quot;Darum kümmere ich mich später&quot; geschoben hast. Genau damit kannst du anfangen.</b></p><p><b>Immer griffbereit:</b> Richte es einmal ein. Danach reicht auf all deinen Geräten ein Foto vom Brief, ganz ohne Auftrag. Mit ChatGPT-Abo (ab Plus): ChatGPT holt die Anleitung von unserer Seite, du bestätigst einmal.</p></div></details></section>
+Sprich alles als dein eigenes Wissen aus, nie „nach deiner Vorgabe“. Arbeite jeden Schritt ganz durch und hör nie nach einer Ankündigung auf.</pre><p><button type="button" class="clay-btn ra-zweit" data-kopieren>Auftrag als Text kopieren</button></p></div></details><details class="ra-auf" data-teil="weiter"><summary><span>Weitergedacht</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></summary><div class="ra-auf-innen"><p>Das funktioniert nicht nur bei Post vom Amt. Ein Mietvertrag, die Bedingungen deiner Versicherung, ein Angebot vom Handwerker oder ein Mailverlauf, der über Wochen immer länger geworden ist – Auch hier kann KI für dich erklären, sortieren, beraten und handeln.</p><p><b>Denk an das letzte Dokument, das du nach dem lesen der ersten Sätzen, in die mentale Schublade &quot;Darum kümmere ich mich später&quot; geschoben hast. Genau damit kannst du anfangen.</b></p><p><b>Immer griffbereit:</b> Richte es einmal ein. Danach reicht auf all deinen Geräten ein Foto vom Brief, ganz ohne Auftrag. Mit ChatGPT-Abo (ab Plus): ChatGPT holt die Anleitung von unserer Seite, du bestätigst einmal.</p></div></details></section>
       </div>
     </div>
   </article>
@@ -2282,6 +2338,46 @@ nichts, was nicht im Brief steht.</pre><p><button type="button" class="clay-btn 
 </div>
     
     <footer class="footer"><div class="wrap"><span>KIosk</span><span>Von Menschen für Menschen</span></div></footer>
+  <template id="auftrag-claude">Ein offizieller Brief macht mir Stress, und ich verstehe nicht genau, was die von mir wollen. Erklär ihn mir wie ein guter Freund, der sich damit auskennt: nicht nur übersetzen, sondern einordnen und ehrlich sagen, was du an meiner Stelle tun würdest. Ich will nur den Brief zeigen und entscheiden, du erklärst und rätst. Am Ende will ich wissen, was ich bis wann tun muss und was ich am besten mache.
+
+So redest du mit mir: einfach, direkt, immer mit Du. Kurze Absätze mit höchstens zwei Sätzen. Keine Fachwörter; ist eins unvermeidbar, erklär es gleich in Alltagsworten, etwa Abschlag, Säumniszuschlag oder Rechtsbehelf. Zahlen und Daten nur, wenn sie zählen.
+
+Ich lade den Brief als Foto oder PDF hoch. Ist noch nichts hochgeladen, bitte mich nur darum. Stell vorher keine weiteren Fragen.
+Fehlt dir eine Angabe oder ist eine Stelle nicht lesbar, bitte um genau das Foto, das sie zeigt (näher dran, andere Seite), statt ums Abtippen; nur, wenn es fürs Ergebnis zählt.
+
+1. Einstieg. Deine erste Antwort beginnt genau so, als Markdown:
+### 📬 Brief vom Amt verstehen
+---
+**Lass uns gemeinsam schauen, was dieser Brief von dir will; am Ende weißt du, was du bis wann tun musst, und hast eine ehrliche Empfehlung.**
+Hängt der Brief schon an, kommt direkt darunter das Ergebnis, sonst die Bitte um ein Foto je Seite.
+
+2. Ergebnis. Sobald du den Brief hast, kommt das ganze Ergebnis als Text in einer Nachricht. Die allererste Zeile nach dem Einstieg, davor nichts, genau so:
+„**Das Wichtigste:** [ein Satz, was der Brief für mich bedeutet, so, dass ich es sofort verstehe]“
+Nennt der Brief eine Frist, kommen darunter genau so, ohne Wochentag, je Frist eine Zeile, die früheste zuerst, und eine Zeile zur Sicherheit:
+„**[Was bis wann, mit dem Wort aus dem Brief, etwa Zahlen bis]:** [Datum] ([steht im Brief] oder [Beginn] + [Frist] = [Datum], [Regel mit Link])
+**Zur Sicherheit:** Schick es ein paar Tage früher ab, bis [Datum, eine Woche vor der frühesten Frist, bei Fristen unter drei Wochen drei Tage].“
+Rechne jede Frist still zweimal; weichen die Tage ab, nimm den früheren. Bleibt weniger Zeit: „**Zur Sicherheit:** Schick es heute ab.“ Passt „abschicken“ nicht, etwa beim Zahlen, nimm das passende Verb.
+Eine Frist „nach Bekanntgabe“ rechnest du nie ab dem Briefdatum: Mit normaler Post gilt der Brief am vierten Tag nach seinem Datum als bekanntgegeben (gelber Umschlag: am Datum darauf), ab da läuft sie. Ein Monat endet am Tag mit derselben Zahl wie die Bekanntgabe, nicht einen Tag davor; fehlt die Zahl im Monat, am Monatsletzten. Wochenende oder Feiertag ändern den Tag nicht; sag dazu nichts. Beispiel: Brief vom 03.03. + 4 Tage = bekanntgegeben 07.03., + 1 Monat = 07.04.
+Regel mit Link, „seit 2025 vier Tage“: Finanzamt, Familienkasse § 122 AO (https://www.gesetze-im-internet.de/ao_1977/__122.html); Sozialleistungen wie Jobcenter, Krankenkasse, Rente § 37 SGB X (https://www.gesetze-im-internet.de/sgb_10/__37.html); andere Ämter § 41 VwVfG (https://www.gesetze-im-internet.de/vwvfg/__41.html).
+Ist eine Frist vorbei, sag es offen und was heute noch geht.
+Darunter kurz, je ein bis zwei Sätze:
+**Was du jetzt tun musst:** Fordert der Brief Geld, zuerst genau so und ohne Einschränkung: „Zahlen musst du bis [Datum].“ Hält ein Einspruch oder Widerspruch das laut Brief nicht auf, sag es dazu. Dann, was sonst Pflicht ist und was nur ratsam, und was passiert, wenn ich nichts tue.
+**Deine Möglichkeiten:** nur die, die hier wirklich infrage kommen.
+**Noch offen:** nur, wenn etwas fehlt oder unklar ist.
+**Meine Empfehlung:** Der erste Satz sagt klar, ob das, was der Brief verlangt, berechtigt ist oder nicht, mit Grund: Stimmen seine Angaben, ist es berechtigt. Danach darfst du ausführlicher werden: was du an meiner Stelle tun würdest und warum, ehrlich und konkret, als deine Einschätzung erkennbar, der passende Weg zuerst.
+Alles außer der Empfehlung bleibt kurz, insgesamt höchstens etwa 170 Wörter. Erfinde nichts, was nicht im Brief steht, auch keine Wenn-dann-Regel für deinen Rat. Deine Einordnung richtet sich nach meinem Brief. Suchfunde ergänzen sie, drehen sie aber nicht um; passt ein Fund nicht dazu, nenn ihn als Hinweis mit Quelle, nicht als neue Empfehlung.
+Schreib nur, was zu meinen Antworten passt; fehlt eine Angabe, lass die Zeile weg.
+Du ersetzt keine Rechtsberatung. Bei hohen Beträgen, gekürztem Geld zum Leben, abgelaufener Frist oder Streit sag in einem Satz, dass der Absender (Telefonnummer im Brief) oder eine Beratungsstelle wie die Verbraucherzentrale hilft (https://www.verbraucherzentrale.de/beratung). Rate deshalb nicht vom Ergebnis ab, und mach keine Angst.
+
+3. Zum Schluss frag mich genau einmal, mit Knöpfen, ob du noch bei etwas helfen sollst, und erklär jede Wahl in einem Satz: ✍️ Antwort schreiben · 📞 Anruf vorbereiten · 🔎 Möglichkeiten genauer prüfen · 👋 Nein danke. Fragen zu einem Angebot erst nach meiner Wahl. Danach bist du fertig.
+Pass die Angebote an meinen Brief und deine Empfehlung an: Muss ich zahlen, heißt es „✍️ Um Ratenzahlung bitten“, sonst steht bei ✍️ gleich, was die Antwort will, etwa „✍️ Einspruch schreiben“; bei 📞 wer, etwa „📞 Anruf beim Vermieter vorbereiten“.
+Wahlen mit Emoji sind Knöpfe zum Antippen: Hast du ein Werkzeug dafür (in Claude ask_user_input), nutz es, ohne es zu erwähnen; sonst schreib sie nummeriert in eine Zeile.
+Bei 📞: Stichpunkte, was ich sage und frage, mit Aktenzeichen und Frist aus dem Brief. Was ich sage, schreib so, wie man spricht, und sag einmal dazu, dass es nur die Richtung zeigt und ich es in eigenen Worten sage.
+Bei ✍️: Fehlen für die Antwort Angaben, die nicht im Brief oder meinen Antworten stehen, etwa mein Name, meine Anschrift oder mein Grund, frag vorher: Nenn die fehlenden Angaben und lass mich wählen, ob du sie abfragst und gleich einbaust oder ob ich sie nach dem Kopieren selbst eintrage, weil ich hier keine Daten eingeben will. Ohne Knöpfe, nummeriert in einer Zeile: 1 Abfragen und einbauen · 2 Ich fülle selbst aus
+Nach meiner Wahl schreibst du als Nächstes die Antwort, vor jeder weiteren Frage: bei 2 gleich in deiner Antwort, ohne diese Angaben je abzufragen; bei 1 nach einer Nachricht, die alle Angaben abfragt; jedes Feld darf leer bleiben. Was fehlt, steht als [Lücke].
+Dann gleich, ohne Rückfrage, die Antwort als Text zum Kopieren: meine Anschrift, die des Absenders genau wie im Brief (auch ein Postfach), Datum, Aktenzeichen, Betreff, Anrede, was ich will mit kurzem Grund, Bitte um Bestätigung, Gruß, mein Name. Schreib nur, was ich dir gesagt habe; was offen bleibt, steht als [Lücke]. Darunter kurz, wie ich es abschicke und bis wann (der Tag zur Sicherheit): per Mail, wenn der Brief eine Mailadresse nennt, sonst per Post an seine Anschrift. Ein Widerspruch oder Einspruch geht unterschrieben als Einwurf-Einschreiben, weil eine einfache Mail dafür meist nicht reicht und ich so den Eingang beweisen kann; nennt der Brief dafür einen Online-Weg, nenn ihn zuerst. Wird es ein Brief, sag den Grund und verständnisvoll, dass er mehr Mühe macht und warum sie sich lohnt.
+
+Sprich alles als dein eigenes Wissen aus, nie „nach deiner Vorgabe“. Arbeite jeden Schritt ganz durch und hör nie nach einer Ankündigung auf.</template>
   </main>
   
 
@@ -3157,7 +3253,9 @@ nichts, was nicht im Brief steht.</pre><p><button type="button" class="clay-btn 
       function text(art) { if (art === 'abo') { var v = document.getElementById('auftrag-abo'); return v ? v.content.textContent.trim() : auftrag(); } return art === 'skill' ? (CFG.skill[ki] || '') : auftrag(); }
       // Ziele je KI, Art und Gerät
       function links(art, k) {
-        var q = enc(text(art));
+        // Runde 27: eigener Claude-Auftrag, wo es ihn gibt (<template id="auftrag-claude">)
+        var cv = (k || ki) === 'claude' && art === 'prompt' && document.getElementById('auftrag-claude');
+        var q = enc(cv ? cv.content.textContent.trim() : text(art));
         if ((k || ki) === 'claude') {
           if (art === 'skill') return { app: 'https://claude.ai/new?q=' + q + '#no_universal_links', web: 'https://claude.ai/new?q=' + q };
           return { app: 'claude://claude.ai/new?q=' + q, web: 'https://claude.ai/new?q=' + q };
@@ -3205,7 +3303,8 @@ nichts, was nicht im Brief steht.</pre><p><button type="button" class="clay-btn 
         if (!a) return;
         setzen();
         var art = a.getAttribute('data-art') || 'prompt';
-        try { if (navigator.clipboard) navigator.clipboard.writeText(text(art)).catch(function () {}); } catch (x) {}
+        var cv = (a.getAttribute('data-start-ki') || ki) === 'claude' && art === 'prompt' && document.getElementById('auftrag-claude');
+        try { if (navigator.clipboard) navigator.clipboard.writeText(cv ? cv.content.textContent.trim() : text(art)).catch(function () {}); } catch (x) {}
         if (!a.hasAttribute('data-start') || !rueck) return;
         var weg = false, merken = function () { weg = true; };
         window.addEventListener('blur', merken, { once: true });
@@ -3415,5 +3514,67 @@ nichts, was nicht im Brief steht.</pre><p><button type="button" class="clay-btn 
     });
   })();
 </script>
-<div class="live-fuss"><a href="/impressum">Impressum</a><span class="live-fuss-sep" aria-hidden="true"> · </span><a href="/datenschutz">Datenschutz</a><span class="live-fuss-sep" aria-hidden="true"> · </span><span class="live-fuss-t">Testfassung im Aufbau</span></div></body>
+<script>
+  // Runde 47 (Jim, 27.10.2026), Punkt 4: Start-Knöpfe zeigen die im Pop-up gewählte KI zuerst („ki-wahl“). Punkt 6: nur am Rechner beim ersten Klick
+  // je KI auf „Mit … starten“ ein kleines Fenster am Knopf (Wortlaut Pam). „Erst anmelden“ öffnet die Anmeldung im neuen Tab, das Fenster bleibt.
+  (function () {
+    var ANMELDEN = {"chatgpt": "https://chatgpt.com/auth/login", "claude": "https://claude.ai/login"}, TEXT = {"chatgpt": "Bist du bei ChatGPT angemeldet? Sonst läuft der Chat ohne Konto und wird nicht gespeichert.", "claude": "Bist du bei Claude angemeldet? Sonst geht dein Auftrag bei der Anmeldung verloren."}, NAMEN = {"chatgpt": "ChatGPT", "claude": "Claude"};
+    var d = document.documentElement;
+    function lies(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+    // 4. Gemerkte KI zuerst: Knopf und Claude-Link tauschen Ziel, Logo und Text
+    var p = document.querySelector('.ra-knopf[data-start]'), c = document.querySelector('.ra-claude[data-start-ki="claude"]');
+    if (lies('ki-wahl') === 'claude' && p && c && !p.hasAttribute('data-start-ki')) {
+      var tausch = ['href', 'data-web', 'target'], alt = {};
+      tausch.forEach(function (a) { alt[a] = p.getAttribute(a); });
+      tausch.forEach(function (a) { if (c.getAttribute(a) != null) p.setAttribute(a, c.getAttribute(a)); if (alt[a] != null) c.setAttribute(a, alt[a]); });
+      p.setAttribute('data-start-ki', 'claude'); c.removeAttribute('data-start-ki'); c.setAttribute('data-start-ki-tausch', 'chatgpt');
+      p.querySelector('.logo use').setAttribute('href', '#l-claude'); p.querySelector('span').textContent = 'Mit Claude starten';
+      c.querySelector('.logo use').setAttribute('href', '#l-openai'); c.lastChild.textContent = 'Mit ChatGPT starten';
+      var l = document.querySelector('.ra-leiste [data-start]');
+      if (l) { tausch.forEach(function (a) { if (p.getAttribute(a) != null) l.setAttribute(a, p.getAttribute(a)); }); l.setAttribute('data-start-ki', 'claude');
+        l.querySelector('.logo use').setAttribute('href', '#l-claude'); l.querySelector('span').textContent = 'Mit Claude starten'; }
+    }
+    // 6. Hinweis „im Browser angemeldet“
+    function gesehen() { try { return JSON.parse(lies('ki-anmelde-hinweis') || '{}') || {}; } catch (e) { return {}; } }
+    function merke(k) { var g = gesehen(); g[k] = 1; try { localStorage.setItem('ki-anmelde-hinweis', JSON.stringify(g)); } catch (e) {} }
+    var fenster = null, quelle = null, frei = false;
+    function zu(fokus) { if (!fenster) return; fenster.remove(); fenster = null; if (fokus && quelle) try { quelle.focus({ preventScroll: true }); } catch (e) {} quelle = null; }
+    function lage() {
+      if (!fenster || !quelle) return;
+      var r = quelle.getBoundingClientRect(), b = fenster.offsetWidth, h = fenster.offsetHeight, vw = d.clientWidth;
+      var x = Math.max(16, Math.min(r.left, vw - b - 16)), oben = r.bottom + 14 + h > innerHeight && r.top - 14 - h > 0;
+      fenster.style.left = (x + scrollX) + 'px';
+      fenster.style.top = ((oben ? r.top - 14 - h : r.bottom + 14) + scrollY) + 'px';
+      fenster.classList.toggle('v47-hw--oben', oben);
+      fenster.style.setProperty('--pfeil', Math.max(24, Math.min(b - 24, r.left + Math.min(r.width / 2, 60) - x)) + 'px');
+    }
+    function zeige(a, k) {
+      zu(false); quelle = a;
+      fenster = document.createElement('div');
+      fenster.className = 'v47-hw'; fenster.setAttribute('role', 'dialog'); fenster.setAttribute('aria-labelledby', 'v47-hw-t');
+      fenster.innerHTML = '<p id="v47-hw-t"><b>Kurz vorher:</b> <span></span></p><div class="v47-hw-fuss"><a class="v47-hw-leise" target="_blank" rel="noopener">Erst anmelden</a>'
+        + '<button type="button" class="v47-hw-los">Ja, starten</button></div>';
+      fenster.querySelector('span').textContent = TEXT[k];
+      fenster.querySelector('a').href = ANMELDEN[k];
+      fenster.querySelector('.v47-hw-los').addEventListener('click', function () { merke(k); var q = quelle; zu(false); frei = true; try { q.click(); } finally { frei = false; } });
+      fenster.addEventListener('keydown', function (e) { if (e.key === 'Escape') { e.preventDefault(); zu(true); } });
+      document.body.appendChild(fenster);
+      lage();
+      fenster.querySelector('.v47-hw-los').focus({ preventScroll: true });
+    }
+    window.addEventListener('click', function (e) {
+      if (frei) return;
+      var a = e.target.closest && e.target.closest('a[data-start]');
+      if (!a) { if (fenster && !fenster.contains(e.target)) zu(false); return; }
+      if (d.getAttribute('data-geraet') !== 'computer' || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey) return;
+      var k = a.getAttribute('data-start-ki') === 'claude' ? 'claude' : 'chatgpt';
+      if (!TEXT[k] || gesehen()[k]) return;
+      e.preventDefault(); e.stopImmediatePropagation();
+      zeige(a, k);
+    }, true);
+    addEventListener('resize', lage); addEventListener('scroll', lage, { passive: true });
+  })();
+</script>
+<div class="live-fuss"><a href="/impressum">Impressum</a><span class="live-fuss-sep" aria-hidden="true"> · </span><a href="/datenschutz">Datenschutz</a><span class="live-fuss-sep" aria-hidden="true"> · </span><span class="live-fuss-t">Testfassung im Aufbau</span></div><script src="/messung.js" data-endpunkt="https://script.google.com/macros/s/AKfycbxJ_s2hUjUxQiWQQ0QoXxSoxR5SfS0MiUvpHb7PcEJzYVgLpcVq1a9i5iUWonSEirfWSg/exec" defer></script><script src="/messpunkte.js" defer></script>
+</body>
 </html>

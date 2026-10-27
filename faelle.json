@@ -43,5 +43,25 @@
   "kennung": "R07",
   "seite": "miete",
   "adresse": "/zahlst-du-zu-viel-miete"
+ },
+ {
+  "kennung": "N10",
+  "seite": "vertrag",
+  "adresse": "/ungewollter-vertrag"
+ },
+ {
+  "kennung": "R17",
+  "seite": "gehalt",
+  "adresse": "/gehaltsgespraech-vorbereiten"
+ },
+ {
+  "kennung": "F-Foerderung",
+  "seite": "foerderung",
+  "adresse": "/zuschuesse-finden"
+ },
+ {
+  "kennung": "N02",
+  "seite": "rueckholen",
+  "adresse": "/geld-nach-betrug-zurueckholen"
  }
 ]
