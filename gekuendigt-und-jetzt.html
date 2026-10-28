@@ -3,17 +3,20 @@
 <head>
   <meta name="robots" content="noindex, nofollow">
   <meta name="description" content="Kündigung erhalten, was tun? Die KI rechnet deine Fristen ab dem Brief, etwa fürs Arbeitssuchend-Melden, prüft die Kündigung und sagt, was zuerst dran ist.">
-  <meta property="og:site_name" content="KIosk">
-  <meta property="og:title" content="Gekündigt, und jetzt? · KIosk">
+  <meta property="og:site_name" content="Die KI-Macherei">
+  <meta property="og:title" content="Gekündigt, und jetzt? · KI-Macherei">
   <meta property="og:image" content="https://loslegen-mit-ki.de/teilen-gekuendigt-und-jetzt.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Gekündigt, und jetzt? · KIosk">
+  <meta property="og:image:alt" content="Gekündigt, und jetzt? · KI-Macherei">
   <meta name="twitter:card" content="summary_large_image">
   <meta property="og:description" content="Die Kündigung ist da, und der Kopf ist leer.">
   <meta property="og:url" content="https://loslegen-mit-ki.de/gekuendigt-und-jetzt">
   <meta property="og:type" content="website">
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.webmanifest">
 <script>
   // Live-Fassung (15.10.2026): übernimmt, was bisher die Hülle von Version 25 getan hat (Seitenwechsel, Anker, Nachrichten).
   (function () {
@@ -67,13 +70,11 @@
   })();
 </script>
 <style>
-  /* Live-Fassung (15.10.2026): Leiste „im Aufbau“, Name KIosk, Fuß mit Impressum. Die Leiste liegt unter allen Fenstern und
+  /* Live-Fassung (15.10.2026): Leiste „im Aufbau“, Fuß mit Impressum. Die Leiste liegt unter allen Fenstern und
      Seitenblättern (z-index 1), sonst deckt sie deren oberen Rand ab. */
   .live-aufbau { position: relative; z-index: 1; background: #2b2420; color: #f7f1e8; font: 500 14px/1.4 Figtree, system-ui, sans-serif;
     text-align: center; padding: 8px 16px; }
   .live-aufbau b { font-weight: 700; }
-  .kiosk { white-space: nowrap; }
-  .kiosk-ki { font-family: Georgia, "Iowan Old Style", "Noto Serif", "Times New Roman", serif; font-weight: 700; letter-spacing: .01em; }
   .live-fuss { font: 500 14px/1.5 Figtree, system-ui, sans-serif; color: #6f655c; text-align: center; padding: 18px 16px 28px; }
   .live-fuss a { color: inherit; }
   /* Fuß am Handy (Runde 11, 19.10.2026, live seit Yannis' „stell live“): Links 44 px hoch, „Testfassung im Aufbau“ in eigener Zeile */
@@ -88,7 +89,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="light">
-  <title>Gekündigt, und jetzt? – was du in den ersten drei Wochen tun musst · KIosk</title>
+  <title>Gekündigt, und jetzt? – was du in den ersten drei Wochen tun musst · KI-Macherei</title>
   <style>
   /* Figtree (Erik Kennedy, SIL Open Font License 1.1), lateinischer Zeichensatz, eingebettet, damit die Schrift auch ohne Internet und auf jedem System gleich aussieht */
   @font-face { font-family: "Figtree"; font-style: italic; font-weight: 300 900; font-display: swap; src: url(/a-ab2c6d32fc54.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
@@ -2086,6 +2087,19 @@ body { padding-bottom: 0; }
   .ra-brauchst li.v57-i > .v57-sym--ki svg { width: 15px; height: 15px; fill: currentColor; stroke: none; }
   .ra-brauchst li.v57-ki { padding-left: 40px; }
 </style>
+<style>
+  /* Runde 61 (Pam, Punkt 8): Logo quer im Kopf, 28 px am Handy bis 36 px am Rechner; Schutzzone = halbe Zeichenhöhe */
+  .r61-brand { gap: 0; padding: 0; line-height: 0; flex: none; }
+  .r61-brand picture { display: block; line-height: 0; }
+  .r61-logo { display: block; height: clamp(28px, 2.6vw, 36px); width: auto; }
+  .site-nav .nav-end { margin-left: clamp(14px, 1.3vw, 18px); }
+  @media (max-width: 359.98px) { .r61-logo { width: clamp(28px, 2.6vw, 36px); } }
+  .r61-popup-logo { display: block; height: 22px; width: auto; }
+  /* Fuß: Name und Instagram in S6, 400 */
+  .footer .r61-fuss { font-size: 15px; font-weight: 400; }
+  .footer .r61-fuss a { color: inherit; text-underline-offset: 3px; }
+  @media (max-width: 767.98px) { .footer .r61-fuss a { display: inline-flex; align-items: center; min-height: 44px; } }
+</style>
 </head>
 <body data-fall="gekuendigt-und-jetzt"><div class="live-aufbau" role="note"><b>Public Beta:</b> Die Seite ist noch im Aufbau, manche Funktionen gehen noch nicht. Dein Feedback hilft uns, sie besser zu machen.</div><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="ls-coins" viewBox="0 0 24 24"><path d="M13.744 17.736a6 6 0 1 1-7.48-7.48"/><path d="M15 6h1v4"/><path d="m6.134 14.768.866-.5 2 3.464"/><circle cx="16" cy="8" r="6"/></symbol><symbol id="ls-door-open" viewBox="0 0 24 24"><path d="M11 20H2"/><path d="M11 4.562v16.157a1 1 0 0 0 1.242.97L19 20V5.562a2 2 0 0 0-1.515-1.94l-4-1A2 2 0 0 0 11 4.561z"/><path d="M11 4H8a2 2 0 0 0-2 2v14"/><path d="M14 12h.01"/><path d="M22 20h-3"/></symbol><symbol id="ls-refresh-cw" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></symbol><symbol id="ls-trending-up" viewBox="0 0 24 24"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></symbol></defs></svg><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><!-- Symbole: Lucide 1.31.0 (lucide.dev, gebündelt aus lucide-react). Lizenz:
 ISC License
@@ -2141,7 +2155,7 @@ SOFTWARE. --><symbol id="ls-mail" viewBox="0 0 24 24"><path d="m22 7-8.991 5.727
 
   <main class="board ra-board" id="board">
     <header class="site-nav wrap">
-        <a class="brand" href="/" aria-label="Zur Startseite"><span class="brand-mark" aria-hidden="true"></span><span class="kiosk"><span class="kiosk-ki">KI</span>osk</span></a>
+        <a class="brand r61-brand" href="/"><picture><source media="(max-width: 359.98px)" srcset="/ki-macherei_zeichen_hell.svg"><img class="r61-logo" src="/ki-macherei_quer_hell.svg" alt="Die KI-Macherei, zur Startseite" width="159" height="28"></picture></a>
         <div class="nav-end">
           <nav class="nav-links v44-nav" aria-label="Hauptnavigation"><a class="v47-pille" href="/ideen"><svg class="v47-ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg><span>Alle Ideen</span></a></nav>
           <a class="nav-mein" href="/mein-bereich" aria-label="Mein Bereich"><span class="nav-mein__ich" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-user-round"/></svg></span><span class="nav-mein__text">Mein Bereich</span></a>
@@ -2240,7 +2254,7 @@ Sprich alles als dein eigenes Wissen aus, nie „nach deiner Vorgabe“. Arbeite
   <div class="ra-leiste" data-leiste aria-hidden="true"><a class="button-primary" href="#" data-start data-art="prompt" target="_blank" rel="noopener" tabindex="-1"><svg class="logo" aria-hidden="true"><use href="#l-openai"/></svg><span>Mit ChatGPT starten</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></div>
 </div>
     
-    <footer class="footer"><div class="wrap"><span>KIosk</span><span>Von Menschen für Menschen</span></div></footer>
+    <footer class="footer"><div class="wrap"><span class="r61-fuss">Die KI-Macherei<span aria-hidden="true"> · </span><a href="https://www.instagram.com/ki_macherei/" target="_blank" rel="noopener">Instagram: @ki_macherei</a></span><span>Von Menschen für Menschen</span></div></footer>
   <template id="auftrag-claude">Hilf mir nach meiner Kündigung: meine Fristen ab dem Tag, an dem sie ankam, mit echten Daten, was ich nicht unterschreibe und wer mir hilft. Ich will nur erzählen und entscheiden, du rechnest, prüfst und suchst. Am Ende will ich einen Fristenplan mit Daten und wissen, was als Nächstes kommt.
 
 So redest du mit mir: einfach, ruhig, immer mit Du. Kurze Absätze mit höchstens zwei Sätzen. Keine Fachwörter; ist eins unvermeidbar, erklär es gleich in Alltagsworten, etwa Kündigungsschutzklage. Zahlen und Daten nur, wenn sie zählen.
@@ -2946,7 +2960,7 @@ Sprich alles als dein eigenes Wissen aus, nie „nach deiner Vorgabe“. Arbeite
     window.efFilm = function (platz) {
       if (!platz || platz.dataset.efAn) return;
       platz.dataset.efAn = '1';
-      platz.innerHTML = "<figure class=\"ef ef-artikel\" aria-label=\"So fügst du einen Auftrag ein\"><div class=\"ef-howto-head\">So einfach geht’s <span class=\"ef-head-r\"><span class=\"ef-chip\">Beispiel</span><button class=\"ef-pause\" data-ef=\"pause\" type=\"button\" aria-pressed=\"false\" aria-label=\"Animation anhalten\"><svg class=\"ef-pz\" viewBox=\"0 0 14 14\" aria-hidden=\"true\"><rect x=\"2.5\" y=\"2\" width=\"3\" height=\"10\" rx=\"1\"/><rect x=\"8.5\" y=\"2\" width=\"3\" height=\"10\" rx=\"1\"/></svg><svg class=\"ef-play\" viewBox=\"0 0 14 14\" aria-hidden=\"true\"><path d=\"M4 2.2v9.6a.6.6 0 0 0 .9.5l7.6-4.8a.6.6 0 0 0 0-1L4.9 1.7a.6.6 0 0 0-.9.5z\"/></svg></button></span></div><div class=\"ef-howto-screen\"><div class=\"ef-stage\" data-ef=\"stage\" aria-hidden=\"true\"><div class=\"ef-dev ef-dev-phone\"><div class=\"ef-screen\"><div class=\"ef-vp\"></div><div class=\"ef-homebar\"></div><div class=\"ef-tap\"><svg viewBox=\"0 0 18 22\"><path d=\"M2 1.5v16.5l4.4-4.2 3 6.7 2.7-1.2-3-6.6h6.2z\" fill=\"#23201c\" stroke=\"#fff\" stroke-width=\"1.4\" stroke-linejoin=\"round\"/></svg></div></div></div><div class=\"ef-dev ef-dev-laptop\"><div class=\"ef-lid\"><div class=\"ef-screen\"><div class=\"ef-tabs\"><span class=\"ef-dots\"><i></i><i></i><i></i></span><span class=\"ef-tab ef-tab-a ef-on\"><i class=\"ef-fav\"></i>KIosk</span><span class=\"ef-tab ef-tab-b\"><i class=\"ef-fav ef-fav-b\"></i>KI-Chat</span></div><div class=\"ef-vp\"></div><div class=\"ef-tap\"><svg viewBox=\"0 0 18 22\"><path d=\"M2 1.5v16.5l4.4-4.2 3 6.7 2.7-1.2-3-6.6h6.2z\" fill=\"#23201c\" stroke=\"#fff\" stroke-width=\"1.4\" stroke-linejoin=\"round\"/></svg></div></div></div><div class=\"ef-base\"></div></div></div><ol class=\"ef-steps\" data-ef=\"steps\"><li data-s=\"1\"><span class=\"ef-n\">1</span>Kopieren</li><li data-s=\"2\"><span class=\"ef-n\">2</span>Einfügen</li><li data-s=\"3\"><span class=\"ef-n\">3</span>Absenden</li><li data-s=\"4\" class=\"ef-rest\">Den Rest macht die KI</li></ol></div><figcaption class=\"ef-artikel-cap\">Vereinfachte Darstellung. Jede KI-App sieht etwas anders aus.</figcaption></figure>";
+      platz.innerHTML = "<figure class=\"ef ef-artikel\" aria-label=\"So fügst du einen Auftrag ein\"><div class=\"ef-howto-head\">So einfach geht’s <span class=\"ef-head-r\"><span class=\"ef-chip\">Beispiel</span><button class=\"ef-pause\" data-ef=\"pause\" type=\"button\" aria-pressed=\"false\" aria-label=\"Animation anhalten\"><svg class=\"ef-pz\" viewBox=\"0 0 14 14\" aria-hidden=\"true\"><rect x=\"2.5\" y=\"2\" width=\"3\" height=\"10\" rx=\"1\"/><rect x=\"8.5\" y=\"2\" width=\"3\" height=\"10\" rx=\"1\"/></svg><svg class=\"ef-play\" viewBox=\"0 0 14 14\" aria-hidden=\"true\"><path d=\"M4 2.2v9.6a.6.6 0 0 0 .9.5l7.6-4.8a.6.6 0 0 0 0-1L4.9 1.7a.6.6 0 0 0-.9.5z\"/></svg></button></span></div><div class=\"ef-howto-screen\"><div class=\"ef-stage\" data-ef=\"stage\" aria-hidden=\"true\"><div class=\"ef-dev ef-dev-phone\"><div class=\"ef-screen\"><div class=\"ef-vp\"></div><div class=\"ef-homebar\"></div><div class=\"ef-tap\"><svg viewBox=\"0 0 18 22\"><path d=\"M2 1.5v16.5l4.4-4.2 3 6.7 2.7-1.2-3-6.6h6.2z\" fill=\"#23201c\" stroke=\"#fff\" stroke-width=\"1.4\" stroke-linejoin=\"round\"/></svg></div></div></div><div class=\"ef-dev ef-dev-laptop\"><div class=\"ef-lid\"><div class=\"ef-screen\"><div class=\"ef-tabs\"><span class=\"ef-dots\"><i></i><i></i><i></i></span><span class=\"ef-tab ef-tab-a ef-on\"><i class=\"ef-fav\"></i>KI-Macherei</span><span class=\"ef-tab ef-tab-b\"><i class=\"ef-fav ef-fav-b\"></i>KI-Chat</span></div><div class=\"ef-vp\"></div><div class=\"ef-tap\"><svg viewBox=\"0 0 18 22\"><path d=\"M2 1.5v16.5l4.4-4.2 3 6.7 2.7-1.2-3-6.6h6.2z\" fill=\"#23201c\" stroke=\"#fff\" stroke-width=\"1.4\" stroke-linejoin=\"round\"/></svg></div></div></div><div class=\"ef-base\"></div></div></div><ol class=\"ef-steps\" data-ef=\"steps\"><li data-s=\"1\"><span class=\"ef-n\">1</span>Kopieren</li><li data-s=\"2\"><span class=\"ef-n\">2</span>Einfügen</li><li data-s=\"3\"><span class=\"ef-n\">3</span>Absenden</li><li data-s=\"4\" class=\"ef-rest\">Den Rest macht die KI</li></ol></div><figcaption class=\"ef-artikel-cap\">Vereinfachte Darstellung. Jede KI-App sieht etwas anders aus.</figcaption></figure>";
       const root = platz;
     
       const $ = (id) => root.querySelector('[data-ef="' + id + '"]');

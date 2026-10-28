@@ -3,17 +3,20 @@
 <head>
   <meta name="robots" content="noindex, nofollow">
   <meta name="description" content="Ideen, wie KI dir im Alltag wirklich Arbeit abnimmt. Von Menschen zusammengestellt und getestet.">
-  <meta property="og:site_name" content="KIosk">
-  <meta property="og:title" content="KIosk – Finde heraus, was KI wirklich für dich tun kann">
+  <meta property="og:site_name" content="Die KI-Macherei">
+  <meta property="og:title" content="Die KI-Macherei – Finde heraus, was KI wirklich für dich tun kann">
   <meta property="og:image" content="https://loslegen-mit-ki.de/teilen-index.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="KIosk – Finde heraus, was KI wirklich für dich tun kann">
+  <meta property="og:image:alt" content="Die KI-Macherei – Finde heraus, was KI wirklich für dich tun kann">
   <meta name="twitter:card" content="summary_large_image">
   <meta property="og:description" content="Ideen, wie KI dir im Alltag wirklich Arbeit abnimmt. Von Menschen zusammengestellt und getestet.">
   <meta property="og:url" content="https://loslegen-mit-ki.de/">
   <meta property="og:type" content="website">
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.webmanifest">
 <script>
   // Live-Fassung (15.10.2026): übernimmt, was bisher die Hülle von Version 25 getan hat (Seitenwechsel, Anker, Nachrichten).
   (function () {
@@ -67,13 +70,11 @@
   })();
 </script>
 <style>
-  /* Live-Fassung (15.10.2026): Leiste „im Aufbau“, Name KIosk, Fuß mit Impressum. Die Leiste liegt unter allen Fenstern und
+  /* Live-Fassung (15.10.2026): Leiste „im Aufbau“, Fuß mit Impressum. Die Leiste liegt unter allen Fenstern und
      Seitenblättern (z-index 1), sonst deckt sie deren oberen Rand ab. */
   .live-aufbau { position: relative; z-index: 1; background: #2b2420; color: #f7f1e8; font: 500 14px/1.4 Figtree, system-ui, sans-serif;
     text-align: center; padding: 8px 16px; }
   .live-aufbau b { font-weight: 700; }
-  .kiosk { white-space: nowrap; }
-  .kiosk-ki { font-family: Georgia, "Iowan Old Style", "Noto Serif", "Times New Roman", serif; font-weight: 700; letter-spacing: .01em; }
   .live-fuss { font: 500 14px/1.5 Figtree, system-ui, sans-serif; color: #6f655c; text-align: center; padding: 18px 16px 28px; }
   .live-fuss a { color: inherit; }
   /* Fuß am Handy (Runde 11, 19.10.2026, live seit Yannis' „stell live“): Links 44 px hoch, „Testfassung im Aufbau“ in eigener Zeile */
@@ -107,7 +108,7 @@
       setTimeout(function () { if (!d.classList.contains('v22z-bereit')) d.classList.remove('v22z-bewegt', 'v22z-szene'); }, 4000);
     })();
   </script>
-  <title>KIosk – Finde heraus, was KI wirklich für dich tun kann</title>
+  <title>Die KI-Macherei – Finde heraus, was KI wirklich für dich tun kann</title>
   <style>
   /* Figtree (Erik Kennedy, SIL Open Font License 1.1), lateinischer Zeichensatz, eingebettet, damit die Schrift auch ohne Internet und auf jedem System gleich aussieht */
   @font-face { font-family: "Figtree"; font-style: italic; font-weight: 300 900; font-display: swap; src: url(/a-ab2c6d32fc54.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
@@ -3314,6 +3315,76 @@
 
 /* Schlusszeile als Leitsatz: zurückgestellt (Pam, 28.10. nachmittags: neues Startseiten-Konzept legt Schriften neu fest; eigener Bauauftrag nach Yannis' Ja) */
 </style>
+<style>
+  /* Runde 61, Weg B (Pam, 28.10.2026): EIN Schriftsystem für die Startseite. Eine Schrift (Figtree), zwei Stärken (400, 600), fünf Größen.
+     Ausgenommen: Inneres der Ideenkarten, Logo, Szene im ersten Bildschirm, Beta-Leiste, Kopf, Sprechblasen der Fragen-Wand, Film-Szene. */
+  :root { --s1: clamp(40px, 5.3vw, 80px); --s2: clamp(32px, 3.6vw, 52px); --s3: clamp(18px, 1.6vw, 24px); --s5: 17px; --s6: 15px;
+    --r61-tinte: #23201c; --r61-leise: #6a6056; --r61-schrift: Figtree, "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+    --r61-abschnitt: clamp(72px, 10vh, 128px); --r61-zum-inhalt: clamp(24px, 3vh, 32px); }
+  /* Erster Bildschirm, Variante C: Überschrift, Vertrauenszeile mit Haken, Knopf (Abstand oben nach Pams Skizze c) */
+  .hero.v22g #hero-title, .hero #hero-title { font-family: var(--r61-schrift) !important; font-style: normal !important; font-size: var(--s1) !important;
+    font-weight: 600 !important; margin-top: clamp(56px, 11vh, 130px) !important; }
+  @media (min-height: 1100px) { .hero.v22g #hero-title, .hero #hero-title { margin-top: clamp(56px, 23vh, 400px) !important; } }   /* 2560 × 1440: Mitte sonst bei 32 % */
+  .hero .v25-vertrauen { font-family: var(--r61-schrift) !important; font-size: var(--s6) !important; font-weight: 400 !important; color: var(--r61-leise) !important; }
+  .hero .hero-actions .button-primary { font-family: var(--r61-schrift) !important; font-size: var(--s6) !important; font-weight: 600 !important; }
+  /* Abschnittstitel (Punkt 4) und Schluss (Punkt 5): alle S2, 600 */
+  #moeglich-title, .v22z-v-titel, #so-gehts-title, #wissen-title, #schluss-title, .v22z-los-titel { font-family: var(--r61-schrift) !important;
+    font-style: normal !important; font-size: var(--s2) !important; font-weight: 600 !important; line-height: 1.08 !important; letter-spacing: -.02em !important; }
+  #schluss-title { line-height: 1.12 !important; max-width: 20ch !important; margin-inline: auto !important; }
+  #schluss-title .v22z-zeile { font: inherit !important; letter-spacing: inherit !important; }
+  /* Unterzeilen S3, 400, leise; Titel → Unterzeile 12 px */
+  .v22z-kopf .v22z-lead, .v22z-schluss-satz { font-family: var(--r61-schrift) !important; font-style: normal !important; font-size: var(--s3) !important;
+    font-weight: 400 !important; color: var(--r61-leise) !important; line-height: 1.35 !important; }
+  #v22z-k1, #v22z-k2, #v22z-k3 { row-gap: 0 !important; }   /* das alte Raster hatte 18–22 px Lücke zusätzlich */
+  html body #moeglich #v22z-k1 .v22z-lead.r61-lead { margin-top: 12px !important; }   /* Keller: ältere Runden zogen die Zeile mit −14 px hoch */
+  html.v22z-szene body #moeglich #v22z-k1 .v22z-lead.r61-lead { margin-top: 0 !important; }   /* Rechner: das Kopf-Raster der Szene hält schon 13 px */
+  .v22z-kopf .v22z-titel + .v22z-lead, .v22z-kopf .v22z-titel ~ .v22z-lead { margin-top: 12px !important; }
+  #schluss-title + .v22z-schluss-satz { margin-top: 12px !important; }
+  /* Kleines in S6: Knöpfe 600, Hinweise 400 */
+  .v22z-skip, .v28-skip, .v26-k-text, .v22z-weiter, .v22z-nochmal, .v22z-fw-hinweis, .v22z-fw :is(p, span):not(.v22z-fw-frage) { font-family: var(--r61-schrift) !important; font-size: var(--s6) !important; font-weight: 600 !important; }
+  .mz2-titel { font-family: var(--r61-schrift) !important; font-size: var(--s3) !important; font-weight: 600 !important; }
+  .v22z-los-fuss, .v22z-los-fuss span { font-family: var(--r61-schrift) !important; font-size: var(--s5) !important; font-weight: 400 !important; }
+
+  /* Runde 61, Punkt 3: kein Satz über oder im Bild. Schild, alte Erzählzeilen, Untertitel-Ebenen und Ergebniszeile der Szene weg. */
+  .v57-auf, .v36-zeile, .pz-ut, .v22z-vh-ut, .v22z-kp-ut, .v22z-k-etikett, .v26-satz--vor, #v22z-film .v25-status, #v22z-film .v22z-ergebnis { display: none !important; }
+  /* Erzählzeile: vor dem Start leise (S3, 400), während der Film läuft der Satz in Tinte (S3, 600); nie ausgeblendet */
+  html #v22z-k1 .v22z-lead.r61-lead { opacity: 1 !important; visibility: visible !important; }
+  html.v22z-szene:has(.v22z-buehne.v22z-video-an) #v22z-k1 .v22z-lead.r61-lead, html.v22z-szene.v44-film-durch #v22z-k1 .v22z-lead.r61-lead,
+  html.v22z-szene #v22z-k1.ist-ut .v22z-lead.r61-lead { transform: translateY(var(--v44-lead-y, 0px)) !important; }
+  html #v22z-k1 .v22z-lead.r61-lead.r61-erzaehlt { color: var(--r61-tinte) !important; font-weight: 600 !important; }
+  /* Der Querfilm hat oben den Streifen, in dem früher der Satz eingebrannt war (60 von 740 Leinwand-Einheiten); er ist jetzt leer und lag über
+     der Erzählzeile. Abgeschnitten, damit die Zeile frei steht. */
+  .v22z-k-video { clip-path: inset(8.11% 0 0 0); }
+  html.v22z-szene #v22z-k1 { position: relative; z-index: 90; }   /* Zeile und Überschrift über der Bühne (Film z 88), damit nichts sie anschneidet */
+  /* Startbild scharf (erstes Bild des Films, Jims Lehre vom 21.10.) */
+  .v22z-buehne.v22z-verhuellt .v22z-keller .v22z-mulde, .v22z-buehne.v22z-verhuellt .v22z-leinwand .v22z-gruebel, .v22z-buehne.v22z-verhuellt .v22z-abzug { filter: none !important; }
+  .v22z-buehne.v22z-verhuellt .v22z-keller .v22z-ding { filter: drop-shadow(0 8px 7px rgb(96 72 46 / .22)) !important; }
+  .v22z-kp video { filter: none !important; scale: 1 !important; }
+  /* Knopf: Der runde Knopf in der Mitte des Startbilds wird eine dunkle Pille mit hellem Play-Kreis und Länge (S6, 600). Die Knöpfe selbst bleiben die
+     unsichtbaren Flächen über dem Bild. Am Rechner liegt die Pille in der skalierten Leinwand: --r61-k gleicht die Skalierung aus. */
+  .r61-pille.v22z-k-rund, .r61-pille.v22z-kp-rund { display: inline-flex !important; align-items: center; gap: 10px; width: auto !important; height: auto !important;
+    min-height: 48px; padding: 7px 20px 7px 7px; border-radius: 999px !important; background: #23201c !important; color: #fff !important; box-sizing: border-box; }
+  .r61-pille.v22z-k-rund { zoom: calc(1 / var(--r61-k, 1)); }
+  .r61-pille::after { border-radius: 999px !important; }
+  .r61-pille .r61-kreis { display: grid; place-items: center; flex: none; width: 34px; height: 34px; border-radius: 50%; background: #fff; color: #23201c; }
+  .r61-pille .r61-kreis svg { width: 16px !important; height: 16px !important; margin: 0 0 0 3px !important; fill: currentColor; }
+  .r61-pille .r61-play-t { font: 600 15px/1 var(--r61-schrift); letter-spacing: 0; color: #fff; white-space: nowrap; }
+  .r61-play .v25-kp-text { display: none !important; }
+  html:not(.v22z-bewegt) .v22z-film:not(.v22z-klick) .v22z-kp:not(.ist-video):not(.ist-ende) .v22z-kp-play.r61-play { background: none !important; box-shadow: none !important; padding: 0 !important; }
+</style>
+<style>
+  /* Runde 61 (Pam, Punkt 8): Logo quer im Kopf, 28 px am Handy bis 36 px am Rechner; Schutzzone = halbe Zeichenhöhe */
+  .r61-brand { gap: 0; padding: 0; line-height: 0; flex: none; }
+  .r61-brand picture { display: block; line-height: 0; }
+  .r61-logo { display: block; height: clamp(28px, 2.6vw, 36px); width: auto; }
+  .site-nav .nav-end { margin-left: clamp(14px, 1.3vw, 18px); }
+  @media (max-width: 359.98px) { .r61-logo { width: clamp(28px, 2.6vw, 36px); } }
+  .r61-popup-logo { display: block; height: 22px; width: auto; }
+  /* Fuß: Name und Instagram in S6, 400 */
+  .footer .r61-fuss { font-size: 15px; font-weight: 400; }
+  .footer .r61-fuss a { color: inherit; text-underline-offset: 3px; }
+  @media (max-width: 767.98px) { .footer .r61-fuss a { display: inline-flex; align-items: center; min-height: 44px; } }
+</style>
 </head>
 <body><div class="live-aufbau" role="note"><b>Public Beta:</b> Die Seite ist noch im Aufbau, manche Funktionen gehen noch nicht. Dein Feedback hilft uns, sie besser zu machen.</div><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><!-- Symbole der Laufbänder: Lucide 1.31.0 (lucide.dev, gebündelt aus lucide-react). Lizenz:
 ISC License
@@ -3411,7 +3482,7 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
       <div class="hero-bg" aria-hidden="true"><i class="pal-blue is-active"></i><i class="pal-sand"></i><i class="pal-coral"></i><i class="pal-plum"></i><i class="pal-moss"></i></div>
       <div class="hero-grain" aria-hidden="true"></div>
       <header class="site-nav wrap">
-        <a class="brand" href="#top" aria-label="Zur Startseite"><span class="brand-mark" aria-hidden="true"></span><span class="kiosk"><span class="kiosk-ki">KI</span>osk</span></a>
+        <a class="brand r61-brand" href="#top"><picture><source media="(max-width: 359.98px)" srcset="/ki-macherei_zeichen_hell.svg"><img class="r61-logo" src="/ki-macherei_quer_hell.svg" alt="Die KI-Macherei, zur Startseite" width="159" height="28"></picture></a>
         <div class="nav-end">
           <nav class="nav-links v44-nav" aria-label="Hauptnavigation"><a class="v47-pille" href="/ideen"><svg class="v47-ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg><span>Alle Ideen</span></a></nav>
           <a class="nav-mein" href="/mein-bereich" aria-label="Mein Bereich"><span class="nav-mein__ich" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-user-round"/></svg></span><span class="nav-mein__text">Mein Bereich</span></a>
@@ -3419,7 +3490,7 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
       </header>
       <div class="hero-grid wrap" id="top">
         <div>
-          <p class="hero-intro v25-intro v44-frage"><span class="zeile">Dir fehlen Ideen, wie du KI im Alltag sinnvoll für dich einsetzen kannst?</span></p>
+          
           <h1 class="display v25-kopf v25-kopf--f" id="hero-title">Finde heraus, was KI für dich tun kann.</h1>
           <p class="v25-vertrauen" data-lage="oben"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Alle Ideen sind von Menschen zusammengestellt und getestet.</p>
           <div class="hero-actions v44-allein">
@@ -3512,9 +3583,9 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
         <div class="v22z-buehne">
           <div class="v22z-leinwand"><p class="v57-auf" aria-hidden="true">Du fotografierst deinen Keller. Schau, was daraus wird.</p>
             <div class="v22z-keller v22z-a" aria-hidden="true"><div class="v22z-mulde"><svg class="v25-kegel" viewBox="0 0 920 520" focusable="false" aria-hidden="true"><path d="M66 98 L172 92 L940 200 L900 520 L410 520 Z" fill="url(#v25-kegel-g)"/><ellipse cx="610" cy="492" rx="250" ry="38" fill="url(#v25-fleck-g)"/></svg><span class="v22z-kfenster"><svg viewBox="0 0 120 74" focusable="false"><rect x="2" y="2" width="116" height="62" rx="9" fill="#fffaf1"/><defs><linearGradient id="v22z-kf-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bcd6e6"/><stop offset="1" stop-color="#e4eef2"/></linearGradient></defs><rect x="11" y="10" width="98" height="46" rx="4" fill="url(#v22z-kf-g)"/><path d="M 11 46 Q 50 36 109 44 L 109 56 L 11 56 Z" fill="#b7cfa8"/><path d="M 36 10 V 56 M 60 10 V 56 M 84 10 V 56" stroke="#8d8174" stroke-width="5" stroke-linecap="round"/><rect x="-4" y="62" width="128" height="10" rx="5" fill="#eadfcd"/></svg></span></div></div>
-            <video class="v22z-k-video" src="/keller-film-v25l.mp4" preload="metadata" playsinline aria-label="Video: Den Keller ausmisten, 34 Sekunden, ohne Ton"><track kind="metadata" srclang="de" label="Deutsch" src="/keller-film-v25h.vtt"></video>
+            <video class="v22z-k-video" src="/keller-film-v25m.mp4" preload="metadata" playsinline aria-label="Video: Den Keller ausmisten, 34 Sekunden, ohne Ton"><track kind="subtitles" srclang="de" label="Deutsch" data-r61="quer" src="/keller-film-v25m.vtt"></video>
             <div class="v22z-vh v22z-vh--k"><p class="v22z-vh-ut" aria-live="polite"></p><p class="v22z-sr v26-sr-k" aria-live="polite"></p><span class="v22z-vh-knoepfe"><button type="button" class="v22z-vh-pause" aria-label="Pause"><svg class="v22z-i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8.5 6v12M15.5 6v12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg><svg class="v22z-i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8.5 5.8v12.4L18.6 12z" fill="currentColor"/></svg></button></span><span class="v22z-vh-fort" aria-hidden="true"><i></i></span><div class="v26-leiste v26-leiste--k"><button type="button" class="v26-k v26-pause" aria-label="Film abspielen"><svg class="v26-i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8.5 5.8v12.4L18.6 12z" fill="currentColor"/></svg><svg class="v26-i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8.5 6v12M15.5 6v12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg><svg class="v26-i-nochmal" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1L3.5 8.5M3.5 3.5v5h5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="v26-k-text">Abspielen</span></button><span class="v26-linie" aria-hidden="true"><b></b></span><button type="button" class="v26-k v26-voll" aria-label="Vollbild"><svg class="v26-i-gross" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><svg class="v26-i-klein" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 4v5H4M15 4v5h5M15 20v-5h5M9 20v-5H4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="v26-k-text">Vollbild</span></button><button type="button" class="v26-k v26-skip" aria-label="Film überspringen"><span class="v26-k-text">Überspringen</span><svg class="v26-i-runter" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4.5v14M6.5 13l5.5 5.5 5.5-5.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div>
-            <button type="button" class="v22z-k-play" aria-label="Film abspielen: Du fotografierst deinen Keller. Schau, was daraus wird."><span class="v22z-k-rund" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M8.5 5.8v12.4L18.6 12z"/></svg></span></button>
+            <button type="button" class="v22z-k-play r61-play" aria-label="Film abspielen, 34 Sekunden: Ein Beispiel, den Keller entrümpeln"><span class="v22z-k-rund r61-pille" aria-hidden="true"><i class="r61-kreis"><svg viewBox="0 0 24 24" focusable="false"><path d="M8.5 5.8v12.4L18.6 12z"/></svg></i><span class="r61-play-t">Abspielen · 34 Sek.</span></span></button>
             <div class="v25-handfeld" aria-hidden="true"><div class="v22z-hand v22z-a" aria-hidden="true"><svg class="v22z-strahl" viewBox="-130 -130 260 260" focusable="false"><circle r="128" fill="url(#v22z-g-blitz)"/><path d="M 0 -92 V -124 M 0 92 V 124 M -64 0 H -104 M 64 0 H 104 M -56 -62 L -82 -92 M 56 -62 L 82 -92 M -56 62 L -82 92 M 56 62 L 82 92" stroke="#f2b84f" stroke-width="8" stroke-linecap="round"/></svg><svg class="v22z-hand-svg" viewBox="0 0 220 1000" focusable="false"><path class="v25-aermel" d="M120 244 L 148 1000" stroke-width="62" stroke-linecap="round"/><path class="v25-handflaeche" d="M74 118 C 66 166, 78 206, 104 222 C 128 236, 156 228, 164 196 C 168 172, 165 144, 160 118 Z" fill="url(#v25-g-hand)"/><path class="v25-buendchen" d="M92 236 C 108 244, 136 242, 150 232" stroke-width="13" stroke-linecap="round"/><rect x="62" y="0" width="96" height="170" rx="18" fill="#2b2722"/><rect x="68" y="8" width="84" height="154" rx="12" fill="#1d1a16"/></svg><div class="v25-live"><div class="v25-live-welt"><i class="v25-live-grund"></i><span class="v22z-kfenster" style="left:192px;top:70px"><svg viewBox="0 0 120 74" focusable="false"><rect x="2" y="2" width="116" height="62" rx="9" fill="#fffaf1"/><rect x="11" y="10" width="98" height="46" rx="4" fill="url(#v22z-kf-g)"/><path d="M 11 46 Q 50 36 109 44 L 109 56 L 11 56 Z" fill="#b7cfa8"/><path d="M 36 10 V 56 M 60 10 V 56 M 84 10 V 56" stroke="#8d8174" stroke-width="5" stroke-linecap="round"/><rect x="-4" y="62" width="128" height="10" rx="5" fill="#eadfcd"/></svg></span><svg class="v25-kegel" style="left:140px;top:40px" viewBox="0 0 920 520" focusable="false" aria-hidden="true"><path d="M66 98 L172 92 L940 200 L900 520 L410 520 Z" fill="url(#v25-kegel-g)"/><ellipse cx="610" cy="492" rx="250" ry="38" fill="url(#v25-fleck-g)"/></svg><span class="v25-ding" style="left:570px;top:410px;width:230px;height:130px"><svg viewBox="0 0 230 130" focusable="false"><rect width="230" height="130" rx="10" fill="url(#v22z-g-karton)"/><rect width="230" height="9" rx="4.5" fill="#fff" opacity=".22"/><rect x="104" width="22" height="30" rx="2" fill="#d9c09a"/><path d="M10 125 H220" stroke="#a9825a" stroke-width="3" stroke-linecap="round" opacity=".3"/></svg></span><span class="v25-ding" style="left:590px;top:292px;width:190px;height:120px"><svg style="transform:rotate(-2deg)" viewBox="0 0 190 120" focusable="false" overflow="visible"><rect x="-2" y="20" width="58" height="13" rx="4" fill="#cfa679" transform="rotate(-32 2 30)"/><rect x="134" y="20" width="58" height="13" rx="4" fill="#cfa679" transform="rotate(32 188 30)"/><rect x="5" y="20" width="180" height="12" rx="4" fill="#8f6c4a" opacity=".55"/><rect y="26" width="190" height="94" rx="8" fill="url(#v22z-g-karton)"/><rect y="26" width="190" height="7" rx="3.5" fill="#fff" opacity=".22"/><rect x="84" y="26" width="22" height="94" fill="#d9c09a" opacity=".9"/></svg></span><span class="v25-ding" style="left:615px;top:232px;width:140px;height:103px"><svg style="transform:rotate(2.5deg)" focusable="false"><use href="#v22z-buecher"/></svg></span><span class="v25-ding" style="left:622px;top:175px;width:135px;height:81px"><svg style="transform:rotate(-5deg)" focusable="false"><use href="#v22z-platte"/></svg></span><span class="v25-ding" style="left:475px;top:419px;width:150px;height:79px"><svg style="transform:rotate(-78deg)" focusable="false"><use href="#v22z-schlitten"/></svg></span><span class="v25-ding" style="left:800px;top:365px;width:76px;height:169px"><svg style="transform:rotate(-12deg)" focusable="false"><use href="#v22z-gitarre"/></svg></span><span class="v25-ding" style="left:862px;top:320px;width:88px;height:220px"><svg viewBox="0 0 80 200" focusable="false" overflow="visible"><rect x="37" y="60" width="6" height="128" rx="3" fill="url(#v22z-g-dunkel)"/><ellipse cx="40" cy="192" rx="24" ry="7" fill="url(#v22z-g-dunkel)"/><g class="v25-lampenschirm" transform="translate(-14 4) rotate(16 40 10)"><path d="M22 8 H58 L76 70 H4 Z" fill="url(#v22z-g-orange)"/><path d="M22 8 H58 L62 22 H18 Z" fill="#fff" opacity=".18"/></g></svg></span><span class="v25-ding" style="left:450px;top:420px;width:80px;height:120px"><svg focusable="false"><use href="#v22z-stuhl"/></svg></span><span class="v25-ding" style="left:585px;top:477px;width:75px;height:64px"><svg focusable="false"><use href="#v22z-fondue"/></svg></span><span class="v25-ding" style="left:680px;top:451px;width:130px;height:89px"><svg focusable="false"><use href="#v22z-laufrad"/></svg></span></div><svg class="v25-live-ui" viewBox="68 8 84 154" focusable="false"><g class="v25-d-ecken" opacity="0"><path d="M76 62 V55 H83" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><path d="M137 55 H144 V62" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><path d="M76 108 V115 H83" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><path d="M137 115 H144 V108" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></g><g class="v25-d-ausloeser"><circle cx="110" cy="140" r="9.5" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="110" cy="140" r="7" fill="#fff"/></g><circle class="v25-d-tipp2" cx="110" cy="140" r="5" fill="#2b2722" opacity="0"/><rect class="v25-d-foto" x="70.5" y="10.5" width="79" height="149" rx="10" fill="none" stroke="#fffdf9" stroke-width="3" opacity="0"/><rect class="v25-d-blitz" x="68" y="8" width="84" height="154" fill="#fff" opacity="0"/></svg></div><svg class="v25-hand-vorn" viewBox="0 0 220 1000" focusable="false"><rect x="47" y="69" width="23" height="19" rx="9.5" fill="url(#v25-g-finger)" transform="rotate(-4 58.5 78.5)"/><rect x="45" y="92" width="25" height="19" rx="9.5" fill="url(#v25-g-finger)" transform="rotate(-2 57.5 101.5)"/><rect x="47" y="115" width="23" height="19" rx="9.5" fill="url(#v25-g-finger)" transform="rotate(0 58.5 124.5)"/><rect x="51" y="137" width="19" height="19" rx="9.5" fill="url(#v25-g-finger)" transform="rotate(3 60.5 146.5)"/><rect class="v25-daumen" x="144" y="122" width="25" height="80" rx="12.5" fill="url(#v25-g-hand)" transform="rotate(-12 156 165)"/></svg></div></div>
             <figure class="v22z-beispiel" aria-label="Beispiel: Den Keller ausmisten">
               <div class="v22z-spalte v22z-spalte--fotos">
@@ -3534,7 +3605,7 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
                 
                 
               </div>
-              <div class="v22z-kp"><div class="v26-kopf"><p class="v26-satz v26-satz--vor" aria-live="polite">4 Schritte · 34 Sekunden · ohne Ton</p></div><div class="v22z-kp-fenster"><p class="v57-auf" aria-hidden="true">Du fotografierst deinen Keller. Schau, was daraus wird.</p><video class="v22z-kp-video" data-hoch-src="/keller-film-hoch-v25l.mp4" data-hoch-poster="/a-1087c220ba4a.webp" src="/keller-film-v25l.mp4" poster="/a-e643eca7376b.webp" preload="none" playsinline aria-label="Video: Den Keller ausmisten, 34 Sekunden, ohne Ton"><track kind="metadata" srclang="de" label="Deutsch" src="/keller-film-v25h.vtt"></video><script>(function () {   // Runde 20: unter 768 px die Hochkant-Fassung (vor dem Player-Skript, deshalb direkt hinter dem Video)
+              <div class="v22z-kp"><div class="v26-kopf"><p class="v26-satz v26-satz--vor" aria-live="polite">4 Schritte · 34 Sekunden · ohne Ton</p></div><div class="v22z-kp-fenster"><p class="v57-auf" aria-hidden="true">Du fotografierst deinen Keller. Schau, was daraus wird.</p><video class="v22z-kp-video" data-hoch-src="/keller-film-hoch-v25m.mp4" data-hoch-poster="/a-43451f031491.webp" src="/keller-film-v25m.mp4" poster="/a-c1f24a3d42b2.webp" preload="none" playsinline aria-label="Video: Den Keller ausmisten, 34 Sekunden, ohne Ton"><track kind="subtitles" srclang="de" label="Deutsch" data-r61="quer" src="/keller-film-v25m.vtt"><track kind="subtitles" srclang="de" label="Deutsch (hochkant)" data-r61="hoch" src="/keller-film-hoch-v25m.vtt"></video><script>(function () {   // Runde 20: unter 768 px die Hochkant-Fassung (vor dem Player-Skript, deshalb direkt hinter dem Video)
   var v = document.currentScript.previousElementSibling;
   if (!v || !window.matchMedia || !matchMedia('(max-width: 767px)').matches) return;
   v.setAttribute('poster', v.getAttribute('data-hoch-poster')); v.setAttribute('src', v.getAttribute('data-hoch-src'));
@@ -3546,7 +3617,7 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
     if (!e.children.length && e.textContent.indexOf('34 Sekunden') >= 0) e.textContent = e.textContent.replace('34 Sekunden', '28 Sekunden'); }); };
   laenge(); document.addEventListener('DOMContentLoaded', laenge);
 })();</script>
-                <button type="button" class="v22z-kp-play" aria-label="Film abspielen: Du fotografierst deinen Keller. Schau, was daraus wird."><span class="v22z-kp-rund" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M8.5 5.8v12.4L18.6 12z"/></svg></span><span class="v25-kp-text" aria-hidden="true"><b>Beispiel abspielen</b><span>Video, 34 Sekunden, ohne Ton</span></span><span class="v25-kp-nochmal" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1L3.5 8.5"/><path d="M3.5 3.5v5h5"/></svg><span>Nochmal ansehen</span></span></button>
+                <button type="button" class="v22z-kp-play r61-play" aria-label="Film abspielen, 28 Sekunden: Ein Beispiel, den Keller entrümpeln"><span class="v22z-kp-rund r61-pille" aria-hidden="true"><i class="r61-kreis"><svg viewBox="0 0 24 24" focusable="false"><path d="M8.5 5.8v12.4L18.6 12z"/></svg></i><span class="r61-play-t">Abspielen · 28 Sek.</span></span><span class="v25-kp-text" aria-hidden="true"><b>Beispiel abspielen</b><span>Video, 34 Sekunden, ohne Ton</span></span><span class="v25-kp-nochmal" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1L3.5 8.5"/><path d="M3.5 3.5v5h5"/></svg><span>Nochmal ansehen</span></span></button>
                 <div class="v22z-vh v22z-vh--kp"><span class="v22z-vh-knoepfe"><button type="button" class="v22z-vh-pause" aria-label="Pause"><svg class="v22z-i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8.5 6v12M15.5 6v12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg><svg class="v22z-i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8.5 5.8v12.4L18.6 12z" fill="currentColor"/></svg></button></span><span class="v22z-vh-fort" aria-hidden="true"><i></i></span></div></div><div class="v26-leiste"><button type="button" class="v26-k v26-pause" aria-label="Film abspielen"><svg class="v26-i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8.5 5.8v12.4L18.6 12z" fill="currentColor"/></svg><svg class="v26-i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8.5 6v12M15.5 6v12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg><svg class="v26-i-nochmal" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1L3.5 8.5M3.5 3.5v5h5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="v26-k-text">Abspielen</span></button><span class="v26-linie" aria-hidden="true"><b></b></span><button type="button" class="v26-k v26-voll" aria-label="Vollbild"><svg class="v26-i-gross" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><svg class="v26-i-klein" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 4v5H4M15 4v5h5M15 20v-5h5M9 20v-5H4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="v26-k-text">Vollbild</span></button></div><p class="v22z-kp-ut" aria-live="polite"></p></div>
               <figcaption class="v22z-ergebnis v22z-a v22z-teil"><p class="v22z-erg-satz">Ein Foto, und für jedes Ding der nächste Schritt.</p><p class="v22z-pillen"><span>etwa 10 Minuten</span></p></figcaption>
             </figure>
@@ -3580,7 +3651,7 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
       <div class="wrap v25-so-wrap">
         <div class="v22z-kopf v22z-kopf--mitte" id="v22z-k2" data-v22z-auftritt>
           <h2 class="display v22z-titel v22z-titel--3" id="so-gehts-title">Einfach nutzen.</h2>
-          <p class="v22z-lead">Lass dich von unseren Ideen inspirieren oder nutze einfach unsere <span class="v57-nobr">1‑Klick</span>-Lösungen in deinem KI-Chat. Keine Erfahrung oder Vorwissen nötig.</p>
+          <p class="v22z-lead">Lass dich von unseren Ideen inspirieren oder nutze einfach unsere <span class="v57-nobr">1‑Klick</span>-Lösungen für deinen KI-Chat. Keine Erfahrung oder Vorwissen nötig.</p>
         </div>
         <p class="v22z-sr">Du musst dich nicht einlesen, nicht prompten, keine Technik verstehen und keine Agenten einrichten.</p>
         <ul class="v22z-nicht" aria-hidden="true"><li>Einlesen<svg viewBox="0 0 100 20" preserveAspectRatio="none" focusable="false"><path d="M3 12 Q 30 7 52 11 T 97 9"/></svg></li><li>Prompten<svg viewBox="0 0 100 20" preserveAspectRatio="none" focusable="false"><path d="M3 10 Q 28 14 50 9 T 97 11"/></svg></li><li>Technik verstehen<svg viewBox="0 0 100 20" preserveAspectRatio="none" focusable="false"><path d="M3 11 Q 34 6 56 12 T 97 9"/></svg></li><li>Agenten einrichten<svg viewBox="0 0 100 20" preserveAspectRatio="none" focusable="false"><path d="M3 9 Q 26 13 54 10 T 97 12"/></svg></li></ul>
@@ -3602,7 +3673,7 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
       <div class="wrap v25-so-wrap">
         <div class="v22z-kopf v22z-kopf--mitte" id="v22z-k2-alt" data-v22z-auftritt>
           <h2 class="display v22z-titel v22z-titel--3" id="so-gehts-title-alt">Einfach nutzen.</h2>
-          <p class="v22z-lead">Lass dich von unseren Ideen inspirieren oder nutze einfach unsere <span class="v57-nobr">1‑Klick</span>-Lösungen in deinem KI-Chat. Keine Erfahrung oder Vorwissen nötig.</p>
+          <p class="v22z-lead">Lass dich von unseren Ideen inspirieren oder nutze einfach unsere <span class="v57-nobr">1‑Klick</span>-Lösungen für deinen KI-Chat. Keine Erfahrung oder Vorwissen nötig.</p>
         </div>
         <p class="v22z-sr">Du musst dich nicht einlesen, nicht prompten, keine Technik verstehen und keine Agenten einrichten.</p>
         <ul class="v22z-nicht" aria-hidden="true"><li>Einlesen<svg viewBox="0 0 100 20" preserveAspectRatio="none" focusable="false"><path d="M3 12 Q 30 7 52 11 T 97 9"/></svg></li><li>Prompten<svg viewBox="0 0 100 20" preserveAspectRatio="none" focusable="false"><path d="M3 10 Q 28 14 50 9 T 97 11"/></svg></li><li>Technik verstehen<svg viewBox="0 0 100 20" preserveAspectRatio="none" focusable="false"><path d="M3 11 Q 34 6 56 12 T 97 9"/></svg></li><li>Agenten einrichten<svg viewBox="0 0 100 20" preserveAspectRatio="none" focusable="false"><path d="M3 9 Q 26 13 54 10 T 97 12"/></svg></li></ul>
@@ -3759,7 +3830,7 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
       </div>
     </section>
 
-    <footer class="footer"><div class="wrap"><span>KIosk</span><span class="footer-rechts"><a href="/ideen">Alle Ideen</a><a href="/mein-bereich#wissen">Wissen</a><a href="#kommt-bald" data-sheet="idee">Eigene Idee teilen</a></span></div></footer>
+    <footer class="footer"><div class="wrap"><span class="r61-fuss">Die KI-Macherei<span aria-hidden="true"> · </span><a href="https://www.instagram.com/ki_macherei/" target="_blank" rel="noopener">Instagram: @ki_macherei</a></span><span class="footer-rechts"><a href="/ideen">Alle Ideen</a><a href="/mein-bereich#wissen">Wissen</a><a href="#kommt-bald" data-sheet="idee">Eigene Idee teilen</a></span></div></footer>
 
     <section class="cases" id="ideen-lager" aria-labelledby="ideen-title" hidden>
       <div class="wrap"><div class="section-head">
@@ -8175,6 +8246,55 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
     function weg() { document.documentElement.classList.add('v57-film-an'); }
     document.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('.v22z-k-play, .v22z-kp-play, .v26-pause')) weg(); }, true);
     document.addEventListener('play', function (e) { if (e.target.matches && e.target.matches('.v22z-k-video, .v22z-kp-video')) weg(); }, true);
+  })();
+</script>
+
+<script>
+  // Runde 61 (Jim, 28.10.2026), Pam, Punkt 3: Text nur an einer Stelle. Die Erzählzeile unter „Mehr als mal eben die KI fragen.“ zeigt vor dem Start
+  // „Ein Beispiel: den Keller entrümpeln“, während der Film läuft den Satz aus seiner Untertitelspur (quer und hochkant je eigene Zeiten), nach dem Ende
+  // den letzten Satz. Die Spur ist verborgen und nur im Vollbild sichtbar. Kein aria-live (nichts doppelt vorlesen).
+  (function () {
+    var lead = document.querySelector('#v22z-k1 .v22z-lead');
+    var filme = [].slice.call(document.querySelectorAll('.v22z-k-video, .v22z-kp-video'));
+    if (!lead || !filme.length) return;
+    lead.classList.add('r61-lead');
+    function hoch(v) { return /hoch/.test(v.currentSrc || v.getAttribute('src') || ''); }
+    function spur(v) {
+      var t = [].filter.call(v.querySelectorAll('track'), function (t) { return t.dataset.r61 === (hoch(v) ? 'hoch' : 'quer'); })[0];
+      return t ? t.track : (v.textTracks[0] || null);
+    }
+    function vollbild(v) { var f = document.fullscreenElement || document.webkitFullscreenElement; return !!(v.webkitDisplayingFullscreen || (f && (f === v || f.contains(v)))); }
+    function moden() {
+      filme.forEach(function (v) {
+        var s = spur(v);
+        [].forEach.call(v.textTracks, function (t) { var m = t === s ? (vollbild(v) ? 'showing' : 'hidden') : 'disabled'; if (t.mode !== m) t.mode = m; });
+      });
+    }
+    function satz(v) {
+      var s = spur(v), c = s && s.activeCues;
+      if (!c || !c.length) return;
+      var t = c[c.length - 1].text;
+      if (lead.textContent !== t) lead.textContent = t;
+      lead.classList.add('r61-erzaehlt');
+    }
+    filme.forEach(function (v) {
+      ['play', 'playing', 'timeupdate', 'seeked', 'loadedmetadata'].forEach(function (n) { v.addEventListener(n, function () { moden(); if (!v.paused || v.currentTime > 0) satz(v); }); });
+      [].forEach.call(v.querySelectorAll('track'), function (t) { t.addEventListener('cuechange', function () { if (!v.paused || v.currentTime > 0) satz(v); }); t.track && t.track.addEventListener && t.track.addEventListener('cuechange', function () { if (!v.paused || v.currentTime > 0) satz(v); }); });
+      v.addEventListener('webkitbeginfullscreen', moden); v.addEventListener('webkitendfullscreen', moden);
+    });
+    document.addEventListener('fullscreenchange', moden); document.addEventListener('webkitfullscreenchange', moden);
+    moden();
+    // Pille am Rechner: Die Leinwand ist skaliert, die Pille soll trotzdem 15 px Schrift haben
+    var lw = document.querySelector('.v22z-leinwand'), kp = document.querySelector('.v22z-k-play');
+    function skala() { if (!lw || !kp || !lw.offsetWidth) return; var k = lw.getBoundingClientRect().width / lw.offsetWidth; if (k > 0) kp.style.setProperty('--r61-k', k.toFixed(4)); }
+    skala(); addEventListener('resize', skala); addEventListener('scroll', skala, { passive: true }); addEventListener('load', skala);
+    // Knopf: Länge aus der Datei (quer 34, hochkant 28), auch für Vorleseprogramme
+    [['.v22z-k-play', '.v22z-k-video'], ['.v22z-kp-play', '.v22z-kp-video']].forEach(function (p) {
+      var k = document.querySelector(p[0]), v = document.querySelector(p[1]); if (!k || !v) return;
+      var n = hoch(v) ? 28 : 34, t = k.querySelector('.r61-play-t');
+      if (t) t.textContent = 'Abspielen · ' + n + ' Sek.';
+      k.setAttribute('aria-label', 'Film abspielen, ' + n + ' Sekunden: Ein Beispiel, den Keller entrümpeln');
+    });
   })();
 </script>
 <div class="live-fuss"><a href="/impressum">Impressum</a><span class="live-fuss-sep" aria-hidden="true"> · </span><a href="/datenschutz">Datenschutz</a><span class="live-fuss-sep" aria-hidden="true"> · </span><span class="live-fuss-t">Testfassung im Aufbau</span></div><script src="/messung.js" data-endpunkt="https://script.google.com/macros/s/AKfycbxJ_s2hUjUxQiWQQ0QoXxSoxR5SfS0MiUvpHb7PcEJzYVgLpcVq1a9i5iUWonSEirfWSg/exec" defer></script><script src="/messpunkte.js" defer></script>

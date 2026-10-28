@@ -1,0 +1,11 @@
+{
+  "name": "Die KI-Macherei",
+  "short_name": "KI-Macherei",
+  "icons": [
+    { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512" },
+    { "src": "/icon-mask.png", "type": "image/png", "sizes": "512x512", "purpose": "maskable" }
+  ],
+  "theme_color": "#f6f1e8",
+  "background_color": "#f6f1e8"
+}

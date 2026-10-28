@@ -4,16 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <title>Impressum · KIosk</title>
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <title>Impressum · KI-Macherei</title>
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.webmanifest">
   <style>
-  /* Live-Fassung (15.10.2026): Leiste „im Aufbau“, Name KIosk, Fuß mit Impressum. Die Leiste liegt unter allen Fenstern und
+  /* Live-Fassung (15.10.2026): Leiste „im Aufbau“, Fuß mit Impressum. Die Leiste liegt unter allen Fenstern und
      Seitenblättern (z-index 1), sonst deckt sie deren oberen Rand ab. */
   .live-aufbau { position: relative; z-index: 1; background: #2b2420; color: #f7f1e8; font: 500 14px/1.4 Figtree, system-ui, sans-serif;
     text-align: center; padding: 8px 16px; }
   .live-aufbau b { font-weight: 700; }
-  .kiosk { white-space: nowrap; }
-  .kiosk-ki { font-family: Georgia, "Iowan Old Style", "Noto Serif", "Times New Roman", serif; font-weight: 700; letter-spacing: .01em; }
   .live-fuss { font: 500 14px/1.5 Figtree, system-ui, sans-serif; color: #6f655c; text-align: center; padding: 18px 16px 28px; }
   .live-fuss a { color: inherit; }
   /* Fuß am Handy (Runde 11, 19.10.2026, live seit Yannis' „stell live“): Links 44 px hoch, „Testfassung im Aufbau“ in eigener Zeile */
@@ -36,9 +37,29 @@
     a { color: inherit; overflow-wrap: anywhere; }
     a.zurueck { display: inline-block; margin-bottom: 20px; color: inherit; }
   </style>
+<style>
+  .r61-rechtskopf { display: flex; align-items: center; height: 80px; width: min(calc(100% - 2 * clamp(16px, 4vw, 40px)), 1220px); margin: 0 auto; }
+  .r61-rechtskopf .r61-brand { display: flex; align-items: center; min-height: 44px; }
+  @media (max-width: 700px) { .r61-rechtskopf { height: 68px; } }
+  .r61-rechtskopf + main { padding-top: 8px; }
+</style>
+<style>
+  /* Runde 61 (Pam, Punkt 8): Logo quer im Kopf, 28 px am Handy bis 36 px am Rechner; Schutzzone = halbe Zeichenhöhe */
+  .r61-brand { gap: 0; padding: 0; line-height: 0; flex: none; }
+  .r61-brand picture { display: block; line-height: 0; }
+  .r61-logo { display: block; height: clamp(28px, 2.6vw, 36px); width: auto; }
+  .site-nav .nav-end { margin-left: clamp(14px, 1.3vw, 18px); }
+  @media (max-width: 359.98px) { .r61-logo { width: clamp(28px, 2.6vw, 36px); } }
+  .r61-popup-logo { display: block; height: 22px; width: auto; }
+  /* Fuß: Name und Instagram in S6, 400 */
+  .footer .r61-fuss { font-size: 15px; font-weight: 400; }
+  .footer .r61-fuss a { color: inherit; text-underline-offset: 3px; }
+  @media (max-width: 767.98px) { .footer .r61-fuss a { display: inline-flex; align-items: center; min-height: 44px; } }
+</style>
 </head>
 <body>
 <div class="live-aufbau" role="note"><b>Public Beta:</b> Die Seite ist noch im Aufbau, manche Funktionen gehen noch nicht. Dein Feedback hilft uns, sie besser zu machen.</div>
+<header class="r61-rechtskopf"><a class="r61-brand" href="/"><img class="r61-logo" src="/ki-macherei_quer_hell.svg" alt="Die KI-Macherei, zur Startseite" width="159" height="28"></a></header>
 <main>
   <a class="zurueck" href="/">← Zur Startseite</a>
   <h1>Impressum</h1>
