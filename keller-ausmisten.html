@@ -17,7 +17,7 @@
 <script>
   // Live-Fassung (15.10.2026): übernimmt, was bisher die Hülle von Version 25 getan hat (Seitenwechsel, Anker, Nachrichten).
   (function () {
-    var ADR = {"start": "/", "ideen": "/ideen", "anleitung": "/brief-verstehen", "abo": "/kontoauszug-abos", "wohnzimmer": "/wohnzimmer-neu-denken", "keller": "/keller-ausmisten", "bereich": "/mein-bereich", "wochenende": "/wochenende-planen", "vorsorge": "/vorsorgemappe-anlegen", "betrug": "/betrug-oder-echt", "anschaffung": "/grosse-anschaffung-planen", "miete": "/zahlst-du-zu-viel-miete", "vertrag": "/ungewollter-vertrag", "gehalt": "/gehaltsgespraech-vorbereiten", "foerderung": "/zuschuesse-finden", "rueckholen": "/geld-nach-betrug-zurueckholen"}, SEITE = 'keller';
+    var ADR = {"start": "/", "ideen": "/ideen", "anleitung": "/brief-verstehen", "abo": "/kontoauszug-abos", "wohnzimmer": "/wohnzimmer-neu-denken", "keller": "/keller-ausmisten", "bereich": "/mein-bereich", "wochenende": "/wochenende-planen", "vorsorge": "/vorsorgemappe-anlegen", "betrug": "/betrug-oder-echt", "anschaffung": "/grosse-anschaffung-planen", "miete": "/zahlst-du-zu-viel-miete", "vertrag": "/ungewollter-vertrag", "gehalt": "/gehaltsgespraech-vorbereiten", "foerderung": "/zuschuesse-finden", "rueckholen": "/geld-nach-betrug-zurueckholen", "therapie": "/therapieplatz-finden", "kuendigung": "/gekuendigt-und-jetzt"}, SEITE = 'keller';
     function ziel(v, a) { if (v === 'start' && a === 'ideen') { v = 'ideen'; a = ''; } return { v: ADR[v] ? v : 'start', a: a || '' }; }
     function liefern(a, von) {
       if (SEITE === 'bereich') { window.postMessage({ mb: a, von: von || '' }, '*'); return; }
@@ -2101,6 +2101,10 @@ body { padding-bottom: 0; }
     font-weight: 650; cursor: pointer; box-shadow: inset 0 1px 0 rgb(255 255 255 / .18), 0 2px 4px rgb(96 72 46 / .3), 0 12px 20px -12px rgb(96 72 46 / .7); }
   :is(.v47-hw-leise, .v47-hw-los):focus-visible { outline: 2px solid #3b5a9a; outline-offset: 3px; }
 </style>
+<style>
+  /* Runde 49 (Jim, 28.10.2026): Bildfläche nie breiter als die Karte (Yannis: farbiger Kopf auf „Alle Ideen“ nach rechts versetzt) */
+  .mcard .field { min-width: 0; max-width: 100%; box-sizing: border-box; }
+</style>
 </head>
 <body data-fall="keller-ausmisten"><div class="live-aufbau" role="note"><b>Diese Seite ist im Aufbau.</b> Du siehst eine Testfassung, noch nicht alles funktioniert.</div><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="ls-package" viewBox="0 0 24 24"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></symbol><symbol id="ls-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></symbol></defs></svg><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><!-- Symbole: Lucide 1.31.0 (lucide.dev, gebündelt aus lucide-react). Lizenz:
 ISC License
@@ -2171,11 +2175,11 @@ SOFTWARE. --><symbol id="ls-mail" viewBox="0 0 24 24"><path d="m22 7-8.991 5.727
       <img src="/a-af87ff3fb98f.webp" alt="Ein Stapel Umzugskartons mit Plattenspieler, Gitarre, Stehlampe, Stuhl und Kinderfahrrad" style="--pos-hoch:50% 18%;--pos-quer:50% 30%" width="800" height="978">
     </picture>
   </figure>
-  <article class="ra-karte" style="--fa:#ecc19c;--fb:#9e5c26;--fc:#592c1d;--ml:0%;--mb:26%">
+  <article class="ra-karte" style="--fa:#e8cba3;--fb:#c0956a;--fc:#6b4a3a;--ml:10%;--mb:58%">
     <svg class="ra-karte-symbol" viewBox="0 0 24 24" aria-hidden="true"><use href="#ls-package"/></svg>
     <div class="ra-karte-innen">
       <div class="ra-lesen">
-        <div class="ra-meta"><span class="ra-chip">Umzug stemmen</span><a class="ra-siegel offen" href="#" data-oeffne="gut">Noch im Test</a>
+        <div class="ra-meta"><span class="ra-chip">Geld sparen</span><a class="ra-siegel offen" href="#" data-oeffne="gut">Noch im Test</a>
           <button type="button" class="ra-herz" data-herz="keller" data-titel="Keller ausmisten" aria-pressed="false" aria-label="Merken: Keller ausmisten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></button></div>
         <h1>Keller ausmisten</h1>
         <p class="ra-kurztext">Im Keller stapelt sich Zeug, das weg soll, aber du findest keinen Anfang. Die KI sortiert den ganzen Haufen auf einmal und sagt je Stück, welcher Weg sich lohnt. Fotografieren musst du, den Rest übernimmt sie:</p>
@@ -3423,7 +3427,7 @@ SOFTWARE. --><symbol id="ls-mail" viewBox="0 0 24 24"><path d="m22 7-8.991 5.727
       zu(false); quelle = a;
       fenster = document.createElement('div');
       fenster.className = 'v47-hw'; fenster.setAttribute('role', 'dialog'); fenster.setAttribute('aria-labelledby', 'v47-hw-t');
-      fenster.innerHTML = '<p id="v47-hw-t"><b>Kurz vorher:</b> <span></span></p><div class="v47-hw-fuss"><a class="v47-hw-leise" target="_blank" rel="noopener">Erst anmelden</a>'
+      fenster.innerHTML = '<p id="v47-hw-t"><span></span></p><div class="v47-hw-fuss"><a class="v47-hw-leise" target="_blank" rel="noopener">Erst anmelden</a>'
         + '<button type="button" class="v47-hw-los">Ja, starten</button></div>';
       fenster.querySelector('span').textContent = TEXT[k];
       fenster.querySelector('a').href = ANMELDEN[k];

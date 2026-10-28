@@ -17,7 +17,7 @@
 <script>
   // Live-Fassung (15.10.2026): übernimmt, was bisher die Hülle von Version 25 getan hat (Seitenwechsel, Anker, Nachrichten).
   (function () {
-    var ADR = {"start": "/", "ideen": "/ideen", "anleitung": "/brief-verstehen", "abo": "/kontoauszug-abos", "wohnzimmer": "/wohnzimmer-neu-denken", "keller": "/keller-ausmisten", "bereich": "/mein-bereich", "wochenende": "/wochenende-planen", "vorsorge": "/vorsorgemappe-anlegen", "betrug": "/betrug-oder-echt", "anschaffung": "/grosse-anschaffung-planen", "miete": "/zahlst-du-zu-viel-miete", "vertrag": "/ungewollter-vertrag", "gehalt": "/gehaltsgespraech-vorbereiten", "foerderung": "/zuschuesse-finden", "rueckholen": "/geld-nach-betrug-zurueckholen"}, SEITE = 'rueckholen';
+    var ADR = {"start": "/", "ideen": "/ideen", "anleitung": "/brief-verstehen", "abo": "/kontoauszug-abos", "wohnzimmer": "/wohnzimmer-neu-denken", "keller": "/keller-ausmisten", "bereich": "/mein-bereich", "wochenende": "/wochenende-planen", "vorsorge": "/vorsorgemappe-anlegen", "betrug": "/betrug-oder-echt", "anschaffung": "/grosse-anschaffung-planen", "miete": "/zahlst-du-zu-viel-miete", "vertrag": "/ungewollter-vertrag", "gehalt": "/gehaltsgespraech-vorbereiten", "foerderung": "/zuschuesse-finden", "rueckholen": "/geld-nach-betrug-zurueckholen", "therapie": "/therapieplatz-finden", "kuendigung": "/gekuendigt-und-jetzt"}, SEITE = 'rueckholen';
     function ziel(v, a) { if (v === 'start' && a === 'ideen') { v = 'ideen'; a = ''; } return { v: ADR[v] ? v : 'start', a: a || '' }; }
     function liefern(a, von) {
       if (SEITE === 'bereich') { window.postMessage({ mb: a, von: von || '' }, '*'); return; }
@@ -2037,6 +2037,10 @@ body { padding-bottom: 0; }
     font-weight: 650; cursor: pointer; box-shadow: inset 0 1px 0 rgb(255 255 255 / .18), 0 2px 4px rgb(96 72 46 / .3), 0 12px 20px -12px rgb(96 72 46 / .7); }
   :is(.v47-hw-leise, .v47-hw-los):focus-visible { outline: 2px solid #3b5a9a; outline-offset: 3px; }
 </style>
+<style>
+  /* Runde 49 (Jim, 28.10.2026): Bildfläche nie breiter als die Karte (Yannis: farbiger Kopf auf „Alle Ideen“ nach rechts versetzt) */
+  .mcard .field { min-width: 0; max-width: 100%; box-sizing: border-box; }
+</style>
 </head>
 <body data-fall="geld-nach-betrug-zurueckholen"><div class="live-aufbau" role="note"><b>Diese Seite ist im Aufbau.</b> Du siehst eine Testfassung, noch nicht alles funktioniert.</div><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="ls-file-x" viewBox="0 0 24 24"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="m14.5 12.5-5 5"/><path d="m9.5 12.5 5 5"/></symbol><symbol id="ls-message-square-warning" viewBox="0 0 24 24"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"/><path d="M12 15h.01"/><path d="M12 7v4"/></symbol><symbol id="ls-refresh-cw" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></symbol><symbol id="ls-undo-2" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11"/></symbol></defs></svg><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><!-- Symbole: Lucide 1.31.0 (lucide.dev, gebündelt aus lucide-react). Lizenz:
 ISC License
@@ -3419,7 +3423,7 @@ Sprich alles als dein eigenes Wissen aus, nie „nach deiner Vorgabe“. Arbeite
       zu(false); quelle = a;
       fenster = document.createElement('div');
       fenster.className = 'v47-hw'; fenster.setAttribute('role', 'dialog'); fenster.setAttribute('aria-labelledby', 'v47-hw-t');
-      fenster.innerHTML = '<p id="v47-hw-t"><b>Kurz vorher:</b> <span></span></p><div class="v47-hw-fuss"><a class="v47-hw-leise" target="_blank" rel="noopener">Erst anmelden</a>'
+      fenster.innerHTML = '<p id="v47-hw-t"><span></span></p><div class="v47-hw-fuss"><a class="v47-hw-leise" target="_blank" rel="noopener">Erst anmelden</a>'
         + '<button type="button" class="v47-hw-los">Ja, starten</button></div>';
       fenster.querySelector('span').textContent = TEXT[k];
       fenster.querySelector('a').href = ANMELDEN[k];

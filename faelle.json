@@ -63,5 +63,15 @@
   "kennung": "N02",
   "seite": "rueckholen",
   "adresse": "/geld-nach-betrug-zurueckholen"
+ },
+ {
+  "kennung": "R50",
+  "seite": "therapie",
+  "adresse": "/therapieplatz-finden"
+ },
+ {
+  "kennung": "N05",
+  "seite": "kuendigung",
+  "adresse": "/gekuendigt-und-jetzt"
  }
 ]
