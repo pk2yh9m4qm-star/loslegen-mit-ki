@@ -2066,6 +2066,27 @@ body { padding-bottom: 0; }
   .mcard:not([data-status="ready"]) .field { filter: brightness(.92) !important; }
   .v22z-wk.v58-bald { filter: grayscale(1) brightness(.92); }
 </style>
+<style id="r57-fall">
+  /* Runde 57 (28.10.2026, Jim; Pam, Punkt 17): Teilen links neben dem Herz, gleiche Art und Größe */
+  .ra-teilen { margin-left: auto; display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%; color: var(--ink-soft); cursor: pointer;
+    background: linear-gradient(175deg, var(--clay-hi), var(--clay)); box-shadow: 0 1px 1px rgba(96,72,46,.14), 0 6px 12px -8px rgba(96,72,46,.3), inset 0 1.5px 0 #fff; }
+  .ra-teilen svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .ra-teilen + .ra-herz { margin-left: 2px; }
+  .ra-teilen, .ra-teilen + .ra-herz { flex: none; }   /* am Handy nie schmaler als 44 px */   /* .ra-meta hat 8 px Abstand, zusammen 10 px */
+  .ra-teilen:focus-visible, .ra-herz:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+  .v57-toast { position: fixed; z-index: 60; left: 50%; bottom: calc(86px + env(safe-area-inset-bottom, 0px)); width: max-content; max-width: calc(100vw - 32px); padding: 10px 16px;
+    text-align: center; border-radius: 999px; background: #23201c; color: #fbf7f0; font-size: 14px; font-weight: 600; opacity: 0; transform: translate(-50%, 12px);
+    pointer-events: none; transition: opacity .25s ease, transform .35s ease; }
+  .v57-toast.is-da { opacity: 1; transform: translate(-50%, 0); }
+  /* Punkt 19: „Das brauchst du“ mit Symbol und Text je Angabe (statt der Zeichen auf den Karten) */
+  .ra-brauchst li.v57-i { padding-left: 30px; }
+  .ra-brauchst li.v57-i::before { display: none; }
+  .ra-brauchst li.v57-i > .v57-sym { position: absolute; left: 0; top: .2em; display: inline-flex; gap: 2px; width: 20px; height: 20px; color: var(--kc, var(--ink-soft)); }
+  .ra-brauchst li.v57-i > .v57-sym svg { width: 19px; height: 19px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .ra-brauchst li.v57-i > .v57-sym--ki { width: auto; gap: 3px; left: -2px; }
+  .ra-brauchst li.v57-i > .v57-sym--ki svg { width: 15px; height: 15px; fill: currentColor; stroke: none; }
+  .ra-brauchst li.v57-ki { padding-left: 40px; }
+</style>
 </head>
 <body data-fall="geld-nach-betrug-zurueckholen"><div class="live-aufbau" role="note"><b>Public Beta:</b> Die Seite ist noch im Aufbau, manche Funktionen gehen noch nicht. Dein Feedback hilft uns, sie besser zu machen.</div><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="ls-file-x" viewBox="0 0 24 24"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="m14.5 12.5-5 5"/><path d="m9.5 12.5 5 5"/></symbol><symbol id="ls-message-square-warning" viewBox="0 0 24 24"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"/><path d="M12 15h.01"/><path d="M12 7v4"/></symbol><symbol id="ls-refresh-cw" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></symbol><symbol id="ls-undo-2" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11"/></symbol></defs></svg><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><!-- Symbole: Lucide 1.31.0 (lucide.dev, gebündelt aus lucide-react). Lizenz:
 ISC License
@@ -2136,6 +2157,7 @@ SOFTWARE. --><symbol id="ls-mail" viewBox="0 0 24 24"><path d="m22 7-8.991 5.727
     <div class="ra-karte-innen">
       <div class="ra-lesen">
         <div class="ra-meta"><span class="ra-chip">Daten schützen</span><a class="ra-siegel ok" href="#" data-oeffne="gut"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Geprüft</a>
+          <button type="button" class="ra-teilen" data-titel="Geld nach Betrug zurückholen" aria-label="Teilen: Geld nach Betrug zurückholen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5"/><path d="M5 11.5V19a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7.5"/></svg></button>
           <button type="button" class="ra-herz" data-herz="n02" data-titel="Geld nach Betrug zurückholen" aria-pressed="false" aria-label="Merken: Geld nach Betrug zurückholen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></button></div>
         <h1>Geld nach Betrug zurückholen</h1>
         <p class="ra-kurztext">Ein Klick auf eine falsche Nachricht, und Geld ist weg. Hast du die Zahlung nicht freigegeben, muss deine Bank sie <b>spätestens am nächsten Geschäftstag erstatten</b>, auch wenn sie dir grobe Fahrlässigkeit vorwirft. Die KI schreibt dir die Forderung.</p>
@@ -2146,7 +2168,7 @@ SOFTWARE. --><symbol id="ls-mail" viewBox="0 0 24 24"><path d="m22 7-8.991 5.727
         <ul class="ra-haken"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Das Wichtigste zuerst</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Deine Lage und das Datum, bis wann die Bank zahlen muss</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Deine Schritte in der richtigen Reihenfolge</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Die Forderung an deine Bank, fertig zum Abschicken</span></li></ul>
         
       </div></section>
-        <section class="ra-brauchst" aria-labelledby="rueckholen-b"><h2 class="ra-versal" id="rueckholen-b">Das brauchst du</h2><ul><li>Klappt mit ChatGPT und Claude</li><li>Was passiert ist, gern mit Screenshot der Nachricht oder Abbuchung</li><li>Etwa 10 Minuten</li><li class="ra-kosten"><span class="ra-marke frei">Free</span> <span>· funktioniert, ohne für KI zu zahlen</span></li></ul></section>
+        <section class="ra-brauchst" aria-labelledby="rueckholen-b"><h2 class="ra-versal" id="rueckholen-b">Das brauchst du</h2><ul><li class="v57-i v57-ki"><span class="v57-sym v57-sym--ki" aria-hidden="true"><svg class="logo" aria-hidden="true"><use href="#l-openai"/></svg><svg class="logo" aria-hidden="true"><use href="#l-claude"/></svg></span>Klappt mit ChatGPT und Claude.</li><li class="v57-i"><span class="v57-sym" aria-hidden="true"><svg aria-hidden="true"><use href="#i-file-text"/></svg></span>Klappt mit ChatGPT und Claude</li><li class="v57-i"><span class="v57-sym" aria-hidden="true"><svg aria-hidden="true"><use href="#i-camera"/></svg></span>Was passiert ist, gern mit Screenshot der Nachricht oder Abbuchung</li><li class="v57-i"><span class="v57-sym" aria-hidden="true"><svg aria-hidden="true"><use href="#i-clock"/></svg></span>Etwa 10 Minuten</li><li class="ra-kosten"><span class="ra-marke frei">Free</span> <span>· funktioniert, ohne für KI zu zahlen</span></li></ul></section>
       </div>
       <div class="ra-handeln">
         <section class="ra-schritte" aria-labelledby="rueckholen-s"><h2 class="ra-versal" id="rueckholen-s">So geht's</h2><ol><li class="ra-start-schritt"><span class="ra-nr" aria-hidden="true">1</span>
@@ -3475,6 +3497,32 @@ Sprich alles als dein eigenes Wissen aus, nie „nach deiner Vorgabe“. Arbeite
       zeige(a, k);
     }, true);
     addEventListener('resize', lage); addEventListener('scroll', lage, { passive: true });
+  })();
+</script>
+<script>
+  // Runde 57 (Jim, 28.10.2026), Punkt 17: Teilen. Am Handy das Teilen-Menü des Geräts (Titel, Teilen-Text der Seite, Adresse), sonst Adresse kopieren
+  // und kurz „Link kopiert“. Abbrechen tut nichts.
+  (function () {
+    var b = document.querySelector('.ra-teilen');
+    if (!b) return;
+    function meta(sel) { var m = document.querySelector(sel); return m ? m.getAttribute('content') : ''; }
+    function adresse() { var u = meta('meta[property="og:url"]'); return u || location.href.split('#')[0].split('?')[0]; }
+    var toast = document.createElement('p'); toast.className = 'v57-toast'; toast.setAttribute('role', 'status'); toast.setAttribute('aria-live', 'polite'); document.body.appendChild(toast);
+    var uhr = 0;
+    function melden(t) { toast.textContent = t; toast.classList.add('is-da'); clearTimeout(uhr); uhr = setTimeout(function () { toast.classList.remove('is-da'); }, 2000); }
+    function kopieren(t) {
+      if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(t);
+      return new Promise(function (ok, nein) {
+        var a = document.createElement('textarea'); a.value = t; a.setAttribute('readonly', ''); a.style.cssText = 'position:fixed;top:-100px;opacity:0';
+        document.body.appendChild(a); a.select(); var g = false; try { g = document.execCommand('copy'); } catch (e) {} a.remove(); g ? ok() : nein();
+      });
+    }
+    var handy = false; try { handy = matchMedia('(pointer: coarse)').matches; } catch (e) {}
+    b.addEventListener('click', function () {
+      var titel = b.getAttribute('data-titel') || document.title, text = meta('meta[property="og:description"]') || meta('meta[name="description"]'), url = adresse();
+      if (handy && navigator.share) { navigator.share({ title: titel, text: text, url: url }).catch(function () {}); return; }
+      kopieren(url).then(function () { melden('Link kopiert'); }, function () { melden('Kopieren ging nicht. Die Adresse steht oben im Browser.'); });
+    });
   })();
 </script>
 <div class="live-fuss"><a href="/impressum">Impressum</a><span class="live-fuss-sep" aria-hidden="true"> · </span><a href="/datenschutz">Datenschutz</a><span class="live-fuss-sep" aria-hidden="true"> · </span><span class="live-fuss-t">Testfassung im Aufbau</span></div><script src="/messung.js" data-endpunkt="https://script.google.com/macros/s/AKfycbxJ_s2hUjUxQiWQQ0QoXxSoxR5SfS0MiUvpHb7PcEJzYVgLpcVq1a9i5iUWonSEirfWSg/exec" defer></script><script src="/messpunkte.js" defer></script>
