@@ -1815,6 +1815,12 @@
     box-shadow: inset 0 1px 0 rgb(255 255 255 / .6), 0 1px 1px rgb(94 66 16 / .22); }
   .shelf[hidden] { display: none !important; }
 </style>
+<style id="r58">
+  /* Runde 58 (28.10.2026, Jim; Pam/Yannis): Karten ohne Anleitung ganz grau, auch beim Drüberfahren */
+  .mcard:not([data-status="ready"]), .mcard:not([data-status="ready"]):hover, .mcard:not([data-status="ready"]):focus-within { filter: grayscale(1) !important; }
+  .mcard:not([data-status="ready"]) .field { filter: brightness(.92) !important; }
+  .v22z-wk.v58-bald { filter: grayscale(1) brightness(.92); }
+</style>
 </head>
 <body><div class="live-aufbau" role="note"><b>Public Beta:</b> Die Seite ist noch im Aufbau, manche Funktionen gehen noch nicht. Dein Feedback hilft uns, sie besser zu machen.</div><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><!-- Symbole: Lucide 1.31.0 (lucide.dev, gebündelt aus lucide-react). Lizenz:
 ISC License

@@ -2113,6 +2113,12 @@ body { padding-bottom: 0; }
     box-shadow: inset 0 1px 0 rgb(255 255 255 / .6), 0 1px 1px rgb(94 66 16 / .22); }
   .shelf[hidden] { display: none !important; }
 </style>
+<style id="r58">
+  /* Runde 58 (28.10.2026, Jim; Pam/Yannis): Karten ohne Anleitung ganz grau, auch beim Drüberfahren */
+  .mcard:not([data-status="ready"]), .mcard:not([data-status="ready"]):hover, .mcard:not([data-status="ready"]):focus-within { filter: grayscale(1) !important; }
+  .mcard:not([data-status="ready"]) .field { filter: brightness(.92) !important; }
+  .v22z-wk.v58-bald { filter: grayscale(1) brightness(.92); }
+</style>
 </head>
 <body data-fall="wohnzimmer-neu-denken"><div class="live-aufbau" role="note"><b>Public Beta:</b> Die Seite ist noch im Aufbau, manche Funktionen gehen noch nicht. Dein Feedback hilft uns, sie besser zu machen.</div><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="ls-package" viewBox="0 0 24 24"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></symbol><symbol id="ls-sofa" viewBox="0 0 24 24"><path d="M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3"/><path d="M2 16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"/><path d="M4 18v2"/><path d="M20 18v2"/><path d="M12 4v9"/></symbol><symbol id="ls-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></symbol></defs></svg><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><!-- Symbole: Lucide 1.31.0 (lucide.dev, gebündelt aus lucide-react). Lizenz:
 ISC License
