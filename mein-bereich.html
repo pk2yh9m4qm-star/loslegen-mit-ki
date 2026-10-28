@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta name="robots" content="noindex, nofollow">
-  <meta name="description" content="Hier sammelst du Ideen, die du ausprobieren willst, und findest Antworten auf deine Fragen rund um KI.">
+  <meta name="description" content="Hier findest du Ideen, die zu dir passen, alles, was du dir gemerkt hast, und Antworten, wenn bei KI etwas unklar ist.">
   <meta property="og:site_name" content="KIosk">
   <meta property="og:title" content="Mein Bereich · KIosk">
   <meta property="og:image" content="https://loslegen-mit-ki.de/teilen-index.jpg">
@@ -2641,7 +2641,7 @@ SOFTWARE. --><symbol id="ls-award" viewBox="0 0 24 24"><path d="m15.477 12.89 1.
         let sub;
         if (ko) sub = '<span class="mb-sicher">' + ic('check') + 'Dein Bereich ist gesichert.</span> Deinen Startplan, deine Ideen und Sammlungen findest du auf jedem Gerät wieder.' + ' <span class="v25r7-mb"><button class="ki-link" type="button" data-v25r7-nachricht>Nachricht von Yannis</button><button class="ki-link" type="button" data-v25r7-umbenennen>Namen ändern</button></span>';
         else if (k || h || KI.sammlungen().length) sub = 'Dein Start, deine gemerkten Ideen und Antworten auf deine Fragen, alles an einem Ort.' + (KI.hinweis().spaeter ? ' <button class="ki-link" type="button" data-mb-konto>Bisher nur in diesem Browser gespeichert · Konto anlegen</button>' : '');
-        else sub = 'Hier sammelst du Ideen, die du ausprobieren willst, und findest Antworten auf deine Fragen rund um KI.';
+        else sub = 'Hier findest du Ideen, die zu dir passen, alles, was du dir gemerkt hast, und Antworten, wenn bei KI etwas unklar ist.';   // Runde 59 (Oscar, Punkt 22)
         kopfEl.innerHTML = '<h1 class="display">' + (ko ? 'Hallo, ' + esc(ko.name) + '.' : 'Mein Bereich') + '</h1><p class="mb-sub">' + sub + '</p>';
         const n = h;
         const zahl = document.getElementById('mb-zahl');
@@ -3103,7 +3103,7 @@ SOFTWARE. --><symbol id="ls-award" viewBox="0 0 24 24"><path d="m15.477 12.89 1.
         document.getElementById('kd-ich').textContent = name.charAt(0).toUpperCase();
         kdBalken(true);
         document.getElementById('kd-fertig-titel').textContent = 'Geschafft, ' + name + '!';
-        document.getElementById('kd-fertig-text').innerHTML = 'Dein Konto ist angelegt. Wir haben dir eine E-Mail an <b>' + esc(kdMail) + '</b> geschickt. Bestätige sie mit einem Klick, dann ist alles fertig.';
+        document.getElementById('kd-fertig-text').innerHTML = 'Dein Konto ist angelegt. Die Seite ist noch im Aufbau: Wir schicken dir deshalb keine E-Mail, und deine Ideen bleiben in diesem Browser.';
         const gewinn = [];
         if (vorher.k) gewinn.push('Dein Startplan aus dem Kompass ist gesichert.');
         if (vorher.h) gewinn.push(vorher.h === 1 ? 'Deine gemerkte Idee geht nicht mehr verloren.' : 'Deine ' + vorher.h + ' gemerkten Ideen gehen nicht mehr verloren.');

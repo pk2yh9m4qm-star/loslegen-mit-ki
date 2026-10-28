@@ -3276,6 +3276,44 @@
   /* Punkt 8: „1-Klick“ bricht nicht um */
   .v57-nobr { white-space: nowrap; }
 </style>
+<style>
+/* Runde 59 (Jim, 28.10.2026): Schritt 3 als Chatfenster (Pam, Variante A) */
+.mz2-chat { position: relative; display: grid; align-content: start; gap: 8px; box-sizing: border-box; width: min(210px, 88%); height: 136px; padding: 9px 12px 10px; overflow: hidden;
+  border-radius: 10px; background: #fff; box-shadow: 0 1px 2px rgb(var(--sh) / .18), 0 10px 22px -14px rgb(var(--sh) / .5); transform-origin: 50% 50%; }
+.mz2-ck { display: flex; align-items: center; gap: 6px; padding-bottom: 6px; border-bottom: 1px solid #eee7dc; font: 650 12px/1 Figtree, system-ui, sans-serif; color: #23201c; }
+.mz2-ck svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linejoin: round; }
+.mz2-cmsg { justify-self: end; max-width: 88%; padding: 5px 9px; border-radius: 10px 10px 3px 10px; background: #f1ebe2; font: 550 11px/1.25 Figtree, system-ui, sans-serif;
+  color: #23201c; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mz2-cfeld { position: absolute; left: 10px; right: 10px; bottom: 9px; padding: 5px 8px; border: 1px solid #e5ded3; border-radius: 8px; background: #fff; opacity: 0;
+  font: 500 11px/1.25 Figtree, system-ui, sans-serif; color: #5d554c; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mz2-cant { display: grid; }
+.mz2-cant > * { grid-area: 1 / 1; }
+.mz2-cpunkte { display: flex; gap: 4px; align-self: start; padding: 2px 0; opacity: 0; }
+.mz2-cpunkte i { width: 6px; height: 6px; border-radius: 50%; background: #c9bfb2; }
+.mz2-czeilen { display: grid; gap: 6px; }
+.mz2-czeilen i { display: block; width: var(--w); height: 6px; border-radius: 3px; background: #e5ded3; }
+.mz2-cplan { justify-self: start; padding: 3px 9px; border-radius: 999px; background: #3f6b58; color: #fff; font: 700 11px/1.3 Figtree, system-ui, sans-serif; }
+@keyframes mz2-cauf { from { transform: scale(.2); opacity: 0; } 40% { opacity: 1; } to { transform: scale(1); opacity: 1; } }
+@keyframes mz2-cfeld { 0%, 30% { opacity: 0; } 42%, 88% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes mz2-cein { from { opacity: 0; translate: 0 6px; } to { opacity: 1; translate: 0 0; } }
+@keyframes mz2-cpunkte { 0% { opacity: 0; } 15%, 85% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes mz2-chuepf { 0%, 60%, 100% { transform: none; } 30% { transform: translateY(-3px); } }
+@keyframes mz2-cbalken { from { width: 0; } }
+.mz2-an .ist-aktiv .mz2-chat { animation: mz2-cauf .6s var(--ease) both; }
+.mz2-an .ist-aktiv .mz2-cfeld { animation: mz2-cfeld 1.5s linear both; }
+.mz2-an .ist-aktiv .mz2-cmsg { animation: mz2-cein .3s var(--ease) 1.2s both; }
+.mz2-an .ist-aktiv .mz2-cpunkte { animation: mz2-cpunkte .8s linear 1.5s both; }
+.mz2-an .ist-aktiv .mz2-cpunkte i { animation: mz2-chuepf .6s ease-in-out 1.5s 2; }
+.mz2-an .ist-aktiv .mz2-cpunkte i:nth-child(2) { animation-delay: 1.6s; }
+.mz2-an .ist-aktiv .mz2-cpunkte i:nth-child(3) { animation-delay: 1.7s; }
+.mz2-an .ist-aktiv .mz2-czeilen i { animation: mz2-cbalken .4s var(--ease) 2.3s both; }
+.mz2-an .ist-aktiv .mz2-czeilen i:nth-child(2) { animation-delay: 2.7s; }
+.mz2-an .ist-aktiv .mz2-czeilen i:nth-child(3) { animation-delay: 3.1s; }
+.mz2-an .ist-aktiv .mz2-cplan { animation: mz2-pop .225s var(--ease) 3.8s both; }
+.mz2-an .mz2-stufe:not(.ist-aktiv) :is(.mz2-cmsg, .mz2-czeilen i, .mz2-cplan) { opacity: 0; }
+
+/* Schlusszeile als Leitsatz: zurückgestellt (Pam, 28.10. nachmittags: neues Startseiten-Konzept legt Schriften neu fest; eigener Bauauftrag nach Yannis' Ja) */
+</style>
 </head>
 <body><div class="live-aufbau" role="note"><b>Public Beta:</b> Die Seite ist noch im Aufbau, manche Funktionen gehen noch nicht. Dein Feedback hilft uns, sie besser zu machen.</div><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><!-- Symbole der Laufbänder: Lucide 1.31.0 (lucide.dev, gebündelt aus lucide-react). Lizenz:
 ISC License
@@ -3552,8 +3590,8 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
               <div class="mz2-bild mz2-b1" aria-hidden="true"><div class="mz2-faecher"><span class="v22z-wk pal-sand mz2-k"><svg class="lb-symbol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ls-package"/></svg></span><span class="v22z-wk pal-coral mz2-k"><svg class="lb-symbol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#lb-sun"/></svg></span><span class="v22z-wk pal-blue mz2-k"><svg class="lb-symbol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#lb-mail"/></svg></span><span class="v22z-wk pal-green mz2-k"><svg class="lb-symbol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#lb-flower"/></svg></span><span class="v22z-wk pal-plum mz2-k"><svg class="lb-symbol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#lb-briefcase"/></svg></span><i class="mz2-haken"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div></div></li>
             <li class="mz2-stufe"><span class="mz2-nr" aria-hidden="true">2</span><h3 class="mz2-titel">Ein Klick.</h3>
               <div class="mz2-bild mz2-b2" aria-hidden="true"><span class="button-primary mz2-knopf"><span>Mit ChatGPT starten</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span><span class="mz2-puff"><i style="--x:32px;--y:0px;--c:var(--coral-a)"></i><i style="--x:23px;--y:-23px;--c:var(--sand-a)"></i><i style="--x:0px;--y:-32px;--c:var(--blue-a)"></i><i style="--x:-23px;--y:-23px;--c:var(--green-a)"></i><i style="--x:-32px;--y:0px;--c:var(--coral-a)"></i><i style="--x:-23px;--y:23px;--c:var(--sand-a)"></i><i style="--x:0px;--y:32px;--c:var(--blue-a)"></i><i style="--x:23px;--y:23px;--c:var(--green-a)"></i></span><svg class="mz2-maus" viewBox="0 0 24 24" aria-hidden="true"><path d="M5.6 3.4v15.3c0 .6.7.9 1.1.5l3.5-3.4 2.3 5.3c.2.4.7.6 1.1.4l1.7-.8c.4-.2.6-.7.4-1.1l-2.3-5.1h4.9c.6 0 .9-.7.5-1.1L6.7 2.9c-.4-.4-1.1-.1-1.1.5z"/></svg></div></li>
-            <li class="mz2-stufe"><span class="mz2-nr" aria-hidden="true">3</span><h3 class="mz2-titel">Der Rest läuft und du siehst jeden Schritt.</h3>
-              <div class="mz2-bild mz2-b4" aria-hidden="true"><span class="mz2-blatt"><span class="mz2-zeile" style="--w:78%"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg><i></i><b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></b></span><span class="mz2-zeile" style="--w:58%"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-file-text"/></svg><i></i><b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></b></span><span class="mz2-zeile" style="--w:70%"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-euro"/></svg><i></i><b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></b></span><span class="mz2-zeile" style="--w:50%"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-bell-ring"/></svg><i></i><b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></b></span><span class="mz2-stern"><svg viewBox="-10 -10 20 20" aria-hidden="true"><path d="M0 -10 C1.4 -2.2 2.2 -1.4 10 0 C2.2 1.4 1.4 2.2 0 10 C-1.4 2.2 -2.2 1.4 -10 0 C-2.2 -1.4 -1.4 -2.2 0 -10 Z"/></svg></span></span></div></li>
+            <li class="mz2-stufe"><span class="mz2-nr" aria-hidden="true">3</span><h3 class="mz2-titel">Deine KI öffnet sich. Und der Rest läuft.</h3>
+              <div class="mz2-bild mz2-b4" aria-hidden="true"><span class="mz2-chat"><span class="mz2-ck"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2a4.3 4.3 0 0 1 4.1 3 4.3 4.3 0 0 1 3.4 6.4 4.3 4.3 0 0 1-3.9 6.2 4.3 4.3 0 0 1-7.2 0 4.3 4.3 0 0 1-3.9-6.2 4.3 4.3 0 0 1 3.4-6.4 4.3 4.3 0 0 1 4.1-3Z"/><path d="M9 9.5 12 8l3 1.5v4L12 15l-3-1.5Z"/></svg>ChatGPT</span><span class="mz2-cmsg">Hilf mir, meine Kündigung zu verstehen …</span><span class="mz2-cfeld">Hilf mir, meine Kündigung zu verstehen …</span><span class="mz2-cant"><span class="mz2-cpunkte"><i></i><i></i><i></i></span><span class="mz2-czeilen"><i style="--w:94%"></i><i style="--w:80%"></i><i style="--w:62%"></i></span></span><span class="mz2-cplan">✓ Dein Plan steht</span></span></div></li>
           </ol>
         </div>
       </div>
@@ -3585,7 +3623,7 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
       <!-- 2 · Die Job-Karte klappt auf -->
       <div class="v22j-karte-schatten"></div>
       <div class="v22j-karte v22j-field v22j-pal-plum">
-        <div class="v22j-k-kopf"><span class="v22j-k-tag">Job und Karriere</span><span class="v22j-k-tag"><i><b class="v22j-an"></b><b class="v22j-an"></b><b></b></i>Stufe 2</span></div>
+        <div class="v22j-k-kopf"><span class="v22j-k-tag">Job und Karriere</span></div>
         <p class="v22j-k-titel">Den perfekten Job finden <em>lassen</em></p>
         <div class="v22j-k-inhalt">
           <p class="v22j-k-label">Das übernimmt die KI</p>
@@ -5997,7 +6035,7 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
         // Ruhendes Fenster: das erste Bild steht (u 3,4), unscharf, mit Play-Knopf; abgespielt wird erst auf Klick (07.10. spätabends)
         function posterSetzen() { filmFertig = false; filmLauf = false; ff = null; filmT = 0; uJetzt = uFilm(0); gesehen = true; schrittNr = -1; stopAt = 0; filmStartP = 0; pfeilWeg = true; }
         function sperreAktiv() { return szeneAn && !gesehen && !filmFertig && Date.now() > sprungBis; }
-        function haltAktiv() { return false; }   // Runde 57: kein Halt an „Von vielen.“ (Yannis: „sobald es da ist, muss man weiter scrollen können“)
+        function haltAktiv() { return szeneAn && gesehen && (filmFertig || !!ff) && !stationGesehen && Date.now() > sprungBis; }   // Runde 59: Halt an „Von vielen.“ wieder an (Yannis, 28.10.: „aber nicht davor“), er endet mit den Kategorien
         // Video-Schranke (08.10., Yannis: man hat das Video oft aus Versehen überscrollt): Wer von oben kommt, hält am Video an. Weiterscrollen
         // startet das Video; erst wenn es das Scannen der Fotos hinter sich hat (VIDEO_SPERRE_T), geht es weiter. Sprünge per Link gehen vorbei.
         var videoDurch = false, vonOben = false;
@@ -6189,7 +6227,7 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
           else if (sf > 0) for (var j = 0; j < off.length; j++) { if (reihenR[j] !== 6) off[j] = umbrechen(off[j] + vel[j] * sf * dt); }
           if (!cAktiv) for (var k6 = 0; k6 < off.length; k6++) if (reihenR[k6] === 6 && off[k6]) { var sch = 320 * dt; off[k6] = Math.abs(off[k6]) <= sch ? 0 : off[k6] - (off[k6] > 0 ? sch : -sch); }
           if (!cAktiv && cWert === 0 && kanten.length) kantenLoesen();
-          if (!stationGesehen && cAktiv && cWert >= .98) stationFertig();   // 07.10. nachts wieder voll: kürzer rutschte schnelles Scrollen durch
+          if (!stationGesehen && cAktiv && cWert >= .5) stationFertig();   // Runde 59: frei, sobald die Kategorien zu sehen sind (Yannis, 28.10.: „ab da … wieder runter scrollen“; vorher erst bei 0,98, das fühlte sich wie ein Hänger an)
           zeichnen(uJetzt); knoepfeZeigen();
           if (braucht()) requestAnimationFrame(uhr); else uhrLaeuft = false;
         }
@@ -8024,6 +8062,8 @@ SOFTWARE. --><symbol id="ls-book-heart" viewBox="0 0 24 24"><path d="M4 19.5v-15
       if (!t.height) return;
       var jetzt = parseFloat(lead.style.getPropertyValue('--v44-lead-y')) || 0, m = getComputedStyle(lead).transform;
       if (m === 'none') jetzt = 0;   // beim Abspielen ohne Verschiebung
+      var bh = bild.closest('.v22z-buehne');   // Runde 59 (Yannis, 28.10.: Zeile „bleibt an Ort und Stelle … zittert“): sitzt die Bühne fest, bleibt die Verschiebung
+      if (bh && bh.getBoundingClientRect().top <= .5 && lead.style.getPropertyValue('--v44-lead-y')) return;
       var y = Math.max(0, Math.round(bild.getBoundingClientRect().top - ABSTAND - (t.bottom - jetzt)));
       lead.style.setProperty('--v44-lead-y', y + 'px'); lead.parentNode.style.setProperty('--v57-titel-y', y + 'px');
     }

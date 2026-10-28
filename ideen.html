@@ -1398,6 +1398,20 @@
   @media (min-width: 701px) { .v57-unter-m { display: none; } }
   .v47-innen:not([data-schritt="f2"]) .v57-unter-m { display: none; }
 </style>
+<style id="r59-wand">
+  /* Runde 59 (Jim, 28.10.2026; Yannis, Punkte 5 und 6): Kacheln der Abfrage wie die echten Karten. Schild oben, Titel unten; Fläche, Schatten und
+     Prägesymbol von der Karte der Seite (dieselben Werte, nur kleiner); die Abdunklung für den weißen Titel (Pam) etwas stärker. */
+  .v57-k:not(.v57-mehr) { justify-content: space-between; align-items: flex-start; }
+  .v57-k b { margin-top: auto; }
+  .v57-k:not(.aus):not(.v57-mehr) { box-shadow: var(--v59-sch, 0 1px 1px rgb(96 72 46 / .14), 0 6px 12px -8px rgb(96 72 46 / .3)); }
+  /* die echte Fläche ist oben heller (Glanz): für den 13-px-Titel ≥ 4,5 : 1 deshalb brightness .8 statt .88 (gemessen) */
+  .v57-k:not(.aus):not(.v57-mehr)::before { background-image: var(--v59-bg, linear-gradient(172deg, var(--top), var(--bot))); filter: brightness(.8); }
+  .v57-k i { position: relative; box-shadow: inset 0 1px 0 rgb(255 255 255 / .6), 0 1px 1px rgb(47 74 38 / .22); }
+  .v57-k i.abo { box-shadow: inset 0 1px 0 rgb(255 255 255 / .6), 0 1px 1px rgb(94 66 16 / .22); }
+  .v57-k b { position: relative; }
+  .v59-sym { position: absolute; right: -15%; bottom: -24%; height: 104%; width: auto; aspect-ratio: 1; fill: none; stroke: #000; stroke-width: 1.5;
+    stroke-linecap: round; stroke-linejoin: round; opacity: .12; pointer-events: none; z-index: 0; }
+</style>
 </head>
 <body><div class="live-aufbau" role="note"><b>Public Beta:</b> Die Seite ist noch im Aufbau, manche Funktionen gehen noch nicht. Dein Feedback hilft uns, sie besser zu machen.</div><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><!-- Symbole: Lucide 1.31.0 (lucide.dev, gebündelt aus lucide-react). Lizenz:
 ISC License
@@ -3366,7 +3380,9 @@ SOFTWARE. --><symbol id="ls-award" viewBox="0 0 24 24"><path d="m15.477 12.89 1.
         var t = k.querySelector('h3.title'); if (!t) return;
         var titel = t.textContent.trim(); if (gesehen[titel]) return; gesehen[titel] = 1;
         var pal = (k.className.match(/\bpal-\w+/) || ['pal-sand'])[0];
-        aus.push({ titel: titel, pal: pal, frei: !!k.querySelector('.tag--frei'), abo: !!k.querySelector('.tag--abo') });
+        var f = k.querySelector('.field'), cs = f && getComputedStyle(f), sy = f && f.querySelector('.mcard-symbol');   // Runde 59: Fläche der echten Karte
+        aus.push({ titel: titel, pal: pal, frei: !!k.querySelector('.tag--frei'), abo: !!k.querySelector('.tag--abo'),
+          bg: cs ? cs.backgroundImage : '', sch: cs ? cs.boxShadow : '', sym: sy ? sy.outerHTML.replace('class="mcard-symbol"', 'class="v59-sym"') : '' });
       });
       return aus;
     }
@@ -3382,11 +3398,15 @@ SOFTWARE. --><symbol id="ls-award" viewBox="0 0 24 24"><path d="m15.477 12.89 1.
         var wahl = w.dataset.wahl, h = '';
         liste.forEach(function (i) {
           var dämpfen = wahl !== 'abo' && !i.frei;
-          h += '<div class="v57-k ' + i.pal + (dämpfen ? ' aus' : '') + '">' + (i.frei ? '<i>Mit Free nutzbar</i>' : i.abo ? '<i class="abo">Mit Abo</i>' : '') + '<b></b></div>';
+          h += '<div class="v57-k ' + i.pal + (dämpfen ? ' aus' : '') + '">' + (dämpfen ? '' : i.sym) + (i.frei ? '<i>Mit Free nutzbar</i>' : i.abo ? '<i class="abo">Mit Abo</i>' : '') + '<b></b></div>';
         });
         if (liste.length > HANDY_ZEIGT) h += '<div class="v57-k v57-mehr">+ ' + (liste.length - HANDY_ZEIGT) + '</div>';
         w.innerHTML = h;
         w.querySelectorAll('.v57-k:not(.v57-mehr) b').forEach(function (b, n) { b.textContent = liste[n].titel; });
+        w.querySelectorAll('.v57-k:not(.v57-mehr)').forEach(function (k, n) {   // Runde 59: Körnung, Glanz, Verlauf und Schatten der echten Karte
+          if (liste[n].bg && liste[n].bg !== 'none') k.style.setProperty('--v59-bg', liste[n].bg);
+          if (liste[n].sch && liste[n].sch !== 'none') k.style.setProperty('--v59-sch', liste[n].sch);
+        });
         var u = dlg.querySelector('[data-v57-unter="' + wahl + '"]'); if (u) u.textContent = text(wahl, liste.length, frei);
       });
       // am Handy steht die Unterzeile unter dem Streifen
