@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta name="robots" content="noindex, nofollow">
-  <meta name="description" content="Ideen, wie KI dir im Alltag wirklich Arbeit abnimmt. Von Menschen zusammengestellt und getestet. Diese Seite ist im Aufbau.">
+  <meta name="description" content="Foto vom Keller machen: Die KI sagt dir für jeden Gegenstand, ob sich Verkaufen lohnt, was du verschenken kannst und wohin der Rest kommt.">
   <meta property="og:site_name" content="KIosk">
   <meta property="og:title" content="Keller ausmisten · KIosk">
   <meta property="og:image" content="https://loslegen-mit-ki.de/teilen-keller-ausmisten.jpg">
@@ -88,7 +88,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="light">
-  <title>Keller ausmisten – Was verkaufen, spenden, verschenken, entsorgen? · KIosk</title>
+  <title>Keller ausmisten: verkaufen, verschenken, entsorgen · KIosk</title>
   <style>
   /* Figtree (Erik Kennedy, SIL Open Font License 1.1), lateinischer Zeichensatz, eingebettet, damit die Schrift auch ohne Internet und auf jedem System gleich aussieht */
   @font-face { font-family: "Figtree"; font-style: italic; font-weight: 300 900; font-display: swap; src: url(/a-ab2c6d32fc54.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
@@ -2105,8 +2105,27 @@ body { padding-bottom: 0; }
   /* Runde 49 (Jim, 28.10.2026): Bildfläche nie breiter als die Karte (Yannis: farbiger Kopf auf „Alle Ideen“ nach rechts versetzt) */
   .mcard .field { min-width: 0; max-width: 100%; box-sizing: border-box; }
 </style>
+<style id="r55">
+  /* Runde 55 (28.10.2026, Jim; Pam, Fertig-Liste): rote Punkte weg (Yannis: „Punkt komplett weg lassen“), Schild „Stufe“ weg */
+  .mcard[data-status="ready"]::before { content: none !important; display: none !important; }
+  .stufe { display: none !important; }
+  /* Kopfleiste am Handy: 16 px, Tippflächen mindestens 44 × 44 px, auf allen Seiten gleich */
+  @media (max-width: 767.98px) {
+    .site-nav .v44-nav a.v47-pille, .site-nav .nav-mein, a.ra-zurueck { font-size: 16px; min-height: 44px; }
+    .site-nav .nav-mein { min-width: 44px; }
+    .site-nav a.brand { min-height: 44px; min-width: 44px; }
+  }
+  /* Karten ohne Anleitung: Farbfläche entsättigt, Schrift bleibt voll; Schild „bald“ (Pam: nicht durchsichtig). brightness(.92), damit der
+     weiße Titel auch an der hellsten Stelle der Fläche mindestens 4,5 : 1 hat (nur entsättigt: 4,08 : 1, gemessen mit kontrast55.mjs) */
+  .mcard.is-soon .field { filter: saturate(.25) brightness(.92); }
+  .tag.tag--bald { color: #3d352d; background: #f3eee6; }
+  /* Schild „Mit Abo“ wie „Mit Free nutzbar“, in Sand (Pam, 28.10.: Grund #f1e3c6, Schrift #5e4210, 7,3 : 1) */
+  .tag.tag--abo { color: #5e4210; background: #f1e3c6; white-space: normal; line-height: 1.2;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / .6), 0 1px 1px rgb(94 66 16 / .22); }
+  .shelf[hidden] { display: none !important; }
+</style>
 </head>
-<body data-fall="keller-ausmisten"><div class="live-aufbau" role="note"><b>Diese Seite ist im Aufbau.</b> Du siehst eine Testfassung, noch nicht alles funktioniert.</div><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="ls-package" viewBox="0 0 24 24"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></symbol><symbol id="ls-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></symbol></defs></svg><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><!-- Symbole: Lucide 1.31.0 (lucide.dev, gebündelt aus lucide-react). Lizenz:
+<body data-fall="keller-ausmisten"><div class="live-aufbau" role="note"><b>Public Beta:</b> Die Seite ist noch im Aufbau, manche Funktionen gehen noch nicht. Dein Feedback hilft uns, sie besser zu machen.</div><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="ls-package" viewBox="0 0 24 24"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></symbol><symbol id="ls-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></symbol></defs></svg><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><!-- Symbole: Lucide 1.31.0 (lucide.dev, gebündelt aus lucide-react). Lizenz:
 ISC License
 
 Copyright (c) 2026 Lucide Icons and Contributors
@@ -2182,14 +2201,14 @@ SOFTWARE. --><symbol id="ls-mail" viewBox="0 0 24 24"><path d="m22 7-8.991 5.727
         <div class="ra-meta"><span class="ra-chip">Geld sparen</span><a class="ra-siegel offen" href="#" data-oeffne="gut">Noch im Test</a>
           <button type="button" class="ra-herz" data-herz="keller" data-titel="Keller ausmisten" aria-pressed="false" aria-label="Merken: Keller ausmisten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></button></div>
         <h1>Keller ausmisten</h1>
-        <p class="ra-kurztext">Im Keller stapelt sich Zeug, das weg soll, aber du findest keinen Anfang. Die KI sortiert den ganzen Haufen auf einmal und sagt je Stück, welcher Weg sich lohnt. Fotografieren musst du, den Rest übernimmt sie:</p>
+        <p class="ra-kurztext">Im Keller stapelt sich Zeug, das weg soll, aber du findest keinen Anfang. Die KI geht alles auf einmal durch und sagt je Gegenstand, welcher Weg sich lohnt. Fotografieren musst du, den Rest übernimmt sie:</p>
         <section class="ra-ergebnis" aria-label="Ergebnis"><div class="ra-zettel">
         <span class="ra-band" aria-hidden="true"></span>
         <p class="ra-ergebnis-satz"><b>Ergebnis:</b> Du weißt für jedes Ding, was damit passiert und was der Verkauf ungefähr bringt.</p>
         <ul class="ra-haken"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Je Ding: Empfehlung, erwarteter Preis und Startpreis</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Was der Verkauf zusammen bringt</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Spendenstelle, die so etwas annimmt, mit Adresse und Öffnungszeiten</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Text zum Verschenken, fertig zum Kopieren</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Wertstoffhof mit Öffnungszeiten von heute und Link</span></li></ul>
         <button type="button" class="ra-beispiel-knopf" data-dialog="bsp-keller">Beispiel ansehen</button>
       </div></section>
-        <section class="ra-brauchst" aria-labelledby="keller-b"><h2 class="ra-versal" id="keller-b">Das brauchst du</h2><ul><li>Ein paar Fotos, auch von ganzen Regalen</li><li>Deine Postleitzahl</li><li>Etwa 20 Minuten</li><li class="ra-kosten"><span class="ra-marke abo">Am besten mit Abo</span> <span>kostenlos nur drei Fotos am Tag.</span> <a class="ra-leise" href="#" data-oeffne="abo">Was bringt ein Abo?</a></li></ul></section>
+        <section class="ra-brauchst" aria-labelledby="keller-b"><h2 class="ra-versal" id="keller-b">Das brauchst du</h2><ul><li>Ein paar Fotos, auch von ganzen Regalen</li><li>Deine Postleitzahl</li><li>Etwa 20 Minuten</li><li class="ra-kosten"><span class="ra-marke abo">Mit Abo</span> <span>kostenlos gehen nur wenige Fotos am Tag.</span> <a class="ra-leise" href="#" data-oeffne="abo">Was bringt ein Abo?</a></li></ul></section>
       </div>
       <div class="ra-handeln">
         <section class="ra-schritte" aria-labelledby="keller-s"><h2 class="ra-versal" id="keller-s">So geht's</h2><ol><li><span class="ra-nr" aria-hidden="true">1</span><p>Fotografiere, was weg soll</p></li>
